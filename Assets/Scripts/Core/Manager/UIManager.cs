@@ -1,0 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.PackageManager.UI;
+using UnityEngine;
+
+public class UIManager
+{
+    private List<UIWindow> _windowDataList = new List<UIWindow>();
+    private Stack<UIWindow> _activeWindowStack = new Stack<UIWindow>();
+
+    #region Window Data
+    
+    public void AddWindow(UIWindow window)
+    {
+        if (window == null || ContainWindow(window))
+            return;
+        
+        _windowDataList?.Add(window);
+        window.Hide();
+    }
+
+    public bool ContainWindow(UIWindow window)
+    {
+        return _windowDataList.Contains(window);
+    }
+    
+    public T FindWindowData<T>() where T : UIWindow
+    {
+        return _windowDataList.Find(x => x.GetType() == typeof(T)) as T;
+    }
+    
+    #endregion
+    
+    #region Active Window
+
+    public T ShowWindow<T>() where T : UIWindow
+    {
+        var window = FindWindowData<T>();
+        _activeWindowStack.Push(window);
+        
+        window.Init();
+
+        return window;
+    }
+    
+    public T PeakWindow<T>() where T : UIWindow
+    {
+        return _activeWindowStack?.Peek() as T;
+    }
+
+    public void CloseWindow()
+    {
+        if(_activeWindowStack.Count > 0)
+            _activeWindowStack?.Peek();
+    }
+
+    #endregion
+}
