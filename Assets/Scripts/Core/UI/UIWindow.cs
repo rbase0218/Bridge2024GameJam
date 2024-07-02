@@ -16,5 +16,4 @@ public abstract class UIWindow : MonoBehaviour
     {
         Managers.UI.AddWindow(this);
     }
-
 }
