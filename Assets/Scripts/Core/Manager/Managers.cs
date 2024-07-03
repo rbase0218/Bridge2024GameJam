@@ -27,11 +27,12 @@ public sealed class Managers : MonoBehaviour
     }
 
     private static UIManager _uiManager = new UIManager();
-    private static DataManager _DataManager = new DataManager();
-    public static UIManager UI => _uiManager;
-    public static DataManager Data => _DataManager;
-    
+    private static DataManager _dataManager = new DataManager();
     private static SoundManager _soundManager = new SoundManager();
+    
+    public static UIManager UI => _uiManager;
+    public static DataManager Data => _dataManager;
+    
     public static SoundManager Sound => _soundManager;
 
     private void Start()
