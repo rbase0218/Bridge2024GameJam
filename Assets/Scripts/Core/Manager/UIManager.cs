@@ -26,7 +26,7 @@ public class UIManager
         return _windowDataList.Contains(window);
     }
     
-    public T FindWindowData<T>() where T : UIWindow
+    public T GetWindow<T>() where T : UIWindow
     {
         return _windowDataList.Find(x => x.GetType() == typeof(T)) as T;
     }
@@ -37,10 +37,10 @@ public class UIManager
 
     public T ShowWindow<T>() where T : UIWindow
     {
-        var window = FindWindowData<T>();
+        var window = GetWindow<T>();
         _activeWindowStack.Push(window);
         
-        window.Init();
+        window.Open();
 
         return window;
     }

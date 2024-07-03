@@ -3,14 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UIWindow : MonoBehaviour
+public abstract class UIWindow : UIBase
 {
-    public virtual void Init()
+    protected override bool Init()
     {
-        Open();
+        if (!base.Init())
+            return false;
+        
+        return true;
     }
-    public void Hide() => gameObject.SetActive(false);
+    
     public void Open() => gameObject.SetActive(true);
+    public void Hide()
+    {
+        if (_alwaysOpen)
+            return;
+        
+        gameObject.SetActive(false);
+    }
+
 
     protected virtual void Awake()
     {
