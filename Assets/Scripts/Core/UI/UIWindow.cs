@@ -5,6 +5,9 @@ using UnityEngine;
 
 public abstract class UIWindow : UIBase
 {
+    [SerializeField]
+    protected bool _alwaysOpen = false;
+    
     protected override bool Init()
     {
         if (!base.Init())

@@ -11,8 +11,7 @@ public class UIBase : MonoBehaviour
     protected Dictionary<Type, Object[]> _objects = new Dictionary<Type, Object[]>();
     protected bool _init = false;
     
-    [SerializeField]
-    protected bool _alwaysOpen = false;
+  
 
     protected virtual bool Init()
     {
