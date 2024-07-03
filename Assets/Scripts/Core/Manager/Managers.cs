@@ -27,7 +27,9 @@ public sealed class Managers : MonoBehaviour
     }
 
     private static UIManager _uiManager = new UIManager();
+    private static DataManager _DataManager = new DataManager();
     public static UIManager UI => _uiManager;
+    public static DataManager Data => _DataManager;
 
     private void Start()
     {

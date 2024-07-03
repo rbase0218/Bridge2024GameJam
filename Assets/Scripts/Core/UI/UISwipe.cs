@@ -4,13 +4,13 @@ using UnityEngine;
 
 public abstract class UISwipe : UIBase
 {
-    private enum Buttons
+    protected enum Buttons
     {
         AfterButton,
         BeforeButton
     }
 
-    private enum Texts
+    protected enum Texts
     {
         SwipeValue
     }
@@ -30,8 +30,6 @@ public abstract class UISwipe : UIBase
         
         return true;
     }
-
-    protected abstract void SetData();
 
     protected abstract void OnClickAfterButton();
     protected abstract void OnClickBeforeButton();
