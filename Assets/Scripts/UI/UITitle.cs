@@ -29,7 +29,11 @@ public class UITitle : UIWindow
 
     private void OnClickStartButton()
     {
+        // Start Modal을 띄운다.
         Debug.Log("Click - Start");
+
+        var startFlow = Managers.UI.GetWindow<UIStartFlow>();
+        
     }
 
     private void OnClickSettingButton()
