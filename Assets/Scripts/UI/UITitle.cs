@@ -31,9 +31,7 @@ public class UITitle : UIWindow
     {
         // Start Modal을 띄운다.
         Debug.Log("Click - Start");
-
-        var startFlow = Managers.UI.GetWindow<UIStartFlow>();
-        
+        Managers.UI.ShowWindow<UIStartFlow>();
     }
 
     private void OnClickSettingButton()
