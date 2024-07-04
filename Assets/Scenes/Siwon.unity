@@ -5489,11 +5489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8a5cebb852df84a87070aff1681a06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layouts:
-  - {fileID: 5570620}
-  - {fileID: 1158045085}
-  - {fileID: 1748024752}
-  - {fileID: 1701339837}
   selectPanel: {fileID: 835014689}
 --- !u!4 &998482752
 Transform:
