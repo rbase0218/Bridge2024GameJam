@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GaugeBarTimer : MonoBehaviour
+public class TimerLayer : MonoBehaviour, ILayoutControl
 {
     public static Action OnTimerEnd;
     
-    [SerializeField] 
-    private Image gauge;
+    [SerializeField] private Image gauge;
+    [SerializeField] private float maxTime;
+    [SerializeField] private string jobText;
+    [SerializeField] private string wordText;
     
-    [SerializeField]
-    private float maxTime;
     private float currentTime;
     private bool isPlaying;
 
@@ -22,6 +22,18 @@ public class GaugeBarTimer : MonoBehaviour
         StartTimer();
     }
 
+    private void OnEnable()
+    {
+        isPlaying = false;
+        StartTimer();
+    }
+
+    public void SetText(string job, string word)
+    {
+        jobText = job;
+        wordText = word;
+    }
+    
     private void OnDisable()
     {
         StopTimer();
@@ -70,5 +82,15 @@ public class GaugeBarTimer : MonoBehaviour
         }
         
         gauge.fillAmount = currentTime / maxTime;
+    }
+
+    public void ExitLayout()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void StartLayout()
+    {
+        gameObject.SetActive(true);
     }
 }

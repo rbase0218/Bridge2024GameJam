@@ -10,9 +10,7 @@ public class SelectButton : MonoBehaviour
     private Image image;
     private Color defaultColor;
     private bool isSelected;
-
     public bool IsSelected => isSelected;
-
 
     private void OnValidate()
     {

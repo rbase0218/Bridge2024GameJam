@@ -4,25 +4,29 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-public class InputPanel : MonoBehaviour
+public class InputLayer : MonoBehaviour, ILayoutControl
 {
     private List<TMP_Text> texts;
     
-    // Start is called before the first frame update
     void OnValidate()
     {
         texts = GameObject.FindGameObjectsWithTag("NameTag")
             .Select(x => x.GetComponent<TMP_Text>())
             .ToList();
     }
-
-    void Start()
-    {
-        
-    }
     
     public void SetText(string text)
     {
         texts[0].text = text;
+    }
+
+    public void ExitLayout()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void StartLayout()
+    {
+        gameObject.SetActive(true);
     }
 }
