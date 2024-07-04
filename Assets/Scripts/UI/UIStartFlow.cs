@@ -39,8 +39,9 @@ public class UIStartFlow : UIWindow
         var nameSelect = Managers.UI.ShowWindow<UINameSelect>();
         var stringCount = Get<UISwipe>((int)Swipes.CountSwipe).GetData();
         var personCount = Convert.ToInt32(stringCount);
+        
         // NameSelect 창에서 MakeChildren을 통해서 Child를 생성한다.
-        nameSelect.MakeChildren(personCount);
+        nameSelect.ShowChildren(personCount);
 
     }
 }

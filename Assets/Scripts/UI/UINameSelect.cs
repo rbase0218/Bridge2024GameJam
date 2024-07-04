@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UINameSelect : UIWindow
 {
     private enum Buttons
     {
         EntryButton
+    }
+
+    private enum RectTransforms
+    {
+        Content
     }
     
     [Space(10), SerializeField]
@@ -22,14 +29,30 @@ public class UINameSelect : UIWindow
             return false;
         
         BindButton(typeof(Buttons));
+        Bind<RectTransform>(typeof(RectTransforms));
+        
         GetButton((int)Buttons.EntryButton).onClick.AddListener(OnClickEntryButton);
 
         return true;
     }
 
-    public void MakeChildren(int count)
+    protected override void Setting()
     {
-        Utils.MakeChildren<TMP_Text>(rootContent.transform, childObj, count);
+        Get<RectTransform>((int)RectTransforms.Content).anchoredPosition = Vector2.zero;
+    }
+
+    public void ShowChildren(int count)
+    {
+        if (count < 0)
+            return;
+
+        for (int i = 0; i < rootContent.transform.childCount; ++i)
+        {
+            if(i < count)
+                rootContent.transform.GetChild(i).gameObject.SetActive(true);
+            else
+                rootContent.transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 
     private void OnClickEntryButton()
