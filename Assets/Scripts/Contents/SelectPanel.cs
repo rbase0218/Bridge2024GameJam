@@ -6,30 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Button = UnityEngine.UIElements.Button;
 
-public enum EJobType
-{
-    None,
-    Spy,
-    Actor
-}
-
-[Serializable]
-public class UserInfo
-{
-    public int index;
-    public string name;
-    public EJobType jobType;
-    public bool isSelect;
-    
-    public UserInfo(int index, string name, EJobType jobType)
-    {
-        this.index = index;
-        this.name = name;
-        this.jobType = jobType;
-        isSelect = false;
-    }
-}
-
 public class SelectPanel : MonoBehaviour
 {
     private GridLayoutGroup gridLayoutGroup;
