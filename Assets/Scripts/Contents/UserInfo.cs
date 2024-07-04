@@ -10,7 +10,7 @@ public class UserInfo
     public EJobType jobType;
     public bool isSelect;
 
-    public UserInfo(int index, string name, EJobType jobType)
+    public UserInfo(int index = 0, string name = "", EJobType jobType = EJobType.None)
     {
         SetData(index, name, jobType);
     }

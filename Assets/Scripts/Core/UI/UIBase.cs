@@ -11,17 +11,16 @@ public class UIBase : MonoBehaviour
     protected Dictionary<Type, Object[]> _objects = new Dictionary<Type, Object[]>();
     protected bool _init = false;
     
-  
-
     protected virtual bool Init()
     {
+        Debug.Log(_init);
         if (_init)
             return false;
 
         return _init = true;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         Init();
     }

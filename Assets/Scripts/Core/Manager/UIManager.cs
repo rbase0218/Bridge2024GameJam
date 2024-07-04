@@ -5,10 +5,16 @@ using Unity.VisualScripting;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
-public class UIManager
+public class UIManager : MonoBehaviour
 {
-    private List<UIWindow> _windowDataList = new List<UIWindow>();
-    private Stack<UIWindow> _activeWindowStack = new Stack<UIWindow>();
+    private List<UIWindow> _windowDataList;
+    private Stack<UIWindow> _activeWindowStack;
+
+    public void Init()
+    {
+        _windowDataList = new List<UIWindow>();
+        _activeWindowStack = new Stack<UIWindow>();
+    }
 
     #region Window Data
     
@@ -16,7 +22,7 @@ public class UIManager
     {
         if (window == null || ContainWindow(window))
             return;
-        
+
         _windowDataList?.Add(window);
         window.Hide();
     }
@@ -60,4 +66,10 @@ public class UIManager
     }
 
     #endregion
+
+    public void Quit()
+    {
+        _windowDataList = null;
+        _activeWindowStack = null;
+    }
 }

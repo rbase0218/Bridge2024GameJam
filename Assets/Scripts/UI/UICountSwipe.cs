@@ -1,47 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UICountSwipe : UISwipe
 {
-    private int[] data;
-    
-    protected override bool Init()
+    protected override void RegisterData()
     {
-        if (!base.Init())
-            return false;
-
-        data = Managers.Data.personCountArray;
-        count = 0;
-        GetText((int)Texts.SwipeValue).text = data[count].ToString();
-        
-        return true;
-    }
-
-    protected override void OnClickAfterButton()
-    {
-        Debug.Log("Click After");
-        
-        if (count + 1 >= data.Length)
-            return;
-
-        count += 1;
-        RefreshUI();
-    }
-
-    protected override void OnClickBeforeButton()
-    {
-        Debug.Log("Click Before");
-        
-        if (count - 1 < 0)
-            return;
-
-        count -= 1;
-        RefreshUI();
-    }
-
-    protected override void RefreshUI()
-    {
-        GetText((int)Texts.SwipeValue).text = data[count].ToString();
+        data = Managers.Data.personArray.ToList();
     }
 }
