@@ -1,22 +1,49 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class Utils
 {
-    public static T TryOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
+    /// <summary>
+    /// 컴포넌트 없으면 Add, 있다면 Get하는 작업을 한 번에 할 수 있도록 하는 함수.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="go"></param>
+    /// <returns></returns>
+    public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
     {
-        var isEmpty = go.TryGetComponent<T>(out var component);
-        if (!isEmpty)
-            component = go.AddComponent<T>();
+        go.TryGetComponent(out T component);
 
+        if (component == null)
+            component = go.AddComponent<T>();
         return component;
     }
+    
+    /// <summary>
+    /// GetChild를 개선한 함수. recursive는 자식의 자식까지 다 찾을 것인지 묻는 것
+    /// </summary>
+    /// <param name="go"></param>
+    /// <param name="name"></param>
+    /// <param name="recursive"></param>
+    /// <returns></returns>
+    public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
+    {
+        Transform transform = FindChild<Transform>(go, name, recursive);
+        if (transform == null)
+            return null;
 
+        return transform.gameObject;
+    }
+    
+    /// <summary>
+    /// FindChild 오버라이딩. 제네릭을 이용한 버전으로 컴포넌트 불러오기 가능.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="go"></param>
+    /// <param name="name"></param>
+    /// <param name="recursive"></param>
+    /// <returns></returns>
     public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
     {
         if (go == null)
@@ -24,13 +51,19 @@ public class Utils
 
         if (recursive == false)
         {
-            Transform transform = go.transform.Find(name);
-            if (transform != null)
-                return transform.GetComponent<T>();
+            for (int i = 0; i < go.transform.childCount; i++)
+            {
+                Transform transform = go.transform.GetChild(i);
+                if (string.IsNullOrEmpty(name) || transform.name == name)
+                { 
+                    if (transform.TryGetComponent(out T component))
+                        return component;
+                }
+            }
         }
         else
         {
-            foreach (T component in go.GetComponentsInChildren<T>())
+            foreach (T component in go.GetComponentsInChildren<T>(true))
             {
                 if (string.IsNullOrEmpty(name) || component.name == name)
                     return component;
@@ -39,28 +72,9 @@ public class Utils
 
         return null;
     }
-
-    public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
+    
+    public static T GetDictValue<T>(Dictionary<string, T> dict, string key)
     {
-        Transform transform = FindChild<Transform>(go, name, recursive);
-        if (transform != null)
-            return transform.gameObject;
-        return null;
-    }
-
-    public static List<T> MakeChildren<T>(Transform trans, GameObject obj, int count, string name = null) where T : Component
-    {
-        if (count == 0) 
-            return null;
-
-        List<T> resultList = new List<T>();
-        
-        for (int i = 0; i < count; ++i)
-        {
-            var gameObj = GameObject.Instantiate(obj, trans);
-            resultList.Add(FindChild<T>(gameObj, gameObj.name));
-        }
-
-        return resultList;
+        return dict.TryGetValue(key, out T value) ? value : default(T);
     }
 }
