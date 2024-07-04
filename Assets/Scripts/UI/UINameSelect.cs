@@ -30,7 +30,7 @@ public class UINameSelect : UIWindow
     public void MakeChildren(int count)
     {
         RemoveChildren();
-        Utils.MakeChildren<TMP_Text>(rootContent.transform, childObj, count);
+        //Utils.MakeChildren<TMP_Text>(rootContent.transform, childObj, count);
     }
 
     private void RemoveChildren()
