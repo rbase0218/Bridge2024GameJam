@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager
 {
     // 게임에 참여하는 총 인원
-    public Dictionary<int, UserInfo> _userInfoList = new Dictionary<int, UserInfo>();
+    public Dictionary<int, UserInfo> _userInfoDic = new Dictionary<int, UserInfo>();
     
-    [HideInInspector]
     public int personCount = 0;
-    
-    
-    public void SetUserInfo(UserInfo info)
+
+    public void Reset()
     {
-        // UserInfoList가 MaxCount보다 많을 경우 Return
+        _userInfoDic.Clear();
+    }
+    
+    public void AddUserInfo(UserInfo info)
+    {
+        _userInfoDic.Add(info.index, info);
     }
 }

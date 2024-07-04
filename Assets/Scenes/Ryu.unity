@@ -1051,7 +1051,7 @@ GameObject:
   - component: {fileID: 633884872}
   - component: {fileID: 633884871}
   m_Layer: 5
-  m_Name: Scrollbar Vertical
+  m_Name: Scrollbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1251,6 +1251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 741110012}
   - component: {fileID: 741110011}
+  - component: {fileID: 741110013}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -1285,6 +1286,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &741110013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741110010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5881929893ff43a4c3f6694f80215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personCount: 0
 --- !u!1 &755265158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,8 +1561,9 @@ GameObject:
   - component: {fileID: 945505546}
   - component: {fileID: 945505547}
   - component: {fileID: 945505548}
+  - component: {fileID: 945505549}
   m_Layer: 5
-  m_Name: NameField List
+  m_Name: NameField_List
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1620,6 +1635,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &945505549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945505545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f2ddcd4c68ae74195fccb6c4c8856a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputFields: []
 --- !u!1 &1003186752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,7 +2015,7 @@ GameObject:
   - component: {fileID: 1083305087}
   - component: {fileID: 1083305090}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: Scrol View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
