@@ -30,19 +30,25 @@ public sealed class Managers : MonoBehaviour
     private static DataManager _dataManager = new DataManager();
     private static SoundManager _soundManager = new SoundManager();
     private static GameManager _gameManager = new GameManager();
-    
+
     public static UIManager UI => _uiManager;
     public static DataManager Data => _dataManager;
     public static GameManager Game => _gameManager;
     public static SoundManager Sound => _soundManager;
 
-    private void Start()
+    private void Awake()
     {
+        _uiManager.Init();
         SetUp();
     }
 
     private void SetUp()
     {
         DontDestroyOnLoad(this);
+    }
+
+    private void OnApplicationQuit()
+    {
+        _uiManager.Quit();
     }
 }
