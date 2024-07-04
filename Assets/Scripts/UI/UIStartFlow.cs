@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +13,7 @@ public class UIStartFlow : UIWindow
 
     private enum Swipes
     {
-        CountSwipe,
-        SpySwipe,
-        CategorySwipe
+        CountSwipe
     }
 
     protected override bool Init()
@@ -33,12 +32,16 @@ public class UIStartFlow : UIWindow
     private void OnClickNextButton()
     {
         Debug.Log("Click - Next Button");
+        
+        // Current UI를 닫는다.
         Managers.UI.CloseWindow();
-        
+        // NameSelect 창을 열고 Instance를 보유한다.
         var nameSelect = Managers.UI.ShowWindow<UINameSelect>();
-        var personIndex = (Get<UISwipe>((int)Swipes.CountSwipe) as UICountSwipe).GetCount();
-        var resultPersonCount = Managers.Data.personCountArray[personIndex];
+        var stringCount = Get<UISwipe>((int)Swipes.CountSwipe).GetData();
+        var personCount = Convert.ToInt32(stringCount);
         
-        nameSelect.MakeChildren(resultPersonCount);
+        // NameSelect 창에서 MakeChildren을 통해서 Child를 생성한다.
+        nameSelect.ShowChildren(personCount);
+
     }
 }

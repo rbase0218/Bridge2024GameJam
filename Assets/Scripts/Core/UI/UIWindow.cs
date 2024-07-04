@@ -12,12 +12,12 @@ public abstract class UIWindow : UIBase
     {
         if (!base.Init())
             return false;
-        
         return true;
     }
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
+        base.Start();
         Managers.UI.AddWindow(this);
     }
     

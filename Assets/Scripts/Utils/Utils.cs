@@ -77,4 +77,15 @@ public class Utils
     {
         return dict.TryGetValue(key, out T value) ? value : default(T);
     }
+
+    public static void MakeChildren<T>(Transform go, GameObject child, int count)
+    {
+        if (count < 0) return;
+        
+        for (int i = 0; i < count; ++i)
+        {
+            var obj = GameObject.Instantiate(child);
+            obj.transform.parent = go;
+        }
+    } 
 }

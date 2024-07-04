@@ -11,8 +11,6 @@ public class UIBase : MonoBehaviour
     protected Dictionary<Type, Object[]> _objects = new Dictionary<Type, Object[]>();
     protected bool _init = false;
     
-  
-
     protected virtual bool Init()
     {
         if (_init)
@@ -21,7 +19,7 @@ public class UIBase : MonoBehaviour
         return _init = true;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         Init();
     }
