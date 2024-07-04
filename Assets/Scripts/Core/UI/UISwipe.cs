@@ -64,4 +64,9 @@ public abstract class UISwipe : UIBase
     }
 
     protected virtual void RegisterData() {}
+
+    public string GetData()
+    {
+        return data[count];
+    }
 }

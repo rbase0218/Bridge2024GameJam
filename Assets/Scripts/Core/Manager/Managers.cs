@@ -36,7 +36,7 @@ public sealed class Managers : MonoBehaviour
     public static GameManager Game => _gameManager;
     public static SoundManager Sound => _soundManager;
 
-    private void Start()
+    private void Awake()
     {
         _uiManager.Init();
         SetUp();

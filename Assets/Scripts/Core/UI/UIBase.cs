@@ -13,7 +13,6 @@ public class UIBase : MonoBehaviour
     
     protected virtual bool Init()
     {
-        Debug.Log(_init);
         if (_init)
             return false;
 

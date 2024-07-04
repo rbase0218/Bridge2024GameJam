@@ -29,13 +29,7 @@ public class UINameSelect : UIWindow
 
     public void MakeChildren(int count)
     {
-        RemoveChildren();
-        //Utils.MakeChildren<TMP_Text>(rootContent.transform, childObj, count);
-    }
-
-    private void RemoveChildren()
-    {
-        Debug.Log(rootContent.transform.childCount);
+        Utils.MakeChildren<TMP_Text>(rootContent.transform, childObj, count);
     }
 
     private void OnClickEntryButton()
