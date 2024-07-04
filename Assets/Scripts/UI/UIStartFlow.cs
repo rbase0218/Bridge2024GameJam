@@ -10,12 +10,20 @@ public class UIStartFlow : UIWindow
         //ExitButton
     }
 
+    private enum Swipes
+    {
+        CountSwipe,
+        SpySwipe,
+        CategorySwipe
+    }
+
     protected override bool Init()
     {
         if (!base.Init())
             return false;
         
         BindButton(typeof(Buttons));
+        Bind<UISwipe>(typeof(Swipes));
         
         GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         
@@ -25,7 +33,12 @@ public class UIStartFlow : UIWindow
     private void OnClickNextButton()
     {
         Debug.Log("Click - Next Button");
+        Managers.UI.CloseWindow();
+
+        var nameSelect = Managers.UI.ShowWindow<UINameSelect>();
+        var personIndex = (Get<UISwipe>((int)Swipes.CountSwipe) as UICountSwipe).GetCount();
+        var resultPersonCount = Managers.Data.personCountArray[personIndex];
         
-        // Next UI 띄어주기~
+        nameSelect.MakeChildren(resultPersonCount);
     }
 }

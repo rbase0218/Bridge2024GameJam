@@ -15,8 +15,18 @@ public abstract class UIWindow : UIBase
         
         return true;
     }
+
+    protected virtual void Awake()
+    {
+        Managers.UI.AddWindow(this);
+    }
     
-    public void Open() => gameObject.SetActive(true);
+    public void Open()
+    {
+        Setting();
+        gameObject.SetActive(true);
+    }
+
     public void Hide()
     {
         if (_alwaysOpen)
@@ -25,9 +35,8 @@ public abstract class UIWindow : UIBase
         gameObject.SetActive(false);
     }
 
-
-    protected virtual void Awake()
+    protected virtual void Setting()
     {
-        Managers.UI.AddWindow(this);
+        
     }
 }

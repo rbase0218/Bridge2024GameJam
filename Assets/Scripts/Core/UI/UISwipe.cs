@@ -31,7 +31,13 @@ public abstract class UISwipe : UIBase
         return true;
     }
 
+    public int GetCount()
+    {
+        return count;
+    }
+
     protected abstract void OnClickAfterButton();
     protected abstract void OnClickBeforeButton();
     protected abstract void RefreshUI();
+    
 }

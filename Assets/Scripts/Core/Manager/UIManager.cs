@@ -52,8 +52,11 @@ public class UIManager
 
     public void CloseWindow()
     {
-        if(_activeWindowStack.Count > 0)
-            _activeWindowStack?.Peek();
+        if (_activeWindowStack.Count > 0)
+        {
+            var window = _activeWindowStack?.Peek();
+            window.Hide();
+        }
     }
 
     #endregion
