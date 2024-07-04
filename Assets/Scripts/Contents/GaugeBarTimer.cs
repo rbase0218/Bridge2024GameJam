@@ -19,8 +19,15 @@ public class GaugeBarTimer : MonoBehaviour
     private void Start()
     {
         isPlaying = false;
+        StartTimer();
     }
-    
+
+    private void OnDisable()
+    {
+        StopTimer();
+        ResetTimer();
+    }
+
     private void Update()
     {
         if(currentTime > 0 && isPlaying)
