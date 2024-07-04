@@ -11,7 +11,7 @@ public class Utils
     /// <typeparam name="T"></typeparam>
     /// <param name="go"></param>
     /// <returns></returns>
-    public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
+    public static T TryOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
     {
         go.TryGetComponent(out T component);
 
