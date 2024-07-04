@@ -7,7 +7,7 @@ public class DataManager
 {
     public string[] personArray = { "3", "4", "5", "6" };
     public string[] categoryArray = { "A", "B", "C", "D" };
-
+    public string[] wordArray = { "호랑이", "사자", "치타", "표범" };
     public readonly Dictionary<int, string> textDic = new Dictionary<int, string>()
     {
         {1, "다음 {userName} 입니다."},

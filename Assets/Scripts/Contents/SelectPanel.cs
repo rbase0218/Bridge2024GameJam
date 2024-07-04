@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Button = UnityEngine.UIElements.Button;
 
 public class SelectPanel : MonoBehaviour
 {
+    public static Action<int> OnSelectUser;
+    
+    [SerializeField] private Button sendButton;
     private GridLayoutGroup gridLayoutGroup;
     private List<SelectButton> buttons;
     private int selectIndex;
@@ -18,7 +20,12 @@ public class SelectPanel : MonoBehaviour
         buttons = GetComponentsInChildren<SelectButton>(true).ToList();
         gridLayoutGroup.constraintCount = 1;
     }
-    
+
+    private void Start()
+    {
+        sendButton.interactable = false;
+    }
+
     public void SetButtonLayout(List<UserInfo> userInfos,int count = 3)
     {
         if (count == 3 || count == 5)
@@ -39,13 +46,22 @@ public class SelectPanel : MonoBehaviour
     
     public void PushedButton(int index)
     {
-        buttons.ForEach(x=> x.Reset());
+        buttons.ForEach(x=> x.UnSelect());
         buttons[index].Select();
         selectIndex = index;
+        sendButton.interactable = true;
     }
 
-    public int GetSelectedUserIndex()
+    public void SendSelectedUserIndex()
     {
-        return selectIndex;
+        ResetButton();
+        OnSelectUser?.Invoke(selectIndex);
+    }
+    
+    public void ResetButton()
+    {
+        buttons.ForEach(x=> x.Reset());
+        buttons[selectIndex].Lock();
+        sendButton.interactable = false;
     }
 }
