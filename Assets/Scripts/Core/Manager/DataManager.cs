@@ -9,5 +9,9 @@ public class DataManager
     public int[] spyCountArray = { 1, 2, 3, 4, 5, 6, 7 };
     public string[] categoryArray = { "A", "B", "C", "D" };
 
-    public const string nextText = "다음 순서는 {userName} 입니다.";
+    public readonly Dictionary<int, string> textDic = new Dictionary<int, string>()
+    {
+        {1, "다음 {userName} 입니다."},
+        {2, "누구세용"}
+    };
 }
