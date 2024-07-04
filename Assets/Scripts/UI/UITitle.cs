@@ -37,10 +37,13 @@ public class UITitle : UIWindow
     private void OnClickSettingButton()
     {
         Debug.Log("Click - Setting");
+
+        Managers.UI.ShowWindow<UISettings>();
     }
 
     private void OnClickExitButton()
     {
         Debug.Log("Click - Exit");
+        Managers.UI.ShowWindow<UIGameExit>();
     }
 }

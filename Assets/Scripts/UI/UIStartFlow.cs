@@ -34,7 +34,7 @@ public class UIStartFlow : UIWindow
     {
         Debug.Log("Click - Next Button");
         Managers.UI.CloseWindow();
-
+        
         var nameSelect = Managers.UI.ShowWindow<UINameSelect>();
         var personIndex = (Get<UISwipe>((int)Swipes.CountSwipe) as UICountSwipe).GetCount();
         var resultPersonCount = Managers.Data.personCountArray[personIndex];
