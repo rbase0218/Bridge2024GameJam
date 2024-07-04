@@ -20,7 +20,7 @@ public class TestManager : MonoBehaviour
             new UserInfo(2, "길동", EJobType.None),
             new UserInfo(3, "동", EJobType.None),
             new UserInfo(4, "길", EJobType.Spy),
-            new UserInfo(5, "길동동", EJobType.Actor),
+            new UserInfo(5, "금희", EJobType.Actor),
         };
         
         selectPanel.SetButtonLayout(userInfos, userInfos.Count);
@@ -44,6 +44,12 @@ public class TestManager : MonoBehaviour
     {
         currentLayoutIndex = 0;
         currentLayout = layouts[currentLayoutIndex];
+        currentLayout.GetComponent<ILayoutControl>()?.StartLayout();
+    }
+    
+    public void RepeatLayout()
+    {
+        currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout();
     }
     

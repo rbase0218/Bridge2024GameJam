@@ -8,6 +8,11 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Siwon.unity
+    guid: 423ae863445ee7e49bb3bb7c52066e73
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: ddc038ee0a04ef74e9894089ec893fc3, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 31a328bd0b949604eb78b5fed9d0b65c, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 677c93e888631364d83f4f67dc89defd, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 12b89e8d20fa8394098e8b21bb93cd07, type: 2}

@@ -5,7 +5,6 @@ using UnityEngine;
 public enum EJobType
 {
     None,
-    
     Citizen,
     Spy,
     Actor
