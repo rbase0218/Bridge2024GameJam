@@ -1,67 +1,98 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TestManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] layouts;
-    [SerializeField] private SelectPanel selectPanel;
+    [SerializeField] private TMP_Text wordText;
+    
     private List<UserInfo> userInfos;
     private GameObject currentLayout;
     private int currentLayoutIndex;
-    
+    private int userCount;
+    private UserInfo selectedUser;
+    private string currentWord;
+
     private void Start()
     {
+        SelectPanel.OnSelectUser += GetSelectedUser;
         userInfos = new List<UserInfo>
         {
-            new UserInfo(0, "철수", EJobType.None),
-            new UserInfo(1, "영희", EJobType.None),
-            new UserInfo(2, "길동", EJobType.None),
-            new UserInfo(3, "동", EJobType.None),
-            new UserInfo(4, "길", EJobType.Spy),
-            new UserInfo(5, "금희", EJobType.Actor),
+            new UserInfo(0, "철수", EJobType.Citizen),
+            new UserInfo(1, "영희", EJobType.Citizen),
+            new UserInfo(2, "길동", EJobType.Spy),
         };
-        
-        selectPanel.SetButtonLayout(userInfos, userInfos.Count);
+        currentWord = Managers.Data.wordArray[Random.Range(0, Managers.Data.wordArray.Length)];
+        wordText.text = currentWord;
         StartLayout();
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            NextLayout();
-        }
+        SelectPanel.OnSelectUser -= GetSelectedUser;
     }
 
-    public void GetSelectedUser()
+    public void GetSelectedUser(int index)
     {
-        Debug.Log(userInfos[selectPanel.GetSelectedUserIndex()].name);
+        selectedUser = userInfos[index];
+        
+        if(selectedUser.isSelect)
+        {
+            Debug.Log("이미 선택된 유저입니다.");
+            return;
+        }
+        
+        selectedUser.isSelect = true;
+        
+        userInfos.ForEach(x =>
+        {
+            if (x.isSelect)
+            {
+                Debug.Log(x.name+"님이 인질로 선택되었습니다.");
+            }
+        });
     }
-    
+
     public void StartLayout()
     {
+        userCount = 0;
         currentLayoutIndex = 0;
         currentLayout = layouts[currentLayoutIndex];
+        currentLayout.GetComponent<ILayoutControl>()?.SetUserData(userInfos, userCount);
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout();
+        userCount++;
     }
-    
+
     public void RepeatLayout()
     {
+        if(userCount >= userInfos.Count)
+        {
+            userCount = 0;
+            NextLayout();
+        }
+        
         currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
+        currentLayout.GetComponent<ILayoutControl>()?.SetUserData(userInfos, userCount);
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout();
+        userCount++;
     }
-    
+
     public void NextLayout()
     {
-        if(currentLayoutIndex >= layouts.Length - 1)
+        if (currentLayoutIndex >= layouts.Length - 1)
         {
             // 게임 종료
             return;
         }
-        currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
         
+        userCount = 0;
+        currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
+
         currentLayoutIndex++;
         currentLayout = layouts[currentLayoutIndex];
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout();

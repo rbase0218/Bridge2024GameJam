@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,6 +11,7 @@ public class SelectButton : MonoBehaviour
     private Image image;
     private Color defaultColor;
     private bool isSelected;
+    private bool isLocked;
     public bool IsSelected => isSelected;
 
     private void OnValidate()
@@ -18,7 +20,12 @@ public class SelectButton : MonoBehaviour
         image = GetComponent<Image>();
         defaultColor = image.color;
     }
-    
+
+    private void Start()
+    {
+        image.color = Color.blue;
+    }
+
     public void SetText(string text)
     {
         textTMP.text = text;
@@ -32,7 +39,26 @@ public class SelectButton : MonoBehaviour
     
     public void Reset()
     {
-        image.color = defaultColor;
+        if(isLocked)
+            return;
+        
+        image.color = Color.blue;;
         isSelected = false;
+    }
+    
+    public void UnSelect()
+    {
+        if (isLocked)
+            return;
+        
+        image.color = Color.gray;
+        isSelected = false;
+    }
+    
+    public void Lock()
+    {
+        image.color = Color.red;
+        isLocked = true;
+        GetComponent<Button>().interactable = false;
     }
 }

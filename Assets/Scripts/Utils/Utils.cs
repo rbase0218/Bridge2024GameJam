@@ -87,5 +87,20 @@ public class Utils
             var obj = GameObject.Instantiate(child);
             obj.transform.parent = go;
         }
-    } 
+    }
+    
+    public static string ChangeEnum(EJobType jobType)
+    {
+        switch (jobType)
+        {
+            case EJobType.Citizen:
+                return "시민";
+            case EJobType.Spy:
+                return "스파이";
+            case EJobType.Actor:
+                return "배우";
+            default:
+                return "시민";
+        }
+    }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NextOrderLayer : MonoBehaviour,ILayoutControl
+public class NextOrderLayer : MonoBehaviour
 {
     public void ExitLayout()
     {
@@ -13,6 +13,4 @@ public class NextOrderLayer : MonoBehaviour,ILayoutControl
     {
         gameObject.SetActive(true);
     }
-    
-    
 }
