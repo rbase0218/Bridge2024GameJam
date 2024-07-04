@@ -14,7 +14,6 @@ public enum EJobType
 }
 
 [Serializable]
-
 public class UserInfo
 {
     public int index;
