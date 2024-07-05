@@ -21,7 +21,6 @@ public class UINameFields : UIBase
         {
             _inputFields.Add(transform.GetChild(i).GetComponent<TMP_InputField>());
         }
-
         return true;
     }
 
