@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
     {
         if (_activeWindowStack.Count > 0)
         {
-            var window = _activeWindowStack?.Peek();
+            var window = _activeWindowStack?.Pop();
             window.Hide();
         }
     }

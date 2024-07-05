@@ -5,12 +5,32 @@ using UnityEngine;
 
 public class DataManager
 {
-    public string[] personArray = { "3", "4", "5", "6" };
-    public string[] categoryArray = { "A", "B", "C", "D" };
-    public string[] wordArray = { "호랑이", "사자", "치타", "표범" };
-    public readonly Dictionary<int, string> textDic = new Dictionary<int, string>()
+    // 게임의 인원 수
+    public readonly string[] personArray = new string[]{ "3", "4", "5", "6" };
+    // 대체 닉네임
+    public readonly string[] randNicknameArray = { "정혜원", "김지은", "김수민", "이시원", "류병현", "독고순옥"  };
+    
+    // 게임 카테고리 Database
+    public Dictionary<string, string[]> categoryDic = new Dictionary<string, string[]>();
+    public readonly string[] categoryArray = new string[]{ "동물", "음식", "영화 제목", "직업", "나라 이름", "운동", "악기" };
+    public readonly string[][] wordArray = new string[][]
     {
-        {1, "다음 {userName} 입니다."},
-        {2, "누구세용"}
+        new string[] { "사자", "호랑이", "코끼리", "기린", "표범", "하이에나", "코알라", "캥거루", "바다표범", "북극곰" },
+        new string[] { "피자", "초콜릿", "라면", "햄버거", "스파게티", "초밥", "김밥", "샐러드", "스테이크", "치킨" },
+        new string[] { "인셉션", "타이타닉", "어벤져스", "다크나이트", "포레스트 검프", "매트릭스", "해리 포터", "반지의 제왕", "스타워즈", "ET" },
+        new string[] { "의사", "변호사", "요리사", "경찰관", "소방관", "간호사", "교사", "그래픽 디자이너", "게임 기획자", "프로그래머" },
+        new string[] { "한국", "일본", "중국", "미국", "캐나다", "브라질", "아르헨티나", "영국", "프랑스", "독일" },
+        new string[] { "축구", "농구", "테니스", "배드민턴", "골프", "야구", "배구", "핸드볼", "럭비", "족구" },
+        new string[] { "피아노", "바이올린", "첼로", "장구", "가야금", "드럼", "기타", "단소", "리코더", "색소폰" }
     };
+    
+    public void Init()
+    {
+        categoryDic = new Dictionary<string, string[]>();
+        
+        for (int i = 0; i < categoryArray.Length; ++i)
+        {
+            categoryDic?.Add(categoryArray[i], wordArray[i]);
+        }
+    }
 }

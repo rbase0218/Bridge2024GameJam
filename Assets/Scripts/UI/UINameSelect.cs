@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UINameSelect : UIWindow
@@ -12,21 +14,13 @@ public class UINameSelect : UIWindow
         EntryButton
     }
 
-    private enum RectTransforms
+    private enum UINameField
     {
-        Content
-    }
-
-    private enum UINameFields
-    {
-        NameField_List
+        NameField_Group
     }
     
     [Space(10), SerializeField]
     private GameObject rootContent;
-
-    [SerializeField]
-    private GameObject childObj;
 
     private int count = 0;
     
@@ -36,50 +30,52 @@ public class UINameSelect : UIWindow
             return false;
         
         BindButton(typeof(Buttons));
-        Bind<RectTransform>(typeof(RectTransforms));
-        Bind<UINameField>(typeof(UINameFields));
+        Bind<UINameFields>(typeof(UINameField));
         
         GetButton((int)Buttons.EntryButton).onClick.AddListener(OnClickEntryButton);
 
         return true;
     }
 
-    protected override void Setting()
-    {
-        Get<RectTransform>((int)RectTransforms.Content).anchoredPosition = Vector2.zero;
-    }
-
-    public void ShowChildren(int count)
-    {
-        if (count < 0)
-            return;
-
-        for (int i = 0; i < rootContent.transform.childCount; ++i)
-        {
-            if(i < count)
-                rootContent.transform.GetChild(i).gameObject.SetActive(true);
-            else
-                rootContent.transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        this.count = count;
-    }
-
+    // 모든 작성이 완료되어서 Entry Button을 누른 경우, 게임 진입한다.
     private void OnClickEntryButton()
     {
         Debug.Log("Click - Entry Button");
-        Managers.UI.CloseWindow();
         
-        var nameField = Get<UINameField>((int)UINameFields.NameField_List);
-        nameField.RefreshField();
-        Managers.Game.Reset();
+        // Field의 데이터 값을 가져온다.
+        var nameField = Get<UINameFields>((int)UINameField.NameField_Group);
+        var fieldList = nameField.GetFields();
+        Managers.Game.ClearUser();
         
         for (int i = 0; i < count; ++i)
         {
-            Managers.Game.AddUserInfo(new UserInfo(
-                i,
-                nameField._inputFields[i].text
-            ));
+            if (String.IsNullOrEmpty(fieldList[i].text))
+                fieldList[i].text = Managers.Data.randNicknameArray[i];
+            Managers.Game.AddUserInfo(new UserInfo(i, fieldList[i].text));
         }
+        
+        nameField.HideAll();
+        SceneManager.LoadScene(1);
+    }
+    
+    // 처음 NameModal이 나타난다면, 이름 수에 맞게 데이터를 노출하는 것이 필요.
+    public void ExecuteProcess(int count)
+    {
+        if (count < 0)
+            return;
+        
+        this.count = count;
+        Managers.Game.SetGame(count);
+        ShowChildren(count);
+    }
+
+    private void ShowChildren(int count)
+    {
+        Get<UINameFields>((int)UINameField.NameField_Group).SetField(count);
+    }
+
+    protected override void Clear()
+    {
+        Get<UINameFields>((int)UINameField.NameField_Group).HideAll();
     }
 }

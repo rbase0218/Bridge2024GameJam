@@ -24,13 +24,12 @@ public class TestManager : MonoBehaviour
         SelectPanel.OnSelectHostage += SetHostage;
         SelectPanel.OnSelectVote += SetVotePoint;
         NextOrderLayer.OnExitLayout += GoJobOpenLayout;
-        userInfos = new List<UserInfo>
-        {
-            new UserInfo(0, "철수", EJobType.Citizen),
-            new UserInfo(1, "영희", EJobType.Actor),
-            new UserInfo(2, "길동", EJobType.Spy),
-        };
-        currentWord = Managers.Data.wordArray[Random.Range(0, Managers.Data.wordArray.Length)];
+        userInfos = Managers.Game._saveUserInfoList;
+
+        var categoryWord = Managers.Data.categoryArray[Managers.Game.currCategoryIndex];
+        var len = Managers.Data.categoryDic[categoryWord].Length;
+        currentWord = Managers.Data.categoryDic[categoryWord][Random.Range(0, len)];
+        
         wordText.text = currentWord;
         StartLayout();
     }

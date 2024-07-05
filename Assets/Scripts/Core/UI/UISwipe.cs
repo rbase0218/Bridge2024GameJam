@@ -34,6 +34,7 @@ public abstract class UISwipe : UIBase
         RegisterData();
 
         GetText((int)Texts.SwipeValue).text = data[0];
+        count = 0;
         
         return true;
     }
