@@ -10,7 +10,8 @@ public class UITitle : UIWindow
         SettingButton,
         ExitButton,
         BackButton,
-        HomeButton
+        HomeButton,
+        ManualButton
     }
     
     protected override bool Init()
@@ -25,6 +26,7 @@ public class UITitle : UIWindow
         GetButton((int)Buttons.ExitButton).onClick.AddListener(OnClickExitButton);
         GetButton((int)Buttons.HomeButton).onClick.AddListener(OnClickHomeButton);
         GetButton((int)Buttons.BackButton).onClick.AddListener(OnClickBackButton);
+        GetButton((int)Buttons.ManualButton).onClick.AddListener(OnClickManualButton);
         
         // Sound Manager
         
@@ -59,5 +61,10 @@ public class UITitle : UIWindow
     private void OnClickHomeButton()
     {
         Managers.UI.ShowWindow<UIReturnMain>();
+    }
+
+    private void OnClickManualButton()
+    {
+        Managers.UI.ShowWindow<UIManual>();
     }
 }

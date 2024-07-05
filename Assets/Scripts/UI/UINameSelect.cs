@@ -54,7 +54,7 @@ public class UINameSelect : UIWindow
             Managers.Game.AddUserInfo(new UserInfo(i, fieldList[i].text));
         }
         
-        // Scene 불러오기
+        nameField.HideAll();
         SceneManager.LoadScene(1);
     }
     
