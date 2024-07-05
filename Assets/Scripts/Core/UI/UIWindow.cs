@@ -31,11 +31,17 @@ public abstract class UIWindow : UIBase
     {
         if (_alwaysOpen)
             return;
-        
+
+        Clear();
         gameObject.SetActive(false);
     }
 
     protected virtual void Setting()
+    {
+        
+    }
+
+    protected virtual void Clear()
     {
         
     }

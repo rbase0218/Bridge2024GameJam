@@ -14,14 +14,9 @@ public class UINameSelect : UIWindow
         EntryButton
     }
 
-    private enum RectTransforms
+    private enum UINameField
     {
-        Content
-    }
-
-    private enum UINameFields
-    {
-        NameField_List
+        NameField_Group
     }
     
     [Space(10), SerializeField]
@@ -35,17 +30,11 @@ public class UINameSelect : UIWindow
             return false;
         
         BindButton(typeof(Buttons));
-        Bind<RectTransform>(typeof(RectTransforms));
-        Bind<UINameField>(typeof(UINameFields));
+        Bind<UINameFields>(typeof(UINameField));
         
         GetButton((int)Buttons.EntryButton).onClick.AddListener(OnClickEntryButton);
 
         return true;
-    }
-
-    protected override void Setting()
-    {
-        Get<RectTransform>((int)RectTransforms.Content).anchoredPosition = Vector2.zero;
     }
 
     // 모든 작성이 완료되어서 Entry Button을 누른 경우, 게임 진입한다.
@@ -54,13 +43,10 @@ public class UINameSelect : UIWindow
         Debug.Log("Click - Entry Button");
         
         // Field의 데이터 값을 가져온다.
-        var nameField = Get<UINameField>((int)UINameFields.NameField_List);
+        var nameField = Get<UINameFields>((int)UINameField.NameField_Group);
         var fieldList = nameField.GetFields();
         Managers.Game.ClearUser();
         
-        // Feature List
-        // - Empty Name -> Add Nickname
-        // - Duplicate -> Not Ok
         for (int i = 0; i < count; ++i)
         {
             if (String.IsNullOrEmpty(fieldList[i].text))
@@ -85,13 +71,11 @@ public class UINameSelect : UIWindow
 
     private void ShowChildren(int count)
     {
-        for (int i = 0; i < rootContent.transform.childCount; ++i)
-        {
-            if(i < count)
-                rootContent.transform.GetChild(i).gameObject.SetActive(true);
-            else
-                rootContent.transform.GetChild(i).gameObject.SetActive(false);
-        }
+        Get<UINameFields>((int)UINameField.NameField_Group).SetField(count);
     }
 
+    protected override void Clear()
+    {
+        Get<UINameFields>((int)UINameField.NameField_Group).HideAll();
+    }
 }
