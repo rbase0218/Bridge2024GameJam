@@ -5,18 +5,20 @@ using UnityEngine;
 public class SelectLayer : MonoBehaviour, ILayoutControl
 {
     [SerializeField] private SelectPanel selectPanel;
-    
+
+
     public void ExitLayout()
     {
         gameObject.SetActive(false);
     }
 
-    public void StartLayout()
+    public void StartLayout(List<UserInfo> users, UserInfo curUser)
     {
+        selectPanel.SetButtonLayout(users, users.Count);
         gameObject.SetActive(true);
     }
 
-    public void SetUserData(List<UserInfo> users, int userCount)
+    public void SetPanel(List<UserInfo> users)
     {
         selectPanel.SetButtonLayout(users, users.Count);
     }

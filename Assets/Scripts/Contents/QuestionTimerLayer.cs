@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class QuestionTimerLayer : MonoBehaviour, ILayoutControl
+public class QuestionTimerLayer : MonoBehaviour, ILayoutControl, IUserData
 {
     [Header("Gauge")]
     [SerializeField] private float maxTime;
@@ -25,12 +25,12 @@ public class QuestionTimerLayer : MonoBehaviour, ILayoutControl
     
     [Header("Button")]
     [SerializeField] private Button[] buttons;
-    
-    private List<UserInfo> userInfos;
-    private UserInfo currentUser;
 
     private float currentTime;
     private bool isPlaying;
+    
+    public List<UserInfo> Users { get; set; }
+    public UserInfo CurtUser { get; set; }
 
     private void Start()
     {
@@ -94,26 +94,17 @@ public class QuestionTimerLayer : MonoBehaviour, ILayoutControl
         gauge.fillAmount = currentTime / maxTime;
     }
 
+
     public void ExitLayout()
     {
         gameObject.SetActive(false);
     }
 
-    public void StartLayout()
+    public void StartLayout(List<UserInfo> users, UserInfo curUser)
     {
+        nameText.text = CurtUser.name;
+
         gameObject.SetActive(true);
-    }
-
-    public void SetUserData(List<UserInfo> users, int userCount)
-    {
-        userInfos = users;
-        currentUser = userInfos[userCount];
-        nameText.text = currentUser.name;
-    }
-
-    public void OnClickCardButton()
-    {
-        //
     }
 
     private void TimeOver()
@@ -121,7 +112,7 @@ public class QuestionTimerLayer : MonoBehaviour, ILayoutControl
         //제한시간 종료 화면 보여줌
         cardPanel.SetActive(false);
         nameObject.SetActive(false);
-        timeOverGruop.SetUserData(userInfos, currentUser.index);
+        timeOverGruop.SetUserData(Users, CurtUser.index);
         timeOverGruop.gameObject.SetActive(true);
     }
 }
