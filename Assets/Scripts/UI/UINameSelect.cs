@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
@@ -68,18 +69,27 @@ public class UINameSelect : UIWindow
     private void OnClickEntryButton()
     {
         Debug.Log("Click - Entry Button");
-        Managers.UI.CloseWindow();
         
+        // Field의 데이터 값을 가져온다.
         var nameField = Get<UINameField>((int)UINameFields.NameField_List);
-        nameField.RefreshField();
-        Managers.Game.Reset();
+        var fieldList = nameField.GetFields();
+        Managers.Game.ResetUserInfo();
         
+        // Feature List
+        // - Empty Name -> Add Nickname
+        // - Duplicate -> Not Ok
         for (int i = 0; i < count; ++i)
         {
-            Managers.Game.AddUserInfo(new UserInfo(
-                i,
-                nameField._inputFields[i].text
-            ));
+            if (String.IsNullOrEmpty(fieldList[i].text))
+                fieldList[i].text = Managers.Data.randNicknameArray[i];
+
+            if (!Managers.Game.AddUserInfo(new UserInfo(i, fieldList[i].text)))
+            {
+                // 중복 비허용 Window 추가 예정
+                return;
+            }
         }
+        
+        Managers.UI.CloseWindow();
     }
 }

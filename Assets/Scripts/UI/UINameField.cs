@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class UINameField : MonoBehaviour
 {
-    public List<TMP_Text> _inputFields = new List<TMP_Text>(); 
-        
-    public void RefreshField()
+    public List<TMP_Text> GetFields()
     {
-        _inputFields.Clear();
+        var resultFields = new List<TMP_Text>();
         
         for (int i = 0; i < transform.childCount; ++i)
         {
             if (transform.GetChild(i).gameObject.activeSelf)
             {
                 var text = transform.GetChild(i).GetComponentInChildren<TMP_Text>();
-                _inputFields.Add(text);
+                resultFields.Add(text);
             }
         }
+        return resultFields;
     }
 }

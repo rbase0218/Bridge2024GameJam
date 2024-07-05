@@ -9,13 +9,13 @@ public class GameManager
     
     public int personCount = 0;
 
-    public void Reset()
+    public void ResetUserInfo()
     {
         _userInfoDic.Clear();
     }
     
-    public void AddUserInfo(UserInfo info)
+    public bool AddUserInfo(UserInfo info)
     {
-        _userInfoDic.Add(info.index, info);
+        return _userInfoDic.TryAdd(info.index, info);
     }
 }
