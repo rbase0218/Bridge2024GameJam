@@ -68,8 +68,6 @@ public class UINameSelect : UIWindow
             Managers.Game.AddUserInfo(new UserInfo(i, fieldList[i].text));
         }
         
-        Managers.UI.CloseWindow();
-
         // Scene 불러오기
         SceneManager.LoadScene(1);
     }
