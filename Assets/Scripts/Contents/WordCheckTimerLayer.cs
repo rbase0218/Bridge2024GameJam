@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData
+public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData, ITimerControl
 {
     public List<UserInfo> Users { get; set; }
     public UserInfo CurtUser { get; set; }
@@ -51,7 +51,6 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData
     
     private void OnDisable()
     {
-        StopTimer();
         ResetTimer();
     }
 
@@ -74,11 +73,6 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData
     {
         ResetTimer();
         isPlaying = true;
-    }
-    
-    public void StopTimer()
-    {
-        isPlaying = false;
     }
 
     private void ResetTimer()
@@ -138,7 +132,7 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData
                 descryptionText = spyPanel.GetComponentInChildren<TMP_Text>();
                 card.SetActive(false);
                 cardPanel.SetActive(false);
-                spyPanel.SetPanel(Users);
+                spyPanel.SetPanelForSpy(Users);
                 spyPanel.gameObject.SetActive(true);
                 descryptionText.text = "인질로 잡을 사람을\n 선택하세요.";
                 break;
@@ -187,5 +181,15 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData
         timeOverGruop.SetUserData(Users, CurtUser.index);
         timeOverGruop.gameObject.SetActive(true);
         
+    }
+
+    public void PauseTimer()
+    {
+        isPlaying = false;
+    }
+
+    public void RestartTimer()
+    {
+        isPlaying = true;
     }
 }

@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class SelectPanel : MonoBehaviour
 {
-    public static Action<int> OnSelectUser;
+    public static Action<int> OnSelectHostage;
+    public static Action<int> OnSelectVote;
     
     [SerializeField] private Button sendButton;
     private GridLayoutGroup gridLayoutGroup;
@@ -27,6 +28,28 @@ public class SelectPanel : MonoBehaviour
         sendButton.interactable = false;
     }
 
+    public void SetButtonLayoutForSpy(List<UserInfo> userInfos,int count = 3)
+    {
+        users = userInfos;
+        if (count == 3 || count == 5)
+        {
+            gridLayoutGroup.constraintCount = 1;
+        }
+        else
+        {
+            gridLayoutGroup.constraintCount = 2;
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            buttons[i].gameObject.SetActive(true);
+            buttons[i].Unlock();
+            buttons[i].SetText(userInfos[i].name);
+        }
+        
+        LockButton();
+    }
+    
     public void SetButtonLayout(List<UserInfo> userInfos,int count = 3)
     {
         users = userInfos;
@@ -42,6 +65,7 @@ public class SelectPanel : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             buttons[i].gameObject.SetActive(true);
+            buttons[i].Unlock();
             buttons[i].SetText(userInfos[i].name);
         }
     }
@@ -54,23 +78,38 @@ public class SelectPanel : MonoBehaviour
         sendButton.interactable = true;
     }
 
-    public void SendSelectedUserIndex()
+    public void SendSelectedHostageIndex()
     {
         ResetButton();
-        OnSelectUser?.Invoke(selectIndex);
+        OnSelectHostage?.Invoke(selectIndex);
+    }
+    
+    public void SendSelectedVoteIndex()
+    {
+        ResetButton();
+        OnSelectVote?.Invoke(selectIndex);
     }
     
     public void SendRandomSelectedUserIndex()
     {
         ResetButton();
         selectIndex = users.FindIndex(x => x.isSelect == false);
-        OnSelectUser?.Invoke(selectIndex);
+        OnSelectHostage?.Invoke(selectIndex);
     }
     
-    public void ResetButton()
+    private void ResetButton()
     {
         buttons.ForEach(x=> x.Reset());
-        buttons[selectIndex].Lock();
         sendButton.interactable = false;
+    }
+    
+    private void LockButton()
+    {
+        List<UserInfo> unSelectUsers = new List<UserInfo>(users);
+        unSelectUsers.RemoveAll(x => x.isSelect == false && x.isVotePoint == false);
+        unSelectUsers.ForEach(x =>
+        {
+            buttons[x.index].Lock();
+        });
     }
 }

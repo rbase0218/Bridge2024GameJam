@@ -16,11 +16,13 @@ public class TestManager : MonoBehaviour
     private int currentLayoutIndex;
     private int userCount;
     private UserInfo selectedUser;
+    private UserInfo votePointUser;
     private string currentWord;
 
     private void Start()
     {
-        SelectPanel.OnSelectUser += GetSelectedUser;
+        SelectPanel.OnSelectHostage += SetHostage;
+        SelectPanel.OnSelectVote += SetVotePoint;
         NextOrderLayer.OnExitLayout += GoJobOpenLayout;
         userInfos = new List<UserInfo>
         {
@@ -35,12 +37,38 @@ public class TestManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        SelectPanel.OnSelectUser -= GetSelectedUser;
+        SelectPanel.OnSelectHostage -= SetHostage;
+        SelectPanel.OnSelectVote -= SetVotePoint;
         NextOrderLayer.OnExitLayout -= GoJobOpenLayout;
     }
-
-    public void GetSelectedUser(int index)
+    
+    private void SetVotePoint(int index)
     {
+        if(votePointUser != null)
+        {
+            votePointUser.isVotePoint = false;
+        }
+        
+        votePointUser = userInfos[index];
+        
+        votePointUser.isVotePoint = true;
+        
+        userInfos.ForEach(x =>
+        {
+            if (x.isVotePoint)
+            {
+                Debug.Log(x.name + "님이 투표로 선택되었습니다.");
+            }
+        });
+    }
+        
+    private void SetHostage(int index)
+    {
+        if(selectedUser != null)
+        {
+            selectedUser.curHostage = false;
+        }
+        
         selectedUser = userInfos[index];
 
         if (selectedUser.isSelect)
@@ -50,7 +78,8 @@ public class TestManager : MonoBehaviour
         }
 
         selectedUser.isSelect = true;
-
+        selectedUser.curHostage = true;
+        
         userInfos.ForEach(x =>
         {
             if (x.isSelect)
