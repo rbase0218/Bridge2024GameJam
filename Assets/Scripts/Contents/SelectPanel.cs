@@ -12,6 +12,7 @@ public class SelectPanel : MonoBehaviour
     [SerializeField] private Button sendButton;
     private GridLayoutGroup gridLayoutGroup;
     private List<SelectButton> buttons;
+    private List<UserInfo> users;
     private int selectIndex;
     
     private void OnValidate()
@@ -28,6 +29,7 @@ public class SelectPanel : MonoBehaviour
 
     public void SetButtonLayout(List<UserInfo> userInfos,int count = 3)
     {
+        users = userInfos;
         if (count == 3 || count == 5)
         {
             gridLayoutGroup.constraintCount = 1;
@@ -55,6 +57,13 @@ public class SelectPanel : MonoBehaviour
     public void SendSelectedUserIndex()
     {
         ResetButton();
+        OnSelectUser?.Invoke(selectIndex);
+    }
+    
+    public void SendRandomSelectedUserIndex()
+    {
+        ResetButton();
+        selectIndex = users.FindIndex(x => x.isSelect == false);
         OnSelectUser?.Invoke(selectIndex);
     }
     

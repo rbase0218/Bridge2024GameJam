@@ -22,4 +22,9 @@ public class SelectLayer : MonoBehaviour, ILayoutControl
     {
         selectPanel.SetButtonLayout(users, users.Count);
     }
+    
+    public void SetRandomSelectedUserIndex()
+    {
+        selectPanel.SendRandomSelectedUserIndex();
+    }
 }

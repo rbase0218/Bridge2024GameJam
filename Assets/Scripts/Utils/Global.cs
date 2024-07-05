@@ -9,3 +9,12 @@ public enum EJobType
     Spy,
     Actor
 }
+
+public enum ELayoutName
+{
+    Intro,
+    NextOrder,
+    JobOpen,
+    WordCheck,
+    Select
+}

@@ -176,6 +176,9 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData
 
     private void TimeOver()
     {
+        if(CurtUser.jobType == EJobType.Spy)
+            spyPanel.SetRandomSelectedUserIndex();
+        
         //제한시간 종료 화면 보여줌
         cardPanel.SetActive(false);
         spyPanel.gameObject.SetActive(false);
@@ -183,5 +186,6 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData
         timeWaitText.SetActive(false);
         timeOverGruop.SetUserData(Users, CurtUser.index);
         timeOverGruop.gameObject.SetActive(true);
+        
     }
 }

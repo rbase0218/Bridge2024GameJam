@@ -21,11 +21,11 @@ public class TestManager : MonoBehaviour
     private void Start()
     {
         SelectPanel.OnSelectUser += GetSelectedUser;
-        NextOrderLayer.OnExitLayout += NextLayout;
+        NextOrderLayer.OnExitLayout += GoJobOpenLayout;
         userInfos = new List<UserInfo>
         {
             new UserInfo(0, "철수", EJobType.Citizen),
-            new UserInfo(1, "영희", EJobType.Citizen),
+            new UserInfo(1, "영희", EJobType.Actor),
             new UserInfo(2, "길동", EJobType.Spy),
         };
         currentWord = Managers.Data.wordArray[Random.Range(0, Managers.Data.wordArray.Length)];
@@ -36,7 +36,7 @@ public class TestManager : MonoBehaviour
     private void OnDestroy()
     {
         SelectPanel.OnSelectUser -= GetSelectedUser;
-        NextOrderLayer.OnExitLayout -= NextLayout;
+        NextOrderLayer.OnExitLayout -= GoJobOpenLayout;
     }
 
     public void GetSelectedUser(int index)
@@ -81,19 +81,55 @@ public class TestManager : MonoBehaviour
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
         userCount++;
     }
-
-    public void NextLayout()
+    
+    public void GoJobOpenLayout()
     {
-        if (currentLayoutIndex >= layouts.Length - 1)
+        currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
+        currentLayoutIndex = (int)ELayoutName.JobOpen;
+        currentLayout = layouts[currentLayoutIndex];
+        currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
+    }
+    
+    public void GoWordCheckLayout()
+    {
+        currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
+        currentLayoutIndex = (int)ELayoutName.WordCheck;
+        currentLayout = layouts[currentLayoutIndex];
+        currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
+    }
+
+    public void GoNextOrderLayout()
+    {
+        userCount++;
+        Debug.Log(userCount);
+
+        if (userCount >= userInfos.Count)
         {
-            // 게임 종료
+            currentLayoutIndex = (int)ELayoutName.WordCheck;
+            Debug.Log("다음 라운드로 이동." + currentLayoutIndex);
+            NextLayout();
             return;
         }
 
-        userCount = 0;
         currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
+        currentLayoutIndex = (int)ELayoutName.NextOrder;
+        currentLayout = layouts[currentLayoutIndex];
+        currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
+    }
 
+    public void NextLayout()
+    {
+        userCount = 0;
         currentLayoutIndex++;
+        
+        if (currentLayoutIndex >= layouts.Length)
+        {
+            // 게임 종료
+            Debug.Log("게임 종료");
+            return;
+        }
+
+        currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
         currentLayout = layouts[currentLayoutIndex];
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
     }
