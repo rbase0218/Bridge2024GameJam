@@ -41,7 +41,7 @@ public class UIStartFlow : UIWindow
         var personCount = Convert.ToInt32(stringCount);
         
         // NameSelect 창에서 MakeChildren을 통해서 Child를 생성한다.
-        nameSelect.ShowChildren(personCount);
+        nameSelect.ExecuteProcess(personCount);
 
     }
 }

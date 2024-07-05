@@ -27,7 +27,8 @@ public class TestManager : MonoBehaviour
             new UserInfo(1, "영희", EJobType.Citizen),
             new UserInfo(2, "길동", EJobType.Spy),
         };
-        currentWord = Managers.Data.wordArray[Random.Range(0, Managers.Data.wordArray.Length)];
+        
+        //currentWord = Managers.Data.wordArray[Random.Range(0, Managers.Data.wordArray.Length)];
         wordText.text = currentWord;
         StartLayout();
     }
