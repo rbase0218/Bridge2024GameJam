@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // 게임에 참여하는 총 인원
-    // Key는 Index로 처리하면 됨.
-    // 죽은 인원의 경우 제거를 통해서 뺄 수 있다.
-    public Dictionary<int, UserInfo> _userInfoDic = new Dictionary<int, UserInfo>();
     // 참여 인원을 모두 관리한다.
     public List<UserInfo> _saveUserInfoList = new List<UserInfo>();
     
@@ -25,13 +21,12 @@ public class GameManager : MonoBehaviour
     #region Game Settings
     public void ClearUser()
     {
-        _userInfoDic.Clear();
+        _saveUserInfoList.Clear();
     }
     
-    public bool AddUserInfo(UserInfo info)
+    public void AddUserInfo(UserInfo info)
     {
         _saveUserInfoList.Add(info);
-        return _userInfoDic.TryAdd(info.index, info);
     }
 
     public void SetGame(int count)

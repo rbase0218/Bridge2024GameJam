@@ -64,15 +64,8 @@ public class UINameSelect : UIWindow
         for (int i = 0; i < count; ++i)
         {
             if (String.IsNullOrEmpty(fieldList[i].text))
-            {
                 fieldList[i].text = Managers.Data.randNicknameArray[i];
-            }
-
-            if (!Managers.Game.AddUserInfo(new UserInfo(i, fieldList[i].text)))
-            {
-                // 중복 비허용 Window 추가 예정
-                return;
-            }
+            Managers.Game.AddUserInfo(new UserInfo(i, fieldList[i].text));
         }
         
         Managers.UI.CloseWindow();
