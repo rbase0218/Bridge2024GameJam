@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     
     // 사람 최대 수
     public int personMaxCount = 0;
-    // 현재 Round의 인원 Index
-    public int currPersonIndex = 0;
+    
     // 현재 설정된 카테고리의 Index (큰 주제)
     public int currCategoryIndex = 0;
     // 현재 설정된 카테고리의 세부 주제 Index (진행중인 주제)
@@ -36,14 +35,4 @@ public class GameManager : MonoBehaviour
     }
     
     #endregion
-    private void AddPerson(int num = 1)
-    {
-        // 합친 값이 더 크면, 0으로 만들고 return
-        if (currPersonIndex + num > personMaxCount)
-        {
-            currPersonIndex = 0;
-            return;
-        }
-        currPersonIndex += num;
-    }
 }

@@ -23,8 +23,11 @@ public class TestManager : MonoBehaviour
         SelectPanel.OnSelectUser += GetSelectedUser;
         NextOrderLayer.OnExitLayout += NextLayout;
         userInfos = Managers.Game._saveUserInfoList;
+
+        var categoryWord = Managers.Data.categoryArray[Managers.Game.currCategoryIndex];
+        var len = Managers.Data.categoryDic[categoryWord].Length;
+        currentWord = Managers.Data.categoryDic[categoryWord][Random.Range(0, len)];
         
-        //currentWord = Managers.Data.wordArray[Random.Range(0, Managers.Data.wordArray.Length)];
         wordText.text = currentWord;
         StartLayout();
     }

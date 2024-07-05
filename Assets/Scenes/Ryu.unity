@@ -668,7 +668,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB3D9\uBB3C"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 55d9502e2816ca74fb58234df6521cfa, type: 2}
   m_sharedMaterial: {fileID: -3186240845146122109, guid: 55d9502e2816ca74fb58234df6521cfa, type: 2}
@@ -1300,7 +1300,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _saveUserInfoList: []
   personMaxCount: 0
-  currPersonIndex: 0
   currCategoryIndex: 0
   currCategorySubIndex: 0
   gameRound: 0
@@ -1743,13 +1742,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: "\uB3D9\uBB3C"
-      m_Image: {fileID: 0}
-    - m_Text: "\uC2DD\uBB3C"
-      m_Image: {fileID: 0}
-    - m_Text: "\uAE30\uD0C0"
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6900,7 +6893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 904, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3401756777193475402

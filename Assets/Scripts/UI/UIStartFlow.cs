@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIStartFlow : UIWindow
@@ -16,6 +17,13 @@ public class UIStartFlow : UIWindow
         CountSwipe
     }
 
+    private enum Dropdowns
+    {
+        CategoryDropdown
+    }
+
+    private int categoryIndex = 0;
+
     protected override bool Init()
     {
         if (!base.Init())
@@ -23,9 +31,20 @@ public class UIStartFlow : UIWindow
         
         BindButton(typeof(Buttons));
         Bind<UISwipe>(typeof(Swipes));
+        Bind<TMP_Dropdown>(typeof(Dropdowns));
         
         GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
+
+        for (int i = 0; i < Managers.Data.categoryArray.Length; ++i)
+        {
+            var option = new TMP_Dropdown.OptionData();
+            option.text = Managers.Data.categoryArray[i];
+            
+            Get<TMP_Dropdown>((int)Dropdowns.CategoryDropdown).options.Add(option);
+        }
         
+        Get<TMP_Dropdown>((int)Dropdowns.CategoryDropdown).SetValueWithoutNotify(-1);
+        Get<TMP_Dropdown>((int)Dropdowns.CategoryDropdown).onValueChanged.AddListener(SetCategoryIndex);
         return true;
     }
 
@@ -42,6 +61,11 @@ public class UIStartFlow : UIWindow
         
         // NameSelect 창에서 MakeChildren을 통해서 Child를 생성한다.
         nameSelect.ExecuteProcess(personCount);
+        Managers.Game.currCategoryIndex = categoryIndex;
+    }
 
+    private void SetCategoryIndex(int index)
+    {
+        categoryIndex = index;
     }
 }
