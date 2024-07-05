@@ -88,6 +88,7 @@ public class UINameSelect : UIWindow
             return;
         
         this.count = count;
+        Managers.Game.SetGame(count);
         ShowChildren(count);
     }
 
