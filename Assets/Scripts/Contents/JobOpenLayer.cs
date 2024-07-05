@@ -10,7 +10,7 @@ public class JobOpenLayer : MonoBehaviour, ILayoutControl
     [SerializeField] private TMP_Text jobText;
     [SerializeField] private GameObject card;
     [SerializeField] private Button cardButton;
-    
+
     public void ExitLayout()
     {
         cardButton.interactable = false;
@@ -18,17 +18,12 @@ public class JobOpenLayer : MonoBehaviour, ILayoutControl
         gameObject.SetActive(false);
     }
 
-    public void StartLayout()
+    public void StartLayout(List<UserInfo> users, UserInfo curUser)
     {
+        nameText.text = curUser.name;
+        jobText.text = Utils.ChangeEnum(curUser.jobType);
         gameObject.SetActive(true);
     }
-
-    public void SetUserData(List<UserInfo> users, int userCount)
-    {
-        nameText.text = users[userCount].name;
-        jobText.text = Utils.ChangeEnum(users[userCount].jobType);
-    }
-    
 
     public void OnClickSendButton()
     {

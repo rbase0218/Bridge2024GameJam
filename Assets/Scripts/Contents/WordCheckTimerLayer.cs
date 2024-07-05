@@ -7,8 +7,11 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl
+public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData
 {
+    public List<UserInfo> Users { get; set; }
+    public UserInfo CurtUser { get; set; }
+    
     [Header("Gauge")]
     [SerializeField] private float maxTime;
     [SerializeField] private Image gauge;
@@ -30,8 +33,6 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl
     [Header("Button")]
     [SerializeField] private Button[] buttons;
     
-    private List<UserInfo> userInfos;
-    private UserInfo currentUser;
     private TMP_Text descryptionText;
     private float currentTime;
     private bool isPlaying;
@@ -103,19 +104,15 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl
         gameObject.SetActive(false);
     }
 
-    public void StartLayout()
+    public void StartLayout(List<UserInfo> users, UserInfo curUser)
     {
+        Users = users;
+        CurtUser = curUser;
+        jobText.text = Utils.ChangeEnum(CurtUser.jobType);
         gameObject.SetActive(true);
-    }
-
-    public void SetUserData(List<UserInfo> users, int userCount)
-    {
-        userInfos = users;
-        currentUser = userInfos[userCount];
-        jobText.text = Utils.ChangeEnum(currentUser.jobType);
         ChangeRole();
     }
-    
+
     private void ChangeRole()
     {
         timeOverGruop.gameObject.SetActive(false);
@@ -123,9 +120,9 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl
         buttons.ToList().ForEach(x=> x.interactable=false);
 
         descryptionText = cardPanel.GetComponentInChildren<TMP_Text>();
-        switch (currentUser.jobType)
+        switch (CurtUser.jobType)
         {
-            case EJobType.None:
+            case EJobType.Citizen:
                 spyPanel.gameObject.SetActive(false);
                 cardPanel.SetActive(true);
                 card.SetActive(true);
@@ -141,7 +138,7 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl
                 descryptionText = spyPanel.GetComponentInChildren<TMP_Text>();
                 card.SetActive(false);
                 cardPanel.SetActive(false);
-                spyPanel.SetUserData(userInfos, userInfos.Count);
+                spyPanel.SetPanel(Users);
                 spyPanel.gameObject.SetActive(true);
                 descryptionText.text = "인질로 잡을 사람을\n 선택하세요.";
                 break;
@@ -153,9 +150,9 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl
     public void OnClickCardButton()
     {
         buttons.ToList().ForEach(x=> x.interactable=true);
-        switch (currentUser.jobType)
+        switch (CurtUser.jobType)
         {
-            case EJobType.None:
+            case EJobType.Citizen:
                 card.SetActive(false);
                 descryptionText.text = "카드를 뒤집어서\n 제시어를 확인하세요.";
                 break;
@@ -184,7 +181,7 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl
         spyPanel.gameObject.SetActive(false);
         jobObject.SetActive(false);
         timeWaitText.SetActive(false);
-        timeOverGruop.SetUserData(userInfos, currentUser.index);
+        timeOverGruop.SetUserData(Users, CurtUser.index);
         timeOverGruop.gameObject.SetActive(true);
     }
 }
