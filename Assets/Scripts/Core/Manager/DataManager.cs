@@ -23,6 +23,8 @@ public class DataManager
     
     public void Init()
     {
+        categoryDic = new Dictionary<string, string[]>();
+        
         for (int i = 0; i < categoryArray.Length; ++i)
         {
             categoryDic?.Add(categoryArray[i], wordArray[i]);

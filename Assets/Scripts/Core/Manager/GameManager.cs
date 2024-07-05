@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     // 죽은 인원의 경우 제거를 통해서 뺄 수 있다.
     public Dictionary<int, UserInfo> _userInfoDic = new Dictionary<int, UserInfo>();
     // 참여 인원을 모두 관리한다.
-    private List<UserInfo> _saveUserInfoList = new List<UserInfo>();
+    public List<UserInfo> _saveUserInfoList = new List<UserInfo>();
     
     // 사람 최대 수
     public int personMaxCount = 0;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO.IsolatedStorage;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UINameSelect : UIWindow
@@ -63,7 +64,9 @@ public class UINameSelect : UIWindow
         for (int i = 0; i < count; ++i)
         {
             if (String.IsNullOrEmpty(fieldList[i].text))
+            {
                 fieldList[i].text = Managers.Data.randNicknameArray[i];
+            }
 
             if (!Managers.Game.AddUserInfo(new UserInfo(i, fieldList[i].text)))
             {
@@ -73,6 +76,9 @@ public class UINameSelect : UIWindow
         }
         
         Managers.UI.CloseWindow();
+
+        // Scene 불러오기
+        SceneManager.LoadScene(1);
     }
     
     // 처음 NameModal이 나타난다면, 이름 수에 맞게 데이터를 노출하는 것이 필요.
@@ -81,6 +87,7 @@ public class UINameSelect : UIWindow
         if (count < 0)
             return;
         
+        this.count = count;
         ShowChildren(count);
     }
 

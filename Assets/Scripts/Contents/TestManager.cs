@@ -22,12 +22,7 @@ public class TestManager : MonoBehaviour
     {
         SelectPanel.OnSelectUser += GetSelectedUser;
         NextOrderLayer.OnExitLayout += NextLayout;
-        userInfos = new List<UserInfo>
-        {
-            new UserInfo(0, "철수", EJobType.Citizen),
-            new UserInfo(1, "영희", EJobType.Citizen),
-            new UserInfo(2, "길동", EJobType.Spy),
-        };
+        userInfos = Managers.Game._saveUserInfoList;
         
         //currentWord = Managers.Data.wordArray[Random.Range(0, Managers.Data.wordArray.Length)];
         wordText.text = currentWord;

@@ -1251,6 +1251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 741110012}
   - component: {fileID: 741110011}
+  - component: {fileID: 741110013}
   m_Layer: 0
   m_Name: '@Managers'
   m_TagString: Untagged
@@ -1285,6 +1286,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &741110013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741110010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5881929893ff43a4c3f6694f80215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _saveUserInfoList: []
+  personMaxCount: 0
+  currPersonIndex: 0
+  currCategoryIndex: 0
+  currCategorySubIndex: 0
+  gameRound: 0
 --- !u!1 &755265158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,7 +1342,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &755265160
 MonoBehaviour:
@@ -9523,7 +9542,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _alwaysOpen: 0
   rootContent: {fileID: 945505545}
-  childObj: {fileID: 2872995496197942899, guid: de860c968749621499a0703c9d528add, type: 3}
 --- !u!222 &6081483013936064633
 CanvasRenderer:
   m_ObjectHideFlags: 0
