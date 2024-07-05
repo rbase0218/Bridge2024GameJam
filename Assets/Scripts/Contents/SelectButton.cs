@@ -61,4 +61,11 @@ public class SelectButton : MonoBehaviour
         isLocked = true;
         GetComponent<Button>().interactable = false;
     }
+    
+    public void Unlock()
+    {
+        image.color = defaultColor;
+        isLocked = false;
+        GetComponent<Button>().interactable = true;
+    }
 }

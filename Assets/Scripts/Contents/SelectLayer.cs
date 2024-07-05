@@ -14,12 +14,22 @@ public class SelectLayer : MonoBehaviour, ILayoutControl
 
     public void StartLayout(List<UserInfo> users, UserInfo curUser)
     {
-        selectPanel.SetButtonLayout(users, users.Count);
+        selectPanel.SetButtonLayoutForSpy(users, users.Count);
         gameObject.SetActive(true);
     }
 
+    public void SetPanelForSpy(List<UserInfo> users)
+    {
+        selectPanel.SetButtonLayoutForSpy(users, users.Count);
+    }
+    
     public void SetPanel(List<UserInfo> users)
     {
         selectPanel.SetButtonLayout(users, users.Count);
+    }
+    
+    public void SetRandomSelectedUserIndex()
+    {
+        selectPanel.SendRandomSelectedUserIndex();
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class QuestionTimerLayer : MonoBehaviour, ILayoutControl, IUserData
+public class AnswerTimerLayer : MonoBehaviour, ILayoutControl, IUserData
 {
     [Header("Gauge")]
     [SerializeField] private float maxTime;
@@ -16,6 +16,7 @@ public class QuestionTimerLayer : MonoBehaviour, ILayoutControl, IUserData
     [Header("Text")]
     [SerializeField] private TMP_Text descryptionText;
     [SerializeField] private TMP_Text nameText;
+    [SerializeField] private TMP_Text answerText;
 
     [Header("Object")]
     [SerializeField] private GameObject card;
@@ -103,7 +104,6 @@ public class QuestionTimerLayer : MonoBehaviour, ILayoutControl, IUserData
     public void StartLayout(List<UserInfo> users, UserInfo curUser)
     {
         nameText.text = CurtUser.name;
-
         gameObject.SetActive(true);
     }
 
@@ -114,5 +114,10 @@ public class QuestionTimerLayer : MonoBehaviour, ILayoutControl, IUserData
         nameObject.SetActive(false);
         timeOverGruop.SetUserData(Users, CurtUser.index);
         timeOverGruop.gameObject.SetActive(true);
+    }
+
+    public void SaveAnswer(string answer)
+    {
+        answerText.text = answer;
     }
 }

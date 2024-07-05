@@ -11,6 +11,12 @@ public class TimeOverGruop : MonoBehaviour
     public void SetUserData(List<UserInfo> userInfos, int userCount)
     {
         user1Name.text = userInfos[userCount].name;
+        
+        if (userCount + 1 >= userInfos.Count)
+        {
+            user2Name.text = userInfos[0].name;
+            return;
+        }
         user2Name.text = userInfos[userCount + 1].name;
     }
 }
