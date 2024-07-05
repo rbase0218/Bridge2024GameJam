@@ -10,7 +10,7 @@ public class TestManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] layouts;
     [SerializeField] private TMP_Text wordText;
-    
+
     private List<UserInfo> userInfos;
     private GameObject currentLayout;
     private int currentLayoutIndex;
@@ -21,6 +21,7 @@ public class TestManager : MonoBehaviour
     private void Start()
     {
         SelectPanel.OnSelectUser += GetSelectedUser;
+        NextOrderLayer.OnExitLayout += NextLayout;
         userInfos = new List<UserInfo>
         {
             new UserInfo(0, "철수", EJobType.Citizen),
@@ -35,25 +36,26 @@ public class TestManager : MonoBehaviour
     private void OnDestroy()
     {
         SelectPanel.OnSelectUser -= GetSelectedUser;
+        NextOrderLayer.OnExitLayout -= NextLayout;
     }
 
     public void GetSelectedUser(int index)
     {
         selectedUser = userInfos[index];
-        
-        if(selectedUser.isSelect)
+
+        if (selectedUser.isSelect)
         {
             Debug.Log("이미 선택된 유저입니다.");
             return;
         }
-        
+
         selectedUser.isSelect = true;
-        
+
         userInfos.ForEach(x =>
         {
             if (x.isSelect)
             {
-                Debug.Log(x.name+"님이 인질로 선택되었습니다.");
+                Debug.Log(x.name + "님이 인질로 선택되었습니다.");
             }
         });
     }
@@ -63,22 +65,20 @@ public class TestManager : MonoBehaviour
         userCount = 0;
         currentLayoutIndex = 0;
         currentLayout = layouts[currentLayoutIndex];
-        currentLayout.GetComponent<ILayoutControl>()?.SetUserData(userInfos, userCount);
-        currentLayout.GetComponent<ILayoutControl>()?.StartLayout();
+        currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
         userCount++;
     }
 
     public void RepeatLayout()
     {
-        if(userCount >= userInfos.Count)
+        if (userCount >= userInfos.Count)
         {
             userCount = 0;
             NextLayout();
         }
-        
+
         currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
-        currentLayout.GetComponent<ILayoutControl>()?.SetUserData(userInfos, userCount);
-        currentLayout.GetComponent<ILayoutControl>()?.StartLayout();
+        currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
         userCount++;
     }
 
@@ -89,12 +89,12 @@ public class TestManager : MonoBehaviour
             // 게임 종료
             return;
         }
-        
+
         userCount = 0;
         currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
 
         currentLayoutIndex++;
         currentLayout = layouts[currentLayoutIndex];
-        currentLayout.GetComponent<ILayoutControl>()?.StartLayout();
+        currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
     }
 }
