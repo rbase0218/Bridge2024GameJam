@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class SelectPanel : MonoBehaviour
 {
     public static Action<int> OnSelectHostage;
+    public static Action<int> OnSelectQuestion;
     public static Action<int> OnSelectVote;
     
     [SerializeField] private Button sendButton;
@@ -15,6 +16,7 @@ public class SelectPanel : MonoBehaviour
     private List<SelectButton> buttons;
     private List<UserInfo> users;
     private int selectIndex;
+    private bool isEnd;
     
     private void OnValidate()
     {
@@ -28,45 +30,28 @@ public class SelectPanel : MonoBehaviour
         sendButton.interactable = false;
     }
 
-    public void SetButtonLayoutForSpy(List<UserInfo> userInfos,int count = 3)
+    public void SetButtonLayout(List<UserInfo> userInfos, ESelectType selectType)
     {
+        isEnd = false;
         users = userInfos;
-        if (count == 3 || count == 5)
-        {
-            gridLayoutGroup.constraintCount = 1;
-        }
-        else
-        {
-            gridLayoutGroup.constraintCount = 2;
-        }
-
-        for (int i = 0; i < count; i++)
-        {
-            buttons[i].gameObject.SetActive(true);
-            buttons[i].Unlock();
-            buttons[i].SetText(userInfos[i].name);
-        }
         
-        LockButton();
-    }
-    
-    public void SetButtonLayout(List<UserInfo> userInfos,int count = 3)
-    {
-        users = userInfos;
-        if (count == 3 || count == 5)
-        {
-            gridLayoutGroup.constraintCount = 1;
-        }
-        else
-        {
-            gridLayoutGroup.constraintCount = 2;
-        }
-
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < userInfos.Count; i++)
         {
             buttons[i].gameObject.SetActive(true);
-            buttons[i].Unlock();
             buttons[i].SetText(userInfos[i].name);
+        }
+
+        switch (selectType)
+        {
+            case ESelectType.Hostage:
+                LockButtonForHostage();
+                break;
+            case ESelectType.Question:
+                LockButtonForQuestion();
+                break;
+            case ESelectType.Vote:
+                LockButtonForVote();
+                break;
         }
     }
     
@@ -80,21 +65,47 @@ public class SelectPanel : MonoBehaviour
 
     public void SendSelectedHostageIndex()
     {
-        ResetButton();
+        if(isEnd) return;
+        
         OnSelectHostage?.Invoke(selectIndex);
+        ResetButton();
+        
+        isEnd = true;
+    }
+    
+    public void SendSelectedQuestionIndex()
+    {
+        if(isEnd) return;
+        
+        OnSelectQuestion?.Invoke(selectIndex);
+        ResetButton();
+        
+        isEnd = true;
     }
     
     public void SendSelectedVoteIndex()
     {
-        ResetButton();
+        if(isEnd) return;
+        
         OnSelectVote?.Invoke(selectIndex);
+        ResetButton();
+        
+        isEnd = true;
     }
     
     public void SendRandomSelectedUserIndex()
     {
+        if(isEnd) return;
+        
         ResetButton();
-        selectIndex = users.FindIndex(x => x.isSelect == false);
+        List<UserInfo> unSelectUsers = new List<UserInfo>(users);
+        unSelectUsers.RemoveAll(x => x.hasHostage);
+        unSelectUsers.RemoveAll(x => x.myTurn);
+        
+        selectIndex = unSelectUsers[UnityEngine.Random.Range(0, unSelectUsers.Count)].index;
+        
         OnSelectHostage?.Invoke(selectIndex);
+        isEnd = true;
     }
     
     private void ResetButton()
@@ -103,13 +114,48 @@ public class SelectPanel : MonoBehaviour
         sendButton.interactable = false;
     }
     
-    private void LockButton()
+    private void LockButtonForHostage()
     {
         List<UserInfo> unSelectUsers = new List<UserInfo>(users);
-        unSelectUsers.RemoveAll(x => x.isSelect == false && x.isVotePoint == false);
+        unSelectUsers.RemoveAll(x => x.hasHostage == false);
+        
         unSelectUsers.ForEach(x =>
         {
-            buttons[x.index].Lock();
+            buttons[x.index].gameObject.SetActive(false);
+        });
+    }
+
+    private void LockButtonForQuestion()
+    {
+        List<UserInfo> unSelectUsers = new List<UserInfo>(users);
+        List<UserInfo> selectUsers = new List<UserInfo>();
+        
+        foreach (var item in unSelectUsers)
+        {
+            if(item.curHostage || item.myTurn || item.isDead)
+                selectUsers.Add(item);
+        }
+        
+        selectUsers.ForEach(x =>
+        {
+            buttons[x.index].gameObject.SetActive(false);
+        });
+    }
+    
+    private void LockButtonForVote()
+    {
+        List<UserInfo> unSelectUsers = new List<UserInfo>(users);
+        List<UserInfo> selectUsers = new List<UserInfo>();
+
+        foreach (var item in unSelectUsers)
+        {
+            if(item.isDead)
+                selectUsers.Add(item);
+        }
+        
+        selectUsers.ForEach(x =>
+        {
+            buttons[x.index].gameObject.SetActive(false);
         });
     }
 }

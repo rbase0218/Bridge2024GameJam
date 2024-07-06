@@ -7,7 +7,7 @@ using UnityEngine;
 using DG.Tweening;
 using Sequence = DG.Tweening.Sequence;
 
-public class NextOrderLayer : MonoBehaviour, ILayoutControl
+public class NextOrderVoteLayer : MonoBehaviour, ILayoutControl
 {
     public static Action OnExitLayout;
 
@@ -56,7 +56,6 @@ public class NextOrderLayer : MonoBehaviour, ILayoutControl
             {
                 // 3초가 지났으므로 액션 호출
                 OnExitLayout?.Invoke();
-
                 // 타이머 중지
                 isTimerRunning = false;
             }

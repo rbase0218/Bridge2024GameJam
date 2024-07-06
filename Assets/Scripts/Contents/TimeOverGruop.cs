@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TimeOverGruop : MonoBehaviour
@@ -18,5 +19,17 @@ public class TimeOverGruop : MonoBehaviour
             return;
         }
         user2Name.text = userInfos[userCount + 1].name;
+    }
+    
+    public void SetUserDataForNextQuestion(UserInfo user1, string user2)
+    {
+        user1Name.text = user1.name;
+        
+        if(TestManager.instance.isQuestionEnd)
+        {
+            user2Name.text = "종료";
+            return;
+        }
+        user2Name.text = user2;
     }
 }

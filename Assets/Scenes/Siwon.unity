@@ -10604,7 +10604,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 817298704}
         m_TargetAssemblyTypeName: SelectPanel, Assembly-CSharp
-        m_MethodName: SendSelectedVoteIndex
+        m_MethodName: SendSelectedQuestionIndex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

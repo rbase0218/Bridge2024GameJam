@@ -12,16 +12,21 @@ public class AnswerTimerLayer : MonoBehaviour, ILayoutControl, IUserData
     [Header("Gauge")]
     [SerializeField] private float maxTime;
     [SerializeField] private Image gauge;
+    [SerializeField] private GameObject gruop;
+    [SerializeField] private GameObject slider;
     
     [Header("Text")]
     [SerializeField] private TMP_Text descryptionText;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text answerText;
+    [SerializeField] private GameObject timeWaitText;
 
-    [Header("Object")]
+    [Header("Object")] 
+    [SerializeField] private GameObject timer;
+
+    [SerializeField]
+    private GameObject selectButtons;
     [SerializeField] private GameObject card;
-    [SerializeField] private GameObject cardPanel;
-    [SerializeField] private GameObject nameObject;
     [SerializeField] private TimeOverGruop timeOverGruop;
     
     [Header("Button")]
@@ -36,7 +41,6 @@ public class AnswerTimerLayer : MonoBehaviour, ILayoutControl, IUserData
     private void Start()
     {
         isPlaying = false;
-        StartTimer();
     }
 
     private void OnEnable()
@@ -61,7 +65,8 @@ public class AnswerTimerLayer : MonoBehaviour, ILayoutControl, IUserData
             if(currentTime <= 0)
             {
                 isPlaying = false;
-                TimeOver();
+                if(timeOverGruop.gameObject.activeInHierarchy == false)
+                    TimeOver();
             }
         }
     }
@@ -82,42 +87,77 @@ public class AnswerTimerLayer : MonoBehaviour, ILayoutControl, IUserData
         currentTime = maxTime;
         gauge.fillAmount = 1;
     }
-    
-    public void PlusTime(float time)
-    {
-        currentTime += time;
-        
-        if (currentTime > maxTime)
-        {
-            currentTime = maxTime;
-        }
-        
-        gauge.fillAmount = currentTime / maxTime;
-    }
-
 
     public void ExitLayout()
     {
+        card.SetActive(true);
+        timer.SetActive(false);
+        selectButtons.SetActive(false);
+        timeOverGruop.gameObject.SetActive(false);
+        gruop.SetActive(true);
         gameObject.SetActive(false);
+        CurtUser.myTurn = false;
     }
 
     public void StartLayout(List<UserInfo> users, UserInfo curUser)
     {
+        Users = users;
+        CurtUser = curUser;
+        descryptionText.text = "카드를 뒤집어\n 질문을 선택해주세요.";
         nameText.text = CurtUser.name;
         gameObject.SetActive(true);
+    }
+    
+    public void ChangeDisplay()
+    {
+        //패널 끄기
+        gruop.SetActive(false);
+        timeWaitText.SetActive(true);
     }
 
     private void TimeOver()
     {
+        gruop.SetActive(false);
+        timeWaitText.SetActive(false);
         //제한시간 종료 화면 보여줌
-        cardPanel.SetActive(false);
-        nameObject.SetActive(false);
-        timeOverGruop.SetUserData(Users, CurtUser.index);
+        gruop.SetActive(false);
+        
+        try
+        {
+            var nextUser = TestManager.instance.GetNextQuestionUser();
+
+            if(nextUser == null)
+            {
+                timeOverGruop.SetUserDataForNextQuestion(CurtUser, "종료");
+            }
+            else
+            {
+                timeOverGruop.SetUserDataForNextQuestion(CurtUser, nextUser.name);
+            }
+        }
+        catch
+        {
+            
+        }
+        
+
+        
         timeOverGruop.gameObject.SetActive(true);
     }
 
     public void SaveAnswer(string answer)
     {
         answerText.text = answer;
+    }
+
+    public void OnclickCardButton()
+    {
+        gauge.fillAmount = 1;
+        currentTime = maxTime;
+        timer.SetActive(true);
+        isPlaying = true;
+        descryptionText.text = "질문을 읽고\n 답을 선택해주세요.";
+        card.SetActive(false);
+        selectButtons.SetActive(true);
     }
 }

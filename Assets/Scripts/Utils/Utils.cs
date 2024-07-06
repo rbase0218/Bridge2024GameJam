@@ -93,14 +93,14 @@ public class Utils
     {
         switch (jobType)
         {
-            case EJobType.Citizen:
-                return "시민";
-            case EJobType.Spy:
-                return "스파이";
-            case EJobType.Actor:
-                return "배우";
+            case EJobType.VIP:
+                return "귀빈";
+            case EJobType.Assassin:
+                return "암살자";
+            case EJobType.Clown:
+                return "광대";
             default:
-                return "시민";
+                return "귀빈";
         }
     }
 }

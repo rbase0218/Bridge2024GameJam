@@ -64,7 +64,9 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData, ITi
             if(currentTime <= 0)
             {
                 isPlaying = false;
-                TimeOver();
+                
+                if(timeOverGruop.gameObject.activeInHierarchy == false)
+                    TimeOver();
             }
         }
     }
@@ -81,20 +83,9 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData, ITi
         gauge.fillAmount = 1;
     }
     
-    public void PlusTime(float time)
-    {
-        currentTime += time;
-        
-        if (currentTime > maxTime)
-        {
-            currentTime = maxTime;
-        }
-        
-        gauge.fillAmount = currentTime / maxTime;
-    }
-
     public void ExitLayout()
     {
+        CurtUser.myTurn = false;
         gameObject.SetActive(false);
     }
 
@@ -103,6 +94,7 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData, ITi
         Users = users;
         CurtUser = curUser;
         jobText.text = Utils.ChangeEnum(CurtUser.jobType);
+        CurtUser.myTurn = true;
         gameObject.SetActive(true);
         ChangeRole();
     }
@@ -116,23 +108,23 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData, ITi
         descryptionText = cardPanel.GetComponentInChildren<TMP_Text>();
         switch (CurtUser.jobType)
         {
-            case EJobType.Citizen:
+            case EJobType.VIP:
                 spyPanel.gameObject.SetActive(false);
                 cardPanel.SetActive(true);
                 card.SetActive(true);
                 descryptionText.text = "카드를 뒤집어서\n 제시어를 확인하세요.";
                 break;
-            case EJobType.Actor:
+            case EJobType.Clown:
                 spyPanel.gameObject.SetActive(false);
                 cardPanel.SetActive(true);
                 card.SetActive(true);
                 descryptionText.text = "카드를 뒤집어서\n 제시어를 확인하세요.";
                 break;
-            case EJobType.Spy:
+            case EJobType.Assassin:
                 descryptionText = spyPanel.GetComponentInChildren<TMP_Text>();
                 card.SetActive(false);
                 cardPanel.SetActive(false);
-                spyPanel.SetPanelForSpy(Users);
+                spyPanel.SetPanelLayout(Users, ESelectType.Hostage);
                 spyPanel.gameObject.SetActive(true);
                 descryptionText.text = "인질로 잡을 사람을\n 선택하세요.";
                 break;
@@ -146,11 +138,11 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData, ITi
         buttons.ToList().ForEach(x=> x.interactable=true);
         switch (CurtUser.jobType)
         {
-            case EJobType.Citizen:
+            case EJobType.VIP:
                 card.SetActive(false);
                 descryptionText.text = "카드를 뒤집어서\n 제시어를 확인하세요.";
                 break;
-            case EJobType.Actor:
+            case EJobType.Clown:
                 card.SetActive(false);
                 descryptionText.text = "배우 역할은 숨기고\n 스파이로 보일 수 있게끔\n 적절히 연기하세요.";
                 break;
@@ -170,7 +162,7 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData, ITi
 
     private void TimeOver()
     {
-        if(CurtUser.jobType == EJobType.Spy)
+        if(CurtUser.jobType == EJobType.Assassin)
             spyPanel.SetRandomSelectedUserIndex();
         
         //제한시간 종료 화면 보여줌
@@ -180,7 +172,6 @@ public class WordCheckTimerLayer : MonoBehaviour, ILayoutControl, IUserData, ITi
         timeWaitText.SetActive(false);
         timeOverGruop.SetUserData(Users, CurtUser.index);
         timeOverGruop.gameObject.SetActive(true);
-        
     }
 
     public void PauseTimer()

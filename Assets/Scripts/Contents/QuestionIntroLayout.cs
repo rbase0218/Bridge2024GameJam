@@ -23,25 +23,8 @@ public class QuestionIntroLayout : MonoBehaviour,ILayoutControl
     {
         imageButton.interactable = true;
         var hostage = users.Find(info => info.curHostage);
-        var votePoint = users.Find(info => info.isVotePoint);
-        List<UserInfo> otherUsers = new List<UserInfo>(users);
         
-        if (hostage != null)
-        {
-            otherUsers.Remove(hostage);
-        }
-        else
-        {
-            Debug.LogError("현재 인질이 없습니다.");
-        }
-        
-        if(votePoint != null)
-        {
-            otherUsers.Remove(votePoint);
-        }
-        
-        var randomUser = otherUsers[Random.Range(0, otherUsers.Count)];
-        presentationPanel.SetUserInfo(hostage.name,randomUser.name);
+        presentationPanel.SetUserInfo(hostage.name,curUser.name);
         gameObject.SetActive(true);
     }
     

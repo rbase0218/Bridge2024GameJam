@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class JobOpenLayer : MonoBehaviour, ILayoutControl
 {
@@ -12,12 +13,15 @@ public class JobOpenLayer : MonoBehaviour, ILayoutControl
     [SerializeField] private Button cardButton;
     [SerializeField] private TMP_Text jobDescryptionText;
     
+    private UserInfo curUser;
+    
     public void ExitLayout()
     {
         cardButton.interactable = false;
         card.SetActive(true);
         gameObject.SetActive(false);
         jobDescryptionText.gameObject.SetActive(false);
+        this.curUser.myTurn = false;
     }
 
     public void StartLayout(List<UserInfo> users, UserInfo curUser)
@@ -26,6 +30,9 @@ public class JobOpenLayer : MonoBehaviour, ILayoutControl
         jobText.text = Utils.ChangeEnum(curUser.jobType);
         ChangeDescryption(curUser.jobType);
         gameObject.SetActive(true);
+        this.curUser = curUser;
+        this.curUser.myTurn = true;
+        
     }
 
     public void OnClickSendButton()
@@ -39,13 +46,13 @@ public class JobOpenLayer : MonoBehaviour, ILayoutControl
     {
         switch (jobType)
         {
-            case EJobType.Citizen:
+            case EJobType.VIP:
                 jobDescryptionText.text = "무도회에 침입한\n 불청객 암살자를 색출하면\n 승리합니다.";
                 break;
-            case EJobType.Actor:
+            case EJobType.Clown:
                 jobDescryptionText.text = "무도회에 잠입한\n 암살자로 지목당하면\n 승리합니다.";
                 break;
-            case EJobType.Spy:
+            case EJobType.Assassin:
                 jobDescryptionText.text = "무도회의 게임에 참여한\n 모든 귀빈들을 인질로 잡거나,\n 그들의 암구호를 맞추면\n 승리합니다.";
                 break;
             default:

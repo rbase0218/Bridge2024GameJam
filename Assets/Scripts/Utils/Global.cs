@@ -5,9 +5,9 @@ using UnityEngine;
 public enum EJobType
 {
     None,
-    Citizen,
-    Spy,
-    Actor
+    VIP,
+    Assassin,
+    Clown
 }
 
 public enum ELayoutName
@@ -16,5 +16,29 @@ public enum ELayoutName
     NextOrder,
     JobOpen,
     WordCheck,
-    Select
+    QuestionIntro,
+    Question,
+    Answer,
+    Debate,
+    VoteIntro,
+    NextOrderVote,
+    Vote,
+    Result,
+    Final,
+    End
+}
+
+public enum ESelectType
+{
+    Hostage,
+    Question,
+    Vote,
+}
+
+public enum EVoteType
+{
+    Same,
+    VIP,
+    Assassin,
+    Clown
 }
