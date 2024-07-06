@@ -91,18 +91,22 @@ public class TestManager : MonoBehaviour
                 break;
         }
 
-        int random1,  random2;
-        EJobType temp;
-
-        for (int i = 0; i < jobTypes.Count; ++i)
-        {
-            random1 = Random.Range(0, jobTypes.Count);
-            random2 = Random.Range(0, jobTypes.Count);
-
-            temp = jobTypes[random1];
-            jobTypes[random1] = jobTypes[random2];
-            jobTypes[random2] = temp;
-        }
+        // int random1,  random2;
+        // EJobType temp;
+        //
+        // for (int i = 0; i < jobTypes.Count; ++i)
+        // {
+        //     random1 = Random.Range(0, jobTypes.Count);
+        //     random2 = Random.Range(0, jobTypes.Count);
+        //
+        //     temp = jobTypes[random1];
+        //     jobTypes[random1] = jobTypes[random2];
+        //     jobTypes[random2] = temp;
+        // }
+        
+        var temp = jobTypes.OrderBy(item => Guid.NewGuid()).ToList();
+        jobTypes.Clear();
+        jobTypes.AddRange(temp);
         
         for (int i = 0; i < userInfos.Count; i++)
         {
