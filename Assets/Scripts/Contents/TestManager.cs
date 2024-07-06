@@ -9,9 +9,8 @@ using Random = UnityEngine.Random;
 
 public class TestManager : MonoBehaviour
 {
-
     public static TestManager instance = null;
-    
+
     private void Awake()
     {
         if (instance == null)
@@ -20,13 +19,13 @@ public class TestManager : MonoBehaviour
         }
         else
         {
-            if(instance != this)
+            if (instance != this)
             {
                 Destroy(gameObject);
             }
         }
     }
-    
+
     [SerializeField] private GameObject[] layouts;
     [SerializeField] private TMP_Text wordText;
     private UserInfo curQuestionUser;
@@ -48,7 +47,7 @@ public class TestManager : MonoBehaviour
     private List<int> voteUsers = new List<int>();
 
     private int roundCount;
-    
+    private bool isCorrect;
 
     private void Start()
     {
@@ -60,6 +59,57 @@ public class TestManager : MonoBehaviour
         VoteIntroLayer.OnExitLayout += GoNextOrderVoteLayout;
         userInfos = Managers.Game._saveUserInfoList;
 
+        List<EJobType> jobTypes = new List<EJobType>();
+
+        switch (userInfos.Count)
+        {
+            case 3:
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.Assassin);
+                break;
+            case 4:
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.Assassin);
+                break;
+            case 5:
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.Clown);
+                jobTypes.Add(EJobType.Assassin);
+                break;
+            case 6:
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.VIP);
+                jobTypes.Add(EJobType.Clown);
+                jobTypes.Add(EJobType.Assassin);
+                break;
+        }
+
+        int random1,  random2;
+        EJobType temp;
+
+        for (int i = 0; i < jobTypes.Count; ++i)
+        {
+            random1 = Random.Range(0, jobTypes.Count);
+            random2 = Random.Range(0, jobTypes.Count);
+
+            temp = jobTypes[random1];
+            jobTypes[random1] = jobTypes[random2];
+            jobTypes[random2] = temp;
+        }
+        
+        for (int i = 0; i < userInfos.Count; i++)
+        {
+            userInfos[i].SetJob(jobTypes[i]);
+            Debug.Log(jobTypes[i]);
+        }
+
         var categoryWord = Managers.Data.categoryArray[Managers.Game.currCategoryIndex];
         var len = Managers.Data.categoryDic[categoryWord].Length;
         currentWord = Managers.Data.categoryDic[categoryWord][Random.Range(0, len)];
@@ -68,6 +118,7 @@ public class TestManager : MonoBehaviour
         {
             voteUsers.Add(0);
         }
+
         wordText.text = currentWord;
         StartLayout();
     }
@@ -112,16 +163,16 @@ public class TestManager : MonoBehaviour
             {
                 Debug.Log("동점자 발생");
                 // 토론부터 다시 시작
-                
-                voteUsers.ForEach(x=>x=0);
+
+                voteUsers.ForEach(x => x = 0);
                 voteType = EVoteType.Same;
-                
+
                 return;
             }
         }
 
         voteTargetUser = userInfos[maxIndex];
-        
+
         switch (userInfos[maxIndex].jobType)
         {
             case EJobType.VIP:
@@ -130,19 +181,19 @@ public class TestManager : MonoBehaviour
                 // 라운드 인원 수 넘었는지 확인 넘었으면 종료
                 Debug.Log("귀빈 사망");
 
-                if(roundCount >= userInfos.Count -1)
+                if (roundCount >= userInfos.Count - 1)
                 {
                     Debug.Log("스파이 승리 화면");
-                    
+
                     return;
                 }
-                
+
                 roundCount++;
-                
-                voteUsers.ForEach(x=>x=0);
-                
+
+                voteUsers.ForEach(x => x = 0);
+
                 voteType = EVoteType.VIP;
-                
+
                 // 라운드 다시 시작
                 // GoQuestionIntroLayout();
                 // // 투표 초기화
@@ -243,7 +294,7 @@ public class TestManager : MonoBehaviour
     {
         userCount = 0;
     }
-    
+
     public void GoDebateLayout()
     {
         currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
@@ -354,7 +405,7 @@ public class TestManager : MonoBehaviour
         currentLayout = layouts[currentLayoutIndex];
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, questionTargetUser);
     }
-    
+
     public void GoFinalLayout()
     {
         currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
@@ -362,7 +413,7 @@ public class TestManager : MonoBehaviour
         currentLayout = layouts[currentLayoutIndex];
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
     }
-    
+
     public void GoEndLayout()
     {
         currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
@@ -386,5 +437,21 @@ public class TestManager : MonoBehaviour
         currentLayout.GetComponent<ILayoutControl>()?.ExitLayout();
         currentLayout = layouts[currentLayoutIndex];
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
+    }
+
+    public void AnswerCheck(string answer)
+    {
+        if (answer == currentWord)
+        {
+            Debug.Log("정답");
+            isCorrect = true;
+            GoEndLayout();
+        }
+        else
+        {
+            Debug.Log("오답");
+            isCorrect = false;
+            GoEndLayout();
+        }
     }
 }

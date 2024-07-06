@@ -26,6 +26,10 @@ public class UserInfo
         this.index = index;
         this.name = name;
         this.jobType = jobType;
-        this.hasHostage = isSelect;
+    }
+    
+    public void SetJob(EJobType jobType)
+    {
+        this.jobType = jobType;
     }
 }

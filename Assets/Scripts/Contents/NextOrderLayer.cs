@@ -5,6 +5,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 using Sequence = DG.Tweening.Sequence;
 
 public class NextOrderLayer : MonoBehaviour, ILayoutControl
@@ -104,6 +105,8 @@ public class NextOrderLayer : MonoBehaviour, ILayoutControl
         
         namePanel.orderText.GetComponent<RectTransform>().localPosition = orderTextLocalPosition;
         namePanel.orderText.fontSize = orderTextFontSize;
+
+        namePanel.nameBox.GetComponent<Image>().DOFade(1, 0);
     }
 
     private void NameBoxScaleAnimation()
@@ -116,7 +119,8 @@ public class NextOrderLayer : MonoBehaviour, ILayoutControl
             .Join(
                 namePanel.GetComponent<RectTransform>()
                     .DOLocalMove(targetNamePanel.GetComponent<RectTransform>().localPosition, 0.5f))
-            .Join(DOTween.To(() => nameText.fontSize, x => nameText.fontSize = x, nameText2.fontSize, 0.5f));
+            .Join(DOTween.To(() => nameText.fontSize, x => nameText.fontSize = x, nameText2.fontSize, 0.5f))
+            .Join(namePanel.nameBox.GetComponent<Image>().DOFade(0, 0.5f));
 
 
         // 목표 크기로 줄어들기

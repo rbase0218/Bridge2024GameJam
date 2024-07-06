@@ -59,7 +59,7 @@ public class UINameSelect : UIWindow
         }
         
         nameField.HideAll();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     
     // 처음 NameModal이 나타난다면, 이름 수에 맞게 데이터를 노출하는 것이 필요.

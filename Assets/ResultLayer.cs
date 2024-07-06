@@ -36,7 +36,7 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
         Users = users;
         CurtUser = curUser;
         gameObject.SetActive(true);
-        nameText.text = TestManager.instance.voteTargetUser.name + "\n\n\n\n\n\n입니다.";
+        nameText.text = TestManager.instance.voteTargetUser.name + "은\n\n\n\n\n\n입니다.";
         voteType = TestManager.instance.voteType;
     }
 

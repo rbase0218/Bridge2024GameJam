@@ -12066,7 +12066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &762444546
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12442,7 +12442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &797576874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14759,7 +14759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &898916939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16611,7 +16611,7 @@ MonoBehaviour:
   - {fileID: 960912457}
   - {fileID: 1833972943}
   - {fileID: 1701339837}
-  wordText: {fileID: 0}
+  wordText: {fileID: 248541188}
   isQuestionEnd: 0
   voteType: 0
   voteTargetUser:
@@ -25224,7 +25224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1660409267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26860,7 +26860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTime: 5
   gauge: {fileID: 521141942}
-  wordText: {fileID: 0}
+  wordText: {fileID: 248541188}
   timeWaitText: {fileID: 1758143471}
   card: {fileID: 1023727377}
   cardPanel: {fileID: 945069258}
@@ -30623,7 +30623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1982523368
 RectTransform:
   m_ObjectHideFlags: 0
