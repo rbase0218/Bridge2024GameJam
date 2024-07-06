@@ -11,7 +11,9 @@ public class UINameSelect : UIWindow
 {
     private enum Buttons
     {
-        EntryButton
+        EntryButton,
+        BackButton,
+        ManualButton
     }
 
     private enum UINameField
@@ -33,6 +35,8 @@ public class UINameSelect : UIWindow
         Bind<UINameFields>(typeof(UINameField));
         
         GetButton((int)Buttons.EntryButton).onClick.AddListener(OnClickEntryButton);
+        GetButton((int)Buttons.BackButton).onClick.AddListener(OnClickBackButton);
+        GetButton((int)Buttons.ManualButton).onClick.AddListener(OnClickManualButton);
 
         return true;
     }
@@ -77,5 +81,15 @@ public class UINameSelect : UIWindow
     protected override void Clear()
     {
         Get<UINameFields>((int)UINameField.NameField_Group).HideAll();
+    }
+    
+    private void OnClickBackButton()
+    {
+        Managers.UI.CloseWindow();
+    }
+
+    private void OnClickManualButton()
+    {
+        Managers.UI.ShowWindow<UIManual>();
     }
 }

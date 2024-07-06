@@ -9,7 +9,8 @@ public class UIStartFlow : UIWindow
     private enum Buttons
     {
         NextButton,
-        //ExitButton
+        BackButton,
+        ManualButton
     }
 
     private enum Swipes
@@ -23,6 +24,7 @@ public class UIStartFlow : UIWindow
     }
 
     private int categoryIndex = 0;
+    public GameObject _actorObj;
 
     protected override bool Init()
     {
@@ -45,6 +47,10 @@ public class UIStartFlow : UIWindow
         
         Get<TMP_Dropdown>((int)Dropdowns.CategoryDropdown).SetValueWithoutNotify(-1);
         Get<TMP_Dropdown>((int)Dropdowns.CategoryDropdown).onValueChanged.AddListener(SetCategoryIndex);
+        Get<UISwipe>((int)Swipes.CountSwipe).onValueChanged.AddListener(ShowActor);
+        
+        GetButton((int)Buttons.BackButton).onClick.AddListener(OnClickBackButton);
+        GetButton((int)Buttons.ManualButton).onClick.AddListener(OnClickManualButton);
         return true;
     }
 
@@ -65,5 +71,24 @@ public class UIStartFlow : UIWindow
     private void SetCategoryIndex(int index)
     {
         categoryIndex = index;
+    }
+
+    private void ShowActor(int count)
+    {
+        var data = Convert.ToInt32(Managers.Data.personArray[count]);
+        if(data >= 5)
+            _actorObj.SetActive(true);
+        else
+            _actorObj.SetActive(false);
+    }
+    
+    private void OnClickBackButton()
+    {
+        Managers.UI.CloseWindow();
+    }
+
+    private void OnClickManualButton()
+    {
+        Managers.UI.ShowWindow<UIManual>();
     }
 }

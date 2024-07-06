@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class UISwipe : UIBase
 {
@@ -19,6 +20,7 @@ public abstract class UISwipe : UIBase
 
     protected int count;
     protected List<string> data;
+    public UnityEvent<int> onValueChanged;
 
     protected override bool Init()
     {
@@ -61,6 +63,7 @@ public abstract class UISwipe : UIBase
 
     protected virtual void RefreshUI()
     {
+        onValueChanged?.Invoke(count);
         GetText((int)Texts.SwipeValue).text = data[count];
     }
 

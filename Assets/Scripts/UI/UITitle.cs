@@ -13,7 +13,7 @@ public class UITitle : UIWindow
         HomeButton,
         ManualButton
     }
-    
+
     protected override bool Init()
     {
         if (!base.Init())
