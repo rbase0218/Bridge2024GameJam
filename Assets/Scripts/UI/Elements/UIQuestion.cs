@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,7 +41,7 @@ public class UIQuestion : MonoBehaviour
     /// <returns></returns>
     public string GetQuestionText()
     {
-        return _objects[0].GetComponentInChildren<InputField>().text;
+        return _objects[0].GetComponentInChildren<TMP_InputField>().text;
     }
 
     /// <summary>
@@ -49,7 +50,7 @@ public class UIQuestion : MonoBehaviour
     /// <param name="text"></param>
     public void SetFrame24(string text)
     {
-        _objects[1].GetComponentInChildren<InputField>().text = text;
+        _objects[1].GetComponentInChildren<TMP_InputField>().text = text;
     }
 
     public UISelectButtons frame22;

@@ -232,6 +232,7 @@ public class RoundManager : MonoBehaviour
         
         uiQuestion.SetFrame24(uiQuestion.GetQuestionText());
         uiQuestion.gameObject.SetActive(true);
+        uiQuestion.OpenFrame(24);
     }
     
     

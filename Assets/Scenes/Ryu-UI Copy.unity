@@ -11406,12 +11406,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: "\uC544\uBB34\uB9AC \uC0AC\uB78C\uB4E4\uC774 \uB9D0\uB824\uB3C4 \uCC28\uB9C8
-    \uBC84\uB9AC\uC9C0 \uBABB\uD558\uB294 \uAC83, \uADF8 \uC5B4\uB5A4 \uB9D0\uC744
-    \uB4E4\uC5B4\uB3C4 \uC0C1\uAD00\uC5C6\uB2E4\uACE0 \uB290\uAEF4\uC9C0\uB294 \uAC83,
-    \uBC14\uB85C \uC0AC\uB791\uC774\uC5C8\uB2E4. \uADF8 \uB9C8\uC74C\uC744 \uB2F9\uD574\uB0BC
-    \uC7AC\uAC04\uC740 \uC5C6\uC5C8\uB2E4. \uC0AC\uB791 \uC55E\uC5D0\uC120 \uC880\uCC98\uB7FC
-    \uBA74\uC5ED\uC774 \uC0DD\uAE30\uC9C0 \uC54A\uC558\uB2E4."
+  m_Text: XX
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
