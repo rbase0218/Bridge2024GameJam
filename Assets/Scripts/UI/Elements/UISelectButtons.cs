@@ -12,10 +12,20 @@ public class UISelectButtons : MonoBehaviour
     public void SetData(params string[] buttonData)
     {
         SetSpacing(buttonData.Length);
+        Hide();
         
         for (int i = 0; i < buttonData.Length; ++i)
         {
+            selectButtonList[i].gameObject.SetActive(true);
             selectButtonList[i].GetComponentInChildren<TMP_Text>().text = buttonData[i];
+        }
+    }
+
+    private void Hide()
+    {
+        for (int i = 0; i < selectButtonList.Count; ++i)
+        {
+            selectButtonList[i].SetActive(false);
         }
     }
 
