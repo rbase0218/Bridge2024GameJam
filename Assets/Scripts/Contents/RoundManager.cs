@@ -329,7 +329,6 @@ public class RoundManager : MonoBehaviour
 
         uiVote.gameObject.SetActive(true);
         
-        
         curUserCount++;
     }
 
