@@ -90,19 +90,6 @@ public class TestManager : MonoBehaviour
                 jobTypes.Add(EJobType.Assassin);
                 break;
         }
-
-        // int random1,  random2;
-        // EJobType temp;
-        //
-        // for (int i = 0; i < jobTypes.Count; ++i)
-        // {
-        //     random1 = Random.Range(0, jobTypes.Count);
-        //     random2 = Random.Range(0, jobTypes.Count);
-        //
-        //     temp = jobTypes[random1];
-        //     jobTypes[random1] = jobTypes[random2];
-        //     jobTypes[random2] = temp;
-        // }
         
         var temp = jobTypes.OrderBy(item => Guid.NewGuid()).ToList();
         jobTypes.Clear();
@@ -443,19 +430,18 @@ public class TestManager : MonoBehaviour
         currentLayout.GetComponent<ILayoutControl>()?.StartLayout(userInfos, userInfos[userCount]);
     }
 
-    public void AnswerCheck(string answer)
+    public bool AnswerCheck(string answer)
     {
         if (answer == currentWord)
         {
             Debug.Log("정답");
-            isCorrect = true;
-            GoEndLayout();
+            return true;
         }
         else
         {
             Debug.Log("오답");
             isCorrect = false;
-            GoEndLayout();
+            return false;
         }
     }
 }

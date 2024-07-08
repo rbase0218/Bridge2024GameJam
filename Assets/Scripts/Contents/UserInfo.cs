@@ -14,7 +14,6 @@ public class UserInfo
     public bool hasQuestion;
     public bool myTurn;
     public bool isDead;
-    public Sprite icon;
 
     public UserInfo(int index = 0, string name = "", EJobType jobType = EJobType.None)
     {
