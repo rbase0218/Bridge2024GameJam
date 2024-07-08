@@ -15,9 +15,10 @@ public class TimeOverGruop : MonoBehaviour
         
         if (userCount + 1 >= userInfos.Count)
         {
-            user2Name.text = userInfos[0].name;
+            user2Name.text = "종료";
             return;
         }
+
         user2Name.text = userInfos[userCount + 1].name;
     }
     

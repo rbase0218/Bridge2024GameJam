@@ -123,7 +123,7 @@ public class TestManager : MonoBehaviour
             voteUsers.Add(0);
         }
 
-        wordText.text = currentWord;
+        //wordText.text = currentWord;
         StartLayout();
     }
 

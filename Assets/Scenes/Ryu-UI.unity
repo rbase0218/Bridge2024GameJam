@@ -22340,6 +22340,132 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073292530}
   m_CullTransparentMesh: 1
+--- !u!1 &2078827024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2078827028}
+  - component: {fileID: 2078827027}
+  - component: {fileID: 2078827026}
+  - component: {fileID: 2078827025}
+  m_Layer: 0
+  m_Name: '@Managers'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2078827025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078827024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9c5eb0879f0b047a0e09333ef6d87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  array_sfx: []
+  array_bgm: []
+  bgmPlayer: {fileID: 0}
+  sfxPlayer: {fileID: 0}
+  bgmVolume: 0
+  sfxVolume: 0
+--- !u!114 &2078827026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078827024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c5881929893ff43a4c3f6694f80215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _saveUserInfoList:
+  - index: 0
+    name: "\uC774\uC2DC\uC6D0"
+    jobType: 1
+    hasHostage: 0
+    curHostage: 0
+    hasQuestion: 0
+    myTurn: 0
+    isDead: 0
+    icon: {fileID: 0}
+  - index: 1
+    name: "\uB958"
+    jobType: 1
+    hasHostage: 0
+    curHostage: 0
+    hasQuestion: 0
+    myTurn: 0
+    isDead: 0
+    icon: {fileID: 0}
+  - index: 2
+    name: "\uBCD1"
+    jobType: 1
+    hasHostage: 0
+    curHostage: 0
+    hasQuestion: 0
+    myTurn: 0
+    isDead: 0
+    icon: {fileID: 0}
+  - index: 3
+    name: "\uD604"
+    jobType: 1
+    hasHostage: 0
+    curHostage: 0
+    hasQuestion: 0
+    myTurn: 0
+    isDead: 0
+    icon: {fileID: 0}
+  - index: 4
+    name: "\uC528"
+    jobType: 2
+    hasHostage: 0
+    curHostage: 0
+    hasQuestion: 0
+    myTurn: 0
+    isDead: 0
+    icon: {fileID: 0}
+  personMaxCount: 0
+  currCategoryIndex: 0
+  currCategorySubIndex: 0
+  gameRound: 0
+--- !u!114 &2078827027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078827024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84211734f33192d428f439a79822022a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2078827028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078827024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2094876070
 GameObject:
   m_ObjectHideFlags: 0

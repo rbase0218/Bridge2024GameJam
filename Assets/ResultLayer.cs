@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,10 +9,11 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
 {
     [SerializeField] private TMP_Text introText;
     [SerializeField] private TMP_Text nameText;
+    [SerializeField] private TMP_Text nameText2;
     [SerializeField] private TMP_Text jobText;
     [SerializeField] private TMP_Text descryptionText;
     [SerializeField] private GameObject sameTable;
-    
+    [SerializeField] private GameObject prevCard;
     [SerializeField] private GameObject resultCard;
     
     [SerializeField] private Button nextButton;
@@ -37,6 +39,7 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
         CurtUser = curUser;
         gameObject.SetActive(true);
         nameText.text = TestManager.instance.voteTargetUser.name + "은\n\n\n\n\n\n입니다.";
+        nameText2.text = "이번 라운드의 투표 결과,\n\n\n\n\n\n\n\n\n\n\n\n\n\n" +TestManager.instance.voteTargetUser.name +  "이 암살자로\n지목되었습니다.";
         voteType = TestManager.instance.voteType;
     }
 
@@ -60,7 +63,7 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
             case EVoteType.Clown:
                 resultCard.SetActive(true);
                 jobText.text = "광대";
-                descryptionText.text = "그러나 암살자가\n, 본인을 드러내 암구호를\n, 말할 경우, 암살자가\n 승리합니다.";
+                descryptionText.text = "그러나 암살자가\n 본인을 드러내 암구호를\n 말할 경우, 암살자가\n 승리합니다.";
                 
                 nextButton.GetComponentInChildren<TMP_Text>().text = "최후 찬스 발동!";
                 nextButton.onClick.AddListener(() =>
@@ -71,7 +74,7 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
             case EVoteType.Assassin:
                 resultCard.SetActive(true);
                 jobText.text = "암살자";
-                descryptionText.text = "과연\n, 암살자가\n, 암구호를\n 파악했을까요?";
+                descryptionText.text = "과연,\n 암살자가\n 암구호를\n 파악했을까요?";
                 nextButton.GetComponentInChildren<TMP_Text>().text = "최후 찬스 발동!";
                 nextButton.onClick.AddListener(() =>
                 {
@@ -87,6 +90,12 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
     {
         GetComponent<Button>().interactable = false;
         introText.gameObject.SetActive(false);
+        prevCard.gameObject.SetActive(true);
+    }
+
+    public void OnClickPrevCard()
+    {
+        prevCard.gameObject.SetActive(false);
         ChangeRole();
     }
 }
