@@ -24,6 +24,8 @@ public class UIWordCheck : MonoBehaviour
     {
         HideObjects();
         
+        SetSecondTitle(1);
+        
         switch (jobType)
         {
             case EJobType.VIP:      // 일반
@@ -65,6 +67,19 @@ public class UIWordCheck : MonoBehaviour
     public void SetData(params string[] names) => _buttons.SetData(names);
     
     public void SetTitle(string txt) => _jobGroup.SetText(txt);
+
+    private readonly string a = "당신은";
+    private readonly string b = "현재 응답자는";
+
+    public void SetSecondTitle(int type)
+    {
+        if(type == 1)
+            _jobGroup.SetSecond(a);
+        else
+        {
+            _jobGroup.SetSecond(b);
+        }
+    }
 
     private void ShowObjects(List<GameObject> objs, bool isShow = true)
     {
