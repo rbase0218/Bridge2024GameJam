@@ -23,7 +23,7 @@ public class UIWordCheck : MonoBehaviour
     public void SetLayout(EJobType jobType)
     {
         HideObjects();
-
+        
         switch (jobType)
         {
             case EJobType.VIP:      // 일반

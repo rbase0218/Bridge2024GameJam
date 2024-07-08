@@ -31,6 +31,7 @@ public class RoundManager : MonoBehaviour
     private int curUserCount;
     private int roundCount;
     private string secretWord;
+    private UserInfo hostageUser;
     
     private void Start()
     {
@@ -51,7 +52,27 @@ public class RoundManager : MonoBehaviour
         uiThis.SetFrame8(userList[curUserCount].name);
         // 원래 인트로로 시작
     }
+
+    public void SetCurHostage(int index)
+    {
+        if (hostageUser != null)
+        {
+            hostageUser.curHostage = false;
+        }
+        
+        hostageUser = userList[index];
+        hostageUser.curHostage = true;
+        hostageUser.hasHostage = true;
+        
+        userList.ForEach(x =>
+        {
+            if(x.hasHostage)
+                Debug.Log(userList[index].name + " is Hostage");
+        });
+    }
     
+    #region WordCheck
+
     public void OpenFrameThis(int count)
     {
         uiThis.OpenFrame(count);
@@ -83,13 +104,29 @@ public class RoundManager : MonoBehaviour
         }
     }
     
-    public void NextUser()
+    public void NextWordCheckUser()
     {
+        curUserCount++;
+        
         if (curUserCount >= userList.Count)
         {
-            curUserCount = 0;
-            Debug.Log("Round End");
+            StartQuestionRound();
         }
-        curUserCount++;
+        
+        uiWordCheck.gameObject.SetActive(false);
+        uiThis.gameObject.SetActive(true);
+        
+        uiThis.OpenFrame(8);
+        uiThis.SetFrame8(userList[curUserCount].name);
     }
+    
+    #endregion
+
+    public void StartQuestionRound()
+    {
+        curUserCount = 0;
+        
+        
+    }
+
 }

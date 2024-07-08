@@ -17,14 +17,16 @@ public class Frame9 : MonoBehaviour
     
     private void OnClick()
     {
-        if (!isClicked)
+        if (isClicked)
         {
-            RoundManager.instance.uiWordCheck.OpenCard();
-            isClicked = true;
+            isClicked = false;
+            RoundManager.instance.uiThis._frame9Card.Reset();
+            RoundManager.instance.OpenWordCheck();
         }
         else
         {
-            RoundManager.instance.OpenWordCheck();
+            isClicked = true;
+            RoundManager.instance.uiThis.OpenFrame9();
         }
     }
 }

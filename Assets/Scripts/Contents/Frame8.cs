@@ -7,7 +7,7 @@ public class Frame8 : MonoBehaviour
 {
     private void OnEnable()
     {
-        Invoke(nameof(AnimDelay), 1.5f);
+        Invoke(nameof(AnimDelay), 2f);
     }
 
     private void OnDisable()
