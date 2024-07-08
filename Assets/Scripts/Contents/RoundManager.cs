@@ -205,6 +205,7 @@ public class RoundManager : MonoBehaviour
         List<UserInfo> notHostageList = new List<UserInfo>(userList);
         notHostageList.RemoveAll(x => x.curHostage);
         notHostageList.RemoveAll(x => x.isDead);
+        notHostageList.RemoveAll(questionUser.Equals);
         
         uiQuestion.SetData(notHostageList.Select(x => x.name).ToArray());
         uiQuestion.OpenFrame(22);
@@ -217,6 +218,14 @@ public class RoundManager : MonoBehaviour
         uiWordCheck.SetSecondTitle(2);
         uiWordCheck.SetTitle(answerUser.name);
         uiWordCheck.gameObject.SetActive(true);
+    }
+    
+    public void GoNextAnswerPage(int index)
+    {
+        OffAllFrame();
+        
+        uiQuestion.SetFrame24(uiQuestion.GetQuestionText());
+        uiQuestion.gameObject.SetActive(true);
     }
     
     

@@ -25,7 +25,8 @@ public class UIWordCheck : MonoBehaviour
         HideObjects();
         
         SetSecondTitle(1);
-        
+        ResetCard();
+
         switch (jobType)
         {
             case EJobType.VIP:      // 일반
@@ -55,9 +56,9 @@ public class UIWordCheck : MonoBehaviour
 
     public void StartGauge()
     {
-        UIGauge.instance.SetTime(10f);
-        UIGauge.instance.Play();
         UIGauge.instance.SetActive(true);
+        UIGauge.instance.SetTime(3f);
+        UIGauge.instance.Play();
     }
 
     public void RemoveGauge()

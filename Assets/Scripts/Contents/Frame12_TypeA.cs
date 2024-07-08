@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Frame1223_TypeA : MonoBehaviour
+public class Frame12_TypeA : MonoBehaviour
 {
     private Button button;
     private bool isClicked;
@@ -21,6 +21,7 @@ public class Frame1223_TypeA : MonoBehaviour
         if (isClicked)
         {
             isClicked = false;
+            RoundManager.instance.uiWordCheck.ResetCard();
             if (UIGauge.instance.isPlaying)
             {
                 RoundManager.instance.GoTimeWaitFrame();

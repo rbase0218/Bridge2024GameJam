@@ -18,7 +18,7 @@ public class Frame23 : MonoBehaviour
     {
         if (RoundManager.instance.curPageType == EPageType.Question)
         {
-            GetComponent<Frame1223_TypeA>().enabled = false;
+            GetComponent<Frame12_TypeA>().enabled = false;
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(OnClick);
             UIGauge.instance.onEndGauge.RemoveAllListeners();

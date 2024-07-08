@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Frame1223_TypeB : MonoBehaviour
+public class Frame12_TypeB : MonoBehaviour
 {
     private Button button;
     private bool isClicked;
