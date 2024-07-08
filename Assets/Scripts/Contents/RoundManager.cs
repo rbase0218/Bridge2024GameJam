@@ -36,6 +36,8 @@ public class RoundManager : MonoBehaviour
     private string secretWord;
     private UserInfo hostageUser;
     private UserInfo questionUser;
+    private UserInfo answerUser;
+    public EPageType curPageType;
     
     private void Start()
     {
@@ -48,7 +50,8 @@ public class RoundManager : MonoBehaviour
         
         curUserCount = 0;
         roundCount = 0;
-        
+        curPageType = EPageType.WordCheck;
+
         StartRound();
     }
     
@@ -88,21 +91,9 @@ public class RoundManager : MonoBehaviour
         });
     }
 
-    public void SetQuestionTarget(int index)
+    public void SetAnswerTarget(int index)
     {
-        if (questionUser != null)
-        {
-            Debug.LogError("Not Question User");
-        }
-        
-        questionUser = userList[index];
-        questionUser.hasQuestion = true;
-        
-        userList.ForEach(x =>
-        {
-            if(x.hasQuestion)
-                Debug.Log(userList[index].name + " has Question");
-        });
+        answerUser = userList[index];
     }
 
     public void OffAllFrame()
@@ -138,6 +129,7 @@ public class RoundManager : MonoBehaviour
     
     public void OpenWordCheck()
     {
+        curPageType = EPageType.WordCheck;
         OffAllFrame();
         uiWordCheck.gameObject.SetActive(true);
         uiWordCheck.StartGauge();
@@ -181,10 +173,12 @@ public class RoundManager : MonoBehaviour
         OffAllFrame();
         uiNoneBg.gameObject.SetActive(true);
         uiNoneBg.OpenFrame(20);
+        curPageType = EPageType.Question;
     }
 
     public void PresentationRound()
     {
+        curPageType = EPageType.Question;
         OffAllFrame();
         uiNoneBg.gameObject.SetActive(true);
         List<UserInfo> notHostageList = new List<UserInfo>(userList);
@@ -200,12 +194,35 @@ public class RoundManager : MonoBehaviour
 
     public void GoQuestionRound()
     {
-        if(curUserCount >= userList.Count)
-        {
-            Debug.Log("Question Round End");
-            return;
-        }
+        OffAllFrame();
+        uiQuestion.gameObject.SetActive(true);
+        uiQuestion.SetTitle(questionUser.name);
+        uiQuestion.OpenFrame(21);
+    }
+
+    public void QuestionSelectPage()
+    {
+        List<UserInfo> notHostageList = new List<UserInfo>(userList);
+        notHostageList.RemoveAll(x => x.curHostage);
+        notHostageList.RemoveAll(x => x.isDead);
         
+        uiQuestion.SetData(notHostageList.Select(x => x.name).ToArray());
+        uiQuestion.OpenFrame(22);
+    }
+
+    public void GoAnswerPage()
+    {
+        OffAllFrame();
+        
+        uiWordCheck.SetSecondTitle(2);
+        uiWordCheck.SetTitle(answerUser.name);
+        uiWordCheck.gameObject.SetActive(true);
+    }
+    
+    
+    // 예 아니오 눌렀을 때
+    public void GoAnswerSelectedPage()
+    {
         if(questionUser.hasQuestion)
         {
             List<UserInfo> notHostageList = new List<UserInfo>(userList);
@@ -220,30 +237,13 @@ public class RoundManager : MonoBehaviour
             }
             
             questionUser = notHostageList[Random.Range(0, notHostageList.Count)];
+            questionUser.hasQuestion = true;
         }
         
         OffAllFrame();
-        uiQuestion.gameObject.SetActive(true);
-        uiQuestion.SetTitle(questionUser.name);
-        uiQuestion.OpenFrame(21);
-    }
 
-    public void NextQuestionPage()
-    {
-        List<UserInfo> notHostageList = new List<UserInfo>(userList);
-        notHostageList.RemoveAll(x => x.curHostage);
-        notHostageList.RemoveAll(x => x.isDead);
-        
-        uiQuestion.SetData(notHostageList.Select(x => x.name).ToArray());
-        uiQuestion.OpenFrame(22);
-    }
-
-    public void GoAnswerPage()
-    {
-        OffAllFrame();
-        uiWordCheck.gameObject.SetActive(true);
-        
-        //uiWordCheck.SetTitle();
-        uiQuestion.OpenFrame(23);
+        uiNoneBg.SetFrame25(answerUser.name, questionUser.name);
+        uiNoneBg.OpenFrame(25);
+        uiNoneBg.gameObject.SetActive(true);
     }
 }

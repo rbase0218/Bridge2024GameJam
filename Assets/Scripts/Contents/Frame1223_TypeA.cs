@@ -32,4 +32,6 @@ public class Frame1223_TypeA : MonoBehaviour
             RoundManager.instance.uiWordCheck.OpenCard();
         }
     }
+    
+    
 }

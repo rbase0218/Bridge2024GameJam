@@ -1768,6 +1768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 195454051}
   - component: {fileID: 195454052}
+  - component: {fileID: 195454053}
   m_Layer: 5
   m_Name: Type_A
   m_TagString: Untagged
@@ -1809,6 +1810,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c495b80aa4806564fb4b45769f33a1df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &195454053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195454050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9f765e32bf7f140bcd4d9ea5708611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &200954597
@@ -3102,7 +3115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &308676573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15420,7 +15433,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1598137875}
         m_TargetAssemblyTypeName: RoundManager, Assembly-CSharp
-        m_MethodName: NextQuestionPage
+        m_MethodName: QuestionSelectPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16724,6 +16737,7 @@ MonoBehaviour:
   uiWordCheck: {fileID: 2094876072}
   uiNoneBg: {fileID: 1110005360}
   uiQuestion: {fileID: 200954599}
+  curPageType: 0
 --- !u!4 &1598137876
 Transform:
   m_ObjectHideFlags: 0

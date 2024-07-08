@@ -43,6 +43,16 @@ public enum EVoteType
     Clown
 }
 
+public enum EPageType
+{
+    Intro,
+    WordCheck,
+    Question,
+    Answer,
+    Vote,
+    Result
+}
+
 public static class Global
 {
     public static readonly string ActorJobText = "광대";

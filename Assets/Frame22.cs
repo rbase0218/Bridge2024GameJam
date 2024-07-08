@@ -13,7 +13,7 @@ public class Frame22 : MonoBehaviour
     {
         button = GetComponentInChildren<Button>();
         UIGauge.instance.onEndGauge.RemoveAllListeners();
-        UIGauge.instance.onEndGauge.AddListener(RoundManager.instance.NextQuestionPage);
+        UIGauge.instance.onEndGauge.AddListener(RoundManager.instance.QuestionSelectPage);
     }
     
     public void OnClickSelectButton(int num)
@@ -23,7 +23,7 @@ public class Frame22 : MonoBehaviour
 
     public void OnClickSendButton()
     {
-        RoundManager.instance.SetQuestionTarget(curIndex);
+        RoundManager.instance.SetAnswerTarget(curIndex);
         
         if(UIGauge.instance.isPlaying)
             RoundManager.instance.GoTimeWaitFrame();

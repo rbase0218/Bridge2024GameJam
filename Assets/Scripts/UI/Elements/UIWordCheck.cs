@@ -55,9 +55,15 @@ public class UIWordCheck : MonoBehaviour
 
     public void StartGauge()
     {
-        UIGauge.instance.SetActive(true);
         UIGauge.instance.SetTime(10f);
         UIGauge.instance.Play();
+        UIGauge.instance.SetActive(true);
+    }
+
+    public void RemoveGauge()
+    {
+        UIGauge.instance.SetActive(false);
+        UIGauge.instance.StopAllCoroutines();
     }
 
     public void OpenCard() => _cardElement.OpenCard();
