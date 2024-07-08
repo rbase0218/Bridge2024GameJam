@@ -11,8 +11,15 @@ public class UIThis : MonoBehaviour
     // Frame 9
     public UIJobGroup _frame9Job;
     public UICardElement _frame9Card;
+    public UIImageSwap _frame9Swap;
     // Frame 11
     public UIJobGroup _frame11;
+
+    private void Awake()
+    {
+        // OpenFrame(11);
+        // SetFrame11("명수");
+    }
 
     public void OpenFrame(int count)
     {
@@ -25,5 +32,30 @@ public class UIThis : MonoBehaviour
             _objects[1].SetActive(true);
         else if(count == 11)
             _objects[2].SetActive(true);
+    }
+
+    public void SetFrame8(string name)
+    {
+        _frame8.SetText(name);
+    }
+
+    public void SetFrame9(string name, EJobType jobType)
+    {
+        _frame9Job.SetText(name);
+        
+        var jobText = (jobType == EJobType.Assassin) ? Global.AssJobText :
+            (jobType == EJobType.Clown) ? Global.ActorJobText : Global.VipJobText;
+        _frame9Swap.SetImage(jobType);
+        _frame9Card.SetText(jobText);
+    }
+
+    public void OpenFrame9()
+    {
+        _frame9Card.OpenCard();
+    }
+
+    public void SetFrame11(string nextName)
+    {
+        _frame11.SetText(nextName);
     }
 }
