@@ -51,6 +51,9 @@ public class UINoneBG : MonoBehaviour
                 Open(_objects[7]);
                 Open(_objects[8]);
                 break;
+            case 18:
+                Open(_objects[9]);
+                break;
         }
     }
 
