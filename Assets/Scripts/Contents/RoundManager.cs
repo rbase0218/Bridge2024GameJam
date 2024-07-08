@@ -222,6 +222,7 @@ public class RoundManager : MonoBehaviour
         
         uiWordCheck.SetSecondTitle(2);
         uiWordCheck.SetTitle(answerUser.name);
+        uiQuestion.SetTitle(answerUser.name);
         uiWordCheck.ResetCard();
         uiWordCheck.gameObject.SetActive(true);
     }
@@ -234,7 +235,6 @@ public class RoundManager : MonoBehaviour
         uiQuestion.gameObject.SetActive(true);
         uiQuestion.OpenFrame(24);
     }
-    
     
     // 예 아니오 눌렀을 때
     public void GoAnswerSelectedPage()
