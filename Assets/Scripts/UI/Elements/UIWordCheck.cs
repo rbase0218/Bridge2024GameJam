@@ -49,6 +49,8 @@ public class UIWordCheck : MonoBehaviour
     {
         ResetCard();
         _cardElement.SetText(text);
+        UIGauge.instance.SetTime(10f);
+        UIGauge.instance.Play();
     }
 
     public void OpenCard() => _cardElement.OpenCard();

@@ -12,6 +12,8 @@ public class Frame1223_TypeA : MonoBehaviour
     {
         button = GetComponentInChildren<Button>();
         button.onClick.AddListener(OnClick);
+        UIGauge.instance.onEndGauge.RemoveAllListeners();
+        UIGauge.instance.onEndGauge.AddListener(RoundManager.instance.NextWordCheckUser);
     }
     
     private void OnClick()
@@ -19,7 +21,8 @@ public class Frame1223_TypeA : MonoBehaviour
         if (isClicked)
         {
             isClicked = false;
-            RoundManager.instance.NextWordCheckUser();
+            if(UIGauge.instance.isPlaying)
+                RoundManager.instance.GoTimeWaitFrame();
         }
         else
         {

@@ -13,6 +13,8 @@ public class Frame1223_TypeB : MonoBehaviour
     private void Start()
     {
         button = GetComponentInChildren<Button>();
+        UIGauge.instance.onEndGauge.RemoveAllListeners();
+        UIGauge.instance.onEndGauge.AddListener(RoundManager.instance.NextWordCheckUser);
     }
     
     public void OnClickSelectButton(int num)
@@ -24,5 +26,8 @@ public class Frame1223_TypeB : MonoBehaviour
     {
         RoundManager.instance.SetCurHostage(curIndex);
         RoundManager.instance.NextWordCheckUser();
+        
+        if(UIGauge.instance.isPlaying)
+            RoundManager.instance.GoTimeWaitFrame();
     }
 }

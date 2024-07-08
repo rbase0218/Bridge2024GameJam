@@ -26,6 +26,8 @@ public class RoundManager : MonoBehaviour
     
     public UIThis uiThis;
     public UIWordCheck uiWordCheck;
+    public UINoneBG uiNoneBg;
+    
     private List<UserInfo> userList;
 
     private int curUserCount;
@@ -47,6 +49,7 @@ public class RoundManager : MonoBehaviour
     
     private void StartRound()
     {
+        OffAllFrame();
         uiThis.gameObject.SetActive(true);
         uiThis.OpenFrame(8);
         uiThis.SetFrame8(userList[curUserCount].name);
@@ -70,13 +73,27 @@ public class RoundManager : MonoBehaviour
                 Debug.Log(userList[index].name + " is Hostage");
         });
     }
+
+    public void OffAllFrame()
+    {
+        uiThis.gameObject.SetActive(false);
+        uiWordCheck.gameObject.SetActive(false);
+        uiNoneBg.gameObject.SetActive(false);
+    }
+
+    public void GoTimeWaitFrame()
+    {
+        OffAllFrame();
+        uiNoneBg.gameObject.SetActive(true);
+        uiNoneBg.OpenFrame(14);
+    }
     
     #region WordCheck
 
     public void OpenFrameThis(int count)
     {
+        OffAllFrame();
         uiThis.OpenFrame(count);
-        uiWordCheck.gameObject.SetActive(false);
         
         if (count == 8)
         {
@@ -90,7 +107,7 @@ public class RoundManager : MonoBehaviour
     
     public void OpenWordCheck()
     {
-        uiThis.gameObject.SetActive(false);
+        OffAllFrame();
         uiWordCheck.gameObject.SetActive(true);
 
         uiWordCheck.SetLayout(userList[curUserCount].jobType);
@@ -110,10 +127,10 @@ public class RoundManager : MonoBehaviour
         
         if (curUserCount >= userList.Count)
         {
-            StartQuestionRound();
+            //StartQuestionRound();
         }
         
-        uiWordCheck.gameObject.SetActive(false);
+        OffAllFrame();
         uiThis.gameObject.SetActive(true);
         
         uiThis.OpenFrame(8);
@@ -121,12 +138,5 @@ public class RoundManager : MonoBehaviour
     }
     
     #endregion
-
-    public void StartQuestionRound()
-    {
-        curUserCount = 0;
-        
-        
-    }
 
 }

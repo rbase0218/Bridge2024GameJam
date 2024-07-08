@@ -8,13 +8,11 @@ public class UIImageSwap : MonoBehaviour
     private Image image;
     public List<Sprite> _sprs;
 
-    private void Awake()
-    {
-        image = GetComponent<Image>();
-    }
-
     public void SetImage(EJobType type)
     {
+        if (image == null)
+            image = GetComponent<Image>();
+
         if (type == EJobType.VIP)
             image.sprite = _sprs[0];
         else if (type == EJobType.Assassin)
