@@ -51,4 +51,10 @@ public class UIQuestion : MonoBehaviour
     {
         _objects[1].GetComponentInChildren<InputField>().text = text;
     }
+
+    public UISelectButtons frame22;
+    public void SetData(params string[] names)
+    {
+        frame22.SetData(names);
+    }
 }
