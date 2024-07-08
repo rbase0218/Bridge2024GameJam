@@ -91,9 +91,14 @@ public class RoundManager : MonoBehaviour
         });
     }
 
-    public void SetAnswerTarget(int index)
+    public void SetAnswerTarget(string name)
     {
-        answerUser = userList[index];
+        answerUser = FindAnswerTarget(name);
+    }
+
+    public UserInfo FindAnswerTarget(string name)
+    {
+        return userList.Find((x) => x.name == name);
     }
 
     public void OffAllFrame()
