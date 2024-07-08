@@ -6,6 +6,8 @@ TagManager:
   tags:
   - NameTag
   - Layer
+  - UIThis
+  - UIWordCheck
   layers:
   - Default
   - TransparentFX

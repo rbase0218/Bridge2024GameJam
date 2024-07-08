@@ -13,10 +13,19 @@ public class FinalLayer : MonoBehaviour, ILayoutControl
     [SerializeField] private float maxTime;
     [SerializeField] private Image gauge;
 
+    
+    
+    [Header("Text")]
+    [SerializeField] private TMP_Text jobText;
+    [SerializeField] private TMP_Text resultText;
+    [SerializeField] private TMP_Text descryptionText;
+    
+    [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private GameObject resultObject;
     private float currentTime;
     private bool isPlaying;
     private bool isClick;
-    [SerializeField] TMP_InputField inputField;
+    private bool isAssasinWin;
 
     private string answer;
 
@@ -30,10 +39,10 @@ public class FinalLayer : MonoBehaviour, ILayoutControl
         answer = text;
     }
 
-    public void OnClick()
+    public void OnClickAnswerCheck()
     {
         isClick = true;
-        TestManager.instance.AnswerCheck(answer);
+        AnswerResult();
     }
 
     public void ExitLayout()
@@ -77,10 +86,41 @@ public class FinalLayer : MonoBehaviour, ILayoutControl
                 isPlaying = false;
                 if(isClick == false)
                 {
-                    TestManager.instance.AnswerCheck(answer);
+                    AnswerResult();
                 }
             }
         }
+    }
+
+    private void AnswerResult()
+    {
+        isAssasinWin = TestManager.instance.AnswerCheck(answer);
+        resultObject.SetActive(true);
+        if(isAssasinWin)
+        {
+            resultText.text = "정답입니다!";
+            jobText.text = "암살자";
+            descryptionText.text = "암살자가\n 귀빈들과의 대결에서\n 승리했습니다.";
+        }
+        else
+        {
+            resultText.text = "오답입니다!";
+            if (TestManager.instance.voteTargetUser.jobType == EJobType.VIP)
+            {
+                jobText.text = "귀빈";
+                descryptionText.text = "귀빈들이 그들의\n 무도회를\n 지켜냈습니다.";
+            }
+            else
+            {
+                jobText.text = "광대";
+                descryptionText.text = "뜻밖의 광대가\n 귀빈들과의 게임에서\n 승리를 가져갑니다.";
+            }
+        }
+    }
+    
+    public void OnClickExit()
+    {
+        // 최종 결과 창으로
     }
 
     private void OnEnable()

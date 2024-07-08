@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -49,17 +50,47 @@ public class UINameSelect : UIWindow
         // Field의 데이터 값을 가져온다.
         var nameField = Get<UINameFields>((int)UINameField.NameField_Group);
         var fieldList = nameField.GetFields();
+        var jobList = GetRandomJobList();
         Managers.Game.ClearUser();
         
         for (int i = 0; i < count; ++i)
         {
             if (String.IsNullOrEmpty(fieldList[i].text))
                 fieldList[i].text = Managers.Data.randNicknameArray[i];
-            Managers.Game.AddUserInfo(new UserInfo(i, fieldList[i].text));
+            Managers.Game.AddUserInfo(new UserInfo(i, fieldList[i].text, jobList[i]));
         }
         
         nameField.HideAll();
         SceneManager.LoadScene(2);
+    }
+
+    // EJobType을 랜덤으로 섞어서 반환한다.
+    private List<EJobType> GetRandomJobList()
+    {
+        List<EJobType> jobTypeEnums = new List<EJobType>();
+        
+        for (int i = 0; i < count; i++)
+        {
+            jobTypeEnums.Add(EJobType.VIP);
+        }
+        switch (count)
+        {
+            case 3:
+            case 4:
+                jobTypeEnums.Add(EJobType.Assassin);
+                break;
+            case 5:
+            case 6:
+                jobTypeEnums.Add(EJobType.Clown);
+                jobTypeEnums.Add(EJobType.Assassin);
+                break;
+        }
+        
+        var temp = jobTypeEnums.OrderBy(item => Guid.NewGuid()).ToList();
+        jobTypeEnums.Clear();
+        jobTypeEnums.AddRange(temp);
+        
+        return jobTypeEnums;
     }
     
     // 처음 NameModal이 나타난다면, 이름 수에 맞게 데이터를 노출하는 것이 필요.

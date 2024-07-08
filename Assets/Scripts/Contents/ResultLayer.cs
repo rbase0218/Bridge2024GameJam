@@ -51,7 +51,6 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
                 sameTable.SetActive(true);
                 break;
             case EVoteType.VIP:
-                resultCard.SetActive(true);
                 jobText.text = "귀빈";
                 descryptionText.text = "앞으로 해당 귀빈은 발언권은\n 잃지만, 지목 투표 권력은\n 유지합니다";
                 nextButton.GetComponentInChildren<TMP_Text>().text = "다음 라운드 진행";
@@ -61,10 +60,8 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
                 });
                 break;
             case EVoteType.Clown:
-                resultCard.SetActive(true);
                 jobText.text = "광대";
                 descryptionText.text = "그러나 암살자가\n 본인을 드러내 암구호를\n 말할 경우, 암살자가\n 승리합니다.";
-                
                 nextButton.GetComponentInChildren<TMP_Text>().text = "최후 찬스 발동!";
                 nextButton.onClick.AddListener(() =>
                 {
@@ -72,7 +69,6 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
                 });
                 break;
             case EVoteType.Assassin:
-                resultCard.SetActive(true);
                 jobText.text = "암살자";
                 descryptionText.text = "과연,\n 암살자가\n 암구호를\n 파악했을까요?";
                 nextButton.GetComponentInChildren<TMP_Text>().text = "최후 찬스 발동!";
@@ -82,6 +78,7 @@ public class ResultLayer : MonoBehaviour, ILayoutControl,  IUserData
                 });
                 break;
             default:
+                resultCard.SetActive(true);
                 break;
         }
     }

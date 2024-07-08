@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         _saveUserInfoList.Clear();
     }
     
-    public void AddUserInfo(UserInfo info)
+    public void AddUserInfo(UserInfo info, EJobType jobType = EJobType.None)
     {
         _saveUserInfoList.Add(info);
     }

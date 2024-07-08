@@ -15,12 +15,16 @@ public class UIThis : MonoBehaviour
     // Frame 11
     public UIJobGroup _frame11;
 
-    private void Awake()
-    {
-        // OpenFrame(11);
-        // SetFrame11("명수");
-    }
+    // private void Awake()
+    // {
+    //     OpenFrame(11);
+    //     SetFrame11("명수");
+    // }
 
+    /// <summary>
+    /// 사용할 프레임 수 매개변수 입력
+    /// </summary>
+    /// <param name="count"></param>
     public void OpenFrame(int count)
     {
         foreach(var obj in _objects)
@@ -34,11 +38,20 @@ public class UIThis : MonoBehaviour
             _objects[2].SetActive(true);
     }
 
+    /// <summary>
+    /// 현재 유저의 이름 매개변수
+    /// </summary>
+    /// <param name="name"></param>
     public void SetFrame8(string name)
     {
         _frame8.SetText(name);
     }
 
+    /// <summary>
+    /// 직업까지 매개변수 입력
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="jobType"></param>
     public void SetFrame9(string name, EJobType jobType)
     {
         _frame9Job.SetText(name);
@@ -49,11 +62,18 @@ public class UIThis : MonoBehaviour
         _frame9Card.SetText(jobText);
     }
 
+    /// <summary>
+    /// 카드 오픈
+    /// </summary>
     public void OpenFrame9()
     {
         _frame9Card.OpenCard();
     }
 
+    /// <summary>
+    /// 이번 라운드의 인질의 이름ㅈ
+    /// </summary>
+    /// <param name="nextName"></param>
     public void SetFrame11(string nextName)
     {
         _frame11.SetText(nextName);
