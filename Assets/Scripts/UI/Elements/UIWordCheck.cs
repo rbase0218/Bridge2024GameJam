@@ -41,8 +41,13 @@ public class UIWordCheck : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 직업이 암살자가 아닐 경우에만 사용
+    /// </summary>
+    /// <param name="text"></param>
     public void SetCardData(string text)
     {
+        ResetCard();
         _cardElement.SetText(text);
     }
 
@@ -50,6 +55,8 @@ public class UIWordCheck : MonoBehaviour
 
     public void ResetCard() => _cardElement.Reset();
 
+    public bool IsCardActive() => _cardElement.gameObject.activeInHierarchy;
+    
     public void SetData(params string[] names) => _buttons.SetData(names);
 
     private void ShowObjects(List<GameObject> objs, bool isShow = true)
