@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class Frame9 : MonoBehaviour
 {
     private Button button;
-
+    private bool isClicked;
+    
     private void Start()
     {
         button = GetComponentInChildren<Button>();
@@ -16,9 +17,10 @@ public class Frame9 : MonoBehaviour
     
     private void OnClick()
     {
-        if (RoundManager.instance.uiWordCheck.IsCardActive())
+        if (!isClicked)
         {
             RoundManager.instance.uiWordCheck.OpenCard();
+            isClicked = true;
         }
         else
         {

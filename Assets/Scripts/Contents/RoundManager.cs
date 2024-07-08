@@ -40,6 +40,7 @@ public class RoundManager : MonoBehaviour
         userList = Managers.Game._saveUserInfoList;
         roundCount = Managers.Game.gameRound;
         curUserCount = 0;
+        roundCount = 0;
         StartRound();
     }
     

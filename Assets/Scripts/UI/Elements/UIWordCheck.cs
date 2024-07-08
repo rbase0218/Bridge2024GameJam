@@ -55,10 +55,6 @@ public class UIWordCheck : MonoBehaviour
 
     public void ResetCard() => _cardElement.Reset();
     
-    public void GetCardActive() => _cardElement.GetCardActive();
-
-    public bool IsCardActive() => _cardElement.gameObject.activeInHierarchy;
-    
     public void SetData(params string[] names) => _buttons.SetData(names);
 
     private void ShowObjects(List<GameObject> objs, bool isShow = true)

@@ -19,6 +19,4 @@ public class UICardElement : MonoBehaviour
     {
         _backObj.SetActive(true);
     }
-    
-    public bool GetCardActive() => _backObj.activeInHierarchy;
 }
