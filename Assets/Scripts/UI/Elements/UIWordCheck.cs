@@ -49,6 +49,11 @@ public class UIWordCheck : MonoBehaviour
     {
         ResetCard();
         _cardElement.SetText(text);
+    }
+
+    public void StartGauge()
+    {
+        UIGauge.instance.SetActive(true);
         UIGauge.instance.SetTime(10f);
         UIGauge.instance.Play();
     }
@@ -58,6 +63,8 @@ public class UIWordCheck : MonoBehaviour
     public void ResetCard() => _cardElement.Reset();
     
     public void SetData(params string[] names) => _buttons.SetData(names);
+    
+    public void SetTitle(string txt) => _jobGroup.SetText(txt);
 
     private void ShowObjects(List<GameObject> objs, bool isShow = true)
     {

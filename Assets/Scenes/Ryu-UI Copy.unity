@@ -1867,6 +1867,7 @@ MonoBehaviour:
   - {fileID: 1564446639}
   - {fileID: 2116791171}
   _jobGroup: {fileID: 816045801}
+  frame22: {fileID: 1812832363}
 --- !u!1 &217596796
 GameObject:
   m_ObjectHideFlags: 0
@@ -3101,7 +3102,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &308676573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4879,7 +4880,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 475699785}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1598137875}
+        m_TargetAssemblyTypeName: RoundManager, Assembly-CSharp
+        m_MethodName: GoQuestionRound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &475699785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9163,6 +9176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 960584083}
+  - component: {fileID: 960584084}
   m_Layer: 5
   m_Name: Frame20
   m_TagString: Untagged
@@ -9192,6 +9206,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &960584084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960584082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d518a9f8d36b2643aa16c606c4ecb78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &982263983
 GameObject:
   m_ObjectHideFlags: 0
@@ -10939,6 +10965,8 @@ MonoBehaviour:
   - {fileID: 1903462053}
   currUser: {fileID: 1102618729}
   nextUser: {fileID: 1464970576}
+  currUser2: {fileID: 1919694161}
+  nextUser2: {fileID: 2633371563840131081}
 --- !u!1 &1134106037 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3395277458872498195, guid: 8eed6cef99ae2484c95d803d44344343, type: 3}
@@ -13984,6 +14012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1327235009}
   - component: {fileID: 1327235010}
+  - component: {fileID: 1327235011}
   m_Layer: 5
   m_Name: Frame11
   m_TagString: Untagged
@@ -14029,6 +14058,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 486087512}
   second: {fileID: 0}
+--- !u!114 &1327235011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327235008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d518a9f8d36b2643aa16c606c4ecb78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1327577454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15376,7 +15417,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1479335803}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1598137875}
+        m_TargetAssemblyTypeName: RoundManager, Assembly-CSharp
+        m_MethodName: NextQuestionPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1479335803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16670,6 +16723,7 @@ MonoBehaviour:
   uiThis: {fileID: 308676574}
   uiWordCheck: {fileID: 2094876072}
   uiNoneBg: {fileID: 1110005360}
+  uiQuestion: {fileID: 200954599}
 --- !u!4 &1598137876
 Transform:
   m_ObjectHideFlags: 0
@@ -23484,6 +23538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2068906629}
+  - component: {fileID: 2068906630}
   m_Layer: 5
   m_Name: Gauge
   m_TagString: Untagged
@@ -23514,6 +23569,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 92}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &2068906630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068906628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99b38482914f654eb2949f81a1d601b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gauge: {fileID: 1928551541}
+  onEndGauge:
+    m_PersistentCalls:
+      m_Calls: []
+  isPlaying: 0
 --- !u!1 &2070223073
 GameObject:
   m_ObjectHideFlags: 0
@@ -23880,7 +23952,7 @@ MonoBehaviour:
     isDead: 0
   - index: 1
     name: "\uD604"
-    jobType: 1
+    jobType: 2
     hasHostage: 0
     curHostage: 0
     hasQuestion: 0
@@ -23888,7 +23960,7 @@ MonoBehaviour:
     isDead: 0
   - index: 2
     name: "\uC528"
-    jobType: 2
+    jobType: 1
     hasHostage: 0
     curHostage: 0
     hasQuestion: 0

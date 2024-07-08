@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Frame1223_TypeB : MonoBehaviour
+public class Frame22 : MonoBehaviour
 {
     private Button button;
     private bool isClicked;
@@ -14,7 +13,7 @@ public class Frame1223_TypeB : MonoBehaviour
     {
         button = GetComponentInChildren<Button>();
         UIGauge.instance.onEndGauge.RemoveAllListeners();
-        UIGauge.instance.onEndGauge.AddListener(RoundManager.instance.NextWordCheckUser);
+        UIGauge.instance.onEndGauge.AddListener(RoundManager.instance.NextQuestionPage);
     }
     
     public void OnClickSelectButton(int num)
@@ -24,7 +23,7 @@ public class Frame1223_TypeB : MonoBehaviour
 
     public void OnClickSendButton()
     {
-        RoundManager.instance.SetCurHostage(curIndex);
+        RoundManager.instance.SetQuestionTarget(curIndex);
         
         if(UIGauge.instance.isPlaying)
             RoundManager.instance.GoTimeWaitFrame();

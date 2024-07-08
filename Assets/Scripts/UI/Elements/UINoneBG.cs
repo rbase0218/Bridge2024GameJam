@@ -64,6 +64,14 @@ public class UINoneBG : MonoBehaviour
         currUser.text = currUserText;
         nextUser.text = targetUser;
     }
+    
+    public TMP_Text currUser2;
+    public TMP_Text nextUser2;
+    public void SetFrame15(string currUserText, string targetUser)
+    {
+        currUser2.text = currUserText;
+        nextUser2.text = targetUser;
+    }
 
     private void Open(GameObject obj) => obj.SetActive(true);
 }

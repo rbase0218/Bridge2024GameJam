@@ -50,7 +50,13 @@ public class UIGauge : MonoBehaviour
         }
 
         onEndGauge?.Invoke();
+        ResetGauge();
         isPlaying = false;
     }
 
+    public void SetActive(bool active)
+    {
+        gameObject.SetActive(active);
+    }
+    
 }

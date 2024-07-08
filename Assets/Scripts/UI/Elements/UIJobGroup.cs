@@ -10,4 +10,6 @@ public class UIJobGroup : MonoBehaviour
 
     public void SetText(string txt) => text.text = txt;
     public void SetSecond(string txt) => second.text = txt;
+    
+    
 }

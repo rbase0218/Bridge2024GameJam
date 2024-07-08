@@ -21,8 +21,10 @@ public class Frame1223_TypeA : MonoBehaviour
         if (isClicked)
         {
             isClicked = false;
-            if(UIGauge.instance.isPlaying)
+            if (UIGauge.instance.isPlaying)
+            {
                 RoundManager.instance.GoTimeWaitFrame();
+            }
         }
         else
         {
