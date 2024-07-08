@@ -5,6 +5,8 @@ using UnityEngine;
 public class UIWordCheck : MonoBehaviour
 {
     public UIJobGroup _jobGroup;
+    public UICardElement _cardElement;
+    public UISelectButtons _buttons;
 
     public List<GameObject> _vipObjs;
     public List<GameObject> _clownObjs;
@@ -38,6 +40,17 @@ public class UIWordCheck : MonoBehaviour
                 break;
         }
     }
+
+    public void SetCardData(string text)
+    {
+        _cardElement.SetText(text);
+    }
+
+    public void OpenCard() => _cardElement.OpenCard();
+
+    public void ResetCard() => _cardElement.Reset();
+
+    public void SetData(params string[] names) => _buttons.SetData(names);
 
     private void ShowObjects(List<GameObject> objs, bool isShow = true)
     {
