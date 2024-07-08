@@ -59,7 +59,6 @@ public class UIWordCheck : MonoBehaviour
             obj.SetActive(isShow);
         }
     }
-
     private void HideObjects()
     {
         ShowObjects(_vipObjs, false);
