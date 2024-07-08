@@ -15,6 +15,11 @@ public class UIVote : MonoBehaviour
         SetData("강호동", "백종원", "이만기", "카리나", "누구냐", "강호동");
     }
 
+    public void OpenFrame()
+    {
+        gameObject.SetActive(true);
+    }
+
     public void SetData(string currUser, params string[] userNames)
     {
         _jobGroup.SetText(currUser);
