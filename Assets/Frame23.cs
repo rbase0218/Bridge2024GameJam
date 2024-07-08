@@ -23,6 +23,7 @@ public class Frame23 : MonoBehaviour
             button.onClick.AddListener(OnClick);
             UIGauge.instance.onEndGauge.RemoveAllListeners();
             RoundManager.instance.uiWordCheck.RemoveGauge();
+            isClicked = false;
         }
     }
 
