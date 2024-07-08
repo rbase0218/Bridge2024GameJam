@@ -222,10 +222,11 @@ public class RoundManager : MonoBehaviour
         
         uiWordCheck.SetSecondTitle(2);
         uiWordCheck.SetTitle(answerUser.name);
+        uiWordCheck.ResetCard();
         uiWordCheck.gameObject.SetActive(true);
     }
     
-    public void GoNextAnswerPage(int index)
+    public void GoNextAnswerPage()
     {
         OffAllFrame();
         

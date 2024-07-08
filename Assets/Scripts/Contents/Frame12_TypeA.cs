@@ -22,6 +22,7 @@ public class Frame12_TypeA : MonoBehaviour
         {
             isClicked = false;
             RoundManager.instance.uiWordCheck.ResetCard();
+            
             if (UIGauge.instance.isPlaying)
             {
                 RoundManager.instance.GoTimeWaitFrame();

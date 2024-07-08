@@ -32,6 +32,7 @@ public class Frame23 : MonoBehaviour
         {
             isClicked = true;
             RoundManager.instance.uiWordCheck.OpenCard();
+            RoundManager.instance.GoNextAnswerPage();
             UIGauge.instance.onEndGauge.AddListener(RoundManager.instance.GoAnswerSelectedPage);
             RoundManager.instance.uiWordCheck.StartGauge();
         }
