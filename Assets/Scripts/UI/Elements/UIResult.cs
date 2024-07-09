@@ -11,11 +11,11 @@ public class UIResult : MonoBehaviour
 
     public void Awake()
     {
-        OpenType(false);
-        OpenFrameA_BG_Frame(EJobType.Clown);
-        OpenFrameA(31);
-        
-        SetFrame31353637("누굴", EJobType.Clown);
+        // OpenType(false);
+        // OpenFrameA_BG_Frame(EJobType.Clown);
+        // OpenFrameA(31);
+        //
+        // SetFrame31353637("누굴", EJobType.Clown);
     }
 
     public void OpenType(bool type)

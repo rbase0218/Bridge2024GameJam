@@ -11,24 +11,21 @@ public class Frame28 : MonoBehaviour
     private bool isClicked;
     private int curIndex;
     private string name;
-
+    
     private void Start()
     {
         button = GetComponentInChildren<Button>();
-        UIGauge.instance.onEndGauge.RemoveAllListeners();
-        UIGauge.instance.onEndGauge.AddListener(RoundManager.instance.QuestionSelectPage);
     }
     
-    public void OnClickSelectButton(int num)
+    public void OnClickSelectButton()
     {
-        curIndex = num;
+        name = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text;
     }
 
     public void OnClickSendButton()
     {
-        RoundManager.instance.SetAnswerTarget(name);
+        var index = RoundManager.instance.GetNameToUserIndex(name);
         
-        if(UIGauge.instance.isPlaying)
-            RoundManager.instance.GoTimeWaitFrame();
+        RoundManager.instance.voteList[index] += 1;
     }
 }

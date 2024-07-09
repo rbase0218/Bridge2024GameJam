@@ -6095,7 +6095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &585370959
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7216,7 +7216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &743182577
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8112,7 +8112,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 831339096}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 610149828}
+        m_TargetAssemblyTypeName: Frame28, Assembly-CSharp
+        m_MethodName: OnClickSelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &833667129
 GameObject:
   m_ObjectHideFlags: 0
@@ -11156,7 +11168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1110005359
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13250,7 +13262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1262595717
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13663,7 +13675,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1598137875}
         m_TargetAssemblyTypeName: RoundManager, Assembly-CSharp
-        m_MethodName: GoQuestionRound
+        m_MethodName: GoVotePage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15156,6 +15168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1383865897}
+  - component: {fileID: 1383865898}
   m_Layer: 5
   m_Name: Frame29
   m_TagString: Untagged
@@ -15185,6 +15198,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1383865898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383865896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa556d7d4e2b0f943b90825ae88abd35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1415584681
 GameObject:
   m_ObjectHideFlags: 0
@@ -17108,9 +17133,11 @@ MonoBehaviour:
   uiWordCheck: {fileID: 2094876072}
   uiNoneBg: {fileID: 1110005360}
   uiQuestion: {fileID: 200954599}
-  uiVote: {fileID: 0}
+  uiVote: {fileID: 1415584683}
+  uiResult: {fileID: 0}
   curPageType: 0
   voteList: 
+  globalIndex: 0
 --- !u!4 &1598137876
 Transform:
   m_ObjectHideFlags: 0
@@ -18799,7 +18826,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1740229466}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 610149828}
+        m_TargetAssemblyTypeName: Frame28, Assembly-CSharp
+        m_MethodName: OnClickSelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1740763045
 GameObject:
   m_ObjectHideFlags: 0
@@ -19994,7 +20033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1820111295
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21409,6 +21448,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 610149828}
+        m_TargetAssemblyTypeName: Frame28, Assembly-CSharp
+        m_MethodName: OnClickSendButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1877846744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21683,7 +21734,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1893630840}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 610149828}
+        m_TargetAssemblyTypeName: Frame28, Assembly-CSharp
+        m_MethodName: OnClickSelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1901144612
 GameObject:
   m_ObjectHideFlags: 0
@@ -22420,7 +22483,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1925812080}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 610149828}
+        m_TargetAssemblyTypeName: Frame28, Assembly-CSharp
+        m_MethodName: OnClickSelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1928551539
 GameObject:
   m_ObjectHideFlags: 0
@@ -24786,7 +24861,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2072817174}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 610149828}
+        m_TargetAssemblyTypeName: Frame28, Assembly-CSharp
+        m_MethodName: OnClickSelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2073292530
 GameObject:
   m_ObjectHideFlags: 0
@@ -25265,6 +25352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2115385315}
   - component: {fileID: 2115385316}
+  - component: {fileID: 2115385317}
   m_Layer: 5
   m_Name: Frame30
   m_TagString: Untagged
@@ -25309,6 +25397,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1515726370}
   second: {fileID: 0}
+--- !u!114 &2115385317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115385314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e576c467617bdbd4786c9a1da8e913dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2116791171
 GameObject:
   m_ObjectHideFlags: 0
@@ -25675,7 +25775,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2119289781}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 610149828}
+        m_TargetAssemblyTypeName: Frame28, Assembly-CSharp
+        m_MethodName: OnClickSelectButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2121072254
 GameObject:
   m_ObjectHideFlags: 0

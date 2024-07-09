@@ -7,18 +7,18 @@ public class UIVote : MonoBehaviour
     private UIJobGroup _jobGroup;
     private UISelectButtons _selectButtons;
 
-    private void Awake()
+    public void Init()
     {
         _jobGroup = gameObject.GetComponentInChildren<UIJobGroup>();
-        _selectButtons = gameObject.GetComponentInChildren<UISelectButtons>();
-        
-        SetData("강호동", "백종원", "이만기", "카리나", "누구냐", "강호동");
+        _selectButtons = gameObject.GetComponentInChildren<UISelectButtons>();   
     }
 
     public void OpenFrame()
     {
         gameObject.SetActive(true);
     }
+
+    public void Hide() => gameObject.SetActive(false);
 
     public void SetData(string currUser, params string[] userNames)
     {

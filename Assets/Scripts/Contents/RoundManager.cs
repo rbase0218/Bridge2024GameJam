@@ -29,6 +29,7 @@ public class RoundManager : MonoBehaviour
     public UINoneBG uiNoneBg;
     public UIQuestion uiQuestion;
     public UIVote uiVote;
+    public UIResult uiResult;
 
     private List<UserInfo> userList;
 
@@ -53,7 +54,7 @@ public class RoundManager : MonoBehaviour
         curUserCount = 0;
         roundCount = 0;
         curPageType = EPageType.WordCheck;
-        voteList = new List<int>(5);
+        voteList = new List<int>(6) {0,0,0,0,0,0};
 
         StartRound();
     }
@@ -98,6 +99,11 @@ public class RoundManager : MonoBehaviour
         answerUser = FindAnswerTarget(name);
     }
 
+    public int GetNameToUserIndex(string name)
+    {
+        return FindAnswerTarget(name).index;
+    }
+
     public UserInfo FindAnswerTarget(string name)
     {
         return userList.Find((x) => x.name == name);
@@ -109,6 +115,7 @@ public class RoundManager : MonoBehaviour
         uiWordCheck.gameObject.SetActive(false);
         uiNoneBg.gameObject.SetActive(false);
         uiQuestion.gameObject.SetActive(false);
+        uiVote.gameObject.SetActive(false);
     }
 
     public void GoTimeWaitFrame()
@@ -313,12 +320,30 @@ public class RoundManager : MonoBehaviour
 
     #region VotePage
 
+    public int globalIndex = 0;
     public void GoVotePage()
     {
         if(curUserCount >= userList.Count)
         {
             Debug.Log("Vote End");
             curUserCount = 0;
+        
+            var asdf = Mathf.CeilToInt(userList.Count / 2f);
+            
+            for (int i = 0; i < voteList.Count; ++i)
+            {
+                if (voteList[i] == 0)
+                    continue;
+            
+                if (voteList[i] >= asdf)
+                {
+                    globalIndex = i;
+                    uiNoneBg.OpenFrame(29);
+                    return;
+                }
+            }
+            
+            GoQuestionRound();
             return;
         }
         
@@ -326,17 +351,20 @@ public class RoundManager : MonoBehaviour
         UIGauge.instance.SetActive(true);
         UIGauge.instance.SetTime(10f);
         UIGauge.instance.Play();
-
-        uiVote.gameObject.SetActive(true);
+        
+        uiVote.Init();
+        uiVote.SetData(userList[curUserCount].name, userList.Select( x => x.name).ToArray());
+        uiVote.OpenFrame();
         
         curUserCount++;
     }
 
+    
+    // 투표 완료 버튼을 눌렀을 경우, 사용되는 메서드
     public void GoNextVoteTurnPage()
     {
         OffAllFrame();
 
-        string name1 = userList[curUserCount].name;
         string name2 = "";
         
         if (curUserCount + 1 >= userList.Count)
@@ -347,11 +375,33 @@ public class RoundManager : MonoBehaviour
         {
             name2 = userList[curUserCount + 1].name;
         }
+        
 
-        uiNoneBg.SetFrame25(userList[curUserCount].name, name2);
+        if(name2 != "종료")
+            uiNoneBg.SetFrame25(userList[curUserCount].name, name2);
+        else
+            uiNoneBg.SetFrame25(name2, "");
         uiNoneBg.OpenFrame(25);
         uiNoneBg.gameObject.SetActive(true);
     }
 
+    #endregion
+    
+    #region UI-Result
+
+    public void OnTypeAResultBoard()
+    {
+        uiResult.OpenType(false);
+        uiResult.OpenFrameA_BG_Frame(userList[globalIndex].jobType);
+        
+        uiResult.SetFrame30(userList[globalIndex].name);
+        uiResult.OpenFrameA(30);
+    }
+
+    public void OnFrame31Board()
+    {
+        uiResult.SetFrame31353637(userList[globalIndex].name, userList[globalIndex].jobType);
+    }
+    
     #endregion
 }
