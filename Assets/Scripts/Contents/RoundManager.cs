@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class RoundManager : MonoBehaviour
@@ -116,6 +117,7 @@ public class RoundManager : MonoBehaviour
         uiNoneBg.gameObject.SetActive(false);
         uiQuestion.gameObject.SetActive(false);
         uiVote.gameObject.SetActive(false);
+        uiResult.gameObject.SetActive(false);
     }
 
     public void GoTimeWaitFrame()
@@ -326,6 +328,8 @@ public class RoundManager : MonoBehaviour
         if(curUserCount >= userList.Count)
         {
             Debug.Log("Vote End");
+            UIGauge.instance.SetActive(false);
+            
             curUserCount = 0;
         
             var asdf = Mathf.CeilToInt(userList.Count / 2f);
@@ -375,12 +379,12 @@ public class RoundManager : MonoBehaviour
         {
             name2 = userList[curUserCount + 1].name;
         }
-        
 
         if(name2 != "종료")
             uiNoneBg.SetFrame25(userList[curUserCount].name, name2);
         else
             uiNoneBg.SetFrame25(name2, "");
+        
         uiNoneBg.OpenFrame(25);
         uiNoneBg.gameObject.SetActive(true);
     }
@@ -391,6 +395,9 @@ public class RoundManager : MonoBehaviour
 
     public void OnTypeAResultBoard()
     {
+        OffAllFrame();
+        
+        uiResult.gameObject.SetActive(true);
         uiResult.OpenType(false);
         uiResult.OpenFrameA_BG_Frame(userList[globalIndex].jobType);
         
@@ -400,8 +407,41 @@ public class RoundManager : MonoBehaviour
 
     public void OnFrame31Board()
     {
+        OffAllFrame();
+        
+        uiResult.gameObject.SetActive(true);
         uiResult.SetFrame31353637(userList[globalIndex].name, userList[globalIndex].jobType);
+        uiResult.OpenFrameA(31);
     }
-    
+
+    public UserInfo GetCurrentUser()
+    {
+        return userList[globalIndex];
+    }
+
+    public string inputWord = "";
+
+    public void Confirm()
+    {
+        OffAllFrame();
+        uiResult.gameObject.SetActive(true);
+        
+        if (inputWord == secretWord)
+        {
+            uiResult.SetFrame3334(EJobType.Assassin);
+            uiResult.OpenFrameA(33);
+        }
+        else
+        {
+            uiResult.SetFrame3334(EJobType.VIP);
+            uiResult.OpenFrameA(34);
+        }
+    }
+
+    public void MoveMain()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     #endregion
 }
