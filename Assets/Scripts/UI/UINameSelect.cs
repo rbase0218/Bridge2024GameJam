@@ -61,7 +61,7 @@ public class UINameSelect : UIWindow
         }
         
         nameField.HideAll();
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Ryu-UI Copy");
     }
 
     // EJobType을 랜덤으로 섞어서 반환한다.
