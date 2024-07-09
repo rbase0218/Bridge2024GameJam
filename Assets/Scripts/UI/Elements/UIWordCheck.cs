@@ -57,7 +57,7 @@ public class UIWordCheck : MonoBehaviour
     public void StartGauge()
     {
         UIGauge.instance.SetActive(true);
-        UIGauge.instance.SetTime(3f);
+        UIGauge.instance.SetTime(10f);
         UIGauge.instance.Play();
     }
 
