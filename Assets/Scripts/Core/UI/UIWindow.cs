@@ -5,20 +5,19 @@ using UnityEngine;
 
 public abstract class UIWindow : UIBase
 {
-    [SerializeField]
-    protected bool _alwaysOpen = false;
+    protected bool alwaysOpen = false;
+    protected virtual void Setting() { }
+    protected virtual void Clear() { }
     
     protected override bool Init()
     {
         if (!base.Init())
             return false;
+        
+        Managers.UI.RegisterWindow(this);
+        Hide();
+        
         return true;
-    }
-
-    protected virtual void Start()
-    {
-        base.Start();
-        Managers.UI.AddWindow(this);
     }
     
     public void Open()
@@ -29,20 +28,11 @@ public abstract class UIWindow : UIBase
 
     public void Hide()
     {
-        if (_alwaysOpen)
+        if (alwaysOpen)
             return;
 
         Clear();
         gameObject.SetActive(false);
     }
 
-    protected virtual void Setting()
-    {
-        
-    }
-
-    protected virtual void Clear()
-    {
-        
-    }
 }
