@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class WindowContainer : Dictionary<Type, UIWindow>
 {
-    public bool AddWindow(Type type, UIWindow window)
-    {
-        return TryAdd(type, window);
-    }
-
     public T GetWindow<T>() where T : UIWindow
     {
         return this[typeof(T)] as T;
