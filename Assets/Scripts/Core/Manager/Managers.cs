@@ -5,49 +5,39 @@ using UnityEngine;
 
 public sealed class Managers : MonoBehaviour
 {
+    #region # [ Origin ] #
+    
     private static Managers _instance = null;
-    public static Managers Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                GameObject go = GameObject.Find("@Managers");
-                if (go == null)
-                {
-                    go = new GameObject { name = "@Managers" };
-                    go.AddComponent<Managers>();
-                }
+    public static Managers Instance => _instance;
+    
+    #endregion
 
-                _instance = go.GetComponent<Managers>();
-            }
-
-            return _instance;
-        }
-    }
-
+    #region # [ Managers ] #
+    
     private static UIManager _uiManager = new UIManager();
-    private static DataManager _dataManager = new DataManager();
-    private static SoundManager _soundManager = new SoundManager();
+    public static UIManager UI { get { Init(); return _uiManager; } }
 
-    public static UIManager UI => _uiManager;
-    public static DataManager Data => _dataManager;
-    public static SoundManager Sound => _soundManager;
-
-    private void Awake()
+    #endregion
+    
+    private void Start()
     {
-        _uiManager.Init();
-        _dataManager.Init();
-        SetUp();
+        Init();
     }
 
-    private void SetUp()
+    private static void Init()
     {
-        DontDestroyOnLoad(this);
-    }
+        if (_instance == null)
+        {
+            GameObject go = GameObject.Find("@Managers");
+            if (go == null)
+                go = new GameObject { name = "@Managers" };
 
-    private void OnApplicationQuit()
-    {
-        _uiManager.Quit();
+            _instance = Utils.TryOrAddComponent<Managers>(go);
+            DontDestroyOnLoad(go);
+            
+            _uiManager.Init();
+            
+            Application.targetFrameRate = 60;
+        }
     }
 }
