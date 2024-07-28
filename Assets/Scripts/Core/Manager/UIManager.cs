@@ -6,48 +6,31 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    private List<UIWindow> _windowDataList;
+    private WindowContainer _windowContainer;
     private Stack<UIWindow> _activeWindowStack;
 
     public void Init()
     {
-        _windowDataList = new List<UIWindow>();
+        // 모든 Window의 인스턴스를 저장하고 관리한다.
+        _windowContainer = new WindowContainer();
+        
+        // 현재 활성화된 Window의 인스턴스를 저장하고 관리한다.
         _activeWindowStack = new Stack<UIWindow>();
     }
 
-    #region Window Data
-    
-    public void AddWindow(UIWindow window)
+    public bool RegisterWindow(UIWindow window)
     {
-        if (window == null || ContainWindow(window))
-            return;
-
-        _windowDataList?.Add(window);
-        window.Hide();
+        return _windowContainer.TryAdd(window.GetType(), window);
     }
-
-    public bool ContainWindow(UIWindow window)
-    {
-        return _windowDataList.Contains(window);
-    }
-    
-    public T GetWindow<T>() where T : UIWindow
-    {
-        return _windowDataList.Find(x => x.GetType() == typeof(T)) as T;
-    }
-    
-    #endregion
-    
-    #region Active Window
 
     public T ShowWindow<T>() where T : UIWindow
     {
-        var window = GetWindow<T>();
-        _activeWindowStack.Push(window);
+        var findWindow = _windowContainer.GetWindow<T>();
+        if (findWindow == null) { Debug.Log("존재하지 않는 Window를 실행했습니다."); return null; }
         
-        window.Open();
-
-        return window;
+        _activeWindowStack.Push(findWindow);
+        findWindow.Open();
+        return findWindow;
     }
     
     public T PeakWindow<T>() where T : UIWindow
@@ -62,13 +45,5 @@ public class UIManager : MonoBehaviour
             var window = _activeWindowStack?.Pop();
             window.Hide();
         }
-    }
-
-    #endregion
-
-    public void Quit()
-    {
-        _windowDataList = null;
-        _activeWindowStack = null;
     }
 }
