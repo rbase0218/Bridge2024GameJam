@@ -29,22 +29,9 @@ public sealed class Managers : MonoBehaviour
     private static UIManager _uiManager = new UIManager();
     private static DataManager _dataManager = new DataManager();
     private static SoundManager _soundManager = new SoundManager();
-    private static GameManager _gameManager = null;
 
     public static UIManager UI => _uiManager;
     public static DataManager Data => _dataManager;
-    public static GameManager Game
-    {
-        get
-        {
-            if (_gameManager == null)
-            {
-                GameObject go = GameObject.Find("@Managers");
-                _gameManager = go.GetComponent<GameManager>();
-            }
-            return _gameManager;
-        }
-    }
     public static SoundManager Sound => _soundManager;
 
     private void Awake()
