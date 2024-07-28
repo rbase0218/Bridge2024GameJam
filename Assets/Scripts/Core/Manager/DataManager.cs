@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class DataManager
 {
-    // 게임의 인원 수
-    public readonly string[] personArray = new string[]{ "3", "4", "5", "6" };
-    // 대체 닉네임
-    public readonly string[] randNicknameArray = { "정혜원", "김지은", "김수민", "이시원", "류병현", "독고순옥"  };
+    #region # [ Datas ] #
     
-    // 게임 카테고리 Database
-    public Dictionary<string, string[]> categoryDic = new Dictionary<string, string[]>();
+    // 게임에 참여할 수 있는 인원 수를 가지고 있는 배열
+    public readonly string[] playerCountArray = new string[]{ "3", "4", "5", "6" };
+    
+    // 게임 카테고리 ▶ 주제
     public readonly string[] categoryArray = new string[]{ "동물", "음식", "영화 제목", "직업", "나라 이름", "운동", "악기" };
+    // 게임 카테고리 ▶ 세부 주제
     public readonly string[][] wordArray = new string[][]
     {
         new string[] { "사자", "호랑이", "코끼리", "기린", "표범", "하이에나", "코알라", "캥거루", "바다표범", "북극곰" },
@@ -24,13 +24,12 @@ public class DataManager
         new string[] { "피아노", "바이올린", "첼로", "장구", "가야금", "드럼", "기타", "단소", "리코더", "색소폰" }
     };
     
-    public void Init()
-    {
-        categoryDic = new Dictionary<string, string[]>();
-        
-        for (int i = 0; i < categoryArray.Length; ++i)
-        {
-            categoryDic?.Add(categoryArray[i], wordArray[i]);
-        }
-    }
+    #endregion
+    
+    #region # [ For Debug ] #
+    
+    // 대체 닉네임
+    public readonly string[] exampleNicknameArray = { "정혜원", "김지은", "김수민", "이시원", "류병현", "독고순옥"  };
+    
+    #endregion
 }

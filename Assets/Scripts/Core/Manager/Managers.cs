@@ -15,7 +15,9 @@ public sealed class Managers : MonoBehaviour
     #region # [ Managers ] #
     
     private static UIManager _uiManager = new UIManager();
+    private static DataManager _dataManager = new DataManager();
     public static UIManager UI { get { Init(); return _uiManager; } }
+    public static DataManager Data { get { Init(); return _dataManager; } }
 
     #endregion
     
