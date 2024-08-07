@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Ryu.unity
+    path: Assets/Scenes/Active Scene/Title.unity
     guid: 430b1f68e43f2e7489c202633b14c272
   - enabled: 1
     path: Assets/Scenes/Ryu-UI Copy.unity

@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Framework : MonoBehaviour
+public abstract class Framework : MonoBehaviour
 {
-    private void Awake()
+    protected void Awake()
     {
-        // Base Start
+        SetUp();
     }
+
+    protected abstract void Start();
+    
+    protected virtual void SetUp(){ }
 }
