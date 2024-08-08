@@ -5,34 +5,30 @@ using UnityEngine;
 
 public class UITextSegment : UIBase
 {
-    public enum Texts
-    {
-        Text
-    }
+    private TMP_Text _text;
     
     protected override bool Init()
     {
         if (!base.Init())
             return false;
 
-        BindText(typeof(Texts));
+        _text = Utils.TryOrAddComponent<TMP_Text>(gameObject);
         
         return true;
     }
     
-    public void SetInfo(string text, float fontSize)
-    {
-        SetText(text);
-        SetFontSize(fontSize);
-    }
-
     public void SetFontSize(float fontSize)
     {
-        GetText((int)Texts.Text).fontSize = fontSize;
+        _text.fontSize = fontSize;
+    }
+
+    public void SetFontColor(Color color)
+    {
+        _text.color = color;
     }
 
     public void SetText(string text)
     {
-        GetText((int)Texts.Text).text = text;
+        _text.text = text;
     }
 }
