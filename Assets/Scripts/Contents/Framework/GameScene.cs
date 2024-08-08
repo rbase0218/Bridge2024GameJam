@@ -14,6 +14,5 @@ public sealed class GameScene : Framework
     // 해당 메서드는 Start에서 로직을 관리할 때 사용된다.
     protected override void Start()
     {
-        Debug.Log("Call");
     }
 }
