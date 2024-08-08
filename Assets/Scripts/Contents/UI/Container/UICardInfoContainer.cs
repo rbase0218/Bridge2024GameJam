@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UINameTagContainer : UIBase
+public class UICardInfoContainer : UIBase
 {
-    public enum Texts
+    public enum Card
     {
-        Text
+        CardContainer
     }
     
     protected override bool Init()
     {
         if (!base.Init())
             return false;
-        
-        Bind<UITextSegment>(typeof(Texts));
-        
+
+        Bind<UICardContainer>(typeof(Card));
+
         return true;
     }
 
-    public void SetInfo(string text)
+    public void Open()
     {
-        Get<UITextSegment>((int)Texts.Text).SetText(text);
+        Get<UICardContainer>((int)Card.CardContainer).Open();
     }
 }

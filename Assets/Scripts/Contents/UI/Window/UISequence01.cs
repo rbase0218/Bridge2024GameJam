@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIIntroText : UIWindow
+public class UISequence01 : UIWindow
 {
     public enum NameTag
     {
@@ -33,9 +33,14 @@ public class UIIntroText : UIWindow
         return true;
     }
 
+    protected override void ExitWindow()
+    {
+        
+    }
+
     public void SetInfo(string name, string text1, string text2)
     {
-        Get<UINameTagContainer>((int)NameTag.NameTagContainer).SetText(name);
+        Get<UINameTagContainer>((int)NameTag.NameTagContainer).SetInfo(name);
         Get<UITextSegment>((int)Texts.Text1).SetText(text1);
         Get<UITextSegment>((int)Texts.Text2).SetText(text2);
     }
