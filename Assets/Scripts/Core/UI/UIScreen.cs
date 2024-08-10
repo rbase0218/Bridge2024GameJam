@@ -16,4 +16,6 @@ public abstract class UIScreen : UIWindow
             return false;
         return true;
     }
+    
+    public void SetAutoNextPage(bool isAuto) => useAutoNextPage = isAuto;
 }

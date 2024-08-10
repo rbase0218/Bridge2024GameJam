@@ -5,7 +5,7 @@ using UnityEngine;
 public class UI_FinalResultStage : UIStage
 {
 
-    public override void OnFirstScreen()
+    public override void OpenScreen()
     {
         
     }

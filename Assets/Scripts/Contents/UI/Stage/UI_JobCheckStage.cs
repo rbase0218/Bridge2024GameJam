@@ -21,7 +21,7 @@ public class UI_JobCheckStage : UIStage
         return true;
     }
     
-    public override void OnFirstScreen()
+    public override void OpenScreen()
     {
         
     }

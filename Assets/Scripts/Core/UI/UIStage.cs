@@ -18,5 +18,5 @@ public abstract class UIStage : UIBase
         return true;
     }
 
-    public abstract void OnFirstScreen();
+    public abstract void OpenScreen();
 }

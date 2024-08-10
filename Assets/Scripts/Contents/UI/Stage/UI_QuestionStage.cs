@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UI_QuestionStage : UIStage
 {
-    public override void OnFirstScreen()
+    public override void OpenScreen()
     {
         
     }

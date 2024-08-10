@@ -5,7 +5,7 @@ using UnityEngine;
 public class UI_VotingStage : UIStage
 {
 
-    public override void OnFirstScreen()
+    public override void OpenScreen()
     {
         
     }
