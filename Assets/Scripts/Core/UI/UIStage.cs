@@ -18,5 +18,5 @@ public abstract class UIStage : UIBase
         return true;
     }
 
-    public abstract void OpenScreen();
+    public abstract void OpenScreen(UI_Gauge gauge);
 }
