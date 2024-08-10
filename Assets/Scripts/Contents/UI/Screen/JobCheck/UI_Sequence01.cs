@@ -8,13 +8,16 @@ public class UI_Sequence01 : UIScreen
     {
         if (!base.Init())
             return false;
-
-
         return true;
     }
     
     protected override bool EnterWindow()
     {
         return true;
+    }
+    
+    public void SetInfo(UI_Gauge gauge)
+    {
+        
     }
 }

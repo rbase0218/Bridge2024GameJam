@@ -20,8 +20,7 @@ public class UI_JobCheckStage : UIStage
         
         return true;
     }
-    
-    public override void OpenScreen()
+    public override void OpenScreen(UI_Gauge gauge)
     {
         
     }

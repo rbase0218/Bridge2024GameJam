@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class UI_FinalResultStage : UIStage
 {
-
-    public override void OpenScreen()
+    public override void OpenScreen(UI_Gauge gauge)
     {
         
     }

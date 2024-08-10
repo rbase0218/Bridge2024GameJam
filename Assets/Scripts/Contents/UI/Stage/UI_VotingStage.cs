@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class UI_VotingStage : UIStage
 {
-
-    public override void OpenScreen()
+    public override void OpenScreen(UI_Gauge gauge)
     {
-        
+        throw new System.NotImplementedException();
     }
 }

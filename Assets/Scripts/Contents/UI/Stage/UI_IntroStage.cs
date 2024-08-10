@@ -19,8 +19,11 @@ public class UI_IntroStage : UIStage
         return true;
     }
     
-    public override void OpenScreen()
+    public override void OpenScreen(UI_Gauge gauge)
     {
-        var intro = Managers.UI.ShowWindow<UI_Intro01>();
+        var intro = Managers.UI.GetWindow<UI_Intro01>();
+        intro.SetInfo(gauge);
+        
+        Managers.UI.ShowWindow<UI_Intro01>();
     }
 }
