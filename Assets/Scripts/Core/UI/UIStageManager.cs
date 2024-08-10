@@ -25,10 +25,11 @@ public class UIStageManager : UIBase
 
     public void Play()
     {
+        OpenStage();
     }
 
-    private void OnFirstStage()
+    private void OpenStage()
     {
-        Get<UI_IntroStage>((int)Stages.IntroStage).OnFirstScreen();
+        Get<UI_IntroStage>((int)Stages.IntroStage).OpenScreen();
     }
 }

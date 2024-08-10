@@ -19,8 +19,8 @@ public class UI_IntroStage : UIStage
         return true;
     }
     
-    public override void OnFirstScreen()
+    public override void OpenScreen()
     {
-        
+        var intro = Managers.UI.ShowWindow<UI_Intro01>();
     }
 }
