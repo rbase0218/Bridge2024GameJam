@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_JobInteraction : UIScreen
 {
@@ -41,11 +44,21 @@ public class UI_JobInteraction : UIScreen
         // }
         // else
         {
+            _playerSelector.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
+            _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
+            
             GetObject((int)Boards.Board_B).SetActive(true);
             GetObject((int)Boards.Board_A).SetActive(false);
-            
         }
 
         return true;
+    }
+
+    private void OnClickSubmitButton(Button button)
+    {
+        // Hostage를 해당 기능을 통해서 선택한다.
+        var selectUserName = button.GetComponentInChildren<TMP_Text>().GetParsedText();
+        var selectuser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
+        Debug.Log(selectUserName + " : " + selectuser.userName);
     }
 }
