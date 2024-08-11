@@ -10,7 +10,7 @@ public abstract class UIScreen : UIWindow
     // True -> 자동으로 넘김
     // False -> 자동으로 넘기지 않음
     [field: SerializeField]
-    public bool UseAutoNextScreen { get; private set; }
+    public bool UseAutoNextScreen { get; private set; } = true;
     
     protected UI_Gauge _gauge;
 
@@ -24,4 +24,14 @@ public abstract class UIScreen : UIWindow
     }
     
     public void SetAutoNextPage(bool isAuto) => UseAutoNextScreen = isAuto;
+    
+    public void BindNextScreen<T>() where T : UIScreen
+    {
+        _gauge.onEndGauge.AddListener(() =>
+        {
+            Managers.UI.ShowWindow<T>();
+        });
+
+        _gauge.Play();
+    }
 }

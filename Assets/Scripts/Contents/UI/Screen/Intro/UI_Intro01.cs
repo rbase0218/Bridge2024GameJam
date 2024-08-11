@@ -18,14 +18,7 @@ public class UI_Intro01 : UIScreen
     protected override bool EnterWindow()
     {
         if (UseAutoNextScreen)
-        {
-            _gauge.onEndGauge.AddListener(() =>
-            {
-                Managers.UI.ShowWindow<UI_Sequence01>();
-            });
-            
-            _gauge.Play();
-        }
+            BindNextScreen<UI_Sequence01>();
         
         return true;
     }

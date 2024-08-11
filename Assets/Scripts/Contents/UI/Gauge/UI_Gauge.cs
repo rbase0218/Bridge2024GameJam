@@ -89,10 +89,10 @@ public class UI_Gauge : UIBase
             onGaugeTimer?.Invoke(_timer / GaugeTime);
         }
         
-        onEndGauge.Invoke();
-        
         _gaugeFillImage.fillAmount = 1f;
         _timer = .0f;
         _isPlay = false;
+        
+        onEndGauge.Invoke();
     }
 }

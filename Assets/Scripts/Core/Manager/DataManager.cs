@@ -32,4 +32,15 @@ public class DataManager
     public readonly string[] exampleNicknameArray = { "정혜원", "김지은", "김수민", "이시원", "류병현", "독고순옥"  };
     
     #endregion
+
+    public Sprite ActorSprite, VipSprite, AssSprite;
+    public void Init()
+    {
+        ActorSprite = Load<Sprite>(@"Sprite/UI/Frame/ActorFrame");
+    }
+
+    private T Load<T>(string path) where T : UnityEngine.Object
+    {
+        return Resources.Load<T>(path);
+    }
 }

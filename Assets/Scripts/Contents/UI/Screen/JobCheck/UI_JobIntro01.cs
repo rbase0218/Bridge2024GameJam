@@ -4,29 +4,32 @@ using UnityEngine;
 
 public class UI_JobIntro01 : UIScreen
 {
-    private enum NextOrder
+    public enum Texts
     {
-        NextOrderContainer
+        NameText,
+        JobNameText
     }
 
-    private enum CardInfo
+    public enum Images
     {
-        CardInfoContainer
+        Frame
     }
-    
     protected override bool Init()
     {
         if(!base.Init())
             return false;
-        
-        Bind<UINameTagContainer>(typeof(NextOrder));
-        Bind<UICardInfoContainer>(typeof(CardInfo));
+
+        BindText(typeof(Texts));
+        BindImage(typeof(Images));
         
         return true;
     }
     
     protected override bool EnterWindow()
     {
+        var sprite = Managers.Data.ActorSprite;
+        GetImage((int)Images.Frame).sprite = sprite;
+        // 데이터 연결 필요
         return true;
     }
 }
