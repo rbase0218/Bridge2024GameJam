@@ -33,10 +33,39 @@ public class DataManager
     
     #endregion
 
+    // 각자 필요한 초상화 데이터
     public Sprite ActorSprite, VipSprite, AssSprite;
+    public Sprite Hostage, NobleA, NobleB, Black;
+    
+    // BG
+    public Sprite ActorBG, VipBG, AssBG;
+    
     public void Init()
     {
         ActorSprite = Load<Sprite>(@"Sprite/UI/Frame/ActorFrame");
+        VipSprite = Load<Sprite>(@"Sprite/UI/Frame/NobleFrame_A");
+        AssSprite = Load<Sprite>(@"Sprite/UI/Frame/AssFrame");
+        Hostage = Load<Sprite>(@"Sprite/UI/Frame/HostageFrame");
+        NobleA = Load<Sprite>(@"Sprite/UI/Frame/NobleFrame_A");
+        NobleB = Load<Sprite>(@"Sprite/UI/Frame/NobleFrame_B");
+        Black = Load<Sprite>(@"Sprite/UI/Frame/BlackFrame");
+        
+        //ActorBG = Laod<Sprite>(@"Sprite/UI/Frame/ActorBG");
+    }
+
+    public Sprite GetFrameSprite(EJobType jobType)
+    {
+        switch (jobType)
+        {
+            case EJobType.Actor:
+                return ActorSprite;
+            case EJobType.VIP:
+                return VipSprite;
+            case EJobType.Assassin:
+                return AssSprite;
+            default:
+                return null;
+        }
     }
 
     private T Load<T>(string path) where T : UnityEngine.Object

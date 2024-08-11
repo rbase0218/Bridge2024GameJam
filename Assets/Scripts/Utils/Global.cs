@@ -7,7 +7,7 @@ public enum EJobType
     None,
     VIP,
     Assassin,
-    Clown
+    Actor
 }
 
 public enum ELayoutName

@@ -27,6 +27,8 @@ public abstract class UIScreen : UIWindow
     
     public void BindNextScreen<T>() where T : UIScreen
     {
+        _gauge.onEndGauge.RemoveAllListeners();
+        
         _gauge.onEndGauge.AddListener(() =>
         {
             Managers.UI.ShowWindow<T>();

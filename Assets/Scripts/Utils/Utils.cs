@@ -97,7 +97,7 @@ public class Utils
                 return "귀빈";
             case EJobType.Assassin:
                 return "암살자";
-            case EJobType.Clown:
+            case EJobType.Actor:
                 return "광대";
             default:
                 return "귀빈";
