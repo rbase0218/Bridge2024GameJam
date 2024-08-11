@@ -42,6 +42,7 @@ public sealed class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             
             _uiManager.Init();
+            _dataManager.Init();
             
             Application.targetFrameRate = 60;
         }

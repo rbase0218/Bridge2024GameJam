@@ -31,9 +31,6 @@ public class UI_JobInteraction : UIScreen
             return false;
         
         BindObject(typeof(Boards));
-        Bind<UINameTagContainer>(typeof(JobInfo));
-        Bind<UICardContainer>(typeof(Card));
-        Bind<UISelectContainer>(typeof(Select));
 
         return true;
     }
