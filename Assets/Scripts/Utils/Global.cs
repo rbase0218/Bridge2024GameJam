@@ -74,5 +74,13 @@ public static class FontSize
     public static readonly float Font20 = 20f;
 }
 
+public class UserInfo
+{
+    // 유저 이름
+    public string userName;
+    // 유저 직업
+    public EJobType jobType;
+}
+
 
 
