@@ -31,6 +31,7 @@ public abstract class UIScreen : UIWindow
         
         _gauge.onEndGauge.AddListener(() =>
         {
+            Managers.UI.CloseWindow();
             Managers.UI.ShowWindow<T>();
         });
 
