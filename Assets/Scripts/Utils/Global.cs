@@ -80,6 +80,12 @@ public class UserInfo
     public string userName;
     // 유저 직업
     public EJobType jobType;
+    
+    public UserInfo(string userName, EJobType jobType)
+    {
+        this.userName = userName;
+        this.jobType = jobType;
+    }
 }
 
 

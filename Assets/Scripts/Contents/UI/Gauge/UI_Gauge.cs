@@ -50,15 +50,6 @@ public class UI_Gauge : UIBase
         return true;
     }
 
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Q))
-            Play();
-        
-        if(Input.GetKeyDown(KeyCode.W))
-            PlayHide();
-    }
-
     public bool Play()
     {
         if (_isPlay)
@@ -68,10 +59,7 @@ public class UI_Gauge : UIBase
         }
 
         if (_rectTransform.sizeDelta.x <= 0)
-        {
             _rectTransform.sizeDelta = _originSize;
-            _gaugeFillImage.fillAmount = 1f;
-        }
 
         _isPlay = true;
         StartCoroutine("StartGauge");
@@ -103,6 +91,7 @@ public class UI_Gauge : UIBase
         
         onEndGauge.Invoke();
         
+        _gaugeFillImage.fillAmount = 1f;
         _timer = .0f;
         _isPlay = false;
     }

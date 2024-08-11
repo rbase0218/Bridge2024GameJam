@@ -15,4 +15,12 @@ public sealed class GameScene : Framework
     protected override void Start()
     {
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Managers.UI.ShowWindow<UI_Intro01>();
+        }
+    }
 }
