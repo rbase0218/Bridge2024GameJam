@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public abstract class UIScreen : UIWindow
@@ -9,7 +11,9 @@ public abstract class UIScreen : UIWindow
     // True -> 자동으로 넘김
     // False -> 자동으로 넘기지 않음
     [field: SerializeField]
-    public bool useAutoNextPage { get; private set; }
+    public bool UseAutoNextScreen { get; private set; }
+
+    protected UnityAction OnNextScreen;
     
     protected override bool Init()
     {
@@ -18,5 +22,9 @@ public abstract class UIScreen : UIWindow
         return true;
     }
     
-    public void SetAutoNextPage(bool isAuto) => useAutoNextPage = isAuto;
+    public void SetAutoNextPage(bool isAuto) => UseAutoNextScreen = isAuto;
+    public void BindAutoEvent(UI_Gauge gauge, UnityAction changeAction)
+    {
+        gauge.onEndGauge.AddListener(changeAction);
+    }
 }
