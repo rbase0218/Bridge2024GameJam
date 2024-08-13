@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class UI_JobIntro01 : UIScreen
 {
-    public enum Texts
+    private enum Texts
     {
         NameText,
         JobNameText
     }
 
-    public enum Images
+    private enum Images
     {
         Frame
     }
 
-    public enum Buttons
+    private enum Buttons
     {
         CloseCard
     }
 
-    public enum Objects
+    private enum Objects
     {
         CloseCard,
         JobFrame
@@ -31,6 +31,7 @@ public class UI_JobIntro01 : UIScreen
         if(!base.Init())
             return false;
 
+        // Bind or Event Bind 
         BindText(typeof(Texts));
         BindImage(typeof(Images));
         BindButton(typeof(Buttons));
@@ -43,6 +44,7 @@ public class UI_JobIntro01 : UIScreen
     
     protected override bool EnterWindow()
     {
+        // Component에 데이터를 입력하는 곳
         var user = Managers.Game._currentUser;
         
         // 현재 유저의 이름 데이터 등록
@@ -52,15 +54,17 @@ public class UI_JobIntro01 : UIScreen
         GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(user.jobType);
         
         // 유저가 일정 시간 동안 카드를 열지 않는다면?
-        // _gauge.onGaugeTimer += (x) =>
-        // {
-        //     Debug.Log(x);
-        //     if ((1 - x) < 0.8f)
-        //     {
-        //         OnClickCloseCard();
-        //         GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
-        //     }
-        // };
+        bool test = true;
+        _gauge.onGaugeTimer += (x) =>
+        {
+            if ((1 - x) < 0.8f && test)
+            {
+                test = false;
+                
+                GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
+                OnClickCloseCard();
+            }
+        };
         
         // 다음 Screen 연결하기
         if (UseAutoNextScreen)
