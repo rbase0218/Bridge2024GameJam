@@ -34,7 +34,13 @@ public abstract class UIScreen : UIWindow
             Managers.UI.CloseWindow();
             Managers.UI.ShowWindow<T>();
         });
-
+        
         _gauge.Play();
+    }
+
+    public void OnNextScreen<T>() where T : UIScreen
+    {
+        Managers.UI.CloseWindow();
+        Managers.UI.ShowWindow<T>();
     }
 }
