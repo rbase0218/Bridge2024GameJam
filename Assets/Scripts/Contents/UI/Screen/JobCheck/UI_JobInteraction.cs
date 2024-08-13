@@ -12,7 +12,20 @@ public class UI_JobInteraction : UIScreen
         Board_A,
         Board_B
     }
+    
+    #region # [ Board A Component ] #
+    
+    private enum Texts
+    {
+        WordText
+    }
 
+    private enum Buttons
+    {
+        CloseCard
+    }
+    
+    #endregion
     #region # [ Board B Component ] #
     
     private UIPlayerSelector _playerSelector;
@@ -25,6 +38,9 @@ public class UI_JobInteraction : UIScreen
             return false;
         
         BindObject(typeof(Boards));
+        BindButton(typeof(Buttons));
+        BindText(typeof(Texts));
+        
         _playerSelector = Utils.FindChild<UIPlayerSelector>(gameObject, "PlayerSelect", true);
         _playerSelector.Binding();
 
@@ -33,16 +49,22 @@ public class UI_JobInteraction : UIScreen
     
     protected override bool EnterWindow()
     {
+        if (UseAutoNextScreen)
+            BindNextScreen<UI_ClockSwitcher>();
+        
         // 1. 현재 진행중인 유저의 정보를 가져온다.
         var user = Managers.Game._currentUser;
         
         // 2. 유저의 정보에 따라서 Board A와 Board B를 활성화한다.
-        // if (user.jobType == EJobType.Actor || user.jobType == EJobType.VIP)
-        // {
-        //     GetObject((int)Boards.Board_A).SetActive(true);
-        //     GetObject((int)Boards.Board_B).SetActive(false);
-        // }
-        // else
+        if (user.jobType == EJobType.Actor || user.jobType == EJobType.VIP)
+        {
+            GetObject((int)Boards.Board_A).SetActive(true);
+            GetObject((int)Boards.Board_B).SetActive(false);
+
+            GetText((int)Texts.WordText).text = "당신은 VIP입니다.";
+            GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
+        }
+        else
         {
             _playerSelector.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
             _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
@@ -50,7 +72,7 @@ public class UI_JobInteraction : UIScreen
             GetObject((int)Boards.Board_B).SetActive(true);
             GetObject((int)Boards.Board_A).SetActive(false);
         }
-
+        
         return true;
     }
 
@@ -60,5 +82,13 @@ public class UI_JobInteraction : UIScreen
         var selectUserName = button.GetComponentInChildren<TMP_Text>().GetParsedText();
         var selectuser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
         Debug.Log(selectUserName + " : " + selectuser.userName);
+        
+        _playerSelector.onClickSubmitButton.RemoveAllListeners();
+    }
+
+    private void OnClickOpenCardButton()
+    {
+        GetButton((int)Buttons.CloseCard).gameObject.SetActive(false);
+        GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
     }
 }
