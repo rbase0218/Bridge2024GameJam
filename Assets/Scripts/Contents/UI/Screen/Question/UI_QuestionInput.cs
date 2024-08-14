@@ -1,18 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class UI_QuestionInput : MonoBehaviour
+public class UI_QuestionInput : UIScreen
 {
-    // Start is called before the first frame update
-    void Start()
+    private enum Texts
     {
-        
+        NameText
     }
 
-    // Update is called once per frame
-    void Update()
+    private enum InputFields
+    {
+        InputField
+    }
+
+    private enum Buttons
+    {
+        WriteButton
+    }
+
+    protected override bool Init()
+    {
+        if (!base.Init())
+            return false;
+        
+        BindText(typeof(Texts));
+        BindButton(typeof(Buttons));
+        Bind<TMP_InputField>(typeof(InputFields));
+        
+        GetButton((int)Buttons.WriteButton).onClick.AddListener(OnClickWriteButton);
+        
+        return true;
+    }
+
+    protected override bool EnterWindow()
     {
         
+        return true;
+    }
+
+    private void OnClickWriteButton()
+    {
+        var inputText = Get<TMP_InputField>((int)InputFields.InputField).text;
+        
+        // 질문 Question 등록
+        Managers.Game.SetQuestion(inputText);
+        
+        // 다음 화면으로 이동
+        OnNextScreen<UI_PlayerSelectUI>();
     }
 }
