@@ -14,6 +14,8 @@ public abstract class UIScreen : UIWindow
     
     protected UI_Gauge _gauge;
 
+    protected UnityEvent onSceneChanged;
+
     protected override bool Init()
     {
         if (!base.Init())
@@ -28,12 +30,7 @@ public abstract class UIScreen : UIWindow
     public void BindNextScreen<T>() where T : UIScreen
     {
         _gauge.onEndGauge.RemoveAllListeners();
-        
-        _gauge.onEndGauge.AddListener(() =>
-        {
-            Managers.UI.CloseWindow();
-            Managers.UI.ShowWindow<T>();
-        });
+        _gauge.onEndGauge.AddListener(OnSceneChanged<T>);
         
         _gauge.Play();
     }
@@ -41,6 +38,14 @@ public abstract class UIScreen : UIWindow
     public void OnNextScreen<T>() where T : UIScreen
     {
         _gauge.onEndGauge.RemoveAllListeners();
+        
+        OnSceneChanged<T>();
+    }
+
+    private void OnSceneChanged<T>() where T: UIScreen
+    {
+        onSceneChanged?.Invoke();
+        onSceneChanged?.RemoveAllListeners();
         
         Managers.UI.CloseWindow();
         Managers.UI.ShowWindow<T>();
