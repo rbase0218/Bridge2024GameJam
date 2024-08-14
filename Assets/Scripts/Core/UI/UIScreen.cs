@@ -40,6 +40,8 @@ public abstract class UIScreen : UIWindow
 
     public void OnNextScreen<T>() where T : UIScreen
     {
+        _gauge.onEndGauge.RemoveAllListeners();
+        
         Managers.UI.CloseWindow();
         Managers.UI.ShowWindow<T>();
     }

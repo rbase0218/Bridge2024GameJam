@@ -10,6 +10,13 @@ public enum EJobType
     Actor
 }
 
+public enum FrameType
+{
+    None,
+    Hostage,
+    Secret
+}
+
 public enum ELayoutName
 {
     Intro,
@@ -85,6 +92,20 @@ public class UserInfo
     {
         this.userName = userName;
         this.jobType = jobType;
+    }
+}
+
+public class FrameData
+{
+    public string title;
+    public string name;
+    public int type;
+
+    public FrameData(string title, string name, int type)
+    {
+        this.title = title;
+        this.name = name;
+        this.type = type;
     }
 }
 
