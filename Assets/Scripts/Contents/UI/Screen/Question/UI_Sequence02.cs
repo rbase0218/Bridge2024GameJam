@@ -2,17 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Sequence02 : MonoBehaviour
+public class UI_Sequence02 : UIScreen
 {
-    // Start is called before the first frame update
-    void Start()
+    private enum PersonViewer
     {
-        
+        PersonViewer
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    protected override bool Init()
     {
+        if(!base.Init())
+            return false;
+
+        Bind<UIPersonViewer>(typeof(PersonViewer));
+        Get<UIPersonViewer>((int)PersonViewer.PersonViewer).BindInstance();
         
+        return true;
+    }
+    
+    protected override bool EnterWindow()
+    {
+        Get<UIPersonViewer>((int)PersonViewer.PersonViewer).SetFrame(
+            new FrameData("Title1", "Name1", 1),
+            new FrameData("Title2", "Name2", 0)
+        );
+        
+        if(UseAutoNextScreen)
+            BindNextScreen<UI_QuestionInput>();
+        
+        return true;
     }
 }
