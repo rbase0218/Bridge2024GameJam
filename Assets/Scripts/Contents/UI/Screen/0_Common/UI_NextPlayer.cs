@@ -14,6 +14,9 @@ public class UI_NextPlayer : UIScreen
     
     protected override bool EnterWindow()
     {
+        if (UseAutoNextScreen)
+            BindNextScreen<UI_Switcher01>();
+        
         return true;
     }
 }

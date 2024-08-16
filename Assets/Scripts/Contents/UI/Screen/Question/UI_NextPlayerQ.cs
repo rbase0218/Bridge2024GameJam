@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_TextConfirm01 : UIScreen
+public class UI_NextPlayerQ : UIScreen
 {
     protected override bool Init()
     {

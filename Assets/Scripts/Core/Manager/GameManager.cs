@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     // 현재 인질로 지정된 유저를 찾아둔다.
     private UserInfo _hostageUser;
 
+    private string questionText;
+    
     private void Awake()
     {
         var user1 = new UserInfo("User1", EJobType.VIP);
@@ -27,6 +29,11 @@ public class GameManager : MonoBehaviour
     public void AddUser(params UserInfo[] users)
     {
         _userList.AddRange(users);
+    }
+
+    public void SetQuestion(string text)
+    {
+        questionText = text;
     }
 }
 
