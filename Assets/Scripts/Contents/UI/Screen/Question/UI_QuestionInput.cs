@@ -30,7 +30,7 @@ public class UI_QuestionInput : UIScreen
         Bind<TMP_InputField>(typeof(InputFields));
         
         GetButton((int)Buttons.WriteButton).onClick.AddListener(OnClickWriteButton);
-        onSceneChanged.AddListener(SaveQuestion);
+        //onSceneChanged.AddListener(SaveQuestion);
         
         return true;
     }

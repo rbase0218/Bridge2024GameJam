@@ -8,11 +8,6 @@ using UnityEngine.UI;
 
 public class UIPlayerSelector : UIBase
 {
-    private enum Texts
-    {
-        InfoText
-    }
-
     private enum Buttons
     {
         SubmitButton
@@ -26,7 +21,6 @@ public class UIPlayerSelector : UIBase
     // Init에 실행되지 않는 메서드
     public void Binding()
     {
-        BindText(typeof(Texts));
         BindButton(typeof(Buttons));
 
         for (int i = 0; i < _buttons.Length; ++i)
@@ -44,7 +38,6 @@ public class UIPlayerSelector : UIBase
                 return;
             onClickSubmitButton?.Invoke(_selectButton);
         });
-        
     }
 
     public void ShowButton(params string[] names)
@@ -60,6 +53,4 @@ public class UIPlayerSelector : UIBase
                 _buttons[i].gameObject.SetActive(false);
         }
     }
-    
-    public void SetInfoText(string text) => GetText((int)Texts.InfoText).SetText(text);
 }
