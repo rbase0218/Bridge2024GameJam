@@ -7,9 +7,6 @@ public class DataManager
 {
     #region # [ Datas ] #
     
-    // 게임에 참여할 수 있는 인원 수를 가지고 있는 배열
-    public readonly string[] playerCountArray = new string[]{ "3", "4", "5", "6" };
-    
     // 게임 카테고리 ▶ 주제
     public readonly string[] categoryArray = new string[]{ "동물", "음식", "영화 제목", "직업", "나라 이름", "운동", "악기" };
     // 게임 카테고리 ▶ 세부 주제
