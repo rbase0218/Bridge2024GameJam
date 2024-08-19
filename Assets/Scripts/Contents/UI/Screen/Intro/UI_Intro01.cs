@@ -9,9 +9,6 @@ public class UI_Intro01 : UIScreen
         if (!base.Init())
             return false;
 
-        // Auto Page 활성화
-        SetAutoNextPage(true);
-        
         return true;
     }
     
