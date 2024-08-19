@@ -52,6 +52,6 @@ public class UI_QuestionInput : UIScreen
         var inputText = Get<TMP_InputField>((int)InputFields.InputField).text;
         
         // 질문 Question 등록
-        Managers.Game.SetQuestion(inputText);
+        //Managers.Game.SetQuestion(inputText);
     }
 }

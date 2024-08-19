@@ -53,25 +53,25 @@ public class UI_JobInteraction : UIScreen
             BindNextScreen<UI_ClockSwitcher>();
         
         // 1. 현재 진행중인 유저의 정보를 가져온다.
-        var user = Managers.Game._currentUser;
+        //var user = Managers.Game._currentUser;
         
         // 2. 유저의 정보에 따라서 Board A와 Board B를 활성화한다.
-        if (user.jobType == EJobType.Actor || user.jobType == EJobType.VIP)
-        {
-            GetObject((int)Boards.Board_A).SetActive(true);
-            GetObject((int)Boards.Board_B).SetActive(false);
-
-            GetText((int)Texts.WordText).text = "당신은 VIP입니다.";
-            GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
-        }
-        else
-        {
-            _playerSelector.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
-            _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
-            
-            GetObject((int)Boards.Board_B).SetActive(true);
-            GetObject((int)Boards.Board_A).SetActive(false);
-        }
+        // if (user.jobType == EJobType.Actor || user.jobType == EJobType.VIP)
+        // {
+        //     GetObject((int)Boards.Board_A).SetActive(true);
+        //     GetObject((int)Boards.Board_B).SetActive(false);
+        //
+        //     GetText((int)Texts.WordText).text = "당신은 VIP입니다.";
+        //     GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
+        // }
+        // else
+        // {
+        //     _playerSelector.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
+        //     _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
+        //     
+        //     GetObject((int)Boards.Board_B).SetActive(true);
+        //     GetObject((int)Boards.Board_A).SetActive(false);
+        // }
         
         return true;
     }
@@ -80,8 +80,7 @@ public class UI_JobInteraction : UIScreen
     {
         // Hostage를 해당 기능을 통해서 선택한다.
         var selectUserName = button.GetComponentInChildren<TMP_Text>().GetParsedText();
-        var selectuser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
-        Debug.Log(selectUserName + " : " + selectuser.userName);
+        //var selectuser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
         
         _playerSelector.onClickSubmitButton.RemoveAllListeners();
     }

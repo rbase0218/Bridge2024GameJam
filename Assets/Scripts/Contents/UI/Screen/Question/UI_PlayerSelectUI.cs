@@ -26,7 +26,7 @@ public class UI_PlayerSelectUI : UIScreen
     {
         var selectContainer = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainer);
         
-        selectContainer.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
+        //selectContainer.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
         selectContainer.onClickSubmitButton.AddListener(OnClickSubmitButton);
         
         return true;
