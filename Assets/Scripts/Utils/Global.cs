@@ -108,6 +108,3 @@ public class FrameData
         this.type = type;
     }
 }
-
-
-

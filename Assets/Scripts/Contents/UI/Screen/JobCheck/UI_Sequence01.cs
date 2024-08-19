@@ -21,18 +21,13 @@ public class UI_Sequence01 : UIScreen
     
     protected override bool EnterWindow()
     {
-        // var currentUser = Managers.Game._currentUser;
-        //
-        // GetText((int)Texts.Text).SetText(currentUser.userName);
+        var currentUser = Managers.Game.currentUser;
+        
+        GetText((int)Texts.Text).SetText(currentUser.userName);
 
         if (UseAutoNextScreen)
             BindNextScreen<UI_JobIntro01>();
         
         return true;
-    }
-    
-    public void SetInfo(UI_Gauge gauge)
-    {
-        
     }
 }

@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Active Scene/Title.unity
     guid: 430b1f68e43f2e7489c202633b14c272
   - enabled: 1
-    path: Assets/Scenes/Ryu-UI Copy.unity
-    guid: 15bd52a078084cc45a8efbfeba730928
+    path: Assets/Scenes/Active Scene/Play.unity
+    guid: 2a3513ffb545de146b4fdd9fb7a2aa04
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: ddc038ee0a04ef74e9894089ec893fc3, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 31a328bd0b949604eb78b5fed9d0b65c, type: 2}

@@ -11,7 +11,7 @@ public partial class GameManager : MonoBehaviour
     public UserInfo hostageUser;
 
     public UserInfo currentUser;
-    
+
     public void AddRangeUser(List<string> userNames)
     {
         _userList?.Clear();

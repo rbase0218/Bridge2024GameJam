@@ -69,4 +69,18 @@ public class DataManager
     {
         return Resources.Load<T>(path);
     }
+
+    public string GetJobText(EJobType jobType)
+    {
+        switch (jobType)
+        {
+            case EJobType.Actor:
+                return Global.ActorJobText;
+            case EJobType.VIP:
+                return Global.VipJobText;
+            case EJobType.Assassin:
+                return Global.AssJobText;
+        }
+        return "";
+    }
 }

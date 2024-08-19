@@ -45,21 +45,22 @@ public class UI_JobIntro01 : UIScreen
     protected override bool EnterWindow()
     {
         // Component에 데이터를 입력하는 곳
-        // var user = Managers.Game._currentUser;
-        //
-        // // 현재 유저의 이름 데이터 등록
-        // GetText((int)Texts.NameText).SetText(user.userName);
+        var currentUser = Managers.Game.currentUser;
+        
+        // 현재 유저의 이름 데이터 등록
+        GetText((int)Texts.NameText).SetText(currentUser.userName);
+        GetText((int)Texts.JobNameText).SetText(Managers.Data.GetJobText(currentUser.jobType));
         
         // 현재 유저의 직업 데이터 등록
-        //GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(user.jobType);
+        GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(currentUser.jobType);
         
         // 유저가 일정 시간 동안 카드를 열지 않는다면?
-        bool test = true;
+        bool onlyFirst = true;
         _gauge.onGaugeTimer += (x) =>
         {
-            if ((1 - x) < 0.8f && test)
+            if ((1 - x) < 0.8f && onlyFirst)
             {
-                test = false;
+                onlyFirst = false;
                 
                 OnClickCloseCard();
             }
