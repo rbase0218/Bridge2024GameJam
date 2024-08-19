@@ -88,10 +88,10 @@ public class UserInfo
     // 유저 직업
     public EJobType jobType;
     
-    public UserInfo(string userName, EJobType jobType)
+    public UserInfo(string userName)
     {
         this.userName = userName;
-        this.jobType = jobType;
+        this.jobType = EJobType.VIP;
     }
 }
 
