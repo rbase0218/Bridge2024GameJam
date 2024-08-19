@@ -61,7 +61,6 @@ public class UI_JobIntro01 : UIScreen
             {
                 test = false;
                 
-                GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
                 OnClickCloseCard();
             }
         };
