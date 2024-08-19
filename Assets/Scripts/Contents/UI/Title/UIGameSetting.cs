@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class UIGameSetting : UIWindow
 {
@@ -10,6 +11,12 @@ public class UIGameSetting : UIWindow
         SaveButton,
         ExitButton
     }
+
+    private enum Sliders
+    {
+        BGMSlider,
+        SFXSlider
+    }
     
     protected override bool Init()
     {
@@ -17,6 +24,7 @@ public class UIGameSetting : UIWindow
             return false;
 
         BindButton(typeof(Buttons));
+        Bind<Slider>(typeof(Sliders));
 
         return true;
     }
@@ -40,5 +48,14 @@ public class UIGameSetting : UIWindow
         }
         else
             GetButton((int)Buttons.ExitButton).onClick.AddListener(noButton);
+    }
+
+    public void Save()
+    {
+        var bgmSlider = Get<Slider>((int)Sliders.BGMSlider);
+        var sfxSlider = Get<Slider>((int)Sliders.SFXSlider);
+        
+        Managers.Sound.SetBGMVolume(bgmSlider.value);
+        Managers.Sound.SetSFXVolume(sfxSlider.value);
     }
 }
