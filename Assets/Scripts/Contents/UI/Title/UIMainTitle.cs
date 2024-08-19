@@ -47,7 +47,11 @@ public class UIMainTitle : UIWindow
     
     private void OnClickSettingButton()
     {
-        Managers.UI.ShowWindow<UIGameSetting>();
+        var setting = Managers.UI.ShowWindow<UIGameSetting>();
+        setting.OnClickButtons(() =>
+        {
+            setting.Save();
+        });
     }
     
     private void OnClickExitButton()
@@ -62,12 +66,16 @@ public class UIMainTitle : UIWindow
     // 상단 부분에 있는 Button들
     private void OnClickManualButton()
     {
-        Managers.UI.ShowWindow<UIManual>();   
+        Managers.UI.ShowWindow<UIManual>();
     }
     
     private void OnClickHomeButton()
     {
-        Managers.UI.ShowWindow<UIReturnMain>();
+        var returnMain = Managers.UI.ShowWindow<UIReturnMain>();
+        returnMain.OnClickButtons(() =>
+        {
+            Debug.Log("메인으로 돌아감");
+        });
     }
     
     private void OnClickBackButton()
