@@ -14,6 +14,9 @@ public class UI_VoteResult : UIScreen
     
     protected override bool EnterWindow()
     {
+        if(UseAutoNextScreen)
+            BindNextScreen<UI_JobReveal>();
+        
         return true;
     }
 }

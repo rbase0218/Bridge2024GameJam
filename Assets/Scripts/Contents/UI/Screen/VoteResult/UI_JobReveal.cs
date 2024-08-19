@@ -14,6 +14,9 @@ public class UI_JobReveal : UIScreen
     
     protected override bool EnterWindow()
     {
+        if(UseAutoNextScreen)
+            BindNextScreen<UI_LastChance>();
+        
         return true;
     }
 }
