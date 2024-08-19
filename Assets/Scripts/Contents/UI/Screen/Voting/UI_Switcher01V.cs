@@ -14,6 +14,9 @@ public class UI_Switcher01V : UIScreen
     
     protected override bool EnterWindow()
     {
+        if(UseAutoNextScreen)
+            BindNextScreen<UI_PlayerSelectUIV>();
+        
         return true;
     }
 }

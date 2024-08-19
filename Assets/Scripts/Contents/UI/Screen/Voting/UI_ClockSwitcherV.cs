@@ -14,6 +14,9 @@ public class UI_ClockSwitcherV : UIScreen
     
     protected override bool EnterWindow()
     {
+        if(UseAutoNextScreen)
+            BindNextScreen<UI_NextPlayerV>();
+        
         return true;
     }
 }
