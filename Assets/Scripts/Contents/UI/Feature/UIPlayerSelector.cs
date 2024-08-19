@@ -13,6 +13,11 @@ public class UIPlayerSelector : UIBase
         SubmitButton
     }
 
+    private enum Texts
+    {
+        InfoText
+    }
+
     private Button[] _buttons = new Button[6];
     private Button _selectButton;
 
@@ -22,7 +27,8 @@ public class UIPlayerSelector : UIBase
     public void Binding()
     {
         BindButton(typeof(Buttons));
-
+        BindText(typeof(Texts));
+        
         for (int i = 0; i < _buttons.Length; ++i)
         {
             _buttons[i] = Utils.FindChild(gameObject, $"Button" + (i + 1), true).GetComponent<Button>();
