@@ -14,6 +14,9 @@ public class UI_FinalResult : UIScreen
     
     protected override bool EnterWindow()
     {
+        if(UseAutoNextScreen)
+            BindNextScreen<UI_KeywordReveal>();
+        
         return true;
     }
 }
