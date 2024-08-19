@@ -14,6 +14,9 @@ public class UI_LastChance : UIScreen
     
     protected override bool EnterWindow()
     {
+        if(UseAutoNextScreen)
+            BindNextScreen<UI_LastChanceResult>();
+        
         return true;
     }
 }
