@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Switcher01F : MonoBehaviour
+public class UI_Switcher01F : UIScreen
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override bool Init()
     {
-        
-    }
+        if (!base.Init())
+            return false;
 
-    // Update is called once per frame
-    void Update()
+        return true;
+    }
+    
+    protected override bool EnterWindow()
     {
-        
+        return true;
     }
 }

@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class UI_Switcher02 : UIScreen
 {
+    private enum Buttons
+    {
+        NextButton
+    }
+    
     protected override bool Init()
     {
         if (!base.Init())
             return false;
 
+        BindButton(typeof(Buttons));
+        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         return true;
     }
     
     protected override bool EnterWindow()
     {
         return true;
+    }
+    
+    private void OnClickNextButton()
+    {
+        OnNextScreen<UI_Switcher01V>();
     }
 }
