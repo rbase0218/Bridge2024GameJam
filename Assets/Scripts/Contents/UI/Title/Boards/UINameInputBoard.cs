@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UINameInputBoard : UIBase
 {
@@ -31,8 +32,7 @@ public class UINameInputBoard : UIBase
     private void OnClickEntryButton()
     {
         Save();
-        
-        // Scene 연결
+        SceneManager.LoadScene(1);
     }
     
     public void ShowInputField(int count = 3)
