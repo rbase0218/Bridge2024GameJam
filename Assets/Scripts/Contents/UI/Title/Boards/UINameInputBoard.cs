@@ -30,7 +30,9 @@ public class UINameInputBoard : UIBase
 
     private void OnClickEntryButton()
     {
+        Save();
         
+        // Scene 연결
     }
     
     public void ShowInputField(int count = 3)
@@ -39,5 +41,10 @@ public class UINameInputBoard : UIBase
         {
             Get<TMP_InputField>(i).gameObject.SetActive(i < count);
         }
+    }
+
+    private void Save()
+    {
+        
     }
 }

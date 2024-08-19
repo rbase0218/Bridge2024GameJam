@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -35,6 +36,8 @@ public class UISetDataBoard : UIBase
 
     public UnityEvent onClickNextButton;
     
+    private int _selectCategoryIndex = 0;
+    
     public void Bind()
     {
         BindButton(typeof(Buttons));
@@ -46,6 +49,10 @@ public class UISetDataBoard : UIBase
         GetButton((int)Buttons.AfterButton).onClick.AddListener(OnClickAfterButton);
         GetButton((int)Buttons.BeforeButton).onClick.AddListener(OnClickBeforeButton);
         GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
+        
+        var dropdown = Get<TMP_Dropdown>((int)Dropdowns.CategoryDropdown);
+        dropdown.AddOptions(Managers.Data.categoryArray.ToList());
+        dropdown.onValueChanged.AddListener( (x) => { _selectCategoryIndex = x; } );
     }
     
     private void OnClickAfterButton()
