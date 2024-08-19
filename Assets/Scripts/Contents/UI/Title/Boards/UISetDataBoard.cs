@@ -34,7 +34,7 @@ public class UISetDataBoard : UIBase
 
     private int _userCount = 3;
 
-    public UnityEvent onClickNextButton;
+    public UnityEvent<int> onClickNextButton;
     
     private int _selectCategoryIndex = 0;
     
@@ -77,8 +77,7 @@ public class UISetDataBoard : UIBase
 
     private void OnClickNextButton()
     {
-        Save();
-        onClickNextButton?.Invoke();
+        onClickNextButton?.Invoke(_userCount);
     }
     
     #region # [ Update - UI ] #
@@ -100,9 +99,4 @@ public class UISetDataBoard : UIBase
     }
     
     #endregion
-
-    private void Save()
-    {
-        // Game Manager에서 데이터를 연결하면 된다.
-    }
 }

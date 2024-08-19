@@ -45,6 +45,14 @@ public class UINameInputBoard : UIBase
 
     private void Save()
     {
-        
+        List<string> userNames = new List<string>();
+        for (int i = 0; i < 6; i++)
+        {
+            if (Get<TMP_InputField>(i).gameObject.activeSelf)
+            {
+                userNames.Add(Get<TMP_InputField>(i).text);
+            }
+        }
+        Managers.Game.AddRangeUser(userNames);
     }
 }

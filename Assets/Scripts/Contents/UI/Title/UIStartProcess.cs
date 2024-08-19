@@ -51,11 +51,11 @@ public class UIStartProcess : UIWindow
     
     #endregion
 
-    private void OpenNameInput()
+    private void OpenNameInput(int userCount)
     {
         _dataBoard.gameObject.SetActive(false);
         
-        _inputBoard.ShowInputField();
+        _inputBoard.ShowInputField(userCount);
         _inputBoard.gameObject.SetActive(true);
     }
 
