@@ -7,7 +7,7 @@ public class UIMainTitle : UIWindow
     private enum Buttons
     {
         BackButton,
-        HomeButton,
+        //HomeButton,
         ManualButton,
         StartButton,
         SettingButton,
@@ -29,7 +29,7 @@ public class UIMainTitle : UIWindow
         GetButton((int)Buttons.ExitButton).onClick.AddListener(OnClickExitButton);
         
         GetButton((int)Buttons.BackButton).onClick.AddListener(OnClickBackButton);
-        GetButton((int)Buttons.HomeButton).onClick.AddListener(OnClickHomeButton);
+        //GetButton((int)Buttons.HomeButton).onClick.AddListener(OnClickHomeButton);
         GetButton((int)Buttons.ManualButton).onClick.AddListener(OnClickManualButton);
         
         return true;
@@ -50,7 +50,10 @@ public class UIMainTitle : UIWindow
         var setting = Managers.UI.ShowWindow<UIGameSetting>();
         setting.OnClickButtons(() =>
         {
-            setting.Save();
+            // + (2024/08/19) SoundManager Error로 인한 주석처리
+            //setting.Save();
+            
+            Managers.UI.CloseWindow();
         });
     }
     
