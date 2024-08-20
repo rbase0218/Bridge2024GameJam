@@ -32,15 +32,15 @@ public abstract class UIScreen : UIWindow
         _gauge.onEndGauge.RemoveAllListeners();
         _gauge.onEndGauge.AddListener(OnSceneChanged<T>);
         
-        _gauge.Play();
+        if(UseAutoNextScreen)
+            _gauge.Play();
     }
 
-    public T OnNextScreen<T>() where T : UIScreen
+    public void OnNextScreen<T>() where T : UIScreen
     {
-        _gauge.onEndGauge.RemoveAllListeners();
+        _gauge.Stop();
+        
         OnSceneChanged<T>();
-
-        return Managers.UI.GetWindow<T>();
     }
 
     private void OnSceneChanged<T>() where T: UIScreen
