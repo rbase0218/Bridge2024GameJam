@@ -56,7 +56,9 @@ public class DataManager
         NobleB = Load<Sprite>(@"Sprite/UI/Frame/NobleFrame_B");
         Black = Load<Sprite>(@"Sprite/UI/Frame/BlackFrame");
         
-        //ActorBG = Laod<Sprite>(@"Sprite/UI/Frame/ActorBG");
+        ActorBG = Load<Sprite>(@"Sprite/Verify/Play_Verify_ActorBG");
+        VipBG = Load<Sprite>(@"Sprite/Verify/Play_Verify_VipBG");
+        AssBG = Load<Sprite>(@"Sprite/Verify/Play_Verify_AccBG");
     }
 
     public Sprite GetFrameSprite(EJobType jobType)
@@ -69,6 +71,21 @@ public class DataManager
                 return VipSprite;
             case EJobType.Assassin:
                 return AssSprite;
+            default:
+                return null;
+        }
+    }
+
+    public Sprite GetFrameBGSprite(EJobType jobType)
+    {
+        switch (jobType)
+        {
+            case EJobType.Actor:
+                return ActorBG;
+            case EJobType.VIP:
+                return VipBG;
+            case EJobType.Assassin:
+                return AssBG;
             default:
                 return null;
         }

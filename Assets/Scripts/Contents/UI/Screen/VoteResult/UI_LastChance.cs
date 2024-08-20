@@ -14,6 +14,11 @@ public class UI_LastChance : UIScreen
     {
         WriteButton
     }
+
+    private enum Images
+    {
+        BG
+    }
     
     private string _inputText;
     
@@ -24,6 +29,7 @@ public class UI_LastChance : UIScreen
 
         Bind<TMP_InputField>(typeof(InputFields));
         BindButton(typeof(Buttons));
+        BindImage(typeof(Images));
         
         GetButton((int)Buttons.WriteButton).onClick.AddListener(OnClickWriteButton);
         Get<TMP_InputField>((int)InputFields.InputField).onValueChanged.AddListener(OnValueChangedInputField);
@@ -34,6 +40,9 @@ public class UI_LastChance : UIScreen
     protected override bool EnterWindow()
     {
         Get<TMP_InputField>((int)InputFields.InputField).text = string.Empty;
+        var voteUser = Managers.Game.voteUser;
+        var voteUserJobFrame = Managers.Data.GetFrameBGSprite(voteUser.jobType);
+        GetImage((int)Images.BG).sprite = voteUserJobFrame;
         
         return true;
     }

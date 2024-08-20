@@ -19,7 +19,8 @@ public class UI_JobReveal : UIScreen
 
     private enum Images
     {
-        Picture
+        Picture,
+        BG
     }
     
     protected override bool Init()
@@ -39,6 +40,7 @@ public class UI_JobReveal : UIScreen
         var voteUser = Managers.Game.voteUser;
         var voteUserName = voteUser.userName;
         var voteUserPicture = Managers.Data.GetFrameSprite(voteUser.jobType);
+        var voteUserJobFrame = Managers.Data.GetFrameBGSprite(voteUser.jobType);
         
         GetText((int)Texts.FirstText).SetText($"{voteUserName}은(는)");
 
@@ -50,6 +52,7 @@ public class UI_JobReveal : UIScreen
 
         // 초상화 세팅
         GetImage((int)Images.Picture).sprite = voteUserPicture;
+        GetImage((int)Images.BG).sprite = voteUserJobFrame;
         // 직업명 추가
         GetText((int)Texts.JobText).SetText(Managers.Data.GetJobText(voteUser.jobType));
         

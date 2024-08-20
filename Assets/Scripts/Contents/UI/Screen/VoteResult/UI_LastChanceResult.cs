@@ -14,7 +14,8 @@ public class UI_LastChanceResult : UIScreen
 
     private enum Images
     {
-        Frame
+        Frame,
+        BG
     }
 
     private enum Buttons
@@ -50,7 +51,9 @@ public class UI_LastChanceResult : UIScreen
     {
         var voteUserJob = Managers.Game.voteUser.jobType;
         var jobText = Managers.Data.GetJobText(voteUserJob);
-        
+        var voteUserJobFrame = Managers.Data.GetFrameBGSprite(voteUserJob);
+
+        GetImage((int)Images.BG).sprite = voteUserJobFrame;
         GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(voteUserJob);
 
         if (isAnswerCorrect)    // 정답을 맞춘 경우
@@ -77,6 +80,7 @@ public class UI_LastChanceResult : UIScreen
                 GetText((int)Texts.JobText).SetText("귀빈");
                 GetText((int)Texts.SecondText).SetText("귀빈들이\n그들의 무도회를\n지켜냈습니다.");
                 
+                GetImage((int)Images.BG).sprite = Managers.Data.GetFrameBGSprite(EJobType.VIP);
                 GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(EJobType.VIP);
             }
         }
