@@ -29,9 +29,16 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
+        audioSourcePrefab = Resources.Load<GameObject>("Prefabs/AudioSource");
         dic_BGM = new Dictionary<string, AudioClip>();
         dic_SFX = new Dictionary<string, AudioClip>();
 
+        if(array_bgm == null || array_sfx == null)
+        {
+            Debug.Log("SoundManager - Sound array is null");
+            return;
+        }
+        
         foreach (Sound sound in array_bgm)
         {
             dic_BGM.Add(sound.name, sound.clip);
