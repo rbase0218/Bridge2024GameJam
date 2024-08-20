@@ -14,6 +14,9 @@ public class UI_Switcher01VR : UIScreen
     
     protected override bool EnterWindow()
     {
+        Managers.Game.voteUser = Managers.Game._voteList[0];
+        Managers.Game._voteList.Clear();
+        
         if(UseAutoNextScreen)
             BindNextScreen<UI_VoteResult>();
         

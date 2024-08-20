@@ -6,6 +6,8 @@ public partial class GameManager : MonoBehaviour
 {
     public List<UserInfo> _userList = new List<UserInfo>();
     public List<UserInfo> _hostageList = new List<UserInfo>();
+    
+    public SortedList<int, UserInfo> _voteList = new SortedList<int, UserInfo>();
 
     // 현재 직업이 암살자인 유저를 찾아둔다.
     public UserInfo assUser;
