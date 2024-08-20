@@ -71,6 +71,14 @@ public class UI_Gauge : UIBase
         if (isPlay)
             _rectTransform.sizeDelta = _hideSize;
     }
+
+    public void Stop()
+    {
+        _isPlay = false;
+        StopCoroutine(StartGauge());
+        onStartGauge.RemoveAllListeners();
+        onEndGauge.RemoveAllListeners();
+    }
     
     private IEnumerator StartGauge()
     {
