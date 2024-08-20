@@ -15,7 +15,9 @@ public partial class GameManager : MonoBehaviour
     private UserInfo hostageUser;
     public UserInfo voteUser;
 
-    private string questionText;
+    public string selectUserName;
+
+    public string questionText;
 
     public string gameTopic;
     
@@ -29,6 +31,7 @@ public partial class GameManager : MonoBehaviour
         AddUser(user1, user2, user3, user4);
         assUser = user4;
         currentUser = user1;
+        AddHostage(user3);
 
         gameTopic = "호랑이";
     }
@@ -42,7 +45,10 @@ public partial class GameManager : MonoBehaviour
     {
         var index = _userList.IndexOf(currentUser);
         if (index == _userList.Count - 1)
+        {
+            currentUser = _userList[0];
             return false;
+        }
 
         currentUser = _userList[index + 1];
         return true;
@@ -84,4 +90,6 @@ public partial class GameManager : MonoBehaviour
         
         gameTopic = Managers.Data.wordArray[index][randNum];
     }
+    
+    public void WriteQuestion(string text) => questionText = text;
 }

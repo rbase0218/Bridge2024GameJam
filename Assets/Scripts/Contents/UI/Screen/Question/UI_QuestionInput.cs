@@ -30,13 +30,13 @@ public class UI_QuestionInput : UIScreen
         Bind<TMP_InputField>(typeof(InputFields));
         
         GetButton((int)Buttons.WriteButton).onClick.AddListener(OnClickWriteButton);
-        //onSceneChanged.AddListener(SaveQuestion);
-        
         return true;
     }
 
     protected override bool EnterWindow()
     {
+        var currUserName = Managers.Game.currentUser.userName;
+        GetText((int)Texts.NameText).SetText(currUserName);
         
         return true;
     }
@@ -44,14 +44,14 @@ public class UI_QuestionInput : UIScreen
     private void OnClickWriteButton()
     {
         // 다음 화면으로 이동
+        SaveQuestion();
         OnNextScreen<UI_PlayerSelectUI>();
     }
 
     private void SaveQuestion()
     {
         var inputText = Get<TMP_InputField>((int)InputFields.InputField).text;
-        
         // 질문 Question 등록
-        //Managers.Game.SetQuestion(inputText);
+        Managers.Game.WriteQuestion(inputText);
     }
 }

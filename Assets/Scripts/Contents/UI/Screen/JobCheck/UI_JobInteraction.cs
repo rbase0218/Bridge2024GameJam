@@ -103,12 +103,13 @@ public class UI_JobInteraction : UIScreen
         return true;
     }
 
-    private void OnClickSubmitButton(Button button)
+    private void OnClickSubmitButton(string text)
     {
         // Hostage를 해당 기능을 통해서 선택한다.
-        var selectUserName = button.GetComponentInChildren<TMP_Text>().GetParsedText();
+        var selectUserName = text;
         var selectUser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
         Debug.Log(selectUserName + " : " + selectUser.userName);
+        
         _playerSelector.onClickSubmitButton.RemoveAllListeners();
         Managers.Game.AddHostage(selectUser);
         Managers.UI.CloseWindow();

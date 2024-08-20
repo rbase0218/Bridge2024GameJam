@@ -11,7 +11,7 @@ public class UI_TextConfirm01 : UIScreen
 
     private enum Texts
     {
-        QuestionText
+        Text
     }
     
     protected override bool Init()
@@ -29,6 +29,9 @@ public class UI_TextConfirm01 : UIScreen
     
     protected override bool EnterWindow()
     {
+        var answerUserName = Managers.Game.selectUserName;
+        GetText((int)Texts.Text).SetText(answerUserName);
+        
         if (UseAutoNextScreen)
             BindNextScreen<UI_TextConfirm02>();
         return true;
@@ -36,6 +39,6 @@ public class UI_TextConfirm01 : UIScreen
 
     private void OnClickCloseCard()
     {
-        GetButton((int)Buttons.CloseCard).gameObject.SetActive(false);
+        OnNextScreen<UI_TextConfirm02>();
     }
 }

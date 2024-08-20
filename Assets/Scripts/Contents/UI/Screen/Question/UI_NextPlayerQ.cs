@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UI_NextPlayerQ : UIScreen
 {
+    private bool isNext = false;
+    
     private enum Texts
     {
         NameA,
@@ -23,21 +25,43 @@ public class UI_NextPlayerQ : UIScreen
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
         
-        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
-        
         return true;
     }
-    
+
     protected override bool EnterWindow()
     {
-        if(UseAutoNextScreen)
-            BindNextScreen<UI_Switcher02>();
+        isNext = false;
+        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         
+        GetText((int)Texts.NameA).SetText(Managers.Game.currentUser.userName);
+        // 유저 리스트를 가져온다.
+        // 리스트의 끝 인덱스에 도달했는지 확인한다.
+        if (Managers.Game.NextUser())
+        {
+            isNext = true;
+            GetText((int)Texts.NameB).SetText(Managers.Game.currentUser.userName);
+            if (UseAutoNextScreen)
+                BindNextScreen<UI_QuestionInput>();
+        }
+        else
+        {
+            isNext = false;
+            GetText((int)Texts.NameB).SetText("종료");
+            GetText((int)Texts.NameB).faceColor = Color.red;
+            if (UseAutoNextScreen)
+                BindNextScreen<UI_Switcher02>();
+        }
+
         return true;
     }
     
     private void OnClickNextButton()
     {
-        OnNextScreen<UI_Switcher02>();
+        Managers.UI.CloseWindow();
+        
+        if (isNext)
+            Managers.UI.ShowWindow<UI_QuestionInput>();
+        else
+            Managers.UI.ShowWindow<UI_Switcher02>();
     }
 }

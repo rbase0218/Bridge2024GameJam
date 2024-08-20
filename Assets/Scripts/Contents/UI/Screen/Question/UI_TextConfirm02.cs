@@ -10,6 +10,11 @@ public class UI_TextConfirm02 : UIScreen
         InputField    
     }
 
+    private enum Texts
+    {
+        Text
+    }
+
     private enum Buttons
     {
         YesButton,
@@ -21,6 +26,7 @@ public class UI_TextConfirm02 : UIScreen
         if (!base.Init())
             return false;
 
+        BindText(typeof(Texts));
         Bind<TMP_InputField>(typeof(InputFields));
         BindButton(typeof(Buttons));
         
@@ -32,19 +38,24 @@ public class UI_TextConfirm02 : UIScreen
     
     protected override bool EnterWindow()
     {
-        if(UseAutoNextScreen)
+        GetText((int)Texts.Text).text = Managers.Game.selectUserName;
+        Get<TMP_InputField>((int)InputFields.InputField).text = Managers.Game.questionText;
+
+        if (UseAutoNextScreen)
+        {
             BindNextScreen<UI_NextPlayerQ>();
-        
+        }
+
         return true;
     }
 
     private void OnClickYesButton()
     {
-        
+        OnNextScreen<UI_NextPlayerQ>();
     }
 
     private void OnClickNoButton()
     {
-        
+        OnNextScreen<UI_NextPlayerQ>();
     }
 }

@@ -19,9 +19,9 @@ public class UIPlayerSelector : UIBase
     }
 
     private Button[] _buttons = new Button[6];
-    private Button _selectButton;
+    private string _selectButtonText;
 
-    public UnityEvent<Button> onClickSubmitButton;
+    public UnityEvent<string> onClickSubmitButton;
 
     // Init에 실행되지 않는 메서드
     public void Binding()
@@ -34,15 +34,15 @@ public class UIPlayerSelector : UIBase
             _buttons[i] = Utils.FindChild(gameObject, $"Button" + (i + 1), true).GetComponent<Button>();
             _buttons[i].onClick.AddListener(() =>
             {
-                _selectButton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+                _selectButtonText = EventSystem.current.currentSelectedGameObject.GetComponent<Button>().GetComponentInChildren<TMP_Text>().text;
             });
         }
         
         GetButton((int)Buttons.SubmitButton).onClick.AddListener(() =>
         {
-            if (_selectButton == null)
+            if (_selectButtonText == string.Empty)
                 return;
-            onClickSubmitButton?.Invoke(_selectButton);
+            onClickSubmitButton?.Invoke(_selectButtonText);
         });
     }
 
