@@ -19,7 +19,7 @@ public partial class GameManager : MonoBehaviour
     
     private void Awake()
     {
-        var user1 = new UserInfo("User1");
+        var user1 = new UserInfo("User1", EJobType.Assassin);
         var user2 = new UserInfo("User2");
         var user3 = new UserInfo("User3");
         var user4 = new UserInfo("User4");
