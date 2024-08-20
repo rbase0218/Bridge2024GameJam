@@ -11,12 +11,22 @@ public class UI_NextPlayer : UIScreen
 
         return true;
     }
-    
+
     protected override bool EnterWindow()
     {
-        if (UseAutoNextScreen)
-            BindNextScreen<UI_Switcher01>();
-        
+        // 유저 리스트를 가져온다.
+        // 리스트의 끝 인덱스에 도달했는지 확인한다.
+        if (Managers.Game.NextUser())
+        {
+            if (UseAutoNextScreen)
+                BindNextScreen<UI_Sequence01>();
+        }
+        else
+        {
+            if (UseAutoNextScreen)
+                BindNextScreen<UI_Switcher01>();
+        }
+
         return true;
     }
 }
