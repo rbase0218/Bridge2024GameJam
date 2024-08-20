@@ -48,6 +48,7 @@ public sealed class Managers : MonoBehaviour
             
             _uiManager.Init();
             _dataManager.Init();
+            _soundManager.Init();
             
             Application.targetFrameRate = 60;
         }

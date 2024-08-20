@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Unity.VisualScripting;
-
 using UnityEngine;
 
 [System.Serializable]
@@ -17,9 +16,10 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] Sound[] array_sfx = null;
     [SerializeField] Sound[] array_bgm = null;
+    [SerializeField] GameObject audioSourcePrefab = null;
 
-    [SerializeField] AudioSource bgmPlayer = null;
-    [SerializeField] AudioSource sfxPlayer = null;
+    AudioSource bgmPlayer = null;
+    AudioSource[] sfxPlayers = new AudioSource[3];
 
     Dictionary<string, AudioClip> dic_BGM;
     Dictionary<string, AudioClip> dic_SFX;
@@ -29,9 +29,16 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
+        audioSourcePrefab = Resources.Load<GameObject>("Prefabs/AudioSource");
         dic_BGM = new Dictionary<string, AudioClip>();
         dic_SFX = new Dictionary<string, AudioClip>();
 
+        if(array_bgm == null || array_sfx == null)
+        {
+            Debug.Log("SoundManager - Sound array is null");
+            return;
+        }
+        
         foreach (Sound sound in array_bgm)
         {
             dic_BGM.Add(sound.name, sound.clip);
@@ -43,6 +50,19 @@ public class SoundManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void Init()
+    {
+        bgmPlayer = Instantiate(audioSourcePrefab, transform).GetComponent<AudioSource>();
+        bgmPlayer.loop = true;
+        for (int i = 0; i < 3; i++)
+        {
+            sfxPlayers[i] = Instantiate(audioSourcePrefab, transform).GetComponent<AudioSource>();
+        }
+
+        SetBGMVolume(bgmVolume);
+        SetSFXVolume(sfxVolume);
     }
 
     /// <summary>
@@ -57,10 +77,17 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        sfxPlayer.clip = dic_SFX[sfxName];
-        sfxPlayer.volume = sfxVolume;
+        foreach (var sfxPlayer in sfxPlayers)
+        {
+            if (!sfxPlayer.isPlaying)
+            {
+                sfxPlayer.clip = dic_SFX[sfxName];
+                sfxPlayer.volume = sfxVolume;
 
-        sfxPlayer.Play();
+                sfxPlayer.Play();
+                return;
+            }
+        }
     }
 
     /// <summary>
@@ -94,7 +121,13 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     public void StopSFX()
     {
-        sfxPlayer.Stop();
+        foreach (var sfxPlayer in sfxPlayers)
+        {
+            if (sfxPlayer.isPlaying)
+            {
+                sfxPlayer.Stop();
+            }
+        }
     }
 
     /// <summary>
@@ -116,7 +149,10 @@ public class SoundManager : MonoBehaviour
     {
         sfxVolume = Mathf.Clamp01(volume * 0.5f);
 
-        sfxPlayer.volume = sfxVolume;
+        foreach (var sfxPlayer in sfxPlayers)
+        {
+            sfxPlayer.volume = sfxVolume;
+        }
     }
 
     public float SetBGMVolumeTweening(float _duration)
@@ -125,10 +161,7 @@ public class SoundManager : MonoBehaviour
 
         var bgmTween = DOTween.To(() => bgmVolume, x => bgmVolume = x, 0f, _duration)
             .SetEase(Ease.Linear)
-            .OnUpdate(() =>
-            {
-                bgmPlayer.volume = bgmVolume;
-            });
+            .OnUpdate(() => { bgmPlayer.volume = bgmVolume; });
 
         return volume;
     }
@@ -142,10 +175,5 @@ public class SoundManager : MonoBehaviour
     {
         if (dic_SFX.ContainsKey(sfxName)) return true;
         else return false;
-    }
-
-    public bool CheckSFXPlayNow()
-    {
-        return sfxPlayer.isPlaying;
     }
 }

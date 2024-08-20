@@ -80,8 +80,9 @@ public class UI_JobInteraction : UIScreen
     {
         // Hostage를 해당 기능을 통해서 선택한다.
         var selectUserName = button.GetComponentInChildren<TMP_Text>().GetParsedText();
-        //var selectuser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
-        
+        var selectUser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
+        Managers.Game.AddHostage(selectUser);
+        Debug.Log(selectUserName + " : " + selectUser.userName);
         _playerSelector.onClickSubmitButton.RemoveAllListeners();
     }
 
