@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_JobInteraction : UIScreen
 {
+    private bool isSelect;
     private enum Boards
     {
         Board_A,
@@ -49,29 +51,52 @@ public class UI_JobInteraction : UIScreen
     
     protected override bool EnterWindow()
     {
-        if (UseAutoNextScreen)
+        isSelect = false;
+        GetButton((int)Buttons.CloseCard).gameObject.SetActive(true);
+        
+        if (UseAutoNextScreen)  
             BindNextScreen<UI_ClockSwitcher>();
         
-        // 1. 현재 진행중인 유저의 정보를 가져온다.
-        //var user = Managers.Game._currentUser;
+         //1. 현재 진행중인 유저의 정보를 가져온다.
+        var user = Managers.Game.currentUser;
+
+         //2. 유저의 정보에 따라서 Board A와 Board B를 활성화한다.
+         if (user.jobType == EJobType.Actor || user.jobType == EJobType.VIP)
+         {
+             GetObject((int)Boards.Board_A).SetActive(true);
+             GetObject((int)Boards.Board_B).SetActive(false);
         
-        // 2. 유저의 정보에 따라서 Board A와 Board B를 활성화한다.
-        // if (user.jobType == EJobType.Actor || user.jobType == EJobType.VIP)
-        // {
-        //     GetObject((int)Boards.Board_A).SetActive(true);
-        //     GetObject((int)Boards.Board_B).SetActive(false);
-        //
-        //     GetText((int)Texts.WordText).text = "당신은 VIP입니다.";
-        //     GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
-        // }
-        // else
-        // {
-        //     _playerSelector.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
-        //     _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
-        //     
-        //     GetObject((int)Boards.Board_B).SetActive(true);
-        //     GetObject((int)Boards.Board_A).SetActive(false);
-        // }
+             GetText((int)Texts.WordText).text = "당신은 VIP입니다.";
+             GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
+             
+             bool onlyFirst = true;
+             
+             _gauge.onGaugeTimer += (x) =>
+             {
+                 if ((1 - x) < 0.5f && onlyFirst)
+                 {
+                     onlyFirst = false;
+                
+                     OnClickOpenCardButton();
+                 }
+             };
+         }
+         else
+         {
+             _playerSelector.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
+             _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
+             
+             GetObject((int)Boards.Board_B).SetActive(true);
+             GetObject((int)Boards.Board_A).SetActive(false);
+             
+             _gauge.onEndGauge.AddListener(() =>
+             {
+                 if (isSelect)
+                     return;
+             
+                 RandomSubmit();
+             });
+         }
         
         return true;
     }
@@ -81,9 +106,22 @@ public class UI_JobInteraction : UIScreen
         // Hostage를 해당 기능을 통해서 선택한다.
         var selectUserName = button.GetComponentInChildren<TMP_Text>().GetParsedText();
         var selectUser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
-        Managers.Game.AddHostage(selectUser);
         Debug.Log(selectUserName + " : " + selectUser.userName);
         _playerSelector.onClickSubmitButton.RemoveAllListeners();
+        Managers.Game.AddHostage(selectUser);
+        Managers.UI.CloseWindow();
+        Managers.UI.ShowWindow<UI_ClockSwitcher>();
+        isSelect = true;
+    }
+    
+    private void RandomSubmit()
+    {
+        var random = Random.Range(0, Managers.Game._userList.Count);
+        var selectUser = Managers.Game._userList[random];
+        Debug.Log("랜덤 선택 : " + selectUser.userName);
+        _playerSelector.onClickSubmitButton.RemoveAllListeners();
+        Managers.Game.AddHostage(selectUser);
+        isSelect = true;
     }
 
     private void OnClickOpenCardButton()

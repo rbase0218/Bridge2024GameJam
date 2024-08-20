@@ -93,6 +93,12 @@ public class UserInfo
         this.userName = userName;
         this.jobType = EJobType.VIP;
     }
+    
+    public UserInfo(string userName, EJobType jobType)
+    {
+        this.userName = userName;
+        this.jobType = jobType;
+    }
 }
 
 public class FrameData
