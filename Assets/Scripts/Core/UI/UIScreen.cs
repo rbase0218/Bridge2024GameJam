@@ -36,11 +36,12 @@ public abstract class UIScreen : UIWindow
             _gauge.Play();
     }
 
-    public void OnNextScreen<T>() where T : UIScreen
+    public T OnNextScreen<T>() where T : UIScreen
     {
         _gauge.Stop();
         
         OnSceneChanged<T>();
+        return Managers.UI.GetWindow<T>();
     }
 
     private void OnSceneChanged<T>() where T: UIScreen
