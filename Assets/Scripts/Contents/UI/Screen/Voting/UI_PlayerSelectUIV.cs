@@ -12,12 +12,6 @@ public class UI_PlayerSelectUIV : UIScreen
         Board_B
     }
 
-    private enum Buttons
-    {
-        SubmitButton_A,
-        SubmitButton_B
-    }
-
     private enum Texts
     {
         FrontText,
@@ -38,8 +32,9 @@ public class UI_PlayerSelectUIV : UIScreen
 
         BindText(typeof(Texts));
         BindObject(typeof(Objects));
-        BindButton(typeof(Buttons));
         Bind<UIPlayerSelector>(typeof(PlayerSelector));
+        Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA).Binding();
+        Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerB).Binding();
         
         Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA).onClickSubmitButton.AddListener(OnClickSubmitButtonA);
         Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerB).onClickSubmitButton.AddListener(OnClickSubmitButtonB);
@@ -51,7 +46,6 @@ public class UI_PlayerSelectUIV : UIScreen
     {
         var currentUser = Managers.Game.currentUser;
         var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName).Select( (x) => x.userName).ToArray();
-
         if (currentUser.jobType == EJobType.Assassin)
         {
             GetObject((int)Objects.Board_B).SetActive(true);
