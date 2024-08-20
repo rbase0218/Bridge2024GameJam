@@ -16,6 +16,8 @@ public partial class GameManager : MonoBehaviour
     public UserInfo voteUser;
 
     private string questionText;
+
+    public string gameTopic;
     
     private void Awake()
     {
@@ -27,6 +29,8 @@ public partial class GameManager : MonoBehaviour
         AddUser(user1, user2, user3, user4);
         assUser = user4;
         currentUser = user1;
+
+        gameTopic = "호랑이";
     }
     
     public void AddUser(params UserInfo[] users)
@@ -54,6 +58,11 @@ public partial class GameManager : MonoBehaviour
         }
     }
 
+    public UserInfo GetCurrentHostage()
+    {
+        return _hostageList[^1];
+    }
+
     public void AddRangeUser(List<string> userNames)
     {
         _userList?.Clear();
@@ -63,7 +72,16 @@ public partial class GameManager : MonoBehaviour
             _userList?.Add(new UserInfo(userNames[i]));
         }
 
+        // 참여 유저에게 직업 부여
         GiveUsersJob();
         currentUser = _userList[0];
+    }
+
+    public void PickGameTopic(int index)
+    {
+        var maxNum = Managers.Data.wordArray[index].Length;
+        var randNum = Random.Range(0, maxNum);
+        
+        gameTopic = Managers.Data.wordArray[index][randNum];
     }
 }

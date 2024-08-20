@@ -66,7 +66,9 @@ public class UI_JobInteraction : UIScreen
              GetObject((int)Boards.Board_A).SetActive(true);
              GetObject((int)Boards.Board_B).SetActive(false);
         
-             GetText((int)Texts.WordText).text = "당신은 VIP입니다.";
+             // 주제를 이 곳에서 전달한다.
+             GetText((int)Texts.WordText).text = Managers.Game.gameTopic;
+             
              GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
              
              bool onlyFirst = true;

@@ -26,4 +26,6 @@ public partial class GameManager
             actorUser = _userList[actorIndex];
         }
     }
+    
+    
 }

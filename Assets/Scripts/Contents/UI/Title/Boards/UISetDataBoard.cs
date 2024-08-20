@@ -77,6 +77,7 @@ public class UISetDataBoard : UIBase
 
     private void OnClickNextButton()
     {
+        Managers.Game.PickGameTopic(_selectCategoryIndex);
         onClickNextButton?.Invoke(_userCount);
     }
     

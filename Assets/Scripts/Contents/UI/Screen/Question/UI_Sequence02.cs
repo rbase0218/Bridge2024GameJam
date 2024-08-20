@@ -22,9 +22,11 @@ public class UI_Sequence02 : UIScreen
     
     protected override bool EnterWindow()
     {
+        var hostageName = Managers.Game.GetCurrentHostage().userName;
+        var currUserName = Managers.Game.currentUser.userName;
         Get<UIPersonViewer>((int)PersonViewer.PersonViewer).SetFrame(
-            new FrameData("Title1", "Name1", 1),
-            new FrameData("Title2", "Name2", 0)
+            new FrameData("인질", hostageName, 1),
+            new FrameData("첫 순서", currUserName, 0)
         );
         
         if(UseAutoNextScreen)
