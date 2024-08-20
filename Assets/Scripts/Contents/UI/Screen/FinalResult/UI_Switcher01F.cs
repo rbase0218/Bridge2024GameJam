@@ -15,7 +15,7 @@ public class UI_Switcher01F : UIScreen
     protected override bool EnterWindow()
     {
         if(UseAutoNextScreen)
-            BindNextScreen<UI_Switcher01F>();
+            BindNextScreen<UI_FinalResult>();
         
         return true;
     }
