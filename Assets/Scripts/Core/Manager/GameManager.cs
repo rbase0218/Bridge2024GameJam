@@ -8,24 +8,25 @@ public partial class GameManager : MonoBehaviour
     public List<UserInfo> _hostageList = new List<UserInfo>();
 
     // 현재 직업이 암살자인 유저를 찾아둔다.
-    private UserInfo _assUser;
-    public UserInfo _currentUser;
+    public UserInfo assUser;
+    public UserInfo currentUser;
+    public UserInfo actorUser;
     // 현재 인질로 지정된 유저를 찾아둔다.
-    private UserInfo _hostageUser;
-    public UserInfo _voteUser;
+    private UserInfo hostageUser;
+    public UserInfo voteUser;
 
     private string questionText;
     
     private void Awake()
     {
-        var user1 = new UserInfo("User1", EJobType.VIP);
-        var user2 = new UserInfo("User2", EJobType.VIP);
-        var user3 = new UserInfo("User3", EJobType.VIP);
-        var user4 = new UserInfo("User4", EJobType.Assassin);
+        var user1 = new UserInfo("User1");
+        var user2 = new UserInfo("User2");
+        var user3 = new UserInfo("User3");
+        var user4 = new UserInfo("User4");
         
         AddUser(user1, user2, user3, user4);
-        _assUser = user4;
-        _currentUser = user1;
+        assUser = user4;
+        currentUser = user1;
     }
     
     public void AddUser(params UserInfo[] users)
@@ -35,11 +36,11 @@ public partial class GameManager : MonoBehaviour
     
     public bool NextUser()
     {
-        var index = _userList.IndexOf(_currentUser);
+        var index = _userList.IndexOf(currentUser);
         if (index == _userList.Count - 1)
             return false;
 
-        _currentUser = _userList[index + 1];
+        currentUser = _userList[index + 1];
         return true;
     }
     
