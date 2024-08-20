@@ -24,6 +24,7 @@ public class UI_NextPlayer : UIScreen
 
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
+        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         
         return true;
     }
@@ -31,7 +32,6 @@ public class UI_NextPlayer : UIScreen
     protected override bool EnterWindow()
     {
         isNext = false;
-        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         
         GetText((int)Texts.NameA).SetText(Managers.Game.currentUser.userName);
         // 유저 리스트를 가져온다.
@@ -57,11 +57,13 @@ public class UI_NextPlayer : UIScreen
     
     private void OnClickNextButton()
     {
-        Managers.UI.CloseWindow();
-        
         if (isNext)
-            Managers.UI.ShowWindow<UI_Sequence01>();
+        {
+            OnNextScreen<UI_Sequence01>();
+        }
         else
-            Managers.UI.ShowWindow<UI_Switcher01>();
+        {
+            OnNextScreen<UI_Switcher01>();
+        }
     }
 }
