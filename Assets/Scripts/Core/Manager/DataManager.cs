@@ -22,12 +22,13 @@ public class DataManager
     };
     
     // JobReveal Screen에서 필요한 Texts
-    private readonly Dictionary<EJobType, string> jobInfoTexts = new Dictionary<EJobType, string>
+    public readonly Dictionary<EJobType, (string, string)> jobInfoTexts = new Dictionary<EJobType, (string,string)>
     {
-        { EJobType.Actor, "그러나 암살자가\n본인을 드러내 암구호를 외친다면,\n암살자가 승리합니다." },
-        { EJobType.VIP, "앞으로 해당 귀빈은\n발언권은 잃지만,\n투표 권력은 유지합니다." },
-        { EJobType.Assassin, "과연\n암살자가 암구호를\n파악했을까요?" }
+        { EJobType.Actor, ("최후 찬스 발동!", "그러나 암살자가\n본인을 드러내 암구호를 외친다면,\n암살자가 승리합니다.") },
+        { EJobType.VIP, ("다음 라운드 진행", "앞으로 해당 귀빈은\n발언권은 잃지만,\n투표 권력은 유지합니다.") },
+        { EJobType.Assassin, ("최후 찬스 발동!", "과연\n암살자가 암구호를\n파악했을까요?") }
     };
+    
     
     #endregion
     

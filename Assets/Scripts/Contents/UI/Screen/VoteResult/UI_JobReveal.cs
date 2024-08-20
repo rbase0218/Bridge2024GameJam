@@ -7,8 +7,9 @@ public class UI_JobReveal : UIScreen
     private enum Texts
     {
         FirstText,
-        NameText,
-        ThirdText
+        JobText,
+        ThirdText,
+        ButtonText
     }
 
     private enum Buttons
@@ -40,11 +41,37 @@ public class UI_JobReveal : UIScreen
         var voteUserPicture = Managers.Data.GetFrameSprite(voteUser.jobType);
         
         GetText((int)Texts.FirstText).SetText($"{voteUserName}은(는)");
-        GetText((int)Texts.ThirdText).SetText("입니다.");
+
+        var infoTexts = Managers.Data.jobInfoTexts[voteUser.jobType];
+        // Info Text 추가
+        GetText((int)Texts.ThirdText).SetText(infoTexts.Item2);
+        // Button Text 변경
+        GetText((int)Texts.ButtonText).SetText(infoTexts.Item1);
+
+        // 초상화 세팅
+        GetImage((int)Images.Picture).sprite = voteUserPicture;
+        // 직업명 추가
+        GetText((int)Texts.JobText).SetText(Managers.Data.GetJobText(voteUser.jobType));
         
-        if(UseAutoNextScreen)
-            BindNextScreen<UI_LastChance>();
+        // Event Bind
+        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         
         return true;
+    }
+
+    private void OnClickNextButton()
+    {
+        var voteUserJob = Managers.Game.voteUser.jobType;
+
+        switch (voteUserJob)
+        {
+            case EJobType.VIP:
+                Debug.Log("다음 라운드 진행");
+                break;
+            case EJobType.Actor:
+            case EJobType.Assassin:
+                OnNextScreen<UI_LastChance>();
+                break;
+        }
     }
 }
