@@ -57,7 +57,7 @@ public class UI_JobIntro01 : UIScreen
         bool test = true;
         _gauge.onGaugeTimer += (x) =>
         {
-            if ((1 - x) < 0.8f && test)
+            if ((1 - x) < 0.5f && test)
             {
                 test = false;
                 
