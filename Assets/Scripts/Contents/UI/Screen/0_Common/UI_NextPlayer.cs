@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class UI_NextPlayer : UIScreen
 {
+    private enum Texts
+    {
+        NameA,
+        NameB
+    }
+
+    private enum Buttons
+    {
+        NextButton
+    }
+    
     protected override bool Init()
     {
-        if(!base.Init())
+        if (!base.Init())
             return false;
 
+        BindText(typeof(Texts));
+        BindButton(typeof(Buttons));
+        
         return true;
     }
 

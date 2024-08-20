@@ -485,6 +485,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -51.99
       objectReference: {fileID: 0}
+    - target: {fileID: 1051148319467392769, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
+      propertyPath: m_Name
+      value: NameA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1051148319843534580, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
+      propertyPath: m_Name
+      value: NameB
+      objectReference: {fileID: 0}
     - target: {fileID: 1051148319843534581, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
       propertyPath: m_SizeDelta.x
       value: -160.4
