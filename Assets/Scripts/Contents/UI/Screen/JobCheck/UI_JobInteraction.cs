@@ -85,7 +85,8 @@ public class UI_JobInteraction : UIScreen
          }
          else
          {
-             _playerSelector.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
+             var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName).Select( (x) => x.userName).ToArray();
+             _playerSelector.ShowButton(userList);
              _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
              
              GetObject((int)Boards.Board_B).SetActive(true);
@@ -105,15 +106,17 @@ public class UI_JobInteraction : UIScreen
 
     private void OnClickSubmitButton(string text)
     {
+        _playerSelector.onClickSubmitButton.RemoveAllListeners();
+        
         // Hostage를 해당 기능을 통해서 선택한다.
         var selectUserName = text;
         var selectUser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
+        
         Debug.Log(selectUserName + " : " + selectUser.userName);
         
-        _playerSelector.onClickSubmitButton.RemoveAllListeners();
         Managers.Game.AddHostage(selectUser);
-        Managers.UI.CloseWindow();
-        Managers.UI.ShowWindow<UI_ClockSwitcher>();
+
+        OnNextScreen<UI_ClockSwitcher>();
         isSelect = true;
     }
     
