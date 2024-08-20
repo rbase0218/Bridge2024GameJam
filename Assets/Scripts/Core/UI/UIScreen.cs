@@ -32,8 +32,7 @@ public abstract class UIScreen : UIWindow
         _gauge.onEndGauge.RemoveAllListeners();
         _gauge.onEndGauge.AddListener(OnSceneChanged<T>);
         
-        if(UseAutoNextScreen)
-            _gauge.Play();
+        _gauge.Play();
     }
 
     public T OnNextScreen<T>() where T : UIScreen

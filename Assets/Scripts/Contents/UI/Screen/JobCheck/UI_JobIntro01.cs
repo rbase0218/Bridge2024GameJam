@@ -44,14 +44,16 @@ public class UI_JobIntro01 : UIScreen
     
     protected override bool EnterWindow()
     {
-        // Component에 데이터를 입력하는 곳
+        // ===== [ Init ] =====
+        GetObject((int)Objects.CloseCard).SetActive(true);
+        GetObject((int)Objects.JobFrame).SetActive(false);
+        
+        // ===== [ Data Bind ] =====
         var currentUser = Managers.Game.currentUser;
         
-        // 현재 유저의 이름 데이터 등록
         GetText((int)Texts.NameText).SetText(currentUser.userName);
         GetText((int)Texts.JobNameText).SetText(Managers.Data.GetJobText(currentUser.jobType));
         
-        // 현재 유저의 직업 데이터 등록
         GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(currentUser.jobType);
         
         // 유저가 일정 시간 동안 카드를 열지 않는다면?
@@ -61,7 +63,6 @@ public class UI_JobIntro01 : UIScreen
             if ((1 - x) < 0.5f && onlyFirst)
             {
                 onlyFirst = false;
-                
                 OnClickCloseCard();
             }
         };
