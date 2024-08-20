@@ -56,9 +56,9 @@ public class DataManager
         NobleB = Load<Sprite>(@"Sprite/UI/Frame/NobleFrame_B");
         Black = Load<Sprite>(@"Sprite/UI/Frame/BlackFrame");
         
-        ActorBG = Load<Sprite>(@"Sprite/Verify/Play_Verify_ActorBG");
-        VipBG = Load<Sprite>(@"Sprite/Verify/Play_Verify_VipBG");
-        AssBG = Load<Sprite>(@"Sprite/Verify/Play_Verify_AccBG");
+        ActorBG = Load<Sprite>(@"Sprite/Full BG/Verify/Play_Verify_ActorBG");
+        VipBG = Load<Sprite>(@"Sprite/Full BG/Verify/Play_Verify_VipBG");
+        AssBG = Load<Sprite>(@"Sprite/Full BG/Verify/Play_Verify_AccBG");
     }
 
     public Sprite GetFrameSprite(EJobType jobType)
