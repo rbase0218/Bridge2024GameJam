@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public partial class GameManager
@@ -27,5 +28,15 @@ public partial class GameManager
         }
     }
     
-    
+    private UserInfo RandomQuestionUser()
+    {
+        var copyUserList = new List<UserInfo>(_userList);
+        copyUserList.Remove(hostageUser);
+        copyUserList.RemoveAll(x=>x.canQuestion == false);
+        copyUserList.RemoveAll(x=>x.isDie);
+
+        if (copyUserList.Count == 0)
+            return null;
+        return copyUserList[Random.Range(0, copyUserList.Count)];
+    }
 }

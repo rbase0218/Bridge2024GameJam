@@ -19,6 +19,7 @@ public class UI_TextConfirm01 : UIScreen
         if (!base.Init())
             return false;
 
+        // 질문자 이름 호출
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
         
@@ -31,6 +32,16 @@ public class UI_TextConfirm01 : UIScreen
     {
         var answerUserName = Managers.Game.selectUserName;
         GetText((int)Texts.Text).SetText(answerUserName);
+        var onlyFirst = true;
+        _gauge.onGaugeTimer += (x) =>
+        {
+            if ((1 - x) < 0.5f && onlyFirst)
+            {
+                onlyFirst = false;
+                
+                OnClickCloseCard();
+            }
+        };
         
         if (UseAutoNextScreen)
             BindNextScreen<UI_TextConfirm02>();

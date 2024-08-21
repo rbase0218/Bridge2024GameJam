@@ -21,6 +21,10 @@ public class UI_Switcher02 : UIScreen
     
     protected override bool EnterWindow()
     {
+        if (UseAutoNextScreen)
+            BindNextScreen<UI_Switcher01V>();
+        
+        Managers.Game.SetCanAllQuestion();
         return true;
     }
     

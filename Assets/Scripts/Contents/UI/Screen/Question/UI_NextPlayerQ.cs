@@ -57,11 +57,9 @@ public class UI_NextPlayerQ : UIScreen
     
     private void OnClickNextButton()
     {
-        Managers.UI.CloseWindow();
-        
         if (isNext)
-            Managers.UI.ShowWindow<UI_QuestionInput>();
+            OnNextScreen<UI_QuestionInput>();
         else
-            Managers.UI.ShowWindow<UI_Switcher02>();
+            OnNextScreen<UI_Switcher02>();
     }
 }
