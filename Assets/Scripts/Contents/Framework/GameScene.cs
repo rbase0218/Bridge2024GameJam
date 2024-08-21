@@ -23,7 +23,7 @@ public sealed class GameScene : Framework
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Managers.UI.ShowWindow<UI_Switcher01VR>();
+            Managers.UI.ShowWindow<UI_Intro01>();
         }
     }
 }

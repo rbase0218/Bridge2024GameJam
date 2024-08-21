@@ -19,6 +19,7 @@ public class UI_TextConfirm01 : UIScreen
         if (!base.Init())
             return false;
 
+        // 질문자 이름 호출
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
         
@@ -29,6 +30,17 @@ public class UI_TextConfirm01 : UIScreen
     
     protected override bool EnterWindow()
     {
+        var onlyFirst = true;
+        _gauge.onGaugeTimer += (x) =>
+        {
+            if ((1 - x) < 0.5f && onlyFirst)
+            {
+                onlyFirst = false;
+                
+                OnClickCloseCard();
+            }
+        };
+        
         if (UseAutoNextScreen)
             BindNextScreen<UI_TextConfirm02>();
         return true;
@@ -36,6 +48,6 @@ public class UI_TextConfirm01 : UIScreen
 
     private void OnClickCloseCard()
     {
-        GetButton((int)Buttons.CloseCard).gameObject.SetActive(false);
+        OnNextScreen<UI_TextConfirm02>();
     }
 }

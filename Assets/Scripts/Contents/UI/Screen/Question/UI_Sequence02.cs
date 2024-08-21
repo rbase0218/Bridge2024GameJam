@@ -22,10 +22,13 @@ public class UI_Sequence02 : UIScreen
     
     protected override bool EnterWindow()
     {
-        Get<UIPersonViewer>((int)PersonViewer.PersonViewer).SetFrame(
-            new FrameData("Title1", "Name1", 1),
-            new FrameData("Title2", "Name2", 0)
-        );
+        var hostageUser = Managers.Game.hostageUser;
+        
+        Managers.Game.GetQuestionUser();
+        // Get<UIPersonViewer>((int)PersonViewer.PersonViewer).SetFrame(
+        //     new FrameData("인질", hostageUser.userName, 1),
+        //     new FrameData("질문", questionUser.userName, 0)
+        // );
         
         if(UseAutoNextScreen)
             BindNextScreen<UI_QuestionInput>();

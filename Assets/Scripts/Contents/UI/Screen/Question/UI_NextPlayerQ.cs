@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UI_NextPlayerQ : UIScreen
 {
+    private bool isNext;
     private enum Texts
     {
         NameA,
@@ -27,17 +28,33 @@ public class UI_NextPlayerQ : UIScreen
         
         return true;
     }
-    
+
     protected override bool EnterWindow()
     {
-        if(UseAutoNextScreen)
-            BindNextScreen<UI_Switcher02>();
+        isNext = false;
+        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
+        GetText((int)Texts.NameA).SetText(Managers.Game.prevUser.userName);
         
+        if (Managers.Game.GetQuestionUser())
+        {
+            isNext = true;
+            GetText((int)Texts.NameB).SetText(Managers.Game.currentUser.userName);
+        }
+        else
+        {
+            isNext = false;
+            GetText((int)Texts.NameB).SetText("종료");
+            GetText((int)Texts.NameB).faceColor = Color.red;
+        }
+
         return true;
     }
     
     private void OnClickNextButton()
     {
-        OnNextScreen<UI_Switcher02>();
+        if (isNext)
+            OnNextScreen<UI_QuestionInput>();
+        else
+            OnNextScreen<UI_Switcher02>();
     }
 }

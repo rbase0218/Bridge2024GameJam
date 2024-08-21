@@ -32,6 +32,7 @@ public class UI_TextConfirm02 : UIScreen
     
     protected override bool EnterWindow()
     {
+        Get<TMP_InputField>((int)InputFields.InputField).text = Managers.Game.questionText;
         if(UseAutoNextScreen)
             BindNextScreen<UI_NextPlayerQ>();
         
