@@ -18,6 +18,11 @@ public class UIPlayerSelector : UIBase
         InfoText
     }
 
+    private enum Layouts
+    {
+        SelectButtons
+    }
+
     private Button[] _buttons = new Button[6];
     private string _selectButtonText;
 
@@ -28,6 +33,7 @@ public class UIPlayerSelector : UIBase
     {
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
+        Bind<VerticalLayoutGroup>(typeof(Layouts));
         
         for (int i = 0; i < _buttons.Length; ++i)
         {
@@ -58,5 +64,21 @@ public class UIPlayerSelector : UIBase
             else
                 _buttons[i].gameObject.SetActive(false);
         }
+
+        float spacingValue = .0f;
+        switch (names.Length)
+        {
+            case 2:
+            case 3:
+                spacingValue = 101f;
+                break;
+            case 4:
+                spacingValue = 71f;
+                break;
+            case 5:
+                spacingValue = 40f;
+                break;
+        }
+        Get<VerticalLayoutGroup>((int)Layouts.SelectButtons).spacing = spacingValue;
     }
 }
