@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_PlayerSelectUIV : UIScreen
 {
+    private bool isSelect;
+    private List<UserInfo> copyUserList = new List<UserInfo>();
     private enum Objects
     {
         Board_A,
@@ -44,15 +47,31 @@ public class UI_PlayerSelectUIV : UIScreen
     
     protected override bool EnterWindow()
     {
+        if(UseAutoNextScreen)
+            BindNextScreen<UI_ClockSwitcherV>();
+        
+        isSelect = false;
         var currentUser = Managers.Game.currentUser;
-        var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName).Select( (x) => x.userName).ToArray();
         if (currentUser.jobType == EJobType.Assassin)
         {
+            copyUserList = new List<UserInfo>(Managers.Game._userList);
+            copyUserList.Remove(currentUser);
+            copyUserList.RemoveAll(x => Managers.Game._hostageList.Contains(x));
+            
             GetObject((int)Objects.Board_B).SetActive(true);
             GetObject((int)Objects.Board_A).SetActive(false);
 
             var selectorB = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerB);
-            selectorB.ShowButton(userList);
+            selectorB.ShowButton(copyUserList.Select(x => x.userName).ToArray());
+            selectorB.onClickSubmitButton.AddListener(OnClickSubmitButtonB);
+            
+            _gauge.onEndGauge.AddListener(() =>
+            {
+                if (isSelect)
+                    return;
+             
+                RandomSubmit();
+            });
             
             GetText((int)Texts.FrontText).SetText("당신은");
             GetText((int)Texts.Text).SetText("암살자");
@@ -60,19 +79,19 @@ public class UI_PlayerSelectUIV : UIScreen
         }
         else
         {
+            var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName).Select( (x) => x.userName).ToArray();
+            
             GetObject((int)Objects.Board_B).SetActive(false);
             GetObject((int)Objects.Board_A).SetActive(true);
             
             var selectorA = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA);
             selectorA.ShowButton(userList);
+            selectorA.onClickSubmitButton.AddListener(OnClickSubmitButtonA);
             
             GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
             GetText((int)Texts.Text).SetText(currentUser.userName);
             GetText((int)Texts.BackText).SetText("입니다.");
         }
-        
-        if(UseAutoNextScreen)
-            BindNextScreen<UI_ClockSwitcherV>();
         
         return true;
     }
@@ -89,5 +108,15 @@ public class UI_PlayerSelectUIV : UIScreen
     {
         var findUser = Managers.Game._userList.Find( x => x.userName == text);
         Managers.Game.AddHostage(findUser);
+        isSelect = true;
+    }
+    
+    private void RandomSubmit()
+    {
+        var random = Random.Range(0, copyUserList.Count);
+        var selectUser = copyUserList[random];
+        Debug.Log("랜덤 선택 : " + selectUser.userName);
+        Managers.Game.AddHostage(selectUser);
+        isSelect = true;
     }
 }
