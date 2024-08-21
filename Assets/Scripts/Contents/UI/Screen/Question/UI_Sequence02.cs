@@ -22,6 +22,7 @@ public class UI_Sequence02 : UIScreen
     
     protected override bool EnterWindow()
     {
+        Managers.Game.GetQuestionUser();
         var hostageName = Managers.Game.GetCurrentHostage().userName;
         var currUserName = Managers.Game.currentUser.userName;
         Get<UIPersonViewer>((int)PersonViewer.PersonViewer).SetFrame(

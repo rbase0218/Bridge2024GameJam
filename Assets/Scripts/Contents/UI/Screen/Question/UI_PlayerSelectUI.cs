@@ -36,8 +36,7 @@ public class UI_PlayerSelectUI : UIScreen
         Debug.Log("이번 차례는 " +Managers.Game.currentUser.userName);
         
         // 자기 자신을 제외한 리스트를 가져온다.
-        var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName).Select( (x) => x.userName).ToArray();
-        selectContainer.ShowButton(userList);
+        selectContainer.ShowButton(Managers.Game.GetAnswerUserList().Select(user => user.userName).ToArray());
 
         GetText((int)Texts.Text).text = Managers.Game.currentUser.userName;
         selectContainer.onClickSubmitButton.AddListener(OnClickSubmitButton);
