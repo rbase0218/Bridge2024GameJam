@@ -2,21 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Switcher01V : UIScreen
+public class UI_Introduce : UIScreen
 {
+    private enum Texts
+    {
+        Text
+    }
+
     protected override bool Init()
     {
         if (!base.Init())
             return false;
-
+        
+        BindText(typeof(Texts));
         return true;
     }
     
     protected override bool EnterWindow()
     {
-        Managers.Game.currentUser = Managers.Game._userList[0];
+        GetText((int)Texts.Text).SetText(Managers.Game.currentUser.userName);
+        
         if(UseAutoNextScreen)
-            BindNextScreen<UI_Introduce>();
+            BindNextScreen<UI_PlayerSelectUIV>();
         
         return true;
     }
