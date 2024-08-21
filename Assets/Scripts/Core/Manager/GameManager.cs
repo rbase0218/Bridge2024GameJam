@@ -35,7 +35,7 @@ public partial class GameManager : MonoBehaviour
         AddUser(user1, user2, user3, user4);
         assUser = user4;
         currentUser = user1;
-        AddHostage(user3);
+        //AddHostage(user3);
 
         gameTopic = "호랑이";
     }
