@@ -64,12 +64,14 @@ public class UI_JobReveal : UIScreen
 
     private void OnClickNextButton()
     {
-        var voteUserJob = Managers.Game.voteUser.jobType;
+        var voteUser = Managers.Game.voteUser;
+        var voteUserJob = voteUser.jobType;
 
         switch (voteUserJob)
         {
             case EJobType.VIP:
                 Debug.Log("다음 라운드 진행");
+                voteUser.isDie = true;
                 break;
             case EJobType.Actor:
             case EJobType.Assassin:
