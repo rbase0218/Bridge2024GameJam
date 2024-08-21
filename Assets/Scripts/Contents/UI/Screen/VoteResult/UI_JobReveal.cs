@@ -70,8 +70,8 @@ public class UI_JobReveal : UIScreen
         switch (voteUserJob)
         {
             case EJobType.VIP:
-                Debug.Log("다음 라운드 진행");
                 voteUser.isDie = true;
+                OnNextScreen<UI_Switcher01>();
                 break;
             case EJobType.Actor:
             case EJobType.Assassin:
