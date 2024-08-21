@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public class UI_PlayerSelectUI : UIScreen
 {
-    private enum Texts
-    {
-        NameText
-    }
-    
     private enum PlayerSelector
     {
         SelectContainer
