@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UI_FinalResult : UIScreen
 {
     private enum Objects
     {
+        NameField1,
         NameField2,
         NameField3,
         NameField4
@@ -46,23 +48,33 @@ public class UI_FinalResult : UIScreen
     
     protected override bool EnterWindow()
     {
-        // 게임에 참여하는 인원 수를 받아온다.
-        // 인원수가 1명일 경우 -> Actor or Assassin 승리
-        // 인원수가 1명이 아닐 경우 -> Vip 승리
-        
-        // 승자의 직업을 받아서 Frame 이미지 변경
+        // 승자의 직업을 받는다
+        var winner = Managers.Game.currentUser;
+
+        GetImage((int)Images.JobImage).sprite = Managers.Data.GetFrameSprite(winner.jobType);
+
+        if (winner.jobType == EJobType.VIP)
+        {
+            // VIP 타입 중에서 UserName만 가져와서 Array로 만들어서 전달한다.
+            var userNames = Managers.Game._userList.FindAll(user => user.jobType == EJobType.VIP).Select(x => x.userName).ToArray();
+            ShowNameField(userNames);
+        }
+        else
+        {
+            ShowNameField(winner.userName);
+        }
         
         return true;
     }
 
     private void OnClickButton()
     {
-        
+        OnNextScreen<UI_KeywordReveal>();
     }
 
     private void ShowNameField(params string[] names)
     {
-        for (int i = 1; i < 3; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             GetObject(i).SetActive(i < names.Length);
             GetText(i).text = (i < names.Length) ? names[i] : "";
