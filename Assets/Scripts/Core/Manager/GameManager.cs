@@ -24,20 +24,22 @@ public partial class GameManager : MonoBehaviour
     public string questionText;
 
     public string gameTopic;
+
+    public EJobType winnerJob;
     
     private void Awake()
     {
-        var user1 = new UserInfo("User1", EJobType.Assassin);
-        var user2 = new UserInfo("User2");
-        var user3 = new UserInfo("User3");
-        var user4 = new UserInfo("User4");
-        
-        AddUser(user1, user2, user3, user4);
-        assUser = user4;
-        currentUser = user1;
-        //AddHostage(user3);
-
-        gameTopic = "호랑이";
+        // var user1 = new UserInfo("User1", EJobType.Assassin);
+        // var user2 = new UserInfo("User2");
+        // var user3 = new UserInfo("User3");
+        // var user4 = new UserInfo("User4");
+        //
+        // AddUser(user1, user2, user3, user4);
+        // assUser = user4;
+        // currentUser = user1;
+        // //AddHostage(user3);
+        //
+        // gameTopic = "호랑이";
     }
     
     public void AddUser(params UserInfo[] users)
@@ -99,6 +101,7 @@ public partial class GameManager : MonoBehaviour
         var randNum = Random.Range(0, maxNum);
         
         gameTopic = Managers.Data.wordArray[index][randNum];
+        Debug.Log("게임 주제 : " + gameTopic);
     }
     
     public void WriteQuestion(string text) => questionText = text;

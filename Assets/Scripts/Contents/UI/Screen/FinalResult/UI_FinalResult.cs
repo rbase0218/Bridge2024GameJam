@@ -30,40 +30,32 @@ public class UI_FinalResult : UIScreen
         Text3,
         Text4
     }
-    
+
     protected override bool Init()
     {
         if (!base.Init())
             return false;
-        
+
         BindObject(typeof(Objects));
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
         BindImage(typeof(Images));
 
         GetButton((int)Buttons.Button).onClick.AddListener(OnClickButton);
-        
+
         return true;
     }
-    
+
     protected override bool EnterWindow()
     {
         // 승자의 직업을 받는다
-        var winner = Managers.Game.currentUser;
+        var winner = Managers.Game.winnerJob;
 
-        GetImage((int)Images.JobImage).sprite = Managers.Data.GetFrameSprite(winner.jobType);
+        GetImage((int)Images.JobImage).sprite = Managers.Data.GetFrameSprite(winner);
+        // VIP 타입 중에서 UserName만 가져와서 Array로 만들어서 전달한다.
+        var userNames = Managers.Game._userList.FindAll(user => user.jobType == winner).Select(x => x.userName).ToArray();
+        ShowNameField(userNames);
 
-        if (winner.jobType == EJobType.VIP)
-        {
-            // VIP 타입 중에서 UserName만 가져와서 Array로 만들어서 전달한다.
-            var userNames = Managers.Game._userList.FindAll(user => user.jobType == EJobType.VIP).Select(x => x.userName).ToArray();
-            ShowNameField(userNames);
-        }
-        else
-        {
-            ShowNameField(winner.userName);
-        }
-        
         return true;
     }
 

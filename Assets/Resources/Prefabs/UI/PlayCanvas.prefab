@@ -20675,7 +20675,7 @@ MonoBehaviour:
   onEndGauge:
     m_PersistentCalls:
       m_Calls: []
-  <GaugeTime>k__BackingField: 0.1
+  <GaugeTime>k__BackingField: 2
 --- !u!1 &9119554610533602178
 GameObject:
   m_ObjectHideFlags: 0
@@ -23829,7 +23829,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3382875299464762768, guid: d493a544b29fe044c835fb3d4d261e71, type: 3}
       propertyPath: m_Name
-      value: TopicText
+      value: Text
       objectReference: {fileID: 0}
     - target: {fileID: 3382875299464762769, guid: d493a544b29fe044c835fb3d4d261e71, type: 3}
       propertyPath: m_Pivot.x
@@ -24521,7 +24521,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3382875299464762768, guid: d493a544b29fe044c835fb3d4d261e71, type: 3}
       propertyPath: m_Name
-      value: Text
+      value: TopicText
       objectReference: {fileID: 0}
     - target: {fileID: 3382875299464762769, guid: d493a544b29fe044c835fb3d4d261e71, type: 3}
       propertyPath: m_Pivot.x

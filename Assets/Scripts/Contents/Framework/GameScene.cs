@@ -14,16 +14,14 @@ public sealed class GameScene : Framework
     // 해당 메서드는 Start에서 로직을 관리할 때 사용된다.
     protected override void Start()
     {
-        Managers.Game.voteUser = new UserInfo("TestUser");
-        Managers.Game.voteUser.jobType = EJobType.Assassin;
-        // Managers.UI.ShowWindow<UI_Intro01>();
+        Managers.UI.ShowWindow<UI_Intro01>();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Managers.UI.ShowWindow<UI_Intro01>();
-        }
+        // if(Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     Managers.UI.ShowWindow<UI_Intro01>();
+        // }
     }
 }

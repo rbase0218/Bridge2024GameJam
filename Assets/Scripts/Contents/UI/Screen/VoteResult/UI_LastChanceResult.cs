@@ -64,7 +64,7 @@ public class UI_LastChanceResult : UIScreen
                 GetText((int)Texts.FirstText).SetText("정답입니다!");
                 GetText((int)Texts.JobText).SetText(jobText);
                 GetText((int)Texts.SecondText).SetText("암살자가\n귀빈들과의 대결에서\n승리했습니다.");
-
+                Managers.Game.winnerJob = voteUserJob;
             }
         }
         else
@@ -74,6 +74,8 @@ public class UI_LastChanceResult : UIScreen
                 GetText((int)Texts.FirstText).SetText("오답입니다!");
                 GetText((int)Texts.JobText).SetText(jobText);
                 GetText((int)Texts.SecondText).SetText("뜻밖의 광대가\n귀빈들과의 게임에서\n승리를 가져갑니다.");
+                Managers.Game.winnerJob = voteUserJob;
+                
             } else if (voteUserJob == EJobType.Assassin)
             {
                 GetText((int)Texts.FirstText).SetText("오답입니다!");
@@ -82,6 +84,8 @@ public class UI_LastChanceResult : UIScreen
                 
                 GetImage((int)Images.BG).sprite = Managers.Data.GetFrameBGSprite(EJobType.VIP);
                 GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(EJobType.VIP);
+                
+                Managers.Game.winnerJob = EJobType.VIP;
             }
         }
         

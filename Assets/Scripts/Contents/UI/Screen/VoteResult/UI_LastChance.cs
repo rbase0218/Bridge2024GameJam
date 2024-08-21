@@ -49,7 +49,8 @@ public class UI_LastChance : UIScreen
 
     private void OnClickWriteButton()
     {
-        OnNextScreen<UI_LastChanceResult>().SetInfo(false);
+        var writeText = Get<TMP_InputField>((int)InputFields.InputField).text;
+        OnNextScreen<UI_LastChanceResult>().SetInfo(writeText == Managers.Game.gameTopic);
     }
 
     private void OnValueChangedInputField(string text)
