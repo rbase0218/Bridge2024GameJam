@@ -15,19 +15,16 @@ public class UI_JobInteraction : UIScreen
         Board_B
     }
     
-    #region # [ Board A Component ] #
-    
     private enum Texts
     {
-        WordText
+        WordText,
+        Text
     }
 
     private enum Buttons
     {
         CloseCard
     }
-    
-    #endregion
     #region # [ Board B Component ] #
     
     private UIPlayerSelector _playerSelector;
@@ -57,9 +54,12 @@ public class UI_JobInteraction : UIScreen
         if (UseAutoNextScreen)  
             BindNextScreen<UI_ClockSwitcher>();
         
+        
          //1. 현재 진행중인 유저의 정보를 가져온다.
         var user = Managers.Game.currentUser;
 
+        GetText((int)Texts.Text).text = Managers.Data.GetJobText(user.jobType);
+        
          //2. 유저의 정보에 따라서 Board A와 Board B를 활성화한다.
          if (user.jobType == EJobType.Actor || user.jobType == EJobType.VIP)
          {

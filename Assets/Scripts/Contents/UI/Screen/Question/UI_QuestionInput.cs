@@ -35,6 +35,8 @@ public class UI_QuestionInput : UIScreen
 
     protected override bool EnterWindow()
     {
+        Get<TMP_InputField>((int)InputFields.InputField).text = string.Empty;
+        
         var currUserName = Managers.Game.currentUser.userName;
         GetText((int)Texts.NameText).SetText(currUserName);
         

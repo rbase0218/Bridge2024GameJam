@@ -57,6 +57,7 @@ public class UI_Gauge : UIBase
             Debug.Log("이미 Gauge가 실행중 입니다.");
             return false;
         }
+        
         if (_rectTransform.sizeDelta.x <= 0)
             _rectTransform.sizeDelta = _originSize;
 
