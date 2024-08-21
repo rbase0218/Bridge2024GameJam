@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class UI_PlayerSelectUI : UIScreen
 {
+    private enum Texts
+    {
+        NameText
+    }
+    
     private enum PlayerSelector
     {
         SelectContainer
@@ -15,7 +20,8 @@ public class UI_PlayerSelectUI : UIScreen
     {
         if (!base.Init())
             return false;
-        
+        //BindText(typeof(Texts));
+
         Bind<UIPlayerSelector>(typeof(PlayerSelector));
         Get<UIPlayerSelector>((int)PlayerSelector.SelectContainer).Binding();
         
@@ -25,8 +31,10 @@ public class UI_PlayerSelectUI : UIScreen
     protected override bool EnterWindow()
     {
         var selectContainer = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainer);
+        //GetText((int)Texts.NameText).text = Managers.Game.currentUser.userName;
+        Debug.Log("이번 차례는 " +Managers.Game.currentUser.userName);
         
-        //selectContainer.ShowButton(Managers.Game._userList.Select((x) => x.userName).ToArray());
+        selectContainer.ShowButton(Managers.Game.GetAnswerUserList().Select(user => user.userName).ToArray());
         selectContainer.onClickSubmitButton.AddListener(OnClickSubmitButton);
         
         return true;
@@ -36,6 +44,7 @@ public class UI_PlayerSelectUI : UIScreen
     {
         // 질문 전달자 확인.
         // 다음 Scene으로 이동한다.
+        Managers.Game.SetAnswerUser(button.GetComponentInChildren<Text>().text);
         OnNextScreen<UI_TextConfirm01>();
     }
 }

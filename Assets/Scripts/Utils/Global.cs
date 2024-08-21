@@ -87,17 +87,21 @@ public class UserInfo
     public string userName;
     // 유저 직업
     public EJobType jobType;
+    public bool canQuestion;
+    public bool isDie;
     
     public UserInfo(string userName)
     {
         this.userName = userName;
-        this.jobType = EJobType.VIP;
+        jobType = EJobType.VIP;
+        canQuestion = true;
     }
     
     public UserInfo(string userName, EJobType jobType)
     {
         this.userName = userName;
         this.jobType = jobType;
+        canQuestion = true;
     }
 }
 

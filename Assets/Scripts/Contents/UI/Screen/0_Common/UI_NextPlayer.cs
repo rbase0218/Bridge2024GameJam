@@ -57,11 +57,9 @@ public class UI_NextPlayer : UIScreen
     
     private void OnClickNextButton()
     {
-        Managers.UI.CloseWindow();
-        
         if (isNext)
-            Managers.UI.ShowWindow<UI_Sequence01>();
+            OnNextScreen<UI_Sequence01>();
         else
-            Managers.UI.ShowWindow<UI_Switcher01>();
+            OnNextScreen<UI_Switcher01>();
     }
 }

@@ -9,13 +9,15 @@ public partial class GameManager : MonoBehaviour
 
     // 현재 직업이 암살자인 유저를 찾아둔다.
     public UserInfo assUser;
-    public UserInfo currentUser;
     public UserInfo actorUser;
+    public UserInfo currentUser;
+    public UserInfo prevUser;
     // 현재 인질로 지정된 유저를 찾아둔다.
-    private UserInfo hostageUser;
+    public UserInfo hostageUser;
     public UserInfo voteUser;
+    public UserInfo questionUser;
 
-    private string questionText;
+    public string questionText;
     
     private void Awake()
     {
@@ -46,8 +48,11 @@ public partial class GameManager : MonoBehaviour
     
     public void AddHostage(UserInfo hostage)
     {
-        if(_hostageList.Contains(hostage) == false)
+        if (_hostageList.Contains(hostage) == false)
+        {
+            hostageUser = hostage;
             _hostageList.Add(hostage);
+        }
         else
         {
             Debug.LogError("이미 인질로 지정된 유저입니다.");
@@ -65,5 +70,46 @@ public partial class GameManager : MonoBehaviour
 
         GiveUsersJob();
         currentUser = _userList[0];
+    }
+    
+    public bool GetQuestionUser()
+    {
+        prevUser = currentUser;
+        currentUser = RandomQuestionUser();
+        
+        if(currentUser == null)
+            return false;
+        else
+        {
+            currentUser.canQuestion = false;
+            return true;
+        }
+    }
+    
+    public List<UserInfo> GetAnswerUserList()
+    {
+        var copyUserList = new List<UserInfo>(_userList);
+        copyUserList.Remove(hostageUser);
+        copyUserList.Remove(currentUser);
+        copyUserList.RemoveAll(x=>x.isDie);
+        return copyUserList;
+    }
+
+    public void SetQuestion(string inputText)
+    {
+        questionText = inputText;
+    }
+    
+    public void SetCanAllQuestion()
+    {
+        foreach (var user in _userList)
+        {
+            user.canQuestion = true;
+        }
+    }
+
+    public void SetAnswerUser(string text)
+    {
+        questionUser = _userList.Find(x => x.userName == text);
     }
 }
