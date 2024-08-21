@@ -50,7 +50,7 @@ public class UI_PlayerSelectUI : UIScreen
         // 질문 전달자 확인.
         Managers.Game.selectUserName = text;
         // 다음 Scene으로 이동한다.
-        Managers.Game.SetAnswerUser(button.GetComponentInChildren<Text>().text);
+        Managers.Game.SetAnswerUser(text);
         OnNextScreen<UI_TextConfirm01>();
     }
 }
