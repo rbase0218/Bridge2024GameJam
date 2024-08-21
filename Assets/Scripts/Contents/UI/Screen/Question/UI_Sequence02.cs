@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Sequence02 : UIScreen
 {
     private enum PersonViewer
     {
         PersonViewer
+    }
+    
+    private enum Buttons
+    {
+        NextButton
     }
     
     protected override bool Init()
@@ -16,6 +22,8 @@ public class UI_Sequence02 : UIScreen
 
         Bind<UIPersonViewer>(typeof(PersonViewer));
         Get<UIPersonViewer>((int)PersonViewer.PersonViewer).BindInstance();
+        BindButton(typeof(Buttons));
+        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         
         return true;
     }
@@ -34,5 +42,10 @@ public class UI_Sequence02 : UIScreen
             BindNextScreen<UI_QuestionInput>();
         
         return true;
+    }
+    
+    private void OnClickNextButton()
+    {
+        OnNextScreen<UI_QuestionInput>();
     }
 }

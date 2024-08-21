@@ -66,6 +66,13 @@ public class UI_Gauge : UIBase
         return true;
     }
 
+    public void SetGauge(float time)
+    {
+        GaugeTime = time;
+        
+        //TODO: 게이지 끝났을 때 GaugeTime 초기화 필요.
+    }
+
     public void PlayHide()
     {
         var isPlay = Play();

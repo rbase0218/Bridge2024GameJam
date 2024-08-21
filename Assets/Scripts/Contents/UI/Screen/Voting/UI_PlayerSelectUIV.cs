@@ -63,7 +63,6 @@ public class UI_PlayerSelectUIV : UIScreen
 
             var selectorB = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerB);
             selectorB.ShowButton(copyUserList.Select(x => x.userName).ToArray());
-            selectorB.onClickSubmitButton.AddListener(OnClickSubmitButtonB);
             
             _gauge.onEndGauge.AddListener(() =>
             {
@@ -86,7 +85,6 @@ public class UI_PlayerSelectUIV : UIScreen
             
             var selectorA = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA);
             selectorA.ShowButton(userList);
-            selectorA.onClickSubmitButton.AddListener(OnClickSubmitButtonA);
             
             GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
             GetText((int)Texts.Text).SetText(currentUser.userName);
@@ -99,15 +97,23 @@ public class UI_PlayerSelectUIV : UIScreen
     // 광대 및 귀빈
     private void OnClickSubmitButtonA(string text)
     {
+        if (text == null)
+            return;
+        
         var findUser = Managers.Game._userList.Find( x => x.userName == text);
         Managers.Game._voteList.Add(Managers.Game._voteList.Count, findUser);
+        OnNextScreen<UI_ClockSwitcherV>();
     }
 
     // 암살자
     private void OnClickSubmitButtonB(string text)
     {
+        if (text == null)
+            return;
+        
         var findUser = Managers.Game._userList.Find( x => x.userName == text);
         Managers.Game.AddHostage(findUser);
+        OnNextScreen<UI_ClockSwitcherV>();
         isSelect = true;
     }
     
@@ -115,7 +121,7 @@ public class UI_PlayerSelectUIV : UIScreen
     {
         var random = Random.Range(0, copyUserList.Count);
         var selectUser = copyUserList[random];
-        Debug.Log("랜덤 선택 : " + selectUser.userName);
+        //Debug.Log("랜덤 선택 : " + selectUser.userName);
         Managers.Game.AddHostage(selectUser);
         isSelect = true;
     }

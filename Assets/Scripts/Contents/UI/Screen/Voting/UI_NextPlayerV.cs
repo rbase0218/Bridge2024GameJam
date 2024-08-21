@@ -51,17 +51,14 @@ public class UI_NextPlayerV : UIScreen
             if (UseAutoNextScreen)
                 BindNextScreen<UI_Switcher01VR>();
         }
-
         return true;
     }
     
     private void OnClickNextButton()
     {
-        Managers.UI.CloseWindow();
-        
         if (isNext)
-            Managers.UI.ShowWindow<UI_PlayerSelectUIV>();
+            OnNextScreen<UI_PlayerSelectUIV>();
         else
-            Managers.UI.ShowWindow<UI_Switcher01VR>();
+            OnNextScreen<UI_Switcher01VR>();
     }
 }

@@ -8,6 +8,11 @@ public class UI_Introduce : UIScreen
     {
         Text
     }
+    
+    private enum Buttons
+    {
+        NextButton
+    }
 
     protected override bool Init()
     {
@@ -15,6 +20,8 @@ public class UI_Introduce : UIScreen
             return false;
         
         BindText(typeof(Texts));
+        BindButton(typeof(Buttons));
+        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         return true;
     }
     
@@ -26,5 +33,10 @@ public class UI_Introduce : UIScreen
             BindNextScreen<UI_PlayerSelectUIV>();
         
         return true;
+    }
+    
+    private void OnClickNextButton()
+    {
+        OnNextScreen<UI_PlayerSelectUIV>();
     }
 }

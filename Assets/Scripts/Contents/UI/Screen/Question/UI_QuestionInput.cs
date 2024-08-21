@@ -24,11 +24,11 @@ public class UI_QuestionInput : UIScreen
     {
         if (!base.Init())
             return false;
-        
+
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
         Bind<TMP_InputField>(typeof(InputFields));
-        
+
         GetButton((int)Buttons.WriteButton).onClick.AddListener(OnClickWriteButton);
         return true;
     }
@@ -36,24 +36,27 @@ public class UI_QuestionInput : UIScreen
     protected override bool EnterWindow()
     {
         Get<TMP_InputField>((int)InputFields.InputField).text = string.Empty;
-        
+
         var currUserName = Managers.Game.currentUser.userName;
         GetText((int)Texts.NameText).SetText(currUserName);
-        
+
         return true;
     }
 
     private void OnClickWriteButton()
     {
         // 다음 화면으로 이동
-        SaveQuestion();
+        if (SaveQuestion() == false)
+            return;
         OnNextScreen<UI_PlayerSelectUI>();
     }
 
-    private void SaveQuestion()
+    private bool SaveQuestion()
     {
         var inputText = Get<TMP_InputField>((int)InputFields.InputField).text;
-        // 질문 Question 등록
+        if (inputText == string.Empty)
+            return false;
         Managers.Game.WriteQuestion(inputText);
+        return true;
     }
 }

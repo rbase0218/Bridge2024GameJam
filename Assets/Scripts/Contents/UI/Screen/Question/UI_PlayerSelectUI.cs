@@ -33,7 +33,7 @@ public class UI_PlayerSelectUI : UIScreen
     {
         var selectContainer = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainer);
         //GetText((int)Texts.NameText).text = Managers.Game.currentUser.userName;
-        Debug.Log("이번 차례는 " +Managers.Game.currentUser.userName);
+        //Debug.Log("이번 차례는 " +Managers.Game.currentUser.userName);
         
         // 자기 자신을 제외한 리스트를 가져온다.
         selectContainer.ShowButton(Managers.Game.GetAnswerUserList().Select(user => user.userName).ToArray());
@@ -46,6 +46,9 @@ public class UI_PlayerSelectUI : UIScreen
 
     private void OnClickSubmitButton(string text)
     {
+        if (text == null)
+            return;
+        
         // 질문 전달자 확인.
         Managers.Game.selectUserName = text;
         // 다음 Scene으로 이동한다.

@@ -40,7 +40,7 @@ public class UIPlayerSelector : UIBase
             _buttons[i] = Utils.FindChild(gameObject, $"Button" + (i + 1), true).GetComponent<Button>();
             _buttons[i].onClick.AddListener(() =>
             {
-                _selectButtonText = EventSystem.current.currentSelectedGameObject.GetComponent<Button>().GetComponentInChildren<TMP_Text>().text;
+                _selectButtonText = EventSystem.current?.currentSelectedGameObject.GetComponent<Button>().GetComponentInChildren<TMP_Text>().text;
             });
         }
         
@@ -49,6 +49,7 @@ public class UIPlayerSelector : UIBase
             if (_selectButtonText == string.Empty)
                 return;
             onClickSubmitButton?.Invoke(_selectButtonText);
+            _selectButtonText = string.Empty;
         });
     }
 
@@ -69,8 +70,10 @@ public class UIPlayerSelector : UIBase
         switch (names.Length)
         {
             case 2:
+                spacingValue = -500f;
+                break;
             case 3:
-                spacingValue = 101f;
+                spacingValue = -300f;
                 break;
             case 4:
                 spacingValue = 71f;

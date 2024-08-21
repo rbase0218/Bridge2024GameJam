@@ -35,7 +35,7 @@ public class SoundManager : MonoBehaviour
 
         if(array_bgm == null || array_sfx == null)
         {
-            Debug.Log("SoundManager - Sound array is null");
+            //Debug.Log("SoundManager - Sound array is null");
             return;
         }
         

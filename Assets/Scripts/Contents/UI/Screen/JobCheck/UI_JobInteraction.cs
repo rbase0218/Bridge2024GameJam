@@ -106,13 +106,16 @@ public class UI_JobInteraction : UIScreen
 
     private void OnClickSubmitButton(string text)
     {
+        if (text == null)
+            return;
+        
         _playerSelector.onClickSubmitButton.RemoveAllListeners();
         
         // Hostage를 해당 기능을 통해서 선택한다.
         var selectUserName = text;
         var selectUser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
         
-        Debug.Log(selectUserName + " : " + selectUser.userName);
+        //Debug.Log(selectUserName + " : " + selectUser.userName);
         
         Managers.Game.AddHostage(selectUser);
 
@@ -124,7 +127,7 @@ public class UI_JobInteraction : UIScreen
     {
         var random = Random.Range(0, Managers.Game._userList.Count);
         var selectUser = Managers.Game._userList[random];
-        Debug.Log("랜덤 선택 : " + selectUser.userName);
+        //Debug.Log("랜덤 선택 : " + selectUser.userName);
         _playerSelector.onClickSubmitButton.RemoveAllListeners();
         Managers.Game.AddHostage(selectUser);
         isSelect = true;

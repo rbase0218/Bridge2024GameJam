@@ -60,8 +60,11 @@ public partial class GameManager : MonoBehaviour
     
     public void AddHostage(UserInfo hostage)
     {
+        if(hostage == null)
+            return;
         if (_hostageList.Contains(hostage) == false)
         {
+            Debug.Log("인질로 지정된 유저: " + hostage.userName);
             hostageUser = hostage;
             _hostageList.Add(hostage);
         }
