@@ -9,7 +9,7 @@ public abstract class Framework : MonoBehaviour
         SetUp();
     }
 
-    protected abstract void Start();
+    protected virtual void Start() { }
     
     protected virtual void SetUp(){ }
 }
