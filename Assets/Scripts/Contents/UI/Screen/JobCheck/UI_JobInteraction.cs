@@ -71,18 +71,6 @@ public class UI_JobInteraction : UIScreen
              GetText((int)Texts.WordText).text = Managers.Game.gameTopic;
              
              GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
-             
-             bool onlyFirst = true;
-             
-             _gauge.onGaugeTimer += (x) =>
-             {
-                 if ((1 - x) < 0.5f && onlyFirst)
-                 {  
-                     onlyFirst = false;
-                
-                     OnClickOpenCardButton();
-                 }
-             };
          }
          else
          {

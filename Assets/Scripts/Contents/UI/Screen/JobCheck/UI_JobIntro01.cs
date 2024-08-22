@@ -55,16 +55,6 @@ public class UI_JobIntro01 : UIScreen
         GetText((int)Texts.JobNameText).SetText(Managers.Data.GetJobText(currentUser.jobType));
         GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(currentUser.jobType);
         
-        // 유저가 일정 시간 동안 카드를 열지 않는다면?
-        bool onlyFirst = true;
-        _gauge.onGaugeTimer += (x) =>
-        {
-            if ((1 - x) < 0.5f && onlyFirst)
-            {
-                onlyFirst = false;
-                OnClickCloseCard();
-            }
-        };
         
         // 다음 Screen 연결하기
         if (UseAutoNextScreen)
@@ -77,6 +67,6 @@ public class UI_JobIntro01 : UIScreen
     {
         GetObject((int)Objects.CloseCard).SetActive(false);
         GetObject((int)Objects.JobFrame).SetActive(true);
-        _gauge.Play();
+        BindNextScreen<UI_JobInteraction>();
     }
 }

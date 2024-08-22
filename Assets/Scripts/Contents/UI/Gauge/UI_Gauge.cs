@@ -110,7 +110,7 @@ public class UI_Gauge : UIBase
         _gaugeFillImage.fillAmount = 1f;
         _timer = .0f;
         _isPlay = false;
-        
+        GaugeTime = 3f;
         onEndGauge.Invoke();
     }
 }
