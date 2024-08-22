@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class UIManager : MonoBehaviour
         _windowContainer = new WindowContainer();
         // 현재 활성화된 Window의 인스턴스를 저장하고 관리한다.
         _activeWindowStack = new Stack<UIWindow>();
+
+        SceneManager.activeSceneChanged += (x, y) =>
+        {
+            _windowContainer.Clear();
+            _activeWindowStack.Clear();
+        };
     }
 
     public bool RegisterWindow(UIWindow window)
