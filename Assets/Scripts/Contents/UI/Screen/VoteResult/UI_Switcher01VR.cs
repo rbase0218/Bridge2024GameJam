@@ -15,6 +15,11 @@ public class UI_Switcher01VR : UIScreen
     protected override bool EnterWindow()
     {
         UserInfo voteUser = Managers.Game._voteList[Managers.Game._voteList.Count - 1];
+        
+        // + (2024-08-22) voteUser가 Null 일 경우 임시 예외처리
+        if (voteUser == null)
+            voteUser = Managers.Game.currentUser;
+        
         Managers.Game.voteUser = voteUser;
         Managers.Game._voteList.Clear();
         
