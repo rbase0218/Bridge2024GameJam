@@ -48,6 +48,7 @@ public class UI_JobInteraction : UIScreen
     
     protected override bool EnterWindow()
     {
+        _gauge.SetGauge(10f);
         isSelect = false;
         GetButton((int)Buttons.CloseCard).gameObject.SetActive(true);
         
@@ -76,7 +77,7 @@ public class UI_JobInteraction : UIScreen
              _gauge.onGaugeTimer += (x) =>
              {
                  if ((1 - x) < 0.5f && onlyFirst)
-                 {
+                 {  
                      onlyFirst = false;
                 
                      OnClickOpenCardButton();

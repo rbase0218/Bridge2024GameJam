@@ -21,6 +21,7 @@ public class UI_Switcher02 : UIScreen
     
     protected override bool EnterWindow()
     {
+        _gauge.SetGauge(60f);
         if (UseAutoNextScreen)
             BindNextScreen<UI_Switcher01V>();
         

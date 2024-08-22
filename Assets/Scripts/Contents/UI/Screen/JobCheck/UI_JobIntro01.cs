@@ -53,7 +53,6 @@ public class UI_JobIntro01 : UIScreen
         
         GetText((int)Texts.NameText).SetText(currentUser.userName);
         GetText((int)Texts.JobNameText).SetText(Managers.Data.GetJobText(currentUser.jobType));
-        
         GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(currentUser.jobType);
         
         // 유저가 일정 시간 동안 카드를 열지 않는다면?
@@ -78,5 +77,6 @@ public class UI_JobIntro01 : UIScreen
     {
         GetObject((int)Objects.CloseCard).SetActive(false);
         GetObject((int)Objects.JobFrame).SetActive(true);
+        _gauge.Play();
     }
 }
