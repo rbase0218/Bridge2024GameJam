@@ -86,6 +86,7 @@ public class UI_Gauge : UIBase
         
         _isPlay = false;
         _timer = .0f;
+        GaugeTime = 3f;
         _gaugeFillImage.fillAmount = 1f;
         onStartGauge.RemoveAllListeners();
         onEndGauge.RemoveAllListeners();
