@@ -68,7 +68,7 @@ public class UI_Gauge : UIBase
         return true;
     }
 
-    public void SetGauge(float time)
+    public void SetGauge(float time = 3f)
     {
         if (isDebugMode)
             return;
@@ -91,7 +91,7 @@ public class UI_Gauge : UIBase
         
         _isPlay = false;
         _timer = .0f;
-        GaugeTime = 3f;
+        SetGauge();
         _gaugeFillImage.fillAmount = 1f;
         onStartGauge.RemoveAllListeners();
         onEndGauge.RemoveAllListeners();
@@ -116,7 +116,8 @@ public class UI_Gauge : UIBase
         _gaugeFillImage.fillAmount = 1f;
         _timer = .0f;
         _isPlay = false;
-        GaugeTime = 3f;
+        
+        SetGauge();
         onEndGauge.Invoke();
     }
 }
