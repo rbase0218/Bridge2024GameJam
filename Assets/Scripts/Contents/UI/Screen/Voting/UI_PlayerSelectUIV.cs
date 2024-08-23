@@ -100,8 +100,10 @@ public class UI_PlayerSelectUIV : UIScreen
         if (text == null)
             return;
         
+        // 해당 유저에 대한 정보를 찾는다.
         var findUser = Managers.Game._userList.Find( x => x.userName == text);
-        Managers.Game._voteList.Add(Managers.Game._voteList.Count, findUser);
+        Managers.Game.AddVoteUser(findUser);
+        
         OnNextScreen<UI_ClockSwitcherV>();
     }
 
