@@ -14,11 +14,11 @@ public sealed class GameScene : Framework
     private void Update()
     {
 #if !UNITY_EDITOR
-        // if (isPlay == false)
-        // {
-        //     isPlay = true;
-        //     Managers.UI.ShowWindow<UI_Intro01>();
-        // }
+        if (isPlay == false)
+        {
+            isPlay = true;
+            Managers.UI.ShowWindow<UI_Intro01>();
+        }
 #else
         if(Input.GetKeyDown(KeyCode.Space))
         {
