@@ -61,7 +61,8 @@ public class UI_LastChanceResult : UIScreen
             // Assassin의 승리
             if (voteUserJob == EJobType.Assassin)
             {
-                GetText((int)Texts.FirstText).SetText("정답입니다!");
+                // 다양한 게임 분기를 위해 정답입니다 문구를 제거함.
+                GetText((int)Texts.FirstText).SetText("");
                 GetText((int)Texts.JobText).SetText(jobText);
                 GetText((int)Texts.SecondText).SetText("암살자가\n귀빈들과의 대결에서\n승리했습니다.");
                 Managers.Game.winnerJob = voteUserJob;
