@@ -112,12 +112,16 @@ public partial class GameManager : MonoBehaviour
     public bool IsDupleVoteUser()
     {
         var voteCountList = _voteList.Select(x => x.voteCount).ToList();
-        var sameVoteMaxCount = voteCountList.GroupBy(x => x).Where(x => x.Count() > 1).Select(x => x.Key).ToList().Max();
+        var sameVoteCount = voteCountList.GroupBy(x => x).Where(x => x.Count() > 1).Select(x => x.Key).ToList();
+        if (sameVoteCount.Count <= 0) 
+            return false;
+
+        int maxCount = sameVoteCount.Max();
         
         var voteMaxCount = voteCountList.Max();
         
         // 중복 수의 마지막 값과 voteList의 최대 값이 동일하다면 => 중복
-        if (sameVoteMaxCount == voteMaxCount)
+        if (maxCount == voteMaxCount)
             return true;
         return false;
     }
