@@ -126,5 +126,7 @@ public class UI_JobInteraction : UIScreen
     {
         GetButton((int)Buttons.CloseCard).gameObject.SetActive(false);
         GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
+        
+        BindNextScreen<UI_ClockSwitcher>();
     }
 }
