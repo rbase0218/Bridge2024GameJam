@@ -28,7 +28,7 @@ public class UI_Switcher01VR : UIScreen
         // 여기서 암살자가 인질을 모두 잡았을 경우 게임 종료 분기 필요
         if (Managers.Game._hostageList.Count == Managers.Game._userList.Count)
         {
-            GetText((int)Texts.FirstText).SetText("암살자\n 모든 인질을\n 잡았습니다.");
+            GetText((int)Texts.FirstText).SetText("암살자가\n 모든 인질을\n 잡았습니다.");
             GetText((int)Texts.SecondText).SetText("게임이 종료되었습니다.");
             Managers.Game.voteUser = Managers.Game._userList.Find(x => x.jobType == EJobType.Assassin);
             var uiLastChanceResult = BindNextScreen<UI_LastChanceResult>();
