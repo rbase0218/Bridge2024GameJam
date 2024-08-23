@@ -35,6 +35,8 @@ public class UI_Gauge : UIBase
     private Vector2 _hideSize;
     
     #endregion
+
+    public bool isDebugMode = false;
     
     protected override bool Init()
     {
@@ -68,6 +70,9 @@ public class UI_Gauge : UIBase
 
     public void SetGauge(float time)
     {
+        if (isDebugMode)
+            return;
+        
         GaugeTime = time;
         
         //TODO: 게이지 끝났을 때 GaugeTime 초기화 필요.
