@@ -67,6 +67,7 @@ public partial class GameManager : MonoBehaviour
     {
         if(hostage == null)
             return;
+        
         if (_hostageList.Contains(hostage) == false)
         {
             Debug.Log("인질로 지정된 유저: " + hostage.userName);
@@ -77,6 +78,11 @@ public partial class GameManager : MonoBehaviour
         {
             Debug.LogError("이미 인질로 지정된 유저입니다.");
         }
+    }
+
+    public void UndoHostage()
+    {
+        _hostageList.Remove(_hostageList[^1]);
     }
 
     public void AddVoteUser(UserInfo voteUser)
