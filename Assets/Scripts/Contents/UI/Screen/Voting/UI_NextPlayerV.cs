@@ -39,6 +39,7 @@ public class UI_NextPlayerV : UIScreen
         if (Managers.Game.NextUser())
         {
             isNext = true;
+            GetText((int)Texts.NameB).faceColor = Color.white;
             GetText((int)Texts.NameB).SetText(Managers.Game.currentUser.userName);
             if (UseAutoNextScreen)
                 BindNextScreen<UI_PlayerSelectUIV>();
