@@ -78,13 +78,14 @@ public class UI_PlayerSelectUIV : UIScreen
         }
         else
         {
-            var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName).Select( (x) => x.userName).ToArray();
+            var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName);
+            var aliveUserArray = userList.ToList().FindAll(x => x.isDie == false).Select(x => x.userName).ToArray();
             
             GetObject((int)Objects.Board_B).SetActive(false);
             GetObject((int)Objects.Board_A).SetActive(true);
             
             var selectorA = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA);
-            selectorA.ShowButton(userList);
+            selectorA.ShowButton(aliveUserArray);
             
             GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
             GetText((int)Texts.Text).SetText(currentUser.userName);

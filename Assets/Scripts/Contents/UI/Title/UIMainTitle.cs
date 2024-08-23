@@ -60,10 +60,7 @@ public class UIMainTitle : UIWindow
     private void OnClickExitButton()
     {
         var exit = Managers.UI.ShowWindow<UIGameExit>();
-        exit.OnClickButtons(() =>
-        {
-            Debug.Log("게임 종료");
-        });
+        exit.OnClickButtons(Application.Quit);
     }
     
     // 상단 부분에 있는 Button들

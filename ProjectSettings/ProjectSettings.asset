@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: happyBridge
   productName: CovertBallroom
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -139,11 +139,8 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.2.1
-  preloadedAssets:
-  - {fileID: -2176751238378860083, guid: 31a328bd0b949604eb78b5fed9d0b65c, type: 2}
-  - {fileID: 11400000, guid: 677c93e888631364d83f4f67dc89defd, type: 2}
-  - {fileID: 11400000, guid: ddc038ee0a04ef74e9894089ec893fc3, type: 2}
+  bundleVersion: 1.2.3
+  preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1

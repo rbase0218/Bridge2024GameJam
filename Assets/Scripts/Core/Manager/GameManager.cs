@@ -35,9 +35,11 @@ public partial class GameManager : MonoBehaviour
         var user1 = new UserInfo("User1");
         var user2 = new UserInfo("User2", EJobType.Assassin);
         var user3 = new UserInfo("User3");
-        var user4 = new UserInfo("User4");
+        var user4 = new UserInfo("User4", EJobType.Actor);
+        var user5 = new UserInfo("User5");
+        var user6 = new UserInfo("User6");
         
-        AddUser(user1, user2, user3);
+        AddUser(user1, user2, user3, user4, user5, user6);
         assUser = user4;
         currentUser = user1;
         //AddHostage(user3);
