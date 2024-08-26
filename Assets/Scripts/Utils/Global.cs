@@ -118,3 +118,15 @@ public class FrameData
         this.type = type;
     }
 }
+
+public class VoteData
+{
+    public int voteCount;
+    public UserInfo targetUser;
+    
+    public VoteData(int voteCount, UserInfo targetUser)
+    {
+        this.voteCount = voteCount;
+        this.targetUser = targetUser;
+    }
+}

@@ -41,7 +41,7 @@ public class UI_NextPlayer : UIScreen
             isNext = true;
             GetText((int)Texts.NameB).SetText(Managers.Game.currentUser.userName);
             if (UseAutoNextScreen)
-                BindNextScreen<UI_Sequence01>();
+                BindNextScreen<UI_JobIntro01>();
         }
         else
         {
@@ -59,7 +59,7 @@ public class UI_NextPlayer : UIScreen
     {
         if (isNext)
         {
-            OnNextScreen<UI_Sequence01>();
+            OnNextScreen<UI_JobIntro01>();
         }
         else
         {

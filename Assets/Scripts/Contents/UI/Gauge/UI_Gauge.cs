@@ -35,6 +35,8 @@ public class UI_Gauge : UIBase
     private Vector2 _hideSize;
     
     #endregion
+
+    public bool isDebugMode = false;
     
     protected override bool Init()
     {
@@ -66,8 +68,11 @@ public class UI_Gauge : UIBase
         return true;
     }
 
-    public void SetGauge(float time)
+    public void SetGauge(float time = 3f)
     {
+        if (isDebugMode)
+            return;
+        
         GaugeTime = time;
         
         //TODO: 게이지 끝났을 때 GaugeTime 초기화 필요.
@@ -86,6 +91,7 @@ public class UI_Gauge : UIBase
         
         _isPlay = false;
         _timer = .0f;
+        SetGauge();
         _gaugeFillImage.fillAmount = 1f;
         onStartGauge.RemoveAllListeners();
         onEndGauge.RemoveAllListeners();
@@ -111,6 +117,7 @@ public class UI_Gauge : UIBase
         _timer = .0f;
         _isPlay = false;
         
+        SetGauge();
         onEndGauge.Invoke();
     }
 }

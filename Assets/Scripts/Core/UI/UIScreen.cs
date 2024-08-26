@@ -27,12 +27,14 @@ public abstract class UIScreen : UIWindow
     
     public void SetAutoNextPage(bool isAuto) => UseAutoNextScreen = isAuto;
     
-    public void BindNextScreen<T>() where T : UIScreen
+    public T BindNextScreen<T>() where T : UIScreen
     {
         _gauge.onEndGauge.RemoveAllListeners();
         _gauge.onEndGauge.AddListener(OnSceneChanged<T>);
         
         _gauge.Play();
+        
+        return Managers.UI.GetWindow<T>();
     }
 
     public T OnNextScreen<T>() where T : UIScreen

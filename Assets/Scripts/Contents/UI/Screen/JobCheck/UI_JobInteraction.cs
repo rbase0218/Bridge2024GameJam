@@ -48,6 +48,7 @@ public class UI_JobInteraction : UIScreen
     
     protected override bool EnterWindow()
     {
+        _gauge.SetGauge(10f);
         isSelect = false;
         GetButton((int)Buttons.CloseCard).gameObject.SetActive(true);
         
@@ -70,18 +71,6 @@ public class UI_JobInteraction : UIScreen
              GetText((int)Texts.WordText).text = Managers.Game.gameTopic;
              
              GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
-             
-             bool onlyFirst = true;
-             
-             _gauge.onGaugeTimer += (x) =>
-             {
-                 if ((1 - x) < 0.5f && onlyFirst)
-                 {
-                     onlyFirst = false;
-                
-                     OnClickOpenCardButton();
-                 }
-             };
          }
          else
          {
@@ -137,5 +126,7 @@ public class UI_JobInteraction : UIScreen
     {
         GetButton((int)Buttons.CloseCard).gameObject.SetActive(false);
         GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
+        
+        BindNextScreen<UI_ClockSwitcher>();
     }
 }

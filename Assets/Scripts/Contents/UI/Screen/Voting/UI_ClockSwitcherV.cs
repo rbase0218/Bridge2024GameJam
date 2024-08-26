@@ -14,6 +14,7 @@ public class UI_ClockSwitcherV : UIScreen
     
     protected override bool EnterWindow()
     {
+        _gauge.SetGauge(10f);
         if(UseAutoNextScreen)
             BindNextScreen<UI_NextPlayerV>();
         

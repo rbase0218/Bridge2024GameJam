@@ -16,7 +16,11 @@ public abstract class UIWindow : UIBase
             return false;
         
         // 실행 되었을 경우, 해당 Window를 등록한다.
-        Managers.UI.RegisterWindow(this);
+        var isOk = Managers.UI.RegisterWindow(this);
+        if (isOk == false)
+        {
+            Debug.Log("현재 Window가 등록이 되어있습니다. : " + GetType());
+        }
         // 등록 처리 후, Window를 숨긴다.
         Hide();
         
