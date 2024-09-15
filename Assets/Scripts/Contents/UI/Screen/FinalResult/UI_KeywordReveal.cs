@@ -36,6 +36,13 @@ public class UI_KeywordReveal : UIScreen
     
     private void OnClickButton()
     {
-        SceneManager.LoadScene("Title");
+        if (Managers.Ads.interAd.CanShowAd())
+        {
+            Managers.Ads.ShowAd();
+        }
+        else
+        {
+            SceneManager.LoadScene("Title");
+        }
     }
 }

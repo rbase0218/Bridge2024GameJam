@@ -3,33 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GoogleMobileAds.Api;
+using UnityEngine.SceneManagement;
 
 public class AdsManager : MonoBehaviour
 {
+    // 진짜 id ca-app-pub-6504355093417066/5452284685
 #if UNITY_ANDROID
     readonly string adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #else
-readonly string adUnitId = "unexpected_platform";
+readonly string adUnitId = "ca-app-pub-6504355093417066/5452284685";
 #endif
     
-    private InterstitialAd interstitialAd;
+    public InterstitialAd interAd;
 
     private void Awake()
     {
         MobileAds.Initialize(status => {});
     }
 
-    private void Start()
+    public void Init()
     {
         LoadInterstitialAd();
     }
 
     private void LoadInterstitialAd()
     {
-        if (interstitialAd != null)
+        if (interAd != null)
         {
-            interstitialAd.Destroy();
-            interstitialAd = null;
+            interAd.Destroy();
+            interAd = null;
         }
 
         var adRequest = new AdRequest();
@@ -44,31 +46,31 @@ readonly string adUnitId = "unexpected_platform";
             
             Debug.Log("로드 성공 " + ad.GetResponseInfo());
 
-            interstitialAd = ad;
+            interAd = ad;
             
-            RegisterEventHandlers(interstitialAd);
+            RegisterEventHandlers(interAd);
         });
     }
 
     private void RegisterEventHandlers(InterstitialAd interstitialAd)
     {
-        // 광고 지급 관련 이벤트
-        interstitialAd.OnAdPaid += (AdValue adValue) =>
-        {
-            Debug.Log($"Interstitial ad paid {adValue.Value} {adValue.CurrencyCode}.");
-        };
-
-        // 광고 노출 기록 이벤트
-        interstitialAd.OnAdImpressionRecorded += () =>
-        {
-            Debug.Log("Interstitial ad recorded an impression.");
-        };
-
-        // 광고가 클릭되었을 때 이벤트
-        interstitialAd.OnAdClicked += () =>
-        {
-            Debug.Log("Interstitial ad was clicked.");
-        };
+        // // 광고 지급 관련 이벤트
+        // interstitialAd.OnAdPaid += (AdValue adValue) =>
+        // {
+        //     Debug.Log($"Interstitial ad paid {adValue.Value} {adValue.CurrencyCode}.");
+        // };
+        //
+        // // 광고 노출 기록 이벤트
+        // interstitialAd.OnAdImpressionRecorded += () =>
+        // {
+        //     Debug.Log("Interstitial ad recorded an impression.");
+        // };
+        //
+        // // 광고가 클릭되었을 때 이벤트
+        // interstitialAd.OnAdClicked += () =>
+        // {
+        //     Debug.Log("Interstitial ad was clicked.");
+        // };
 
         // 전면 광고가 열렸을 때 호출
         interstitialAd.OnAdFullScreenContentOpened += () =>
@@ -79,6 +81,7 @@ readonly string adUnitId = "unexpected_platform";
         // 전면 광고가 닫혔을 때 호출
         interstitialAd.OnAdFullScreenContentClosed += () =>
         {
+            SceneManager.LoadScene("Title");
             Debug.Log("close Scene");
         };
 
@@ -91,10 +94,10 @@ readonly string adUnitId = "unexpected_platform";
     
     public void ShowAd()
     {
-        if (interstitialAd != null && interstitialAd.CanShowAd())
+        if (interAd != null && interAd.CanShowAd())
         {
-            Debug.Log("전면광고 띄우기");
-            interstitialAd.Show();
+            Debug.Log("전면 광고 띄우기");
+            interAd.Show();
         }
         else
         {
