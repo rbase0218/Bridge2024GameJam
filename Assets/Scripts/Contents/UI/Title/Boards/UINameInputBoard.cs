@@ -31,8 +31,9 @@ public class UINameInputBoard : UIBase
 
     private void OnClickEntryButton()
     {
-        Save();
-        SceneManager.LoadScene(1);
+        if(Save()) 
+            SceneManager.LoadScene(1);
+        return;
     }
     
     public void ShowInputField(int count = 3)
@@ -43,7 +44,7 @@ public class UINameInputBoard : UIBase
         }
     }
 
-    private void Save()
+    private bool Save()
     {
         List<string> userNames = new List<string>();
         for (int i = 0; i < 6; i++)
@@ -53,6 +54,14 @@ public class UINameInputBoard : UIBase
                 userNames.Add(Get<TMP_InputField>(i).text);
             }
         }
+
+        foreach (var user in userNames)
+        {
+            if (user == "")
+                return false;
+        }
+        
         Managers.Game.AddRangeUser(userNames);
+        return true;
     }
 }
