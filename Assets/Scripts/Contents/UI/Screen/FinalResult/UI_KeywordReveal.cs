@@ -36,13 +36,14 @@ public class UI_KeywordReveal : UIScreen
     
     private void OnClickButton()
     {
-        if (Managers.Ads.interAd.CanShowAd())
-        {
-            Managers.Ads.ShowAd();
-        }
-        else
-        {
             SceneManager.LoadScene("Title");
-        }
+        // if (Managers.Ads.interAd.CanShowAd())
+        // {
+        //     Managers.Ads.ShowAd();
+        // }
+        // else
+        // {
+        //     // 광고가 없을 경우
+        // }
     }
 }

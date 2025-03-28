@@ -20,13 +20,13 @@ public sealed class Managers : MonoBehaviour
     private static DataManager _dataManager = new DataManager();
     private static GameManager _gameManager;
     private static SoundManager _soundManager;
-    private static AdsManager _adsManager;
+    //private static AdsManager _adsManager;
     
     public static UIManager UI { get { Init(); return _uiManager; } }
     public static DataManager Data { get { Init(); return _dataManager; } }
     public static GameManager Game { get { Init(); return _gameManager; } }
     public static SoundManager Sound { get { Init(); return _soundManager; } }
-    public static AdsManager Ads { get { Init(); return _adsManager; } }
+    //public static AdsManager Ads { get { Init(); return _adsManager; } }
 
     #endregion
     
@@ -46,14 +46,14 @@ public sealed class Managers : MonoBehaviour
             _instance = Utils.TryOrAddComponent<Managers>(go);
             _gameManager = Utils.TryOrAddComponent<GameManager>(go);
             _soundManager = Utils.TryOrAddComponent<SoundManager>(go);
-            _adsManager = Utils.TryOrAddComponent<AdsManager>(go);
+            //_adsManager = Utils.TryOrAddComponent<AdsManager>(go);
             
             DontDestroyOnLoad(go);
             
             _uiManager.Init();
             _dataManager.Init();
             _soundManager.Init();
-            _adsManager.Init();
+            //_adsManager.Init();
             
             Application.targetFrameRate = 60;
         }

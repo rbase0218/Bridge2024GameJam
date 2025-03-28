@@ -18,7 +18,7 @@ readonly string adUnitId = "ca-app-pub-6504355093417066/5452284685";
 
     private void Awake()
     {
-        MobileAds.Initialize(status => {});
+        //MobileAds.Initialize(status => {});
     }
 
     public void Init()
