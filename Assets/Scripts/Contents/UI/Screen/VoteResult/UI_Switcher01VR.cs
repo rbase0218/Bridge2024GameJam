@@ -45,7 +45,7 @@ public class UI_Switcher01VR : UIScreen
             Managers.Game._voteList.Clear();
             Managers.Game.UndoHostage();
             
-            BindNextScreen<UI_Introduce>();
+            BindNextScreen<UI_Switcher02>();
             
             return true;
         }
