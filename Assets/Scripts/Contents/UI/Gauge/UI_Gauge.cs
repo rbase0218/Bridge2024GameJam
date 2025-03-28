@@ -34,6 +34,8 @@ public class UI_Gauge : UIBase
     private Vector2 _originSize;
     private Vector2 _hideSize;
     
+    private Coroutine _coroutine;
+    
     #endregion
 
     public bool isDebugMode = false;
@@ -64,7 +66,7 @@ public class UI_Gauge : UIBase
             _rectTransform.sizeDelta = _originSize;
 
         _isPlay = true;
-        StartCoroutine("StartGauge");
+        _coroutine = StartCoroutine(nameof(StartGauge));
         return true;
     }
 
@@ -73,9 +75,10 @@ public class UI_Gauge : UIBase
         if (isDebugMode)
             return;
         
+        _gaugeFillImage.fillAmount = 1f;
+        _timer = .0f;
+        _isPlay = false;
         GaugeTime = time;
-        
-        //TODO: 게이지 끝났을 때 GaugeTime 초기화 필요.
     }
 
     public void PlayHide()
@@ -87,12 +90,8 @@ public class UI_Gauge : UIBase
 
     public void Stop()
     {
-        StopCoroutine("StartGauge");
-        
-        _isPlay = false;
-        _timer = .0f;
+        StopCoroutine(_coroutine);
         SetGauge();
-        _gaugeFillImage.fillAmount = 1f;
         onStartGauge.RemoveAllListeners();
         onEndGauge.RemoveAllListeners();
     }
@@ -112,10 +111,6 @@ public class UI_Gauge : UIBase
             // Ratio를 전달한다.
             onGaugeTimer?.Invoke(_timer / GaugeTime);
         }
-        
-        _gaugeFillImage.fillAmount = 1f;
-        _timer = .0f;
-        _isPlay = false;
         
         SetGauge();
         onEndGauge.Invoke();

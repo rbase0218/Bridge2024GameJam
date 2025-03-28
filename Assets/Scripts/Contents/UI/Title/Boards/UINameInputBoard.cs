@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,10 +21,16 @@ public class UINameInputBoard : UIBase
     {
         EntryButton
     }
+    
+    private enum Texts
+    {
+        DuplicationErrorText
+    }
 
     public void Bind()
     {
         Bind<TMP_InputField>(typeof(InputFields));
+        Bind<TMP_Text>(typeof(Texts));
         BindButton(typeof(Buttons));
         
         GetButton((int)Buttons.EntryButton).onClick.AddListener(OnClickEntryButton);
@@ -31,7 +38,7 @@ public class UINameInputBoard : UIBase
 
     private void OnClickEntryButton()
     {
-        if(Save()) 
+        if(Save())
             SceneManager.LoadScene(1);
         return;
     }
@@ -42,6 +49,11 @@ public class UINameInputBoard : UIBase
         {
             Get<TMP_InputField>(i).gameObject.SetActive(i < count);
         }
+    }
+    
+    private void ShowDuplicationErrorText()
+    {
+        Get<TMP_Text>((int)Texts.DuplicationErrorText).gameObject.SetActive(true);
     }
 
     private bool Save()
@@ -55,10 +67,13 @@ public class UINameInputBoard : UIBase
             }
         }
 
-        foreach (var user in userNames)
+        if (userNames.Contains(""))
+            return false;
+
+        if (userNames.Count() != userNames.Distinct().Count())
         {
-            if (user == "")
-                return false;
+            ShowDuplicationErrorText();
+            return false;
         }
         
         Managers.Game.AddRangeUser(userNames);
