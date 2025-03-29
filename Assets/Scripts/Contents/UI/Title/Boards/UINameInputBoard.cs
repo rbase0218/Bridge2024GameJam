@@ -51,9 +51,11 @@ public class UINameInputBoard : UIBase
         }
     }
     
-    private void ShowDuplicationErrorText()
+    private void ShowErrorText(string text)
     {
-        Get<TMP_Text>((int)Texts.DuplicationErrorText).gameObject.SetActive(true);
+        var errorText = Get<TMP_Text>((int)Texts.DuplicationErrorText);
+        errorText.text = text;
+        errorText.gameObject.SetActive(true);
     }
 
     private bool Save()
@@ -72,8 +74,17 @@ public class UINameInputBoard : UIBase
 
         if (userNames.Count() != userNames.Distinct().Count())
         {
-            ShowDuplicationErrorText();
+            ShowErrorText("중복된 이름이 있습니다.");
             return false;
+        }
+
+        foreach (var s in userNames)
+        {
+            if (s.Contains(' '))
+            {
+                ShowErrorText("이름에 공백이 있습니다.");
+                return false;
+            }
         }
         
         Managers.Game.AddRangeUser(userNames);
