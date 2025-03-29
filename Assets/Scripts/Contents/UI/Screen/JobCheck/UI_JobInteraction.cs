@@ -69,12 +69,11 @@ public class UI_JobInteraction : UIScreen
         
              // 주제를 이 곳에서 전달한다.
              GetText((int)Texts.WordText).text = Managers.Game.gameTopic;
-             
              GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
          }
          else
          {
-             var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName).Select( (x) => x.userName).ToArray();
+             var userList = Managers.Game._userList.Select( (x) => x.userName).ToArray();
              _playerSelector.ShowButton(userList);
              _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
              
