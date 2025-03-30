@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class UI_JobInteraction : UIScreen
 {
@@ -55,7 +56,6 @@ public class UI_JobInteraction : UIScreen
         if (UseAutoNextScreen)  
             BindNextScreen<UI_ClockSwitcher>();
         
-        
          //1. 현재 진행중인 유저의 정보를 가져온다.
         var user = Managers.Game.currentUser;
 
@@ -68,11 +68,17 @@ public class UI_JobInteraction : UIScreen
              GetObject((int)Boards.Board_B).SetActive(false);
         
              // 주제를 이 곳에서 전달한다.
-             GetText((int)Texts.WordText).text = Managers.Game.gameTopic;
+             string originalText = Managers.Game.gameTopic;
+             string wrappedText = string.Join("\n", 
+                 Enumerable.Range(0, (originalText.Length + 6) / 7)
+                     .Select(i => originalText.Substring(i * 7, 
+                         Math.Min(6, originalText.Length - i * 7))));
+             GetText((int)Texts.WordText).text = wrappedText;
              GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
          }
          else
          {
+             BindNextScreen<UI_ClockSwitcher>();
              var userList = Managers.Game._userList.Select( (x) => x.userName).ToArray();
              _playerSelector.ShowButton(userList);
              _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);

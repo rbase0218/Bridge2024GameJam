@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,7 +31,12 @@ public class UI_KeywordReveal : UIScreen
     
     protected override bool EnterWindow()
     {
-        GetText((int)Texts.TopicText).SetText(Managers.Game.gameTopic);
+        string originalText = Managers.Game.gameTopic;
+        string wrappedText = string.Join("\n", 
+            Enumerable.Range(0, (originalText.Length + 6) / 7)
+                .Select(i => originalText.Substring(i * 7, 
+                    Math.Min(6, originalText.Length - i * 7))));
+        GetText((int)Texts.TopicText).SetText(wrappedText);
         
         return true;
     }

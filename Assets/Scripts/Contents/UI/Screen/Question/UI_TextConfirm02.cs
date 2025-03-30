@@ -17,8 +17,7 @@ public class UI_TextConfirm02 : UIScreen
 
     private enum Buttons
     {
-        YesButton,
-        NoButton
+        YesButton
     }
     
     protected override bool Init()
@@ -31,7 +30,6 @@ public class UI_TextConfirm02 : UIScreen
         BindButton(typeof(Buttons));
         
         GetButton((int)Buttons.YesButton).onClick.AddListener(OnClickYesButton);
-        GetButton((int)Buttons.NoButton).onClick.AddListener(OnClickNoButton);
 
         return true;
     }
@@ -50,11 +48,6 @@ public class UI_TextConfirm02 : UIScreen
     }
 
     private void OnClickYesButton()
-    {
-        OnNextScreen<UI_NextPlayerQ>();
-    }
-
-    private void OnClickNoButton()
     {
         OnNextScreen<UI_NextPlayerQ>();
     }
