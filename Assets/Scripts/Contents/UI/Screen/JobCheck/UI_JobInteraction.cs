@@ -78,7 +78,7 @@ public class UI_JobInteraction : UIScreen
          }
          else
          {
-             BindNextScreen<UI_ClockSwitcher>();
+             //BindNextScreen<UI_ClockSwitcher>();
              var userList = Managers.Game._userList.Select( (x) => x.userName).ToArray();
              _playerSelector.ShowButton(userList);
              _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
