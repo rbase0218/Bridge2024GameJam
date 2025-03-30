@@ -31,13 +31,13 @@ public class UI_AnswerPerson : UIScreen
         GetText((int)Texts.Text).SetText(answerUserName);
         
         if(UseAutoNextScreen)
-            BindNextScreen<UI_TextConfirm02>();
+            BindNextScreen<UI_TextConfirm01>();
         
         return true;
     }
     
     private void OnClickNextButton()
     {
-        OnNextScreen<UI_TextConfirm02>();
+        OnNextScreen<UI_TextConfirm01>();
     }
 }

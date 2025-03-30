@@ -34,12 +34,12 @@ public class UI_TextConfirm01 : UIScreen
         GetText((int)Texts.Text).SetText(answerUserName);
         
         if (UseAutoNextScreen)
-            BindNextScreen<UI_AnswerPerson>();
+            BindNextScreen<UI_TextConfirm02>();
         return true;
     }
 
     private void OnClickCloseCard()
     {
-        OnNextScreen<UI_AnswerPerson>();
+        OnNextScreen<UI_TextConfirm02>();
     }
 }

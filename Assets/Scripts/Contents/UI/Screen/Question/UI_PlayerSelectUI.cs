@@ -53,6 +53,6 @@ public class UI_PlayerSelectUI : UIScreen
         Managers.Game.selectUserName = text;
         // 다음 Scene으로 이동한다.
         Managers.Game.SetAnswerUser(text);
-        OnNextScreen<UI_TextConfirm01>();
+        OnNextScreen<UI_AnswerPerson>();
     }
 }
