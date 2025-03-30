@@ -41,7 +41,7 @@ public class UI_Switcher01VR : UIScreen
         var isDuple = Managers.Game.IsDupleVoteUser();
         if (isDuple)
         {
-            GetText((int)Texts.SecondText).SetText("동표가 나왔으므로\n 투표를 다시 시작합니다.");
+            GetText((int)Texts.SecondText).SetText("동표가 나왔으므로\n 토론과 투표를 다시 시작합니다.");
             Managers.Game._voteList.Clear();
             Managers.Game.UndoHostage();
             
