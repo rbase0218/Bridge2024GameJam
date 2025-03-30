@@ -5,7 +5,7 @@ using UnityEngine;
 public sealed class GameScene : Framework
 {
     private bool isPlay;
-    
+
     protected override void SetUp()
     {
         isPlay = false;
@@ -13,17 +13,18 @@ public sealed class GameScene : Framework
 
     private void Update()
     {
-#if !UNITY_EDITOR
+// #if !UNITY_EDITOR
         if (isPlay == false)
         {
             isPlay = true;
             Managers.UI.ShowWindow<UI_Intro01>();
         }
-#else
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Managers.UI.ShowWindow<UI_Intro01>();
-        }
-#endif
+// #else
+//         if(Input.GetKeyDown(KeyCode.Space))
+//         {
+//             Managers.UI.ShowWindow<UI_Intro01>();
+//         }
+// #endif
+//     }
     }
 }
