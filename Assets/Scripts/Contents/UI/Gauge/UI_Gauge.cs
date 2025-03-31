@@ -72,12 +72,12 @@ public class UI_Gauge : UIBase
 
     public void SetGauge(float time = 3f)
     {
-        if (isDebugMode)
-            return;
-        
         _gaugeFillImage.fillAmount = 1f;
         _timer = .0f;
         _isPlay = false;
+        
+        if (isDebugMode)
+            return;
         GaugeTime = time;
     }
 

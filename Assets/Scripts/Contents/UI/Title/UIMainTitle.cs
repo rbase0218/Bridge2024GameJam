@@ -39,6 +39,12 @@ public class UIMainTitle : UIWindow
         return true;
     }
     
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            OnClickBackButton();
+    }
+    
     // 게임 실행에 직접적으로 영향을 끼치는 Button들
     private void OnClickStartButton()
     {
@@ -62,10 +68,10 @@ public class UIMainTitle : UIWindow
         var exit = Managers.UI.ShowWindow<UIGameExit>();
         exit.OnClickButtons(() =>
         {
-            Application.Quit();
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #endif
+            Application.Quit();
         });
     }
     
@@ -86,6 +92,18 @@ public class UIMainTitle : UIWindow
     
     private void OnClickBackButton()
     {
-        Managers.UI.CloseWindow();
+        if(!Managers.UI.isEmptyWindow())
+            Managers.UI.CloseWindow();
+        else
+        {
+            var exit = Managers.UI.ShowWindow<UIGameExit>();
+            exit.OnClickButtons(() =>
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                Application.Quit();
+            });
+        }
     }
 }
