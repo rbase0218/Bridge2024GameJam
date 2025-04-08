@@ -32,7 +32,7 @@ public class UISetDataBoard : UIBase
         ActorIconGroup,
     }
 
-    private int _userCount = 3;
+    private int _userCount = 4;
 
     public UnityEvent<int> onClickNextButton;
     
@@ -67,7 +67,7 @@ public class UISetDataBoard : UIBase
     
     private void OnClickBeforeButton()
     {
-        if (_userCount <= 3)
+        if (_userCount <= 4)
             return;
         
         _userCount--;

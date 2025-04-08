@@ -8,19 +8,28 @@ public partial class GameManager
     // User에게 직업을 부여하는 메서드
     private void GiveUsersJob()
     {
-        var copyUserList = new List<UserInfo>(_userList);
+        int userCount = _userList.Count;
 
+        if (userCount < 4)
+            return;
+
+        // 암살자 인덱스 먼저 선정
+        int assIndex = Random.Range(0, userCount);
+
+        // 암살자와 겹치지 않도록 배우 인덱스 재선정
         int actorIndex = -1;
-        int assIndex = Random.Range(0, copyUserList.Count);
-        copyUserList.RemoveAt(assIndex);
-        
-        if (_userList.Count >= 5)
-            actorIndex = Random.Range(0, copyUserList.Count);
+        if (userCount >= 5)
+        {
+            do
+            {
+                actorIndex = Random.Range(0, userCount);
+            } while (actorIndex == assIndex);
+        }
 
-        // Assassin 직업 부여
+        // 역할 부여
         _userList[assIndex].jobType = EJobType.Assassin;
         assUser = _userList[assIndex];
-        
+
         if (actorIndex != -1)
         {
             _userList[actorIndex].jobType = EJobType.Actor;

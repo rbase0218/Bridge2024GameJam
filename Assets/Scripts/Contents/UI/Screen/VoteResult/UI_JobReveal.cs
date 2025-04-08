@@ -71,7 +71,7 @@ public class UI_JobReveal : UIScreen
         {
             case EJobType.VIP:
                 voteUser.isDie = true;
-                if (Managers.Game._userList.Count == 3)
+                if (Managers.Game._userList.Count == 4)
                 {
                     Managers.Game.voteUser = Managers.Game._userList.Find(x => x.jobType == EJobType.Assassin);
                     var lastChanceResult = OnNextScreen<UI_LastChanceResult>();
