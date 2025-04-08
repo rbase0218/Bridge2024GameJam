@@ -3030,7 +3030,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4155195779112338398, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
       propertyPath: isDebugMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4155195779112338398, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
       propertyPath: <GaugeTime>k__BackingField
@@ -4203,6 +4203,11 @@ PrefabInstance:
     - target: {fileID: 7991787555911327896, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000802191107457763, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
+      propertyPath: m_text
+      value: "\uC9C0\uAE08\uBD80\uD130 3\uBD84 \uB3D9\uC548\\n\uC790\uC720\uB85C\uC6B4
+        \uD1A0\uB860 \uC2DC\uAC04\uC744\\n\uC2DC\uC791\uD569\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     - target: {fileID: 8000802191107457765, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
       propertyPath: m_SizeDelta.x
