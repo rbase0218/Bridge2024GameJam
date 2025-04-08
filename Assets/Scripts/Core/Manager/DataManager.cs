@@ -29,7 +29,6 @@ public class DataManager
         { EJobType.Assassin, ("최후 찬스 발동!", "과연\n암살자가 암구호를\n파악했을까요?") }
     };
     
-    
     #endregion
     
     #region # [ For Debug ] #

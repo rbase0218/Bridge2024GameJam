@@ -9,14 +9,16 @@ public partial class GameManager : MonoBehaviour
 {
     public List<UserInfo> _userList = new List<UserInfo>();
     public List<UserInfo> _hostageList = new List<UserInfo>();
-    
+
     public List<VoteData> _voteList = new List<VoteData>();
 
     // 현재 직업이 암살자인 유저를 찾아둔다.
     public UserInfo assUser;
     public UserInfo actorUser;
     public UserInfo currentUser;
+
     public UserInfo prevUser;
+
     // 현재 인질로 지정된 유저를 찾아둔다.
     public UserInfo hostageUser;
     public UserInfo voteUser;
@@ -29,7 +31,7 @@ public partial class GameManager : MonoBehaviour
     public string gameTopic;
 
     public EJobType winnerJob;
-    
+
     private void Awake()
     {
         // var user1 = new UserInfo("User1");
@@ -46,7 +48,26 @@ public partial class GameManager : MonoBehaviour
         //
         // gameTopic = "호랑이";
     }
-    
+
+    public void ResetData()
+    {
+        _userList.Clear();
+        _hostageList.Clear();
+        _voteList.Clear();
+
+        assUser = null;
+        actorUser = null;
+        currentUser = null;
+        prevUser = null;
+        hostageUser = null;
+        voteUser = null;
+        questionUser = null;
+
+        selectUserName = string.Empty;
+        questionText = string.Empty;
+        gameTopic = string.Empty;
+    }
+
     public void AddUser(params UserInfo[] users)
     {
         _userList.AddRange(users);

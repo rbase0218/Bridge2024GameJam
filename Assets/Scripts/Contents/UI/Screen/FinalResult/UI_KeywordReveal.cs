@@ -21,29 +21,30 @@ public class UI_KeywordReveal : UIScreen
     {
         if (!base.Init())
             return false;
-        
+
         BindButton(typeof(Buttons));
         BindText(typeof(Texts));
-        
+
         GetButton((int)Buttons.Button).onClick.AddListener(OnClickButton);
         return true;
     }
-    
+
     protected override bool EnterWindow()
     {
         string originalText = Managers.Game.gameTopic;
-        string wrappedText = string.Join("\n", 
+        string wrappedText = string.Join("\n",
             Enumerable.Range(0, (originalText.Length + 6) / 7)
-                .Select(i => originalText.Substring(i * 7, 
+                .Select(i => originalText.Substring(i * 7,
                     Math.Min(6, originalText.Length - i * 7))));
         GetText((int)Texts.TopicText).SetText(wrappedText);
-        
+
         return true;
     }
-    
+
     private void OnClickButton()
     {
-            SceneManager.LoadScene("Title");
+        Managers.Game.ResetData();
+        SceneManager.LoadScene("Title");
         // if (Managers.Ads.interAd.CanShowAd())
         // {
         //     Managers.Ads.ShowAd();
