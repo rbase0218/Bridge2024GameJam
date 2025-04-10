@@ -72,10 +72,19 @@ public class UI_JobReveal : UIScreen
         {
             case EJobType.VIP:
                 voteUser.isDie = true;
+                
+                // 현재까지 발생한 인질 수
                 int hostageCount = Managers.Game._hostageList.Count; // 현재까지 인질로 잡은 횟수 (자기 포함) 2
-                int aliveCount = Managers.Game._userList.Count(x => !x.isDie && !Managers.Game._hostageList.Contains(x)); // 
-                Debug.Log($"hostageCount: {hostageCount}, aliveCount: {aliveCount}");
+                
+                // 현재까지 살아있는 플레이어 수 ( 현재 유저가 죽지 않았으며, 유저가 인질 리스트에 포함되지 않았더라면 )
+                // 인질인 상태에서 죽은 사람 -> 중복으로 계산이 되는 것이 문제임.
+                int aliveCounts = Managers.Game._userList.Count(x => !x.isDie && !Managers.Game._hostageList.Contains(x));
+                int deadHostageCount = Managers.Game._userList.Count(x => x.isDie && Managers.Game._hostageList.Contains(x));
+                int aliveCount = aliveCounts - deadHostageCount;
+                
+                Debug.Log($"hostageCount: {hostageCount}, aliveCount: {aliveCount}, UserList Count: {Managers.Game._userList.Count}");
 
+                // 암살자 승리 조건 ( 인질 수 + 살아있는 플레이어 수 >= 전체 유저 수 )
                 bool isAssassinWin = (hostageCount + aliveCount) >= Managers.Game._userList.Count;
                 if (isAssassinWin)
                 {
