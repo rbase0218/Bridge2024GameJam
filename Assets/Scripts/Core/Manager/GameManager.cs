@@ -9,6 +9,7 @@ public partial class GameManager : MonoBehaviour
 {
     public List<UserInfo> _userList = new List<UserInfo>();
     public List<UserInfo> _hostageList = new List<UserInfo>();
+    public List<UserInfo> _reverseUserList = new List<UserInfo>();
 
     public List<VoteData> _voteList = new List<VoteData>();
 
@@ -31,6 +32,8 @@ public partial class GameManager : MonoBehaviour
     public string gameTopic;
 
     public EJobType winnerJob;
+
+    public bool IsReverse;
 
     private void Awake()
     {
@@ -75,7 +78,7 @@ public partial class GameManager : MonoBehaviour
     
     public bool NextUser()
     {
-        var index = _userList.IndexOf(currentUser);
+        int index = IsReverse ? _reverseUserList.IndexOf(currentUser) : _userList.IndexOf(currentUser);
         if (index == _userList.Count - 1)
         {
             currentUser = _userList[0];
@@ -162,6 +165,10 @@ public partial class GameManager : MonoBehaviour
         {
             _userList?.Add(new UserInfo(userNames[i]));
         }
+        
+        var copyUserList = new List<UserInfo>(_userList);
+        copyUserList.Reverse();
+        _reverseUserList = copyUserList;
 
         // 참여 유저에게 직업 부여
         GiveUsersJob();

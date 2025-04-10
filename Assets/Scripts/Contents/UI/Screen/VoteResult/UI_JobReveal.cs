@@ -78,7 +78,10 @@ public class UI_JobReveal : UIScreen
                     lastChanceResult.SetInfo(true);
                 }
                 else
+                {
+                    Managers.Game.IsReverse = !Managers.Game.IsReverse;
                     OnNextScreen<UI_Sequence02>();
+                }
                 break;
             case EJobType.Actor:
             case EJobType.Assassin:
