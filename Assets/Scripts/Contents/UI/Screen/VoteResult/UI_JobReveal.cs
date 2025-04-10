@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UI_JobReveal : UIScreen
@@ -71,14 +72,21 @@ public class UI_JobReveal : UIScreen
         {
             case EJobType.VIP:
                 voteUser.isDie = true;
-                if (Managers.Game._userList.Count == 4)
+                int hostageCount = Managers.Game._hostageList.Count; // 현재까지 인질로 잡은 횟수 (자기 포함) 2
+                int aliveCount = Managers.Game._userList.Count(x => !x.isDie && !Managers.Game._hostageList.Contains(x)); // 
+                Debug.Log($"hostageCount: {hostageCount}, aliveCount: {aliveCount}");
+
+                bool isAssassinWin = (hostageCount + aliveCount) >= Managers.Game._userList.Count;
+                if (isAssassinWin)
                 {
+                    // 암살자 승리
                     Managers.Game.voteUser = Managers.Game._userList.Find(x => x.jobType == EJobType.Assassin);
                     var lastChanceResult = OnNextScreen<UI_LastChanceResult>();
-                    lastChanceResult.SetInfo(true);
+                    lastChanceResult.SetInfo(true); // true면 암살자 승리
                 }
                 else
                 {
+                    // 게임 계속 진행
                     Managers.Game.IsReverse = !Managers.Game.IsReverse;
                     OnNextScreen<UI_Sequence02>();
                 }

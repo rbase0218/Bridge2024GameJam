@@ -55,7 +55,7 @@ public class UI_PlayerSelectUIV : UIScreen
         if (currentUser.jobType == EJobType.Assassin)
         {
             copyUserList = new List<UserInfo>(Managers.Game._userList);
-            copyUserList.RemoveAll(x => Managers.Game._hostageList.Contains(x));
+            copyUserList.RemoveAll(x => Managers.Game._hostageList.Contains(x) || x.isDie);
             
             GetObject((int)Objects.Board_B).SetActive(true);
             GetObject((int)Objects.Board_A).SetActive(false);
