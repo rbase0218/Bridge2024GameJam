@@ -52,6 +52,11 @@ public partial class GameManager : MonoBehaviour
         // gameTopic = "호랑이";
     }
 
+    private void Start()
+    {
+        Managers.Sound.PlayBGM("Main_BGM");
+    }
+
     public void ResetData()
     {
         _userList.Clear();
