@@ -49,6 +49,7 @@ public class UI_TextConfirm02 : UIScreen
 
     private void OnClickYesButton()
     {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_NextPlayerQ>();
     }
 }

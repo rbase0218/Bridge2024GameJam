@@ -65,6 +65,7 @@ public class UI_JobIntro01 : UIScreen
 
     private void OnClickCloseCard()
     {
+        Managers.Sound.PlaySFX("Card");
         GetObject((int)Objects.CloseCard).SetActive(false);
         GetObject((int)Objects.JobFrame).SetActive(true);
         BindNextScreen<UI_JobInteraction>();

@@ -57,6 +57,8 @@ public class UI_NextPlayer : UIScreen
     
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (isNext)
         {
             OnNextScreen<UI_JobIntro01>();

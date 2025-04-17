@@ -61,6 +61,7 @@ public class UI_FinalResult : UIScreen
 
     private void OnClickButton()
     {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_KeywordReveal>();
     }
 

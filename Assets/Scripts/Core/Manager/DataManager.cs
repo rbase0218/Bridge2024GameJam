@@ -29,6 +29,9 @@ public class DataManager
         { EJobType.Assassin, ("최후 찬스 발동!", "과연\n암살자가 암구호를\n파악했을까요?") }
     };
     
+    public float BGMVolume = 1f;
+    public float SFXVolume = 1f;
+    
     #endregion
     
     #region # [ For Debug ] #
@@ -107,5 +110,12 @@ public class DataManager
                 return Global.AssJobText;
         }
         return "";
+    }
+
+    public void SaveAudioSettings()
+    {
+        PlayerPrefs.SetFloat("BGMVolume", BGMVolume);
+        PlayerPrefs.SetFloat("SFXVolume", SFXVolume);
+        PlayerPrefs.Save();
     }
 }

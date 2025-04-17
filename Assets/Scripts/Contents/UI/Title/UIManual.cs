@@ -35,6 +35,7 @@ public class UIManual : UIWindow
         GetButton((int)Buttons.AfterButton).onClick.AddListener(OnClickAfterButton);
         GetButton((int)Buttons.CloseButton).onClick.AddListener(() =>
         {
+            Managers.Sound.PlaySFX("Click");
             Managers.UI.CloseWindow();
         });
         
@@ -47,6 +48,8 @@ public class UIManual : UIWindow
     
     private void OnClickBeforeButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (index == 0)
             return;
         
@@ -56,6 +59,8 @@ public class UIManual : UIWindow
     
     private void OnClickAfterButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (index == 5)
             return;
         

@@ -35,8 +35,12 @@ public class UI_QuestionInput : UIScreen
 
     protected override bool EnterWindow()
     {
-        Get<TMP_InputField>((int)InputFields.InputField).text = string.Empty;
-
+        var input = Get<TMP_InputField>((int)InputFields.InputField);
+        input.text = string.Empty;
+        input.onSelect.AddListener((text) =>
+        {
+            Managers.Sound.PlaySFX("Click");
+        });
         var currUserName = Managers.Game.currentUser.userName;
         GetText((int)Texts.NameText).SetText(currUserName);
 
@@ -45,6 +49,7 @@ public class UI_QuestionInput : UIScreen
 
     private void OnClickWriteButton()
     {
+        Managers.Sound.PlaySFX("Click");
         // 다음 화면으로 이동
         if (SaveQuestion() == false)
             return;

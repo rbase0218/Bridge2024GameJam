@@ -41,11 +41,13 @@ public class UIStartProcess : UIWindow
     
     private void OnClickBackButton()
     {
+        Managers.Sound.PlaySFX("Click");
         Managers.UI.CloseWindow();
     }
     
     private void OnClickManualButton()
     {
+        Managers.Sound.PlaySFX("Click");
         Managers.UI.ShowWindow<UIManual>();
     }
     

@@ -61,8 +61,8 @@ public class SoundManager : MonoBehaviour
             sfxPlayers[i] = Instantiate(audioSourcePrefab, transform).GetComponent<AudioSource>();
         }
 
-        SetBGMVolume(bgmVolume);
-        SetSFXVolume(sfxVolume);
+        SetBGMVolume(Managers.Data.BGMVolume);
+        SetSFXVolume(Managers.Data.SFXVolume);
     }
 
     /// <summary>
@@ -136,8 +136,8 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume"></param>
     public void SetBGMVolume(float volume)
     {
+        Managers.Data.BGMVolume = volume;
         bgmVolume = Mathf.Clamp01(volume);
-
         bgmPlayer.volume = bgmVolume;
     }
 
@@ -147,7 +147,8 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume"></param>
     public void SetSFXVolume(float volume)
     {
-        sfxVolume = Mathf.Clamp01(volume * 0.5f);
+        Managers.Data.SFXVolume = volume;
+        sfxVolume = Mathf.Clamp01(volume);
 
         foreach (var sfxPlayer in sfxPlayers)
         {

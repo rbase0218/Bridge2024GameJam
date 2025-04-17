@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class UISetDataBoard : UIBase
 {
@@ -52,11 +53,17 @@ public class UISetDataBoard : UIBase
         
         var dropdown = Get<TMP_Dropdown>((int)Dropdowns.CategoryDropdown);
         dropdown.AddOptions(Managers.Data.categoryArray.ToList());
-        dropdown.onValueChanged.AddListener( (x) => { _selectCategoryIndex = x; } );
+        dropdown.onValueChanged.AddListener((x) =>
+        {
+            Managers.Sound.PlaySFX("Click");
+            _selectCategoryIndex = x;
+        } );
     }
     
     private void OnClickAfterButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (_userCount >= 6)
             return;
         
@@ -67,6 +74,8 @@ public class UISetDataBoard : UIBase
     
     private void OnClickBeforeButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (_userCount <= 4)
             return;
         
@@ -77,6 +86,8 @@ public class UISetDataBoard : UIBase
 
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         Managers.Game.PickGameTopic(_selectCategoryIndex);
         onClickNextButton?.Invoke(_userCount);
     }

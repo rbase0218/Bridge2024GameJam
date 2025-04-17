@@ -3984,13 +3984,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f9c5eb0879f0b047a0e09333ef6d87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  array_sfx: []
+  array_sfx:
+  - name: Card
+    clip: {fileID: 8300000, guid: fc3c310d8e83a36418f54e99562772a0, type: 3}
+  - name: Chance
+    clip: {fileID: 8300000, guid: c934be7ab4071a049bbc7de06bc4f266, type: 3}
+  - name: Click
+    clip: {fileID: 8300000, guid: 9b5c854a271665b489382329db4c6cfd, type: 3}
+  - name: Clock
+    clip: {fileID: 8300000, guid: 0fe3d90339d6aec46bed216f85d87b73, type: 3}
+  - name: Correct
+    clip: {fileID: 8300000, guid: 88a8a9243b3066d4bade8f5d34a84119, type: 3}
+  - name: Wrong
+    clip: {fileID: 8300000, guid: 81109d1a499d94940b5e4336a7ea2b2a, type: 3}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: c9338a3624791e8479b28391c12c80f3, type: 3}
   array_bgm:
-  - name: Main_BGM
-    clip: {fileID: 8300000, guid: 904c4732c16c1e541b0b04000a187d95, type: 3}
+  - name: Title
+    clip: {fileID: 8300000, guid: 57c253ee7d6cdf144a3e052d2791f7d9, type: 3}
   audioSourcePrefab: {fileID: 8096834215764501516, guid: f5c40946dad3ae147a0b522185687b2e, type: 3}
-  bgmVolume: 10
-  sfxVolume: 0
+  bgmVolume: 1
+  sfxVolume: 1
 --- !u!114 &813574954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14199,7 +14213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &4026986790441941045
 GameObject:
   m_ObjectHideFlags: 0
@@ -14462,9 +14476,9 @@ RectTransform:
   - {fileID: 5967222952703382737}
   m_Father: {fileID: 8534061541816076635}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 561, y: -72.5}
   m_SizeDelta: {x: 374, y: 145}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &4766704789156976843
@@ -15564,7 +15578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &7861994402393913273
 GameObject:
   m_ObjectHideFlags: 0
@@ -15666,9 +15680,9 @@ RectTransform:
   - {fileID: 4571657011535800864}
   m_Father: {fileID: 90535698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -106.5}
   m_SizeDelta: {x: 641, y: 213}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8360618601277282945
@@ -15689,7 +15703,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 374, y: 145}
+  m_SizeDelta: {x: 500, y: 145}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8360618602050907601
 RectTransform:

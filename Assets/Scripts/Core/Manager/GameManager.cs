@@ -54,7 +54,7 @@ public partial class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Managers.Sound.PlayBGM("Main_BGM");
+        Managers.Sound.PlayBGM("Title");
     }
 
     public void ResetData()
@@ -80,25 +80,39 @@ public partial class GameManager : MonoBehaviour
     {
         _userList.AddRange(users);
     }
-    
+
     public bool NextUser()
     {
-        int index = IsReverse ? _reverseUserList.IndexOf(currentUser) : _userList.IndexOf(currentUser);
-        if (index == _userList.Count - 1)
+        List<UserInfo> list = _userList;
+        int index = list.IndexOf(currentUser);
+
+        if (index == list.Count - 1)
         {
-            currentUser = _userList[0];
+            currentUser = list[0];
             return false;
         }
 
-        currentUser = _userList[index + 1];
+        currentUser = list[index + 1];
         return true;
     }
-    
+
+    public void SetReverse()
+    {
+        // 전환
+        IsReverse = !IsReverse;
+
+        // 전환 후 리스트
+        var newList = IsReverse ? _reverseUserList : _userList;
+
+        currentUser = newList[0];
+    }
+
+
     public void AddHostage(UserInfo hostage)
     {
-        if(hostage == null)
+        if (hostage == null)
             return;
-        
+
         if (_hostageList.Contains(hostage) == false)
         {
             Debug.Log("인질로 지정된 유저: " + hostage.userName);
@@ -130,7 +144,7 @@ public partial class GameManager : MonoBehaviour
                 return;
             }
         }
-        
+
         // Vote User가 새로운 유저라면 새로운 VoteData를 생성한다.
         _voteList.Add(new VoteData(1, voteUser));
     }
@@ -144,13 +158,13 @@ public partial class GameManager : MonoBehaviour
     {
         var voteCountList = _voteList.Select(x => x.voteCount).ToList();
         var sameVoteCount = voteCountList.GroupBy(x => x).Where(x => x.Count() > 1).Select(x => x.Key).ToList();
-        if (sameVoteCount.Count <= 0) 
+        if (sameVoteCount.Count <= 0)
             return false;
 
         int maxCount = sameVoteCount.Max();
-        
+
         var voteMaxCount = voteCountList.Max();
-        
+
         // 중복 수의 마지막 값과 voteList의 최대 값이 동일하다면 => 중복
         if (maxCount == voteMaxCount)
             return true;
@@ -170,7 +184,7 @@ public partial class GameManager : MonoBehaviour
         {
             _userList?.Add(new UserInfo(userNames[i]));
         }
-        
+
         var copyUserList = new List<UserInfo>(_userList);
         copyUserList.Reverse();
         _reverseUserList = copyUserList;
@@ -184,33 +198,34 @@ public partial class GameManager : MonoBehaviour
     {
         var maxNum = Managers.Data.wordArray[index].Length;
         var randNum = Random.Range(0, maxNum);
-        
+
         gameTopic = Managers.Data.wordArray[index][randNum];
         Debug.Log("게임 주제 : " + gameTopic);
     }
-    
+
     public void WriteQuestion(string text) => questionText = text;
-    
+
     public bool GetQuestionUser()
     {
         prevUser = currentUser;
         currentUser = RandomQuestionUser();
-        
-        if(currentUser == null)
-            return false;
-        else
+
+        if (currentUser == null)
         {
-            currentUser.canQuestion = false;
-            return true;
+            Debug.Log("질문할 유저가 없습니다. 차례가 끝나서 없는건지 그냥 시작부터 없는건지 확인 필요. 관련 스크립트 UI_Sequence02, UI_NextPlayerQ");
+            return false;
         }
+
+        currentUser.canQuestion = false;
+        return true;
     }
-    
+
     public List<UserInfo> GetAnswerUserList()
     {
         var copyUserList = new List<UserInfo>(_userList);
         copyUserList.Remove(hostageUser);
         copyUserList.Remove(currentUser);
-        copyUserList.RemoveAll(x=>x.isDie);
+        copyUserList.RemoveAll(x => x.isDie);
         return copyUserList;
     }
 
@@ -218,7 +233,7 @@ public partial class GameManager : MonoBehaviour
     {
         questionText = inputText;
     }
-    
+
     public void SetCanAllQuestion()
     {
         foreach (var user in _userList)

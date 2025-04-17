@@ -30,6 +30,7 @@ public class UI_Sequence02 : UIScreen
     
     protected override bool EnterWindow()
     {
+        // 여기서 오류 생김. 질문 할 얘가 없어서 null 반환 -> _userList[0]을 줌.
         Managers.Game.GetQuestionUser();
         var hostageName = Managers.Game.GetCurrentHostage().userName;
         var currUserName = Managers.Game.currentUser.userName;
@@ -46,6 +47,7 @@ public class UI_Sequence02 : UIScreen
     
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_QuestionInput>();
     }
 }

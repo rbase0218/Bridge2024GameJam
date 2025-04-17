@@ -61,4 +61,9 @@ public sealed class Managers : MonoBehaviour
             Application.targetFrameRate = 60;
         }
     }
+    
+    private void OnApplicationQuit()
+    {
+        _dataManager.SaveAudioSettings();
+    }
 }

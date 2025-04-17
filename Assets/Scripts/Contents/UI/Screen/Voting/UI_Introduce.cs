@@ -37,6 +37,7 @@ public class UI_Introduce : UIScreen
     
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_PlayerSelectUIV>();
     }
 }

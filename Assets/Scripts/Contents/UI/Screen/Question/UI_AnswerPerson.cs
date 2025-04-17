@@ -38,6 +38,7 @@ public class UI_AnswerPerson : UIScreen
     
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_TextConfirm01>();
     }
 }

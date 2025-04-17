@@ -57,6 +57,8 @@ public class UI_NextPlayerV : UIScreen
     
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (isNext)
             OnNextScreen<UI_PlayerSelectUIV>();
         else

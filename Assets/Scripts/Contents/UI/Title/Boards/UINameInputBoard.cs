@@ -47,7 +47,12 @@ public class UINameInputBoard : UIBase
     {
         for (int i = 0; i < 6; i++)
         {
-            Get<TMP_InputField>(i).gameObject.SetActive(i < count);
+            var input = Get<TMP_InputField>(i);
+            input.gameObject.SetActive(i < count);
+            input.onSelect.AddListener((text) =>
+            {
+                Managers.Sound.PlaySFX("Click");
+            });
         }
     }
     

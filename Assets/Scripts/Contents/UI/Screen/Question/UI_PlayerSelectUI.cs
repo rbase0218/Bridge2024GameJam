@@ -46,6 +46,7 @@ public class UI_PlayerSelectUI : UIScreen
 
     private void OnClickSubmitButton(string text)
     {
+        Managers.Sound.PlaySFX("Click");
         if (text == null)
             return;
         

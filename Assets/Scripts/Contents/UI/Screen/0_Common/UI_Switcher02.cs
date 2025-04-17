@@ -31,6 +31,7 @@ public class UI_Switcher02 : UIScreen
     
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_Switcher01V>();
     }
 }
