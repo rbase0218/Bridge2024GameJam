@@ -55,7 +55,7 @@ public class UI_PlayerSelectUIV : UIScreen
         if (currentUser.jobType == EJobType.Assassin)
         {
             copyUserList = new List<UserInfo>(Managers.Game._userList);
-            copyUserList.RemoveAll(x => Managers.Game._hostageList.Contains(x) || x.isDie);
+            copyUserList.RemoveAll(x => Managers.Game._hostageList.Contains(x));
             
             GetObject((int)Objects.Board_B).SetActive(true);
             GetObject((int)Objects.Board_A).SetActive(false);
@@ -97,6 +97,8 @@ public class UI_PlayerSelectUIV : UIScreen
     // 광대 및 귀빈
     private void OnClickSubmitButtonA(string text)
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (text == null)
             return;
         
@@ -110,6 +112,8 @@ public class UI_PlayerSelectUIV : UIScreen
     // 암살자
     private void OnClickSubmitButtonB(string text)
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (text == null)
             return;
         
