@@ -14,7 +14,7 @@ public class UI_Switcher01V : UIScreen
     
     protected override bool EnterWindow()
     {
-        Managers.Game.currentUser = Managers.Game.IsReverse ? Managers.Game._reverseUserList[0] : Managers.Game._userList[0];
+        Managers.Game.currentUser = Managers.Game._userList[0];
         if(UseAutoNextScreen)
             BindNextScreen<UI_Introduce>();
         return true;
