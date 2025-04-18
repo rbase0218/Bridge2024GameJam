@@ -17,7 +17,6 @@ public partial class GameManager : MonoBehaviour
     public UserInfo assUser;
     public UserInfo actorUser;
     public UserInfo currentUser;
-
     public UserInfo prevUser;
 
     // 현재 인질로 지정된 유저를 찾아둔다.
@@ -34,6 +33,8 @@ public partial class GameManager : MonoBehaviour
     public EJobType winnerJob;
 
     public bool IsReverse;
+
+    public bool isGameEnd;
 
     private void Awake()
     {
@@ -54,6 +55,15 @@ public partial class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (Managers.Game.isGameEnd)
+        {
+            Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume / 0.25f);
+        }
+        else
+        {
+            Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume);
+        }
+        Managers.Sound.StopSFX();
         Managers.Sound.PlayBGM("Title");
     }
 
@@ -74,6 +84,8 @@ public partial class GameManager : MonoBehaviour
         selectUserName = string.Empty;
         questionText = string.Empty;
         gameTopic = string.Empty;
+        
+        isGameEnd = true;
     }
 
     public void AddUser(params UserInfo[] users)

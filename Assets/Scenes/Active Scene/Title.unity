@@ -4003,7 +4003,7 @@ MonoBehaviour:
   - name: Title
     clip: {fileID: 8300000, guid: 57c253ee7d6cdf144a3e052d2791f7d9, type: 3}
   audioSourcePrefab: {fileID: 8096834215764501516, guid: f5c40946dad3ae147a0b522185687b2e, type: 3}
-  bgmVolume: 1
+  bgmVolume: 21.65
   sfxVolume: 1
 --- !u!114 &813574954
 MonoBehaviour:

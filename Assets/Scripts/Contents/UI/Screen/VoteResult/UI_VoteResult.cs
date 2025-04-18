@@ -27,6 +27,7 @@ public class UI_VoteResult : UIScreen
     
     protected override bool EnterWindow()
     {
+        Managers.Sound.SetBGMVolumeNoneSave(0);
         var voteUserName = Managers.Game.voteUser.userName;
         
         GetText((int)Texts.SecondText).SetText(

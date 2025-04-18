@@ -9,7 +9,8 @@ public sealed class GameScene : Framework
     protected override void SetUp()
     {
         isPlay = false;
-        Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume * 0.35f);
+        Managers.Game.isGameEnd = false;
+        Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume * 0.25f);
     }
 
     private void Update()

@@ -23,7 +23,9 @@ public class UI_Sequence02 : UIScreen
         Bind<UIPersonViewer>(typeof(PersonViewer));
         Get<UIPersonViewer>((int)PersonViewer.PersonViewer).BindInstance();
         BindButton(typeof(Buttons));
-        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
+        var nextButton = GetButton((int)Buttons.NextButton);
+        nextButton.onClick.RemoveAllListeners();
+        nextButton.onClick.AddListener(OnClickNextButton);
         
         return true;
     }

@@ -58,7 +58,9 @@ public class UI_JobReveal : UIScreen
         GetText((int)Texts.JobText).SetText(Managers.Data.GetJobText(voteUser.jobType));
 
         // Event Bind
-        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
+        var nextButton = GetButton((int)Buttons.NextButton);
+        nextButton.onClick.RemoveAllListeners();
+        nextButton.onClick.AddListener(OnClickNextButton);
 
         return true;
     }
@@ -68,24 +70,25 @@ public class UI_JobReveal : UIScreen
         Managers.Sound.PlaySFX("Click");
 
         var voteUser = Managers.Game.voteUser;
-        var voteUserJob = voteUser.jobType;
-        
-        
-
-        switch (voteUserJob)
+        var isAssasinWin = Managers.Game._hostageList.Count >= Managers.Game._userList.Count - 1;
+        Debug.Log($"투표: {voteUser.jobType}, isAssasinWin: {isAssasinWin}");
+        switch (voteUser.jobType)
         {
             case EJobType.VIP:
                 voteUser.isDie = true;
                 // 게임 계속 진행
                 
-                Debug.Log($"인질 수: {Managers.Game._hostageList.Count}, 전체 유저 수 : {Managers.Game._userList.Count}");
-                if (Managers.Game._hostageList.Count >= Managers.Game._userList.Count - 1)
+                if (isAssasinWin)
                 {
+                    Debug.Log("Assassin Win");
                     Managers.Game.voteUser = Managers.Game._userList.Find(x => x.jobType == EJobType.Assassin);
                     OnNextScreen<UI_LastChanceResult>().SetInfo(true);
                 }
                 else
+                {
+                    Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume);
                     OnNextScreen<UI_Sequence02>();
+                }
                 break;
             case EJobType.Actor:
             case EJobType.Assassin:

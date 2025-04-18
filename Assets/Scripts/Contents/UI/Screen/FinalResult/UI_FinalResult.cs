@@ -48,6 +48,7 @@ public class UI_FinalResult : UIScreen
 
     protected override bool EnterWindow()
     {
+        Managers.Sound.PlaySFX("GameOver");
         // 승자의 직업을 받는다
         var winner = Managers.Game.winnerJob;
 

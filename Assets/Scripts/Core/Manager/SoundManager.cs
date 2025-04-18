@@ -140,6 +140,12 @@ public class SoundManager : MonoBehaviour
         bgmVolume = Mathf.Clamp01(volume);
         bgmPlayer.volume = bgmVolume;
     }
+    
+    public void SetBGMVolumeNoneSave(float volume)
+    {
+        bgmVolume = Mathf.Clamp01(volume);
+        bgmPlayer.volume = bgmVolume;
+    }
 
     /// <summary>
     /// SFX 볼륨 조절 (0 ~ 1)
