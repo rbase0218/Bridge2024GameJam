@@ -3046,7 +3046,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4155195779112338398, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
       propertyPath: isDebugMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4155195779112338398, guid: 19657d67b471ee94f96114fb6efb8e43, type: 3}
       propertyPath: <GaugeTime>k__BackingField
