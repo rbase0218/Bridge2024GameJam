@@ -7,7 +7,6 @@ public class UIMainTitle : UIWindow
     private enum Buttons
     {
         BackButton,
-        //HomeButton,
         ManualButton,
         StartButton,
         SettingButton,
@@ -29,7 +28,6 @@ public class UIMainTitle : UIWindow
         GetButton((int)Buttons.ExitButton).onClick.AddListener(OnClickExitButton);
         
         GetButton((int)Buttons.BackButton).onClick.AddListener(OnClickBackButton);
-        //GetButton((int)Buttons.HomeButton).onClick.AddListener(OnClickHomeButton);
         GetButton((int)Buttons.ManualButton).onClick.AddListener(OnClickManualButton);
         
         return true;
@@ -37,12 +35,6 @@ public class UIMainTitle : UIWindow
     protected override bool EnterWindow()
     {
         return true;
-    }
-    
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            OnClickBackButton();
     }
     
     // 게임 실행에 직접적으로 영향을 끼치는 Button들
@@ -58,7 +50,6 @@ public class UIMainTitle : UIWindow
         var setting = Managers.UI.ShowWindow<UIGameSetting>();
         setting.OnClickButtons(() =>
         {
-            // + (2024/08/19) SoundManager Error로 인한 주석처리
             setting.Save();
             Managers.Sound.PlaySFX("Click");
             Managers.UI.CloseWindow();

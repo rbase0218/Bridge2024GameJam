@@ -9,7 +9,6 @@ public partial class GameManager : MonoBehaviour
 {
     public List<UserInfo> _userList = new List<UserInfo>();
     public List<UserInfo> _hostageList = new List<UserInfo>();
-    public List<UserInfo> _reverseUserList = new List<UserInfo>();
 
     public List<VoteData> _voteList = new List<VoteData>();
 
@@ -25,33 +24,14 @@ public partial class GameManager : MonoBehaviour
     public UserInfo questionUser;
 
     public string selectUserName;
-
     public string questionText;
 
     public string gameTopic;
-
     public EJobType winnerJob;
 
     public bool IsReverse;
 
     public bool isGameEnd;
-
-    private void Awake()
-    {
-        // var user1 = new UserInfo("User1");
-        // var user2 = new UserInfo("User2", EJobType.Assassin);
-        // var user3 = new UserInfo("User3");
-        // var user4 = new UserInfo("User4", EJobType.Actor);
-        // var user5 = new UserInfo("User5");
-        // var user6 = new UserInfo("User6");
-        //
-        // AddUser(user1, user2, user3, user4, user5, user6);
-        // assUser = user4;
-        // currentUser = user1;
-        // //AddHostage(user3);
-        //
-        // gameTopic = "호랑이";
-    }
 
     private void Start()
     {
@@ -107,18 +87,6 @@ public partial class GameManager : MonoBehaviour
         currentUser = list[index + 1];
         return true;
     }
-
-    public void SetReverse()
-    {
-        // 전환
-        IsReverse = !IsReverse;
-
-        // 전환 후 리스트
-        var newList = IsReverse ? _reverseUserList : _userList;
-
-        currentUser = newList[0];
-    }
-
 
     public void AddHostage(UserInfo hostage)
     {
@@ -196,10 +164,6 @@ public partial class GameManager : MonoBehaviour
         {
             _userList?.Add(new UserInfo(userNames[i]));
         }
-
-        var copyUserList = new List<UserInfo>(_userList);
-        copyUserList.Reverse();
-        _reverseUserList = copyUserList;
 
         // 참여 유저에게 직업 부여
         GiveUsersJob();
