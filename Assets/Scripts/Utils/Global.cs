@@ -17,18 +17,8 @@ public static class Global
     public static readonly string VipJobText = "귀빈";
 }
 
-
-// Font의 Size를 조정하는 곳에 사용되는 Static Class
-public static class FontSize
-{
-    public static readonly float Font60 = 60f;
-    public static readonly float Font40 = 40f;
-    public static readonly float Font20 = 20f;
-}
-
 public class UserInfo
 {
-    
     // 유저 이름
     public string userName;
     // 유저 직업

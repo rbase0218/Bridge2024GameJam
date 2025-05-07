@@ -3,36 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class JobRandomizer
+public static class JobRandomizer
 {
-    public static void SelectRandomJob(List<UserInfo> players)
+    public static bool SelectRandomJob(List<UserInfo> players, UserInfo assassin, UserInfo joker = null)
     {
         if (players == null || players.Count < 4) 
         {
             Debug.LogError("Error : 플레이어 인원 부족!");
-            return;
+            return false;
         }
         
-        var jobs = GetJobs(players.Count);
+        // 인원 수에 맞는 직업군을 가져온다.
+        var jobs = GetNeedJobs(players.Count);
         if (jobs == null)
         {
             Debug.LogError("Error : 직업 목록을 생성할 수 없습니다!");
-            return;
+            return false;
         }
         
-        ShuffleList(jobs);
+        // 순서대로 가져온 직업을 섞는다.
+        Shuffle(jobs);
         
+        // 플레이어에게 직업을 부여한다.
         for (int i = 0; i < players.Count; i++)
+        {
             players[i].jobType = jobs[i];
+            
+            if(jobs[i] == EJobType.Assassin)
+                assassin = players[i];
+            else if(jobs[i] == EJobType.Actor && joker != null)
+                joker = players[i];
+        }
+
+        return true;
     }
 
-    public static List<EJobType> GetJobs(int count)
+    private static List<EJobType> GetNeedJobs(int count)
     {
         var jobList = new List<EJobType>();
         
         int vipCount = 0;
         bool needActor = false;
         
+        // 게임에 필요한 직업을 계산한다.
+        // 인원수(count)에 따라서 직업을 설정한다.
         switch (count)
         {
             case 4:
@@ -62,7 +76,7 @@ public class JobRandomizer
         return jobList;
     }
 
-    private static void ShuffleList<T>(List<T> list)
+    private static void Shuffle<T>(List<T> list)
     {
         System.Random random = new System.Random();
         int n = list.Count;
