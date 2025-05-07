@@ -31,13 +31,7 @@ public class UserInfo
         this.userName = userName;
         jobType = EJobType.VIP;
         canQuestion = true;
-    }
-    
-    public UserInfo(string userName, EJobType jobType)
-    {
-        this.userName = userName;
-        this.jobType = jobType;
-        canQuestion = true;
+        isDie = false;
     }
 }
 

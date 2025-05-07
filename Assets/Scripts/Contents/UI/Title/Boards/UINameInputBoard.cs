@@ -91,8 +91,7 @@ public class UINameInputBoard : UIBase
                 return false;
             }
         }
-        
-        Managers.Game.AddRangeUser(userNames);
-        return true;
+
+        return Managers.Game.HandlePlayerActions(userNames);
     }
 }

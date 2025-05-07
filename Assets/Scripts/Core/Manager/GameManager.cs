@@ -37,4 +37,27 @@ public class GameManager : MonoBehaviour
         _topicPicker = new TopicPicker();
         _questionerPicker = new QuestionerPicker();
     }
+
+    public bool HandlePlayerActions(List<string> playerNames)
+    {
+        var onGenerate = _gamePlayers.GeneratePlayersData(playerNames);
+        if (!onGenerate)
+            Debug.Log("게임 플레이어 생성에 실패했습니다.");
+
+        // 유저들에게 직업을 분배한다.
+        var onRegisterJobs = _gamePlayers.AllocatePlayerJobs();
+        
+        ViewPlayers();
+
+        return onRegisterJobs;
+    }
+
+    public void ViewPlayers()
+    {
+        var players = _gamePlayers.GetPlayerData();
+        foreach (var player in players)
+        {
+            Debug.Log("이름 : " + player.userName + "|| 플레이어 직업 : " + player.jobType);
+        }
+    }
 }

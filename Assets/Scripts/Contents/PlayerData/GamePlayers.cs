@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class GamePlayers
 {
-    private List<UserInfo> _allPlayers = new List<UserInfo>();
+    private readonly List<UserInfo> _allPlayers = new List<UserInfo>();
     private UserInfo _assassinPlayer;
     private UserInfo _jokerPlayer;
     private List<UserInfo> _nonePlayers = new List<UserInfo>();
-
-    public bool AddPlayer(UserInfo userInfo)
+    
+    public bool GeneratePlayersData(List<string> userNames)
     {
-        if (userInfo == null) return false;
+        if (userNames == null) return false;
 
-        _allPlayers?.Add(userInfo);
+        foreach (var name in userNames)
+            _allPlayers.Add(new UserInfo(name));
+
         return true;
     }
 
@@ -28,5 +30,10 @@ public class GamePlayers
     public bool AllocatePlayerJobs()
     {
         return JobRandomizer.SelectRandomJob(_allPlayers, _assassinPlayer, _jokerPlayer);
+    }
+
+    public List<UserInfo> GetPlayerData()
+    {
+        return _allPlayers;
     }
 }
