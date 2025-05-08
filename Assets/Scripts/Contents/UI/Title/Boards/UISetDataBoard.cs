@@ -88,7 +88,9 @@ public class UISetDataBoard : UIBase
     {
         Managers.Sound.PlaySFX("Click");
 
-        // Managers.Game.PickGameTopic(_selectCategoryIndex);
+        // 주제를 랜덤으로 선정한다.
+        Managers.Game.PickTopic(_selectCategoryIndex);
+        
         onClickNextButton?.Invoke(_userCount);
     }
     

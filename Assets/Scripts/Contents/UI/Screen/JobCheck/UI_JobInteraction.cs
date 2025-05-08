@@ -57,47 +57,55 @@ public class UI_JobInteraction : UIScreen
             BindNextScreen<UI_ClockSwitcher>();
         
          //1. 현재 진행중인 유저의 정보를 가져온다.
-        // var user = Managers.Game.currentUser;
+        var user = Managers.Game.GetCurrentPlayer();
 
-        // GetText((int)Texts.Text).text = Managers.Data.GetJobText(user.jobType);
-        //
-        //  //2. 유저의 정보에 따라서 Board A와 Board B를 활성화한다.
-        //  if (user.jobType == EJobType.Actor || user.jobType == EJobType.VIP)
-        //  {
-        //      GetObject((int)Boards.Board_A).SetActive(true);
-        //      GetObject((int)Boards.Board_B).SetActive(false);
-        //
-        //      // 주제를 이 곳에서 전달한다.
-        //      string originalText = Managers.Game.gameTopic;
-        //      string wrappedText = string.Join("\n", 
-        //          Enumerable.Range(0, (originalText.Length + 6) / 7)
-        //              .Select(i => originalText.Substring(i * 7, 
-        //                  Math.Min(6, originalText.Length - i * 7))));
-        //      GetText((int)Texts.WordText).text = wrappedText;
-        //      GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
-        //  }
-        //  else
-        //  {
-        //      //BindNextScreen<UI_ClockSwitcher>();
-        //      var userList = Managers.Game._userList.Select( (x) => x.userName).ToArray();
-        //      _playerSelector.ShowButton(userList);
-        //      _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
-        //      
-        //      GetObject((int)Boards.Board_B).SetActive(true);
-        //      GetObject((int)Boards.Board_A).SetActive(false);
-        //      
-        //      _gauge.onEndGauge.AddListener(() =>
-        //      {
-        //          if (isSelect)
-        //              return;
-        //      
-        //          RandomSubmit();
-        //      });
-        //  }
+        GetText((int)Texts.Text).text = Managers.Data.GetJobText(user.jobType);
+        
+         //2. 유저의 정보에 따라서 Board A와 Board B를 활성화한다.
+         if (user.jobType == EJobType.Actor || user.jobType == EJobType.VIP)
+         {
+             GetObject((int)Boards.Board_A).SetActive(true);
+             GetObject((int)Boards.Board_B).SetActive(false);
+        
+             // 주제를 이 곳에서 전달한다.
+             string originalText = Managers.Game.GetCurrentTopic();
+             
+             string wrappedText = string.Join("\n", 
+                 Enumerable.Range(0, (originalText.Length + 6) / 7)
+                     .Select(i => originalText.Substring(i * 7, 
+                         Math.Min(6, originalText.Length - i * 7))));
+             
+             GetText((int)Texts.WordText).text = wrappedText;
+             GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
+         }
+         else
+         {
+             //BindNextScreen<UI_ClockSwitcher>();
+             
+             // 현재 플레이어의 이름을 String 배열로 만든다.
+             // 이때, 자기 자신도 포함한다.
+             var userList = Managers.Game.GetAllPlayer().Select( (x) => x.userName).ToArray();
+             
+             _playerSelector.ShowButton(userList);
+             _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
+             
+             GetObject((int)Boards.Board_B).SetActive(true);
+             GetObject((int)Boards.Board_A).SetActive(false);
+             
+             _gauge.onEndGauge.AddListener(() =>
+             {
+                 if (isSelect)
+                     return;
+             
+                 RandomSubmit();
+             });
+         }
         
         return true;
     }
 
+    
+    // 직업이 암살자일 경우, 실행되는 Submit 함수
     private void OnClickSubmitButton(string text)
     {
         Managers.Sound.PlaySFX("Click");
@@ -106,13 +114,8 @@ public class UI_JobInteraction : UIScreen
         
         _playerSelector.onClickSubmitButton.RemoveAllListeners();
         
-        // Hostage를 해당 기능을 통해서 선택한다.
-        var selectUserName = text;
-        // var selectUser = Managers.Game._userList.Find((x) => x.userName == selectUserName);
-        //
-        // //Debug.Log(selectUserName + " : " + selectUser.userName);
-        //
-        // Managers.Game.AddHostage(selectUser);
+        // Hostage를 추가한다.
+        Managers.Game.AddHostage(text);
 
         OnNextScreen<UI_ClockSwitcher>();
         isSelect = true;
@@ -120,14 +123,16 @@ public class UI_JobInteraction : UIScreen
     
     private void RandomSubmit()
     {
-        // var random = Random.Range(0, Managers.Game._userList.Count);
-        // var selectUser = Managers.Game._userList[random];
-        // //Debug.Log("랜덤 선택 : " + selectUser.userName);
-        // _playerSelector.onClickSubmitButton.RemoveAllListeners();
-        // Managers.Game.AddHostage(selectUser);
+        var allPlayers = Managers.Game.GetAllPlayer();
+        var randIndex = Random.Range(0, allPlayers.Count);
+        
+        //Debug.Log("랜덤 선택 : " + selectUser.userName);
+        _playerSelector.onClickSubmitButton.RemoveAllListeners();
+        Managers.Game.AddHostage(allPlayers[randIndex]);
         isSelect = true;
     }
 
+    // 직업이 시민, 광대 일 경우 실행되는 함수
     private void OnClickOpenCardButton()
     {
         Managers.Sound.PlaySFX("Card"); 

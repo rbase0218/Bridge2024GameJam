@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 {
     private GamePlayers _gamePlayers;
     private TopicPicker _topicPicker;
-    private QuestionerPicker _questionerPicker;
     public bool isGameEnd;
 
     private void Awake()
@@ -35,9 +34,9 @@ public class GameManager : MonoBehaviour
     {
         _gamePlayers = new GamePlayers();
         _topicPicker = new TopicPicker();
-        _questionerPicker = new QuestionerPicker();
     }
 
+    // 타이틀 Scene -> Play Scene
     public bool HandlePlayerActions(List<string> playerNames)
     {
         // Nickname -> PlayerData 생성
@@ -49,5 +48,41 @@ public class GameManager : MonoBehaviour
         var onRegisterJobs = _gamePlayers.AllocatePlayerJobs();
         
         return onRegisterJobs;
+    }
+
+    public UserInfo FindPlayer(string playerName)
+    {
+        return _gamePlayers.FindPlayer(playerName);
+    }
+
+    public List<UserInfo> GetAllPlayer()
+    {
+        return _gamePlayers.GetAllPlayerData();
+    }
+
+    public UserInfo GetCurrentPlayer()
+    {
+        return _gamePlayers.GetCurrentPlayerData();
+    }
+
+    public void AddHostage(UserInfo userInfo)
+    {
+        _gamePlayers.AddHostage(userInfo);
+    }
+
+    public void AddHostage(string playerName)
+    {
+        var playerData = FindPlayer(playerName); 
+        _gamePlayers.AddHostage(playerData);
+    }
+
+    public void PickTopic(int index)
+    {
+        _topicPicker.PickTopic(index);
+    }
+
+    public string GetCurrentTopic()
+    {
+        return _topicPicker.Topic;
     }
 }

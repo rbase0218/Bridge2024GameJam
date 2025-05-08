@@ -16,7 +16,6 @@ public class UI_Intro01 : UIScreen
     {
         if (UseAutoNextScreen)
             BindNextScreen<UI_Sequence01>();
-        
         return true;
     }
 }

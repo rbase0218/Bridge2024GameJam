@@ -49,11 +49,11 @@ public class UI_JobIntro01 : UIScreen
         GetObject((int)Objects.JobFrame).SetActive(false);
         
         // ===== [ Data Bind ] =====
-        // var currentUser = Managers.Game.currentUser;
+        var currentUser = Managers.Game.GetCurrentPlayer();
         
-        // GetText((int)Texts.NameText).SetText(currentUser.userName);
-        // GetText((int)Texts.JobNameText).SetText(Managers.Data.GetJobText(currentUser.jobType));
-        // GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(currentUser.jobType);
+        GetText((int)Texts.NameText).SetText(currentUser.userName);
+        GetText((int)Texts.JobNameText).SetText(Managers.Data.GetJobText(currentUser.jobType));
+        GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(currentUser.jobType);
         
         
         // 다음 Screen 연결하기

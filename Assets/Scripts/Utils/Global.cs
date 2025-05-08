@@ -23,15 +23,18 @@ public class UserInfo
     public string userName;
     // 유저 직업
     public EJobType jobType;
-    public bool canQuestion;
+    
+    // 사망자
     public bool isDie;
+    // 현재 인질 여부
+    public bool isHostage;
     
     public UserInfo(string userName)
     {
         this.userName = userName;
         jobType = EJobType.VIP;
-        canQuestion = true;
         isDie = false;
+        isHostage = false;
     }
 }
 
