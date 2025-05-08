@@ -79,4 +79,9 @@ public class GamePlayers
     {
         _hostages?.Add(userInfo);
     }
+
+    public bool IsLastPlayer()
+    {
+        return _questionerPicker.IsLastQuestioner();
+    }
 }

@@ -24,10 +24,17 @@ public class QuestionerPicker
 
     public int GetNextQuestionerIndex()
     {
-        return _nextQuestionerIndex;
+        var savedIndex = _nextQuestionerIndex;
+        UpdateNextQuestioner();
+        return savedIndex;
     }
 
-    public void UpdateNextQuestioner()
+    public bool IsLastQuestioner()
+    {
+        return _currentQuestionerIndex == _allPlayers.Count - 1;
+    }
+
+    private void UpdateNextQuestioner()
     {
         _currentQuestionerIndex = _nextQuestionerIndex;
         int nextIndex = _currentQuestionerIndex + 1;
@@ -42,5 +49,7 @@ public class QuestionerPicker
             if(nextIndex >= _allPlayers.Count)
                 nextIndex = 0;
         }
+        
+        _nextQuestionerIndex = nextIndex;
     }
 }

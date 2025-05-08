@@ -34,8 +34,6 @@ public class GameManager : MonoBehaviour
     // 타이틀 Scene -> Play Scene
     public bool SetUpPlayers(List<string> playerNames)
     {
-        Initialized();
-
         // Nickname -> PlayerData 생성
         var onGenerate = _gamePlayers.GeneratePlayersData(playerNames);
         if (!onGenerate)
@@ -62,6 +60,11 @@ public class GameManager : MonoBehaviour
         return _gamePlayers.GetCurrentPlayerData();
     }
 
+    public UserInfo GetNextPlayer()
+    {
+        return _gamePlayers.GetNextPlayerData();
+    }
+
     public void AddHostage(UserInfo userInfo)
     {
         _gamePlayers.AddHostage(userInfo);
@@ -75,11 +78,18 @@ public class GameManager : MonoBehaviour
 
     public void PickTopic(int index)
     {
+        Initialized();
+        
         _topicPicker.PickTopic(index);
     }
 
     public string GetCurrentTopic()
     {
         return _topicPicker.Topic;
+    }
+
+    public bool IsLastPlayer()
+    {
+        return _gamePlayers.IsLastPlayer();
     }
 }

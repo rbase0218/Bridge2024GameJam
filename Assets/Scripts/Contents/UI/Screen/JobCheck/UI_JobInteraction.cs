@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -69,11 +70,14 @@ public class UI_JobInteraction : UIScreen
         
              // 주제를 이 곳에서 전달한다.
              string originalText = Managers.Game.GetCurrentTopic();
+             Debug.Log(originalText);
              
              string wrappedText = string.Join("\n", 
                  Enumerable.Range(0, (originalText.Length + 6) / 7)
                      .Select(i => originalText.Substring(i * 7, 
                          Math.Min(6, originalText.Length - i * 7))));
+             
+             Debug.Log(wrappedText);
              
              GetText((int)Texts.WordText).text = wrappedText;
              GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
@@ -82,9 +86,8 @@ public class UI_JobInteraction : UIScreen
          {
              //BindNextScreen<UI_ClockSwitcher>();
              
-             // 현재 플레이어의 이름을 String 배열로 만든다.
-             // 이때, 자기 자신도 포함한다.
-             var userList = Managers.Game.GetAllPlayer().Select( (x) => x.userName).ToArray();
+             // 현재 플레이어들의 이름을 String 배열로 만든다.
+             var userList = Managers.Game.GetAllPlayers().Select( (x) => x.userName).ToArray();
              
              _playerSelector.ShowButton(userList);
              _playerSelector.onClickSubmitButton.AddListener(OnClickSubmitButton);
@@ -123,7 +126,7 @@ public class UI_JobInteraction : UIScreen
     
     private void RandomSubmit()
     {
-        var allPlayers = Managers.Game.GetAllPlayer();
+        var allPlayers = Managers.Game.GetAllPlayers();
         var randIndex = Random.Range(0, allPlayers.Count);
         
         //Debug.Log("랜덤 선택 : " + selectUser.userName);

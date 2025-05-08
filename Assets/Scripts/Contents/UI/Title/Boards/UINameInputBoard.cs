@@ -92,6 +92,6 @@ public class UINameInputBoard : UIBase
             }
         }
 
-        return Managers.Game.HandlePlayerActions(userNames);
+        return Managers.Game.SetUpPlayers(userNames);
     }
 }
