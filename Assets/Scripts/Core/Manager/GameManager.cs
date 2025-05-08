@@ -11,11 +11,6 @@ public class GameManager : MonoBehaviour
     private TopicPicker _topicPicker;
     public bool isGameEnd;
 
-    private void Awake()
-    {
-        Initialized();
-    }
-    
     private void Start()
     {
         if (Managers.Game.isGameEnd)
@@ -37,8 +32,10 @@ public class GameManager : MonoBehaviour
     }
 
     // 타이틀 Scene -> Play Scene
-    public bool HandlePlayerActions(List<string> playerNames)
+    public bool SetUpPlayers(List<string> playerNames)
     {
+        Initialized();
+
         // Nickname -> PlayerData 생성
         var onGenerate = _gamePlayers.GeneratePlayersData(playerNames);
         if (!onGenerate)
@@ -55,7 +52,7 @@ public class GameManager : MonoBehaviour
         return _gamePlayers.FindPlayer(playerName);
     }
 
-    public List<UserInfo> GetAllPlayer()
+    public List<UserInfo> GetAllPlayers()
     {
         return _gamePlayers.GetAllPlayerData();
     }
