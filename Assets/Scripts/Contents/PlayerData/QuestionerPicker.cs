@@ -42,14 +42,17 @@ public class QuestionerPicker
         // 질문을 할 수 있는 유저
         // 1. 현재 인질인 상태가 아니어야 한다.
         // 2. 현재 죽은 상태가 아니어야 한다.
+        if(nextIndex >= _allPlayers.Count)
+            nextIndex = 0;
+        
         while (_allPlayers[nextIndex].isHostage || _allPlayers[nextIndex].isDie)
         {
             nextIndex++;
-            
-            if(nextIndex >= _allPlayers.Count)
-                nextIndex = 0;
+
+            if (nextIndex >= _allPlayers.Count)
+                break;
         }
-        
+
         _nextQuestionerIndex = nextIndex;
     }
 }
