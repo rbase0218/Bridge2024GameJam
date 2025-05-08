@@ -27,11 +27,11 @@ public class UI_AnswerPerson : UIScreen
     
     protected override bool EnterWindow()
     {
-        var answerUserName = Managers.Game.selectUserName;
-        GetText((int)Texts.Text).SetText(answerUserName);
-        
-        if(UseAutoNextScreen)
-            BindNextScreen<UI_TextConfirm01>();
+        // var answerUserName = Managers.Game.selectUserName;
+        // GetText((int)Texts.Text).SetText(answerUserName);
+        //
+        // if(UseAutoNextScreen)
+        //     BindNextScreen<UI_TextConfirm01>();
         
         return true;
     }

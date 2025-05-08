@@ -31,22 +31,22 @@ public class UI_KeywordReveal : UIScreen
 
     protected override bool EnterWindow()
     {
-        string originalText = Managers.Game.gameTopic;
-        string wrappedText = string.Join("\n",
-            Enumerable.Range(0, (originalText.Length + 6) / 7)
-                .Select(i => originalText.Substring(i * 7,
-                    Math.Min(6, originalText.Length - i * 7))));
-        GetText((int)Texts.TopicText).SetText(wrappedText);
+        // string originalText = Managers.Game.gameTopic;
+        // string wrappedText = string.Join("\n",
+        //     Enumerable.Range(0, (originalText.Length + 6) / 7)
+        //         .Select(i => originalText.Substring(i * 7,
+        //             Math.Min(6, originalText.Length - i * 7))));
+        // GetText((int)Texts.TopicText).SetText(wrappedText);
 
         return true;
     }
 
     private void OnClickButton()
     {
-        Managers.Sound.PlaySFX("Click");
-
-        Managers.Game.ResetData();
-        SceneManager.LoadScene("Title");
+        // Managers.Sound.PlaySFX("Click");
+        //
+        // Managers.Game.ResetData();
+        // SceneManager.LoadScene("Title");
         // if (Managers.Ads.interAd.CanShowAd())
         // {
         //     Managers.Ads.ShowAd();

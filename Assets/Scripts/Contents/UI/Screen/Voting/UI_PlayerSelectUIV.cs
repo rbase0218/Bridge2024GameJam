@@ -51,46 +51,46 @@ public class UI_PlayerSelectUIV : UIScreen
             BindNextScreen<UI_ClockSwitcherV>();
         
         isSelect = false;
-        var currentUser = Managers.Game.currentUser;
-        if (currentUser.jobType == EJobType.Assassin)
-        {
-            copyUserList = new List<UserInfo>(Managers.Game._userList);
-            copyUserList.RemoveAll(x => Managers.Game._hostageList.Contains(x));
-            
-            GetObject((int)Objects.Board_B).SetActive(true);
-            GetObject((int)Objects.Board_A).SetActive(false);
-
-            var selectorB = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerB);
-            selectorB.ShowButton(copyUserList.Select(x => x.userName).ToArray());
-            
-            _gauge.onEndGauge.AddListener(() =>
-            {
-                if (isSelect)
-                    return;
-             
-                RandomSubmit();
-            });
-            
-            GetText((int)Texts.FrontText).SetText("당신은");
-            GetText((int)Texts.Text).SetText("암살자");
-            GetText((int)Texts.BackText).SetText("입니다.");
-        }
-        else
-        {
-            var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName);
-            var aliveUserArray = userList.ToList().FindAll(x => x.isDie == false).Select(x => x.userName).ToArray();
-            
-            GetObject((int)Objects.Board_B).SetActive(false);
-            GetObject((int)Objects.Board_A).SetActive(true);
-            
-            var selectorA = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA);
-            selectorA.ShowButton(aliveUserArray);
-            
-            GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
-            GetText((int)Texts.Text).SetText(currentUser.userName);
-            GetText((int)Texts.BackText).SetText("입니다.");
-        }
-        
+        // var currentUser = Managers.Game.currentUser;
+        // if (currentUser.jobType == EJobType.Assassin)
+        // {
+        //     copyUserList = new List<UserInfo>(Managers.Game._userList);
+        //     copyUserList.RemoveAll(x => Managers.Game._hostageList.Contains(x));
+        //     
+        //     GetObject((int)Objects.Board_B).SetActive(true);
+        //     GetObject((int)Objects.Board_A).SetActive(false);
+        //
+        //     var selectorB = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerB);
+        //     selectorB.ShowButton(copyUserList.Select(x => x.userName).ToArray());
+        //     
+        //     _gauge.onEndGauge.AddListener(() =>
+        //     {
+        //         if (isSelect)
+        //             return;
+        //      
+        //         RandomSubmit();
+        //     });
+        //     
+        //     GetText((int)Texts.FrontText).SetText("당신은");
+        //     GetText((int)Texts.Text).SetText("암살자");
+        //     GetText((int)Texts.BackText).SetText("입니다.");
+        // }
+        // else
+        // {
+        //     var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName);
+        //     var aliveUserArray = userList.ToList().FindAll(x => x.isDie == false).Select(x => x.userName).ToArray();
+        //     
+        //     GetObject((int)Objects.Board_B).SetActive(false);
+        //     GetObject((int)Objects.Board_A).SetActive(true);
+        //     
+        //     var selectorA = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA);
+        //     selectorA.ShowButton(aliveUserArray);
+        //     
+        //     GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
+        //     GetText((int)Texts.Text).SetText(currentUser.userName);
+        //     GetText((int)Texts.BackText).SetText("입니다.");
+        // }
+        //
         return true;
     }
 
@@ -103,8 +103,8 @@ public class UI_PlayerSelectUIV : UIScreen
             return;
         
         // 해당 유저에 대한 정보를 찾는다.
-        var findUser = Managers.Game._userList.Find( x => x.userName == text);
-        Managers.Game.AddVoteUser(findUser);
+        // var findUser = Managers.Game._userList.Find( x => x.userName == text);
+        // Managers.Game.AddVoteUser(findUser);
         
         OnNextScreen<UI_ClockSwitcherV>();
     }
@@ -117,8 +117,8 @@ public class UI_PlayerSelectUIV : UIScreen
         if (text == null)
             return;
         
-        var findUser = Managers.Game._userList.Find( x => x.userName == text);
-        Managers.Game.AddHostage(findUser);
+        // var findUser = Managers.Game._userList.Find( x => x.userName == text);
+        // Managers.Game.AddHostage(findUser);
         OnNextScreen<UI_ClockSwitcherV>();
         isSelect = true;
     }
@@ -128,7 +128,7 @@ public class UI_PlayerSelectUIV : UIScreen
         var random = Random.Range(0, copyUserList.Count);
         var selectUser = copyUserList[random];
         //Debug.Log("랜덤 선택 : " + selectUser.userName);
-        Managers.Game.AddHostage(selectUser);
+        // Managers.Game.AddHostage(selectUser);
         isSelect = true;
     }
 }

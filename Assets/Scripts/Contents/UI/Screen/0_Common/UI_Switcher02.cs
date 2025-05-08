@@ -25,7 +25,7 @@ public class UI_Switcher02 : UIScreen
         if (UseAutoNextScreen)
             BindNextScreen<UI_Switcher01V>();
         
-        Managers.Game.SetCanAllQuestion();
+        // Managers.Game.SetCanAllQuestion();
         return true;
     }
     

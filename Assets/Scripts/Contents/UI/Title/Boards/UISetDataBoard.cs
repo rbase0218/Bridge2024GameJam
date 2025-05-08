@@ -88,7 +88,7 @@ public class UISetDataBoard : UIBase
     {
         Managers.Sound.PlaySFX("Click");
 
-        Managers.Game.PickGameTopic(_selectCategoryIndex);
+        // Managers.Game.PickGameTopic(_selectCategoryIndex);
         onClickNextButton?.Invoke(_userCount);
     }
     

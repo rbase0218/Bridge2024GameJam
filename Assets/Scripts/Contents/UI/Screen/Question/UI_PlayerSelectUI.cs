@@ -36,10 +36,10 @@ public class UI_PlayerSelectUI : UIScreen
         //Debug.Log("이번 차례는 " +Managers.Game.currentUser.userName);
         
         // 자기 자신을 제외한 리스트를 가져온다.
-        selectContainer.ShowButton(Managers.Game.GetAnswerUserList().Select(user => user.userName).ToArray());
-
-        GetText((int)Texts.Text).text = Managers.Game.currentUser.userName;
-        selectContainer.onClickSubmitButton.AddListener(OnClickSubmitButton);
+        // selectContainer.ShowButton(Managers.Game.GetAnswerUserList().Select(user => user.userName).ToArray());
+        //
+        // GetText((int)Texts.Text).text = Managers.Game.currentUser.userName;
+        // selectContainer.onClickSubmitButton.AddListener(OnClickSubmitButton);
         
         return true;
     }
@@ -50,10 +50,10 @@ public class UI_PlayerSelectUI : UIScreen
         if (text == null)
             return;
         
-        // 질문 전달자 확인.
-        Managers.Game.selectUserName = text;
-        // 다음 Scene으로 이동한다.
-        Managers.Game.SetAnswerUser(text);
-        OnNextScreen<UI_AnswerPerson>();
+        // // 질문 전달자 확인.
+        // Managers.Game.selectUserName = text;
+        // // 다음 Scene으로 이동한다.
+        // Managers.Game.SetAnswerUser(text);
+        // OnNextScreen<UI_AnswerPerson>();
     }
 }

@@ -33,25 +33,25 @@ public class UI_NextPlayerV : UIScreen
     {
         isNext = false;
         
-        GetText((int)Texts.NameA).SetText(Managers.Game.currentUser.userName);
-        // 유저 리스트를 가져온다.
-        // 리스트의 끝 인덱스에 도달했는지 확인한다.
-        if (Managers.Game.NextUser())
-        {
-            isNext = true;
-            GetText((int)Texts.NameB).faceColor = Color.white;
-            GetText((int)Texts.NameB).SetText(Managers.Game.currentUser.userName);
-            if (UseAutoNextScreen)
-                BindNextScreen<UI_PlayerSelectUIV>();
-        }
-        else
-        {
-            isNext = false;
-            GetText((int)Texts.NameB).SetText("종료");
-            GetText((int)Texts.NameB).faceColor = Color.red;
-            if (UseAutoNextScreen)
-                BindNextScreen<UI_Switcher01VR>();
-        }
+        // GetText((int)Texts.NameA).SetText(Managers.Game.currentUser.userName);
+        // // 유저 리스트를 가져온다.
+        // // 리스트의 끝 인덱스에 도달했는지 확인한다.
+        // if (Managers.Game.NextUser())
+        // {
+        //     isNext = true;
+        //     GetText((int)Texts.NameB).faceColor = Color.white;
+        //     GetText((int)Texts.NameB).SetText(Managers.Game.currentUser.userName);
+        //     if (UseAutoNextScreen)
+        //         BindNextScreen<UI_PlayerSelectUIV>();
+        // }
+        // else
+        // {
+        //     isNext = false;
+        //     GetText((int)Texts.NameB).SetText("종료");
+        //     GetText((int)Texts.NameB).faceColor = Color.red;
+        //     if (UseAutoNextScreen)
+        //         BindNextScreen<UI_Switcher01VR>();
+        // }
         return true;
     }
     

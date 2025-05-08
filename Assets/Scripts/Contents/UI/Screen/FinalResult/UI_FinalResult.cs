@@ -48,14 +48,14 @@ public class UI_FinalResult : UIScreen
 
     protected override bool EnterWindow()
     {
-        Managers.Sound.PlaySFX("GameOver");
-        // 승자의 직업을 받는다
-        var winner = Managers.Game.winnerJob;
-
-        GetImage((int)Images.JobImage).sprite = Managers.Data.GetFrameSprite(winner);
-        // VIP 타입 중에서 UserName만 가져와서 Array로 만들어서 전달한다.
-        var userNames = Managers.Game._userList.FindAll(user => user.jobType == winner).Select(x => x.userName).ToArray();
-        ShowNameField(userNames);
+        // Managers.Sound.PlaySFX("GameOver");
+        // // 승자의 직업을 받는다
+        // var winner = Managers.Game.winnerJob;
+        //
+        // GetImage((int)Images.JobImage).sprite = Managers.Data.GetFrameSprite(winner);
+        // // VIP 타입 중에서 UserName만 가져와서 Array로 만들어서 전달한다.
+        // var userNames = Managers.Game._userList.FindAll(user => user.jobType == winner).Select(x => x.userName).ToArray();
+        // ShowNameField(userNames);
 
         return true;
     }

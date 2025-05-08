@@ -46,29 +46,29 @@ public class UI_Switcher01VR : UIScreen
          */
         
         // + (2024-08-22) voteUser가 Null 일 경우 임시 예외처리
-        var isDuple = Managers.Game.IsDupleVoteUser();
-        if (isDuple)
-        {
-            GetText((int)Texts.SecondText).SetText("동표가 나왔으므로\n 토론과 투표를 다시 시작합니다.");
-            Managers.Game._voteList.Clear();
-
-            // 암살자도 의심 안받게 인질 다시 잡아야함. 재토론 이후, 중간에 인질 선택하고 싶은 대상이 바뀌는 경우도 있으니까. 재투표시 지목 대상 바뀌는 것 허용.
-            Managers.Game.UndoHostage();
-
-            BindNextScreen<UI_Switcher02>();
-
-            return true;
-        }
-
-        UserInfo voteUser = Managers.Game.GetVoteUser();
-        if (voteUser == null)
-            voteUser = Managers.Game.currentUser;
-
-        Managers.Game.voteUser = voteUser;
-        Managers.Game._voteList.Clear();
-
-        if (UseAutoNextScreen)
-            BindNextScreen<UI_VoteResult>();
+        // var isDuple = Managers.Game.IsDupleVoteUser();
+        // if (isDuple)
+        // {
+        //     GetText((int)Texts.SecondText).SetText("동표가 나왔으므로\n 토론과 투표를 다시 시작합니다.");
+        //     Managers.Game._voteList.Clear();
+        //
+        //     // 암살자도 의심 안받게 인질 다시 잡아야함. 재토론 이후, 중간에 인질 선택하고 싶은 대상이 바뀌는 경우도 있으니까. 재투표시 지목 대상 바뀌는 것 허용.
+        //     Managers.Game.UndoHostage();
+        //
+        //     BindNextScreen<UI_Switcher02>();
+        //
+        //     return true;
+        // }
+        //
+        // UserInfo voteUser = Managers.Game.GetVoteUser();
+        // if (voteUser == null)
+        //     voteUser = Managers.Game.currentUser;
+        //
+        // Managers.Game.voteUser = voteUser;
+        // Managers.Game._voteList.Clear();
+        //
+        // if (UseAutoNextScreen)
+        //     BindNextScreen<UI_VoteResult>();
 
         return true;
     }

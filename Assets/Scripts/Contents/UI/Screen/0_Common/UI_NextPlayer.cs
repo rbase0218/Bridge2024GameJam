@@ -33,24 +33,24 @@ public class UI_NextPlayer : UIScreen
     {
         isNext = false;
         
-        GetText((int)Texts.NameA).SetText(Managers.Game.currentUser.userName);
+        // GetText((int)Texts.NameA).SetText(Managers.Game.currentUser.userName);
         // 유저 리스트를 가져온다.
         // 리스트의 끝 인덱스에 도달했는지 확인한다.
-        if (Managers.Game.NextUser())
-        {
-            isNext = true;
-            GetText((int)Texts.NameB).SetText(Managers.Game.currentUser.userName);
-            if (UseAutoNextScreen)
-                BindNextScreen<UI_JobIntro01>();
-        }
-        else
-        {
-            isNext = false;
-            GetText((int)Texts.NameB).SetText("종료");
-            GetText((int)Texts.NameB).faceColor = Color.red;
-            if (UseAutoNextScreen)
-                BindNextScreen<UI_Switcher01>();
-        }
+        // if (Managers.Game.NextUser())
+        // {
+        //     isNext = true;
+        //     GetText((int)Texts.NameB).SetText(Managers.Game.currentUser.userName);
+        //     if (UseAutoNextScreen)
+        //         BindNextScreen<UI_JobIntro01>();
+        // }
+        // else
+        // {
+        //     isNext = false;
+        //     GetText((int)Texts.NameB).SetText("종료");
+        //     GetText((int)Texts.NameB).faceColor = Color.red;
+        //     if (UseAutoNextScreen)
+        //         BindNextScreen<UI_Switcher01>();
+        // }
 
         return true;
     }

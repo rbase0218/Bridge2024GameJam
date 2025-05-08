@@ -33,13 +33,13 @@ public class UI_Sequence02 : UIScreen
     protected override bool EnterWindow()
     {
         // 여기서 오류 생김. 질문 할 얘가 없어서 null 반환 -> _userList[0]을 줌.
-        Managers.Game.GetQuestionUser();
-        var hostageName = Managers.Game.GetCurrentHostage().userName;
-        var currUserName = Managers.Game.currentUser.userName;
-        Get<UIPersonViewer>((int)PersonViewer.PersonViewer).SetFrame(
-            new FrameData("인질", hostageName, 1),
-            new FrameData("첫 순서", currUserName, 0)
-        );
+        // Managers.Game.GetQuestionUser();
+        // var hostageName = Managers.Game.GetCurrentHostage().userName;
+        // var currUserName = Managers.Game.currentUser.userName;
+        // Get<UIPersonViewer>((int)PersonViewer.PersonViewer).SetFrame(
+        //     new FrameData("인질", hostageName, 1),
+        //     new FrameData("첫 순서", currUserName, 0)
+        // );
         
         if(UseAutoNextScreen)
             BindNextScreen<UI_QuestionInput>();
