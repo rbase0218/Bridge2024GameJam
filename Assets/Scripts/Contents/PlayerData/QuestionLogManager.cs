@@ -14,7 +14,7 @@ public struct QuestionLog
     // 답변 내용
     public string answer;
 
-    public QuestionLog(string questioner, string answerer, string question, string answer)
+    public QuestionLog(string questioner = null, string answerer = null, string question = null, string answer = null)
     {
         this.questioner = questioner;
         this.answerer = answerer;
@@ -30,6 +30,20 @@ public class QuestionLogManager
     public void AddQuestionLog(QuestionLog questionLog)
     {
         _questionLogs?.Add(questionLog);
+    }
+
+    public void ModifyQuestionLog(string answerer = null, string answer = null)
+    {
+        int lastIndex = _questionLogs.Count - 1;
+            
+        QuestionLog lastLog = _questionLogs[lastIndex];
+        
+        if(answerer != null)
+            lastLog.answerer = answerer;
+        if(answer != null)
+            lastLog.answer = answer;
+            
+        _questionLogs[lastIndex] = lastLog;
     }
 
     public QuestionLog GetLastQuestionLog()
