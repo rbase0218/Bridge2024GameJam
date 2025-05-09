@@ -108,6 +108,21 @@ public class GameManager : MonoBehaviour
     #endregion
     
     #region QuestionLogManager
+
+    public void CreateQuestionLog(QuestionLog questionLog)
+    {
+        _questionLogManager.AddQuestionLog(questionLog);
+    }
+
+    public QuestionLog GetLastQuestionLog()
+    {
+        return _questionLogManager.GetLastQuestionLog();
+    }
+
+    public void ModifyQuestionLog(string answerer = null, string answer = null)
+    {
+        _questionLogManager.ModifyQuestionLog(answerer, answer);
+    }
     
     #endregion
 }
