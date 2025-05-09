@@ -81,17 +81,23 @@ public class GamePlayers
     {
         // 이미 인질로 붙잡힌 적이 없다면 인질 리스트에 추가한다.
         // 가장 마지막에 존재하는 유저가 인질로 판정하기 위함
-        if(IsInHostagePlayer(userInfo.userName))
+        if(!IsPlayerAlreadyHostage(userInfo.userName))
             _hostages?.Add(userInfo);
     }
 
-    public bool IsInHostagePlayer(string playerName)
+    public bool IsPlayerAlreadyHostage(string playerName)
     {
         return _hostages.Find((x) => x.userName == playerName) != null;
     }
 
     public UserInfo GetCurrentHostage()
     {
+        Debug.Log("수 : " + _hostages.Count);
+        foreach (var userInfo in _hostages)
+        {
+            Debug.Log(userInfo.userName);
+        }
+        
         return _hostages[^1];
     }
 
