@@ -41,8 +41,8 @@ public class UI_QuestionInput : UIScreen
         {
             Managers.Sound.PlaySFX("Click");
         });
-        // var currUserName = Managers.Game.currentUser.userName;
-        // GetText((int)Texts.NameText).SetText(currUserName);
+        var currUserName = Managers.Game.GetCurrentPlayer().userName;
+        GetText((int)Texts.NameText).SetText(currUserName);
 
         return true;
     }
@@ -61,6 +61,7 @@ public class UI_QuestionInput : UIScreen
         var inputText = Get<TMP_InputField>((int)InputFields.InputField).text;
         if (inputText == string.Empty)
             return false;
+        
         // Managers.Game.WriteQuestion(inputText);
         return true;
     }

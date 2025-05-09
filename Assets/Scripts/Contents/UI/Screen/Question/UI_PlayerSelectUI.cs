@@ -35,12 +35,15 @@ public class UI_PlayerSelectUI : UIScreen
         //GetText((int)Texts.NameText).text = Managers.Game.currentUser.userName;
         //Debug.Log("이번 차례는 " +Managers.Game.currentUser.userName);
         
-        // 자기 자신을 제외한 리스트를 가져온다.
-        // selectContainer.ShowButton(Managers.Game.GetAnswerUserList().Select(user => user.userName).ToArray());
-        //
-        // GetText((int)Texts.Text).text = Managers.Game.currentUser.userName;
-        // selectContainer.onClickSubmitButton.AddListener(OnClickSubmitButton);
+        // 질문자 목록을 만들어야 한다.
+        var currUserName = Managers.Game.GetCurrentPlayer().userName;
+        var answerUserList = Managers.Game.GetAllPlayers(currUserName);
+        selectContainer.ShowButton(answerUserList.Select(user => user.userName).ToArray());
         
+        // 현재 유저의 이름을 표출한다.
+        GetText((int)Texts.Text).text = currUserName;
+        
+        selectContainer.onClickSubmitButton.AddListener(OnClickSubmitButton);
         return true;
     }
 

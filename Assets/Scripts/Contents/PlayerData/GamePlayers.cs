@@ -52,8 +52,10 @@ public class GamePlayers
     /// 모든 유저의 데이터를 반환한다.
     /// </summary>
     /// <returns></returns>
-    public List<UserInfo> GetAllPlayerData()
+    public List<UserInfo> GetAllPlayerData(string unViewName = null)
     {
+        if (unViewName != null)
+            return _allPlayers.FindAll((x) => x.userName != unViewName);
         return _allPlayers;
     }
 
@@ -77,7 +79,20 @@ public class GamePlayers
 
     public void AddHostage(UserInfo userInfo)
     {
-        _hostages?.Add(userInfo);
+        // 이미 인질로 붙잡힌 적이 없다면 인질 리스트에 추가한다.
+        // 가장 마지막에 존재하는 유저가 인질로 판정하기 위함
+        if(IsInHostagePlayer(userInfo.userName))
+            _hostages?.Add(userInfo);
+    }
+
+    public bool IsInHostagePlayer(string playerName)
+    {
+        return _hostages.Find((x) => x.userName == playerName) != null;
+    }
+
+    public UserInfo GetCurrentHostage()
+    {
+        return _hostages[^1];
     }
 
     public bool IsLastPlayer()
