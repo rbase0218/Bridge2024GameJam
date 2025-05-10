@@ -4,39 +4,29 @@ using UnityEngine;
 
 public class QuestionerPicker : IPlayerStrategy
 {
-    private int _currentQuestionerIndex;
-    private int _nextQuestionerIndex;
+    private int _currentIndex;
+    private int _nextIndex;
     
     private List<UserInfo> _allPlayers;
 
     public void Initialized(List<UserInfo> allPlayers)
     {
-        _currentQuestionerIndex = 0;
-        _nextQuestionerIndex = 1;
+        _currentIndex = 0;
+        _nextIndex = 1;
         
         _allPlayers = allPlayers;
     }
 
-    public UserInfo GetPlayerData(int index = 0)
-    {
-        return _allPlayers[index];
-    }
-
     public UserInfo GetCurrentPlayerData()
     {
-        return _allPlayers[_currentQuestionerIndex];
+        return _allPlayers[_currentIndex];
     }
 
     public UserInfo GetNextPlayerData()
     {
-        return _allPlayers[_nextQuestionerIndex];
+        return _allPlayers[_nextIndex];
     }
     
-    public int GetPlayerCount()
-    {
-        return _currentQuestionerIndex;
-    }
-
     public void UpdateNextPlayer()
     {
         UpdateNextQuestioner();
@@ -44,13 +34,13 @@ public class QuestionerPicker : IPlayerStrategy
 
     public bool IsLastPlayer()
     {
-        return _currentQuestionerIndex == _allPlayers.Count - 1;
+        return _currentIndex == _allPlayers.Count - 1;
     }
 
     private void UpdateNextQuestioner()
     {
-        _currentQuestionerIndex = _nextQuestionerIndex;
-        int nextIndex = _currentQuestionerIndex + 1;
+        _currentIndex = _nextIndex;
+        int nextIndex = _currentIndex + 1;
         
         // 질문을 할 수 있는 유저
         // 1. 현재 인질인 상태가 아니어야 한다.
@@ -66,6 +56,6 @@ public class QuestionerPicker : IPlayerStrategy
                 break;
         }
 
-        _nextQuestionerIndex = nextIndex;
+        _nextIndex = nextIndex;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public interface IPlayerStrategy
 {
     public void Initialized(List<UserInfo> allPlayers);
-    public UserInfo GetPlayerData(int index = 0);
     
     public UserInfo GetCurrentPlayerData();
     public UserInfo GetNextPlayerData();
@@ -13,6 +12,4 @@ public interface IPlayerStrategy
     public void UpdateNextPlayer();
     
     public bool IsLastPlayer();
-    
-    public int GetPlayerCount();
 }

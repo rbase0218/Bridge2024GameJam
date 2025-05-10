@@ -4,38 +4,42 @@ using UnityEngine;
 
 public class VotePicker : IPlayerStrategy
 {
+    private int _currentIndex;
+    private int _nextIndex;
+    
+    private List<UserInfo> _allPlayers;
+    
     public void Initialized(List<UserInfo> allPlayers)
     {
-        throw new System.NotImplementedException();
-    }
-    
-    public UserInfo GetPlayerData(int index = 0)
-    {
-        throw new System.NotImplementedException();
+        _currentIndex = 0;
+        _nextIndex = 1;
+        
+        _allPlayers = allPlayers;
     }
     
     public UserInfo GetCurrentPlayerData()
     {
-        throw new System.NotImplementedException();
+        return _allPlayers[_currentIndex];
     }
     
     public UserInfo GetNextPlayerData()
     {
-        throw new System.NotImplementedException();
+        return _allPlayers[_nextIndex];
     }
     
     public void UpdateNextPlayer()
     {
-        throw new System.NotImplementedException();
+        UpdateNextVoter();
     }
     
     public bool IsLastPlayer()
     {
-        throw new System.NotImplementedException();
+        return _currentIndex == _allPlayers.Count - 1;
+    }
+
+    private void UpdateNextVoter()
+    {
+        
     }
     
-    public int GetPlayerCount()
-    {
-        throw new System.NotImplementedException();
-    }
 }
