@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class GamePlayers
 {
@@ -18,8 +17,13 @@ public class GamePlayers
         foreach (var name in userNames)
             _allPlayers.Add(new UserInfo(name));
         
-        _context.Initialize(_allPlayers);
+        _context.Initialized(_allPlayers);
         return true;
+    }
+
+    public void SetContext(PlayersDataContext.DataContextType type)
+    {
+        _context.SetupPlayerStrategy(type);
     }
 
     public bool ClearAllPlayers()

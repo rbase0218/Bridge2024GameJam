@@ -19,7 +19,7 @@ public class PlayersDataContext
         return _playerStrategy;
     }
 
-    public void Initialize(List<UserInfo> players)
+    public void Initialized(List<UserInfo> players)
     {
         _questionerPicker.Initialized(players);
         _votePicker.Initialized(players);

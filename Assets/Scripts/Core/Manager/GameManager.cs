@@ -46,6 +46,11 @@ public class GameManager : MonoBehaviour
         
         return onRegisterJobs;
     }
+
+    public void SetContext(PlayersDataContext.DataContextType type)
+    {
+        _gamePlayers.SetContext(type);
+    }
     
     #region GamePlayers
 

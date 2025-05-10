@@ -39,7 +39,23 @@ public class VotePicker : IPlayerStrategy
 
     private void UpdateNextVoter()
     {
+        _currentIndex = _nextIndex;
+        int nextIndex = _currentIndex + 1;
         
+        // 투표 대상이 될 수 있는 유저
+        // 1. 현재 죽은 상태가 아니어야 한다.
+        if(nextIndex >= _allPlayers.Count)
+            nextIndex = 0;
+        
+        while (_allPlayers[nextIndex].isDie)
+        {
+            nextIndex++;
+
+            if (nextIndex >= _allPlayers.Count)
+                break;
+        }
+
+        _nextIndex = nextIndex;
     }
     
 }
