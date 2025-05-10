@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestionerPicker
+public class QuestionerPicker : IPlayerStrategy
 {
     private int _currentQuestionerIndex;
     private int _nextQuestionerIndex;
@@ -17,23 +17,32 @@ public class QuestionerPicker
         _allPlayers = allPlayers;
     }
 
-    public int GetCurrentQuestionerIndex()
+    public UserInfo GetPlayerData(int index = 0)
+    {
+        return _allPlayers[index];
+    }
+
+    public UserInfo GetCurrentPlayerData()
+    {
+        return _allPlayers[_currentQuestionerIndex];
+    }
+
+    public UserInfo GetNextPlayerData()
+    {
+        return _allPlayers[_nextQuestionerIndex];
+    }
+    
+    public int GetPlayerCount()
     {
         return _currentQuestionerIndex;
     }
 
-    public int GetNextQuestionerIndex()
-    {
-        var savedIndex = _nextQuestionerIndex;
-        return savedIndex;
-    }
-
-    public void UpdateQuestioner()
+    public void UpdateNextPlayer()
     {
         UpdateNextQuestioner();
     }
 
-    public bool IsLastQuestioner()
+    public bool IsLastPlayer()
     {
         return _currentQuestionerIndex == _allPlayers.Count - 1;
     }

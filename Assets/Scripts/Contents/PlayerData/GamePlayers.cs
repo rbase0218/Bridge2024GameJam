@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class GamePlayers
 {
-    private QuestionerPicker _questionerPicker = new QuestionerPicker();
-    
     private readonly List<UserInfo> _allPlayers = new List<UserInfo>();
     private UserInfo _assassinPlayer;
     private UserInfo _jokerPlayer;
-    private List<UserInfo> _nonePlayers = new List<UserInfo>();
-    
     private List<UserInfo> _hostages = new List<UserInfo>();
+
+    private PlayersDataContext _context = new PlayersDataContext();
 
     public bool GeneratePlayersData(List<string> userNames)
     {
@@ -20,7 +18,7 @@ public class GamePlayers
         foreach (var name in userNames)
             _allPlayers.Add(new UserInfo(name));
         
-        _questionerPicker.Initialized(_allPlayers);
+        _context.Initialize(_allPlayers);
         return true;
     }
 
@@ -65,7 +63,7 @@ public class GamePlayers
     /// <returns></returns>
     public UserInfo GetCurrentPlayerData()
     {
-        return _allPlayers[_questionerPicker.GetCurrentQuestionerIndex()];
+        return _context.GetStrategy().GetCurrentPlayerData();
     }
 
     /// <summary>
@@ -74,7 +72,7 @@ public class GamePlayers
     /// <returns></returns>
     public UserInfo GetNextPlayerData()
     {
-        return _allPlayers[_questionerPicker.GetNextQuestionerIndex()];
+        return _context.GetStrategy().GetNextPlayerData();
     }
 
     public void AddHostage(UserInfo userInfo)
@@ -100,11 +98,11 @@ public class GamePlayers
 
     public bool IsLastPlayer()
     {
-        return _questionerPicker.IsLastQuestioner();
+        return _context.GetStrategy().IsLastPlayer();
     }
 
     public void UpdateQuestioner()
     {
-        _questionerPicker.UpdateQuestioner();
+        _context.GetStrategy().UpdateNextPlayer();
     }
 }
