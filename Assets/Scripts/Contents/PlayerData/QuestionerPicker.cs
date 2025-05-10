@@ -25,8 +25,12 @@ public class QuestionerPicker
     public int GetNextQuestionerIndex()
     {
         var savedIndex = _nextQuestionerIndex;
-        UpdateNextQuestioner();
         return savedIndex;
+    }
+
+    public void UpdateQuestioner()
+    {
+        UpdateNextQuestioner();
     }
 
     public bool IsLastQuestioner()

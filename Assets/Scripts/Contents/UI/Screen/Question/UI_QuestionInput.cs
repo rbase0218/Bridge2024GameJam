@@ -62,7 +62,10 @@ public class UI_QuestionInput : UIScreen
         if (inputText == string.Empty)
             return false;
         
-        // Managers.Game.WriteQuestion(inputText);
+        Managers.Game.CreateQuestionLog(new QuestionLog(
+            Managers.Game.GetCurrentPlayer().userName,
+            inputText
+            ));
         return true;
     }
 }

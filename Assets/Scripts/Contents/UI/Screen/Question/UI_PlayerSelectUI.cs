@@ -53,10 +53,8 @@ public class UI_PlayerSelectUI : UIScreen
         if (text == null)
             return;
         
-        // // 질문 전달자 확인.
-        // Managers.Game.selectUserName = text;
-        // // 다음 Scene으로 이동한다.
-        // Managers.Game.SetAnswerUser(text);
-        // OnNextScreen<UI_AnswerPerson>();
+        // 질문 전달자 확인.
+        Managers.Game.ModifyQuestionLog(text);
+        OnNextScreen<UI_AnswerPerson>();
     }
 }

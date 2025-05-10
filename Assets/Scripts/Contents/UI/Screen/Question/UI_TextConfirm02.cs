@@ -36,8 +36,13 @@ public class UI_TextConfirm02 : UIScreen
     
     protected override bool EnterWindow()
     {
-        // GetText((int)Texts.Text).text = Managers.Game.selectUserName;
-        // Get<TMP_InputField>((int)InputFields.InputField).text = Managers.Game.questionText;
+        var log = Managers.Game.GetLastQuestionLog();
+        
+        string answererName = log.answerer;
+        string questionText = log.question;
+        
+        GetText((int)Texts.Text).text = answererName;
+        Get<TMP_InputField>((int)InputFields.InputField).text = questionText;
 
         if (UseAutoNextScreen)
         {

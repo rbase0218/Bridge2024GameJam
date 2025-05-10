@@ -69,6 +69,11 @@ public class GameManager : MonoBehaviour
         return _gamePlayers.GetNextPlayerData();
     }
 
+    public void UpdateQuestioner()
+    {
+        _gamePlayers.UpdateQuestioner();
+    }
+
     public void AddHostage(UserInfo userInfo)
     {
         _gamePlayers.AddHostage(userInfo);

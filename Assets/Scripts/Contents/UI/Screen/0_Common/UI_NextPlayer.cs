@@ -47,12 +47,14 @@ public class UI_NextPlayer : UIScreen
         else
         {
             isNext = false;
+            
             GetText((int)Texts.NameB).SetText("종료");
             GetText((int)Texts.NameB).faceColor = Color.red;
             if (UseAutoNextScreen)
                 BindNextScreen<UI_Switcher01>();
         }
-
+        
+        Managers.Game.UpdateQuestioner();
         return true;
     }
     

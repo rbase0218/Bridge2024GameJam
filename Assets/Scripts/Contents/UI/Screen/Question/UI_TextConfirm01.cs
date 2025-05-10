@@ -30,8 +30,8 @@ public class UI_TextConfirm01 : UIScreen
     
     protected override bool EnterWindow()
     {
-        // var answerUserName = Managers.Game.selectUserName;
-        // GetText((int)Texts.Text).SetText(answerUserName);
+        var answerUserName = Managers.Game.GetLastQuestionLog().answerer;
+        GetText((int)Texts.Text).SetText(answerUserName);
         
         if (UseAutoNextScreen)
             BindNextScreen<UI_TextConfirm02>();
