@@ -28,12 +28,12 @@ public class UI_VoteResult : UIScreen
     protected override bool EnterWindow()
     {
         Managers.Sound.SetBGMVolumeNoneSave(0);
-        // var voteUserName = Managers.Game.voteUser.userName;
-        //
-        // GetText((int)Texts.SecondText).SetText(
-        //     $"{voteUserName}님이 암살자로\n지목되었습니다.");
-        // GetButton((int)Buttons.CloseCard).gameObject.SetActive(true);
-        // GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
+        var voteUserName = Managers.Game.GetMaxVotePlayerName()[0];
+        
+        GetText((int)Texts.SecondText).SetText(
+            $"{voteUserName}님이 암살자로\n지목되었습니다.");
+        GetButton((int)Buttons.CloseCard).gameObject.SetActive(true);
+        GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
 
         if(UseAutoNextScreen)
             BindNextScreen<UI_JobReveal>();

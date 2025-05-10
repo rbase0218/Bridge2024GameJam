@@ -89,7 +89,11 @@ public class GameManager : MonoBehaviour
         var playerData = FindPlayer(playerName); 
         _gamePlayers.AddHostage(playerData);
     }
-    
+
+    public void UndoHostage()
+    {
+        _gamePlayers.UndoHostage();
+    }
     public bool IsLastPlayer()
     {
         return _gamePlayers.IsLastPlayer();
@@ -98,6 +102,21 @@ public class GameManager : MonoBehaviour
     public UserInfo GetCurrentHostageName()
     {
         return _gamePlayers.GetCurrentHostage();
+    }
+
+    public void AddVote(UserInfo userInfo)
+    {
+        _gamePlayers.AddVote(userInfo);
+    }
+
+    public List<string> GetMaxVotePlayerName()
+    {
+        return _gamePlayers.GetMaxVotePlayerName();
+    }
+
+    public void ClearVoteCount()
+    {
+        _gamePlayers.ClearVoteCount();
     }
     
     #endregion

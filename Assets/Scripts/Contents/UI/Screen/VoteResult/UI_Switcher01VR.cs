@@ -44,31 +44,25 @@ public class UI_Switcher01VR : UIScreen
         게임이 빨리 끝나는 버그 방지하기 위해 죽은 사람은 인질로 치지 않는 룰 롤백. 처음처럼 죽은 사람도 포함해서 인질로 잡아야 함.
         죽은 사람도 투표 가능 유지. -> 어차피 암살자는 투표를 하지 않기 때문에, 시민(+광대) 끼리 투표. 이 기표자 수가 적어지면 암살자에게 절대적으로 유리.
          */
+
+        var voteData = Managers.Game.GetMaxVotePlayerName();
+        Managers.Game.ClearVoteCount();
         
         // + (2024-08-22) voteUser가 Null 일 경우 임시 예외처리
-        // var isDuple = Managers.Game.IsDupleVoteUser();
-        // if (isDuple)
-        // {
-        //     GetText((int)Texts.SecondText).SetText("동표가 나왔으므로\n 토론과 투표를 다시 시작합니다.");
-        //     Managers.Game._voteList.Clear();
-        //
-        //     // 암살자도 의심 안받게 인질 다시 잡아야함. 재토론 이후, 중간에 인질 선택하고 싶은 대상이 바뀌는 경우도 있으니까. 재투표시 지목 대상 바뀌는 것 허용.
-        //     Managers.Game.UndoHostage();
-        //
-        //     BindNextScreen<UI_Switcher02>();
-        //
-        //     return true;
-        // }
-        //
-        // UserInfo voteUser = Managers.Game.GetVoteUser();
-        // if (voteUser == null)
-        //     voteUser = Managers.Game.currentUser;
-        //
-        // Managers.Game.voteUser = voteUser;
-        // Managers.Game._voteList.Clear();
-        //
-        // if (UseAutoNextScreen)
-        //     BindNextScreen<UI_VoteResult>();
+        if(voteData.Count == 0 || voteData.Count == 2)
+        {
+            GetText((int)Texts.SecondText).SetText("동표가 나왔으므로\n 토론과 투표를 다시 시작합니다.");
+        
+            // 암살자도 의심 안받게 인질 다시 잡아야함. 재토론 이후, 중간에 인질 선택하고 싶은 대상이 바뀌는 경우도 있으니까. 재투표시 지목 대상 바뀌는 것 허용.
+            Managers.Game.UndoHostage();
+        
+            BindNextScreen<UI_Switcher02>();
+        
+            return true;
+        }
+        
+        if (UseAutoNextScreen)
+            BindNextScreen<UI_VoteResult>();
 
         return true;
     }

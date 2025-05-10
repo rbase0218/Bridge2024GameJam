@@ -38,29 +38,30 @@ public class UI_JobReveal : UIScreen
 
     protected override bool EnterWindow()
     {
-        // var voteUser = Managers.Game.voteUser;
-        // var voteUserName = voteUser.userName;
-        // var voteUserPicture = Managers.Data.GetFrameSprite(voteUser.jobType);
-        // var voteUserJobFrame = Managers.Data.GetFrameBGSprite(voteUser.jobType);
-        //
-        // GetText((int)Texts.FirstText).SetText($"{voteUserName}은(는)");
-        //
-        // var infoTexts = Managers.Data.jobInfoTexts[voteUser.jobType];
-        // // Info Text 추가
-        // GetText((int)Texts.ThirdText).SetText(infoTexts.Item2);
-        // // Button Text 변경
-        // GetText((int)Texts.ButtonText).SetText(infoTexts.Item1);
-        //
-        // // 초상화 세팅
-        // GetImage((int)Images.Picture).sprite = voteUserPicture;
-        // GetImage((int)Images.BG).sprite = voteUserJobFrame;
-        // // 직업명 추가
-        // GetText((int)Texts.JobText).SetText(Managers.Data.GetJobText(voteUser.jobType));
-        //
-        // // Event Bind
-        // var nextButton = GetButton((int)Buttons.NextButton);
-        // nextButton.onClick.RemoveAllListeners();
-        // nextButton.onClick.AddListener(OnClickNextButton);
+        var votePlayerName = Managers.Game.GetMaxVotePlayerName()[0];
+        var votePlayerData = Managers.Game.FindPlayer(votePlayerName);
+        
+        var voteUserPicture = Managers.Data.GetFrameSprite(votePlayerData.jobType);
+        var voteUserJobFrame = Managers.Data.GetFrameBGSprite(votePlayerData.jobType);
+        
+        GetText((int)Texts.FirstText).SetText($"{votePlayerName}은(는)");
+        
+        var infoTexts = Managers.Data.jobInfoTexts[votePlayerData.jobType];
+        // Info Text 추가
+        GetText((int)Texts.ThirdText).SetText(infoTexts.Item2);
+        // Button Text 변경
+        GetText((int)Texts.ButtonText).SetText(infoTexts.Item1);
+        
+        // 초상화 세팅
+        GetImage((int)Images.Picture).sprite = voteUserPicture;
+        GetImage((int)Images.BG).sprite = voteUserJobFrame;
+        // 직업명 추가
+        GetText((int)Texts.JobText).SetText(Managers.Data.GetJobText(votePlayerData.jobType));
+        
+        // Event Bind
+        var nextButton = GetButton((int)Buttons.NextButton);
+        nextButton.onClick.RemoveAllListeners();
+        nextButton.onClick.AddListener(OnClickNextButton);
 
         return true;
     }
@@ -69,19 +70,23 @@ public class UI_JobReveal : UIScreen
     {
         Managers.Sound.PlaySFX("Click");
 
-        // var voteUser = Managers.Game.voteUser;
-        // var isAssasinWin = Managers.Game._hostageList.Count >= Managers.Game._userList.Count - 1;
-        // Debug.Log($"투표: {voteUser.jobType}, isAssasinWin: {isAssasinWin}");
-        // switch (voteUser.jobType)
+        var voteUser = Managers.Game.GetMaxVotePlayerName()[0];
+        var votePlayerData = Managers.Game.FindPlayer(voteUser);
+        
+        
+        // 인질 수가 자기 자신을 제외한 수와 동일하다면 암살자 승리
+        // var isAssassinWin = Managers.Game._hostageList.Count >= Managers.Game._userList.Count - 1;
+        // Debug.Log($"투표: {voteUser.jobType}, isAssasinWin: {isAssassinWin}");
+        // switch (votePlayerData.jobType)
         // {
         //     case EJobType.VIP:
         //         voteUser.isDie = true;
         //         // 게임 계속 진행
         //         
-        //         if (isAssasinWin)
+        //         if (isAssassinWin)
         //         {
         //             Debug.Log("Assassin Win");
-        //             Managers.Game.voteUser = Managers.Game._userList.Find(x => x.jobType == EJobType.Assassin);
+        //             // Managers.Game.voteUser = Managers.Game._userList.Find(x => x.jobType == EJobType.Assassin);
         //             OnNextScreen<UI_LastChanceResult>().SetInfo(true);
         //         }
         //         else

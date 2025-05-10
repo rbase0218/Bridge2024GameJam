@@ -9,6 +9,7 @@ public class GamePlayers
     private List<UserInfo> _hostages = new List<UserInfo>();
 
     private PlayersDataContext _context = new PlayersDataContext();
+    private VoteManager _voteManager = new VoteManager();
 
     public bool GeneratePlayersData(List<string> userNames)
     {
@@ -18,6 +19,8 @@ public class GamePlayers
             _allPlayers.Add(new UserInfo(name));
         
         _context.Initialized(_allPlayers);
+        _voteManager.Initialized(userNames);
+        
         return true;
     }
 
@@ -90,6 +93,11 @@ public class GamePlayers
         }
     }
 
+    public void UndoHostage()
+    {
+        _hostages.RemoveAt(_hostages.Count - 1);
+    }
+
     public bool IsPlayerAlreadyHostage(string playerName)
     {
         return _hostages.Find((x) => x.userName == playerName) != null;
@@ -108,5 +116,20 @@ public class GamePlayers
     public void UpdateQuestioner()
     {
         _context.GetStrategy().UpdateNextPlayer();
+    }
+
+    public void AddVote(UserInfo userInfo)
+    {
+        _voteManager.AddVote(userInfo.userName);
+    }
+
+    public List<string> GetMaxVotePlayerName()
+    {
+        return _voteManager.GetMaxVotePlayerName();
+    }
+
+    public void ClearVoteCount()
+    {
+        _voteManager.ClearVoteCount();
     }
 }
