@@ -14,9 +14,8 @@ public class UI_Switcher01V : UIScreen
     
     protected override bool EnterWindow()
     {
-        // Managers.Game.currentUser = Managers.Game._userList[0];
-        // if(UseAutoNextScreen)
-        //     BindNextScreen<UI_Introduce>();
+        if(UseAutoNextScreen)
+            BindNextScreen<UI_Introduce>();
         return true;
     }
 }

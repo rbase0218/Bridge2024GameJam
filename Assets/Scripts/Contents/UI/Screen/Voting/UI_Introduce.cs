@@ -27,7 +27,8 @@ public class UI_Introduce : UIScreen
     
     protected override bool EnterWindow()
     {
-        // GetText((int)Texts.Text).SetText(Managers.Game.currentUser.userName);
+        var playerName = Managers.Game.GetCurrentPlayer().userName;
+        GetText((int)Texts.Text).SetText(playerName);
         
         if(UseAutoNextScreen)
             BindNextScreen<UI_PlayerSelectUIV>();
