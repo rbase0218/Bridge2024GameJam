@@ -95,6 +95,9 @@ public class GamePlayers
 
     public void UndoHostage()
     {
+        var hostage = _hostages[^1];
+        hostage.isHostage = false;
+        
         _hostages.RemoveAt(_hostages.Count - 1);
     }
 
@@ -131,5 +134,10 @@ public class GamePlayers
     public void ClearVoteCount()
     {
         _voteManager.ClearVoteCount();
+    }
+
+    public bool ValidateVictory()
+    {
+        return _hostages.Count == (_allPlayers.Count - 1);
     }
 }

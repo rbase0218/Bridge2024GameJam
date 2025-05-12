@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private QuestionLogManager _questionLogManager;
     public bool isGameEnd;
 
+    private EJobType _winType = 0;
+    
     private void Start()
     {
         if (Managers.Game.isGameEnd)
@@ -31,6 +33,9 @@ public class GameManager : MonoBehaviour
         _gamePlayers = new GamePlayers();
         _topicPicker = new TopicPicker();
         _questionLogManager = new QuestionLogManager();
+
+        _winType = 0;
+        isGameEnd = false;
     }
 
     // 타이틀 Scene -> Play Scene
@@ -50,6 +55,21 @@ public class GameManager : MonoBehaviour
     public void SetContext(PlayersDataContext.DataContextType type)
     {
         _gamePlayers.SetContext(type);
+    }
+
+    public bool ValidateVictory()
+    {
+        return _gamePlayers.ValidateVictory();
+    }
+
+    public void SetWinner(EJobType type)
+    {
+        _winType = type;
+    }
+
+    public EJobType GetWinner()
+    {
+        return _winType;
     }
     
     #region GamePlayers
@@ -120,7 +140,6 @@ public class GameManager : MonoBehaviour
     }
     
     #endregion
-
     
     #region TopicPicker
     public void PickTopic(int index)

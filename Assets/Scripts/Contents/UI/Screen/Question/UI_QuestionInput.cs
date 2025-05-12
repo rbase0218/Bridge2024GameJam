@@ -64,8 +64,11 @@ public class UI_QuestionInput : UIScreen
         
         Managers.Game.CreateQuestionLog(new QuestionLog(
             Managers.Game.GetCurrentPlayer().userName,
-            inputText
+            null,
+            inputText,
+            null
             ));
+        
         return true;
     }
 }

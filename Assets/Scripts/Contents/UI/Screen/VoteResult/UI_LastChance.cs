@@ -47,9 +47,9 @@ public class UI_LastChance : UIScreen
         {
             Managers.Sound.PlaySFX("Click");
         });
-        // var voteUser = Managers.Game.voteUser;
-        // var voteUserJobFrame = Managers.Data.GetFrameBGSprite(voteUser.jobType);
-        // GetImage((int)Images.BG).sprite = voteUserJobFrame;
+        
+        var assassinFrame = Managers.Data.GetFrameBGSprite(EJobType.Assassin);
+        GetImage((int)Images.BG).sprite = assassinFrame;
         
         return true;
     }
@@ -59,7 +59,7 @@ public class UI_LastChance : UIScreen
         Managers.Sound.PlaySFX("Click");
 
         var writeText = Get<TMP_InputField>((int)InputFields.InputField).text;
-        // OnNextScreen<UI_LastChanceResult>().SetInfo(writeText == Managers.Game.gameTopic);
+        OnNextScreen<UI_LastChanceResult>().SetInfo(writeText == Managers.Game.GetCurrentTopic());
     }
 
     private void OnValueChangedInputField(string text)

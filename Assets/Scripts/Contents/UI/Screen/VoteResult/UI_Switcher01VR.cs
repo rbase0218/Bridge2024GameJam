@@ -46,16 +46,17 @@ public class UI_Switcher01VR : UIScreen
          */
 
         var voteData = Managers.Game.GetMaxVotePlayerName();
-        Managers.Game.ClearVoteCount();
         
         // + (2024-08-22) voteUser가 Null 일 경우 임시 예외처리
-        if(voteData.Count == 0 || voteData.Count == 2)
+        if(voteData.Count != 1)
         {
             GetText((int)Texts.SecondText).SetText("동표가 나왔으므로\n 토론과 투표를 다시 시작합니다.");
         
-            // 암살자도 의심 안받게 인질 다시 잡아야함. 재토론 이후, 중간에 인질 선택하고 싶은 대상이 바뀌는 경우도 있으니까. 재투표시 지목 대상 바뀌는 것 허용.
+            // 암살자도 의심 안받게 인질 다시 잡아야함.
+            // 재토론 이후, 중간에 인질 선택하고 싶은 대상이 바뀌는 경우도 있으니까. 재투표시 지목 대상 바뀌는 것 허용.
             Managers.Game.UndoHostage();
-        
+            Managers.Game.ClearVoteCount();
+
             BindNextScreen<UI_Switcher02>();
         
             return true;

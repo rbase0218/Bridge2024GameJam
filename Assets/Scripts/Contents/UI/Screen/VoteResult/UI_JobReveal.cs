@@ -73,32 +73,30 @@ public class UI_JobReveal : UIScreen
         var voteUser = Managers.Game.GetMaxVotePlayerName()[0];
         var votePlayerData = Managers.Game.FindPlayer(voteUser);
         
-        
         // 인질 수가 자기 자신을 제외한 수와 동일하다면 암살자 승리
-        // var isAssassinWin = Managers.Game._hostageList.Count >= Managers.Game._userList.Count - 1;
-        // Debug.Log($"투표: {voteUser.jobType}, isAssasinWin: {isAssassinWin}");
-        // switch (votePlayerData.jobType)
-        // {
-        //     case EJobType.VIP:
-        //         voteUser.isDie = true;
-        //         // 게임 계속 진행
-        //         
-        //         if (isAssassinWin)
-        //         {
-        //             Debug.Log("Assassin Win");
-        //             // Managers.Game.voteUser = Managers.Game._userList.Find(x => x.jobType == EJobType.Assassin);
-        //             OnNextScreen<UI_LastChanceResult>().SetInfo(true);
-        //         }
-        //         else
-        //         {
-        //             Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume);
-        //             OnNextScreen<UI_Sequence02>();
-        //         }
-        //         break;
-        //     case EJobType.Actor:
-        //     case EJobType.Assassin:
-        //         OnNextScreen<UI_LastChance>();
-        //         break;
-        // }
+        // Debug.Log($"투표: {voteUser.jobType}, isAssassinWin: {isAssassinWin}");
+        switch (votePlayerData.jobType)
+        {
+            case EJobType.VIP:
+                votePlayerData.isDie = true;
+                
+                // 암살자가 이겼는지 확인한다.
+                var isAssassinWin = Managers.Game.ValidateVictory();
+                if (isAssassinWin)
+                {
+                    Debug.Log("Assassin Win");
+                    OnNextScreen<UI_LastChanceResult>().SetInfo(true);
+                }
+                else
+                {
+                    Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume);
+                    OnNextScreen<UI_Sequence02>();
+                }
+                break;
+            case EJobType.Actor:
+            case EJobType.Assassin:
+                OnNextScreen<UI_LastChance>();
+                break;
+        }
     }
 }
