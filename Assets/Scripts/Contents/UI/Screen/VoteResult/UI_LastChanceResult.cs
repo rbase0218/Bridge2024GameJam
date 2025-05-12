@@ -98,9 +98,6 @@ public class UI_LastChanceResult : UIScreen
         GetImage((int)Images.BG).sprite = winnerJobFrame;
         GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(winJob);
         
-        // 투표 초기화
-        Managers.Game.ClearVoteCount();
-        
         gameObject.SetActive(true);
     }
 }
