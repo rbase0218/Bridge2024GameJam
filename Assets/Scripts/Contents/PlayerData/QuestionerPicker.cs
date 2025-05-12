@@ -19,6 +19,7 @@ public class QuestionerPicker : IPlayerStrategy
 
     public UserInfo GetCurrentPlayerData()
     {
+        RefreshCurrentPlayer();
         return _allPlayers[_currentIndex];
     }
 
@@ -57,5 +58,13 @@ public class QuestionerPicker : IPlayerStrategy
         }
 
         _nextIndex = nextIndex;
+    }
+
+    private void RefreshCurrentPlayer()
+    {
+        if (_allPlayers[_currentIndex].isHostage || _allPlayers[_currentIndex].isDie)
+        {
+            UpdateNextQuestioner();
+        }
     }
 }

@@ -19,6 +19,7 @@ public class VotePicker : IPlayerStrategy
     
     public UserInfo GetCurrentPlayerData()
     {
+        RefreshCurrentPlayer();
         return _allPlayers[_currentIndex];
     }
     
@@ -58,4 +59,11 @@ public class VotePicker : IPlayerStrategy
         _nextIndex = nextIndex;
     }
     
+    private void RefreshCurrentPlayer()
+    {
+        if (_allPlayers[_currentIndex].isDie)
+        {
+            UpdateNextVoter();
+        }
+    }
 }

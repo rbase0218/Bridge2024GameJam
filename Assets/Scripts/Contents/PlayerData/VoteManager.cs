@@ -37,6 +37,11 @@ public class VoteManager
     /// </returns>
     public List<string> GetMaxVotePlayerName()
     {
+        foreach (var voteData in _voteData)
+        {
+            Debug.Log(voteData.Key + " : " + voteData.Value);
+        }
+        
         return SortVotes();
     }
 
