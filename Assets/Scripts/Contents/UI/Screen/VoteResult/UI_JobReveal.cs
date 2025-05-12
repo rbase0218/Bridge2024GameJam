@@ -84,7 +84,6 @@ public class UI_JobReveal : UIScreen
                 var isAssassinWin = Managers.Game.ValidateVictory();
                 if (isAssassinWin)
                 {
-                    Debug.Log("Assassin Win");
                     OnNextScreen<UI_LastChanceResult>().SetInfo(true);
                 }
                 else

@@ -77,8 +77,6 @@ public class UI_JobInteraction : UIScreen
                      .Select(i => originalText.Substring(i * 7, 
                          Math.Min(6, originalText.Length - i * 7))));
              
-             Debug.Log(wrappedText);
-             
              GetText((int)Texts.WordText).text = wrappedText;
              GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
          }
