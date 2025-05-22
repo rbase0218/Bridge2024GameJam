@@ -14,10 +14,11 @@ public class UI_Switcher01V : UIScreen
     
     protected override bool EnterWindow()
     {
-        Managers.Game.currentUser = Managers.Game._userList[0];
         if(UseAutoNextScreen)
             BindNextScreen<UI_Introduce>();
         
+        // 플레이어 데이터를 투표자로 변경한다.
+        Managers.Game.SetContext(PlayersDataContext.DataContextType.Voter);
         return true;
     }
 }

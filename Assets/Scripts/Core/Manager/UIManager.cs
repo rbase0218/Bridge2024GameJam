@@ -66,4 +66,9 @@ public class UIManager : MonoBehaviour
             window.Hide();
         }
     }
+    
+    public bool isEmptyWindow()
+    {
+        return _activeWindowStack.Count == 0;
+    }
 }

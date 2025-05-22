@@ -23,16 +23,19 @@ public class UI_Sequence02 : UIScreen
         Bind<UIPersonViewer>(typeof(PersonViewer));
         Get<UIPersonViewer>((int)PersonViewer.PersonViewer).BindInstance();
         BindButton(typeof(Buttons));
-        GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
+        var nextButton = GetButton((int)Buttons.NextButton);
+        nextButton.onClick.RemoveAllListeners();
+        nextButton.onClick.AddListener(OnClickNextButton);
         
         return true;
     }
     
     protected override bool EnterWindow()
     {
-        Managers.Game.GetQuestionUser();
-        var hostageName = Managers.Game.GetCurrentHostage().userName;
-        var currUserName = Managers.Game.currentUser.userName;
+        // 여기서 오류 생김. 질문 할 얘가 없어서 null 반환 -> _userList[0]을 줌.
+        string hostageName = Managers.Game.GetCurrentHostageName().userName;
+        string currUserName = Managers.Game.GetCurrentPlayer().userName;
+        
         Get<UIPersonViewer>((int)PersonViewer.PersonViewer).SetFrame(
             new FrameData("인질", hostageName, 1),
             new FrameData("첫 순서", currUserName, 0)
@@ -46,6 +49,7 @@ public class UI_Sequence02 : UIScreen
     
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_QuestionInput>();
     }
 }

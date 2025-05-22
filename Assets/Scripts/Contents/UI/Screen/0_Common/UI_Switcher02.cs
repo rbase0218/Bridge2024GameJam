@@ -21,16 +21,17 @@ public class UI_Switcher02 : UIScreen
     
     protected override bool EnterWindow()
     {
-        _gauge.SetGauge(60f);
+        _gauge.SetGauge(180f);
         if (UseAutoNextScreen)
             BindNextScreen<UI_Switcher01V>();
         
-        Managers.Game.SetCanAllQuestion();
+        // Managers.Game.SetCanAllQuestion();
         return true;
     }
     
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_Switcher01V>();
     }
 }

@@ -17,8 +17,7 @@ public class UI_TextConfirm02 : UIScreen
 
     private enum Buttons
     {
-        YesButton,
-        NoButton
+        YesButton
     }
     
     protected override bool Init()
@@ -31,15 +30,19 @@ public class UI_TextConfirm02 : UIScreen
         BindButton(typeof(Buttons));
         
         GetButton((int)Buttons.YesButton).onClick.AddListener(OnClickYesButton);
-        GetButton((int)Buttons.NoButton).onClick.AddListener(OnClickNoButton);
 
         return true;
     }
     
     protected override bool EnterWindow()
     {
-        GetText((int)Texts.Text).text = Managers.Game.selectUserName;
-        Get<TMP_InputField>((int)InputFields.InputField).text = Managers.Game.questionText;
+        var log = Managers.Game.GetLastQuestionLog();
+        
+        string answererName = log.answerer;
+        string questionText = log.question;
+        
+        GetText((int)Texts.Text).text = answererName;
+        Get<TMP_InputField>((int)InputFields.InputField).text = questionText;
 
         if (UseAutoNextScreen)
         {
@@ -51,11 +54,7 @@ public class UI_TextConfirm02 : UIScreen
 
     private void OnClickYesButton()
     {
-        OnNextScreen<UI_NextPlayerQ>();
-    }
-
-    private void OnClickNoButton()
-    {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_NextPlayerQ>();
     }
 }

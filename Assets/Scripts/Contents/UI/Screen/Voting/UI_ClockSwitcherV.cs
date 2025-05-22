@@ -14,6 +14,7 @@ public class UI_ClockSwitcherV : UIScreen
     
     protected override bool EnterWindow()
     {
+        Managers.Sound.PlaySFX("Clock");
         _gauge.SetGauge(10f);
         if(UseAutoNextScreen)
             BindNextScreen<UI_NextPlayerV>();

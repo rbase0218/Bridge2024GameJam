@@ -48,12 +48,14 @@ public class UI_FinalResult : UIScreen
 
     protected override bool EnterWindow()
     {
+        Managers.Sound.PlaySFX("GameOver");
         // 승자의 직업을 받는다
-        var winner = Managers.Game.winnerJob;
-
+        var winner = Managers.Game.GetWinner();
+        
         GetImage((int)Images.JobImage).sprite = Managers.Data.GetFrameSprite(winner);
-        // VIP 타입 중에서 UserName만 가져와서 Array로 만들어서 전달한다.
-        var userNames = Managers.Game._userList.FindAll(user => user.jobType == winner).Select(x => x.userName).ToArray();
+        
+        // 우승한 직업의 유저 목록을 가져온다.
+        var userNames = Managers.Game.GetAllPlayers().FindAll(user => user.jobType == winner).Select(x => x.userName).ToArray();
         ShowNameField(userNames);
 
         return true;
@@ -61,6 +63,7 @@ public class UI_FinalResult : UIScreen
 
     private void OnClickButton()
     {
+        Managers.Sound.PlaySFX("Click");
         OnNextScreen<UI_KeywordReveal>();
     }
 

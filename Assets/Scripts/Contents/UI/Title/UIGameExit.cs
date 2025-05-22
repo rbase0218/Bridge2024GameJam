@@ -35,6 +35,7 @@ public class UIGameExit : UIWindow
         {
             GetButton((int)Buttons.NoButton).onClick.AddListener(() =>
             {
+                Managers.Sound.PlaySFX("Click");
                 Managers.UI.CloseWindow();
             });
         }

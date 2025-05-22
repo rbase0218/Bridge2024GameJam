@@ -49,7 +49,7 @@ public class UI_JobIntro01 : UIScreen
         GetObject((int)Objects.JobFrame).SetActive(false);
         
         // ===== [ Data Bind ] =====
-        var currentUser = Managers.Game.currentUser;
+        var currentUser = Managers.Game.GetCurrentPlayer();
         
         GetText((int)Texts.NameText).SetText(currentUser.userName);
         GetText((int)Texts.JobNameText).SetText(Managers.Data.GetJobText(currentUser.jobType));
@@ -65,6 +65,7 @@ public class UI_JobIntro01 : UIScreen
 
     private void OnClickCloseCard()
     {
+        Managers.Sound.PlaySFX("Card");
         GetObject((int)Objects.CloseCard).SetActive(false);
         GetObject((int)Objects.JobFrame).SetActive(true);
         BindNextScreen<UI_JobInteraction>();

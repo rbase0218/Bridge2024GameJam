@@ -18,7 +18,8 @@ public class UIManual : UIWindow
         Third,
         Fourth,
         Fifth,
-        Sixth
+        Sixth,
+        Seventh
     }
 
     private int index;
@@ -35,6 +36,7 @@ public class UIManual : UIWindow
         GetButton((int)Buttons.AfterButton).onClick.AddListener(OnClickAfterButton);
         GetButton((int)Buttons.CloseButton).onClick.AddListener(() =>
         {
+            Managers.Sound.PlaySFX("Click");
             Managers.UI.CloseWindow();
         });
         
@@ -47,6 +49,8 @@ public class UIManual : UIWindow
     
     private void OnClickBeforeButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (index == 0)
             return;
         
@@ -56,7 +60,9 @@ public class UIManual : UIWindow
     
     private void OnClickAfterButton()
     {
-        if (index == 5)
+        Managers.Sound.PlaySFX("Click");
+
+        if (index == 6)
             return;
         
         GetObject((int)Objects.First + index).SetActive(false);

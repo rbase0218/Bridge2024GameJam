@@ -32,15 +32,17 @@ public class UI_NextPlayerQ : UIScreen
     {
         isNext = false;
         GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
+
+        var selectUserName = Managers.Game.GetLastQuestionLog().questioner;
+        GetText((int)Texts.NameA).SetText(selectUserName);
         
-        GetText((int)Texts.NameA).SetText(Managers.Game.currentUser.userName);
         // 유저 리스트를 가져온다.
         // 리스트의 끝 인덱스에 도달했는지 확인한다.
-        if (Managers.Game.GetQuestionUser())
+        if (!Managers.Game.IsLastPlayer())
         {
             isNext = true;
             GetText((int)Texts.NameB).faceColor = Color.white;
-            GetText((int)Texts.NameB).SetText(Managers.Game.currentUser.userName);
+            GetText((int)Texts.NameB).SetText(Managers.Game.GetNextPlayer().userName);
             if (UseAutoNextScreen)
                 BindNextScreen<UI_QuestionInput>();
         }
@@ -49,15 +51,21 @@ public class UI_NextPlayerQ : UIScreen
             isNext = false;
             GetText((int)Texts.NameB).SetText("종료");
             GetText((int)Texts.NameB).faceColor = Color.red;
+            
             if (UseAutoNextScreen)
                 BindNextScreen<UI_Switcher02>();
         }
+        
+        // 다음 순번의 유저로 업데이트한다.
+        Managers.Game.UpdateQuestioner();
 
         return true;
     }
     
     private void OnClickNextButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (isNext)
             OnNextScreen<UI_QuestionInput>();
         else

@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class UISetDataBoard : UIBase
 {
@@ -32,7 +33,7 @@ public class UISetDataBoard : UIBase
         ActorIconGroup,
     }
 
-    private int _userCount = 3;
+    private int _userCount = 4;
 
     public UnityEvent<int> onClickNextButton;
     
@@ -52,11 +53,17 @@ public class UISetDataBoard : UIBase
         
         var dropdown = Get<TMP_Dropdown>((int)Dropdowns.CategoryDropdown);
         dropdown.AddOptions(Managers.Data.categoryArray.ToList());
-        dropdown.onValueChanged.AddListener( (x) => { _selectCategoryIndex = x; } );
+        dropdown.onValueChanged.AddListener((x) =>
+        {
+            Managers.Sound.PlaySFX("Click");
+            _selectCategoryIndex = x;
+        } );
     }
     
     private void OnClickAfterButton()
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (_userCount >= 6)
             return;
         
@@ -67,7 +74,9 @@ public class UISetDataBoard : UIBase
     
     private void OnClickBeforeButton()
     {
-        if (_userCount <= 3)
+        Managers.Sound.PlaySFX("Click");
+
+        if (_userCount <= 4)
             return;
         
         _userCount--;
@@ -77,7 +86,11 @@ public class UISetDataBoard : UIBase
 
     private void OnClickNextButton()
     {
-        Managers.Game.PickGameTopic(_selectCategoryIndex);
+        Managers.Sound.PlaySFX("Click");
+
+        // 주제를 랜덤으로 선정한다.
+        Managers.Game.PickTopic(_selectCategoryIndex);
+        
         onClickNextButton?.Invoke(_userCount);
     }
     

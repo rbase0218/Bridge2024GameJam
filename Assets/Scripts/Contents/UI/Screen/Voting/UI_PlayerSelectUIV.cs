@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class UI_PlayerSelectUIV : UIScreen
 {
     private bool isSelect;
-    private List<UserInfo> copyUserList = new List<UserInfo>();
     private enum Objects
     {
         Board_A,
@@ -51,25 +50,25 @@ public class UI_PlayerSelectUIV : UIScreen
             BindNextScreen<UI_ClockSwitcherV>();
         
         isSelect = false;
-        var currentUser = Managers.Game.currentUser;
+        
+        var currentUser = Managers.Game.GetCurrentPlayer();
+        
         if (currentUser.jobType == EJobType.Assassin)
         {
-            copyUserList = new List<UserInfo>(Managers.Game._userList);
-            copyUserList.Remove(currentUser);
-            copyUserList.RemoveAll(x => Managers.Game._hostageList.Contains(x));
+            var notHostagePlayers = Managers.Game.GetAllPlayers().FindAll( x => x.isHostage != true).Select(x => x.userName).ToArray();
             
             GetObject((int)Objects.Board_B).SetActive(true);
             GetObject((int)Objects.Board_A).SetActive(false);
-
+        
             var selectorB = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerB);
-            selectorB.ShowButton(copyUserList.Select(x => x.userName).ToArray());
+            selectorB.ShowButton(notHostagePlayers);
             
             _gauge.onEndGauge.AddListener(() =>
             {
                 if (isSelect)
                     return;
              
-                RandomSubmit();
+                RandomSubmit(notHostagePlayers);
             });
             
             GetText((int)Texts.FrontText).SetText("당신은");
@@ -78,14 +77,14 @@ public class UI_PlayerSelectUIV : UIScreen
         }
         else
         {
-            var userList = Managers.Game._userList.FindAll((x) => x.userName != Managers.Game.currentUser.userName);
-            var aliveUserArray = userList.ToList().FindAll(x => x.isDie == false).Select(x => x.userName).ToArray();
+            // 남아 있는 플레이어 중, 살아 있는 플레이어 목록
+            var alivePlayers = Managers.Game.GetAllPlayers().FindAll( x => !x.isDie).Select(x => x.userName).ToArray();
             
             GetObject((int)Objects.Board_B).SetActive(false);
             GetObject((int)Objects.Board_A).SetActive(true);
             
             var selectorA = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA);
-            selectorA.ShowButton(aliveUserArray);
+            selectorA.ShowButton(alivePlayers);
             
             GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
             GetText((int)Texts.Text).SetText(currentUser.userName);
@@ -98,12 +97,14 @@ public class UI_PlayerSelectUIV : UIScreen
     // 광대 및 귀빈
     private void OnClickSubmitButtonA(string text)
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (text == null)
             return;
         
         // 해당 유저에 대한 정보를 찾는다.
-        var findUser = Managers.Game._userList.Find( x => x.userName == text);
-        Managers.Game.AddVoteUser(findUser);
+        var findUser = Managers.Game.FindPlayer(text);
+        Managers.Game.AddVote(findUser);
         
         OnNextScreen<UI_ClockSwitcherV>();
     }
@@ -111,20 +112,25 @@ public class UI_PlayerSelectUIV : UIScreen
     // 암살자
     private void OnClickSubmitButtonB(string text)
     {
+        Managers.Sound.PlaySFX("Click");
+
         if (text == null)
             return;
+
+        var findUser = Managers.Game.FindPlayer(text);
         
-        var findUser = Managers.Game._userList.Find( x => x.userName == text);
         Managers.Game.AddHostage(findUser);
+        
         OnNextScreen<UI_ClockSwitcherV>();
         isSelect = true;
     }
     
-    private void RandomSubmit()
+    private void RandomSubmit(params string[] playerNames)
     {
-        var random = Random.Range(0, copyUserList.Count);
-        var selectUser = copyUserList[random];
-        //Debug.Log("랜덤 선택 : " + selectUser.userName);
+        var random = Random.Range(0, playerNames.Length);
+        var selectUser = playerNames[random];
+        
+        Debug.Log("랜덤 선택 : " + selectUser);
         Managers.Game.AddHostage(selectUser);
         isSelect = true;
     }

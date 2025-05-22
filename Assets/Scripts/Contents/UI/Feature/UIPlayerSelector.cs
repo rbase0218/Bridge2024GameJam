@@ -40,6 +40,7 @@ public class UIPlayerSelector : UIBase
             _buttons[i] = Utils.FindChild(gameObject, $"Button" + (i + 1), true).GetComponent<Button>();
             _buttons[i].onClick.AddListener(() =>
             {
+                Managers.Sound.PlaySFX("Click");
                 _selectButtonText = EventSystem.current?.currentSelectedGameObject.GetComponent<Button>().GetComponentInChildren<TMP_Text>().text;
             });
         }
