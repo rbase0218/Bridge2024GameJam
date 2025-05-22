@@ -43,17 +43,10 @@ public class UI_KeywordReveal : UIScreen
 
     private void OnClickButton()
     {
-        // Managers.Sound.PlaySFX("Click");
-        //
-        // Managers.Game.ResetData();
-        // SceneManager.LoadScene("Title");
-        // if (Managers.Ads.interAd.CanShowAd())
-        // {
-        //     Managers.Ads.ShowAd();
-        // }
-        // else
-        // {
-        //     // 광고가 없을 경우
-        // }
+        Managers.Sound.PlaySFX("Click");
+
+        Managers.Game.ResetData();
+        SceneManager.LoadScene("Title");
+        Managers.Ads.ShowAd();
     }
 }
