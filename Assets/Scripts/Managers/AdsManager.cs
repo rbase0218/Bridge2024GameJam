@@ -1,24 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using GoogleMobileAds.Api;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AdsManager : MonoBehaviour
 {
-    // 진짜 id ca-app-pub-6504355093417066/5452284685
-#if UNITY_ANDROID
-    readonly string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+    // Editor용 샘플 광고 ID와 실제 광고 ID를 구분합니다.
+#if UNITY_EDITOR
+    readonly string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #else
-readonly string adUnitId = "ca-app-pub-6504355093417066/5452284685";
+readonly string _adUnitId = "ca-app-pub-6504355093417066/5452284685";
 #endif
-    
-    public InterstitialAd interAd;
+
+    private InterstitialAd _interAd;
 
     private void Awake()
     {
-        //MobileAds.Initialize(status => {});
+        MobileAds.Initialize(status => {});
     }
 
     public void Init()
@@ -28,15 +28,15 @@ readonly string adUnitId = "ca-app-pub-6504355093417066/5452284685";
 
     private void LoadInterstitialAd()
     {
-        if (interAd != null)
+        if (_interAd != null)
         {
-            interAd.Destroy();
-            interAd = null;
+            _interAd.Destroy();
+            _interAd = null;
         }
 
         var adRequest = new AdRequest();
         
-        InterstitialAd.Load(adUnitId, adRequest, (InterstitialAd ad, LoadAdError error) =>
+        InterstitialAd.Load(_adUnitId, adRequest, (InterstitialAd ad, LoadAdError error) =>
         {
             if (error != null || ad == null)
             {
@@ -46,9 +46,9 @@ readonly string adUnitId = "ca-app-pub-6504355093417066/5452284685";
             
             Debug.Log("로드 성공 " + ad.GetResponseInfo());
 
-            interAd = ad;
+            _interAd = ad;
             
-            RegisterEventHandlers(interAd);
+            RegisterEventHandlers(_interAd);
         });
     }
 
@@ -94,10 +94,10 @@ readonly string adUnitId = "ca-app-pub-6504355093417066/5452284685";
     
     public void ShowAd()
     {
-        if (interAd != null && interAd.CanShowAd())
+        if (_interAd != null && _interAd.CanShowAd())
         {
             Debug.Log("전면 광고 띄우기");
-            interAd.Show();
+            _interAd.Show();
         }
         else
         {
