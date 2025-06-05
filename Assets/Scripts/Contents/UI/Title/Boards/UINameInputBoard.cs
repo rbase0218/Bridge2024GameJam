@@ -75,11 +75,14 @@ public class UINameInputBoard : UIBase
         }
 
         if (userNames.Contains(""))
+        {
+            ShowErrorText("이름을 입력해주세요.");
             return false;
+        }
 
         if (userNames.Count() != userNames.Distinct().Count())
         {
-            ShowErrorText("중복된 이름이 있습니다.");
+            ShowErrorText("중복된 이름이 존재합니다.");
             return false;
         }
 
@@ -87,7 +90,7 @@ public class UINameInputBoard : UIBase
         {
             if (s.Contains(' '))
             {
-                ShowErrorText("이름에 공백이 있습니다.");
+                ShowErrorText("이름에 공백이 존재합니다.");
                 return false;
             }
         }
