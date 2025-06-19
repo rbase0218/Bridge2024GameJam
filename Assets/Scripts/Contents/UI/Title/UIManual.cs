@@ -36,6 +36,7 @@ public class UIManual : UIWindow
         GetButton((int)Buttons.AfterButton).onClick.AddListener(OnClickAfterButton);
         GetButton((int)Buttons.CloseButton).onClick.AddListener(() =>
         {
+            Time.timeScale = 1;
             Managers.Sound.PlaySFX("Click");
             Managers.UI.CloseWindow();
         });
