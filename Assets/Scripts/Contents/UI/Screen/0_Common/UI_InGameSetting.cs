@@ -34,24 +34,33 @@ public class UI_InGameSetting : UIWindow
     // 상단 부분에 있는 Button들
     private void OnClickManualButton()
     {
+        Time.timeScale = 0;
         Managers.Sound.PlaySFX("Click");
         Managers.UI.ShowWindow<UIManual>();
     }
 
     private void OnClickBackButton()
     {
+        Time.timeScale = 0;
         Managers.Sound.PlaySFX("Click");
 
         var exit = Managers.UI.ShowWindow<UIGameExit>();
         exit.OnClickButtons(() =>
         {
             Managers.Sound.PlaySFX("Click");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Title");
+            Managers.Ads.ShowAd();
+        }, () =>
+        {
+            Time.timeScale = 1;
+            Managers.Sound.PlaySFX("Click");
+            Managers.UI.CloseWindow();
         });
     }
 
     private void OnClickEmergencyButton()
     {
         Managers.Sound.PlaySFX("Click");
-        //Managers.UI.ShowWindow<UIGameEmergency>();
+        //Managers.UI.ShowWindow<UI_Emergency>();
     }
 }
