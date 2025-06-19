@@ -69,10 +69,10 @@ public static class JobRandomizer
         
         for (int i = 0; i < vipCount; i++)
             jobList.Add(EJobType.VIP);
-        
-        if (needActor)
+        if (needActor && UnityEngine.Random.value < 0.5f)
+        {
             jobList.Add(EJobType.Actor);
-        
+        }
         return jobList;
     }
 
