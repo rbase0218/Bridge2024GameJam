@@ -53,6 +53,15 @@ public class UI_QuestionInput : UIScreen
         // 다음 화면으로 이동
         if (SaveQuestion() == false)
             return;
+
+        var questionCount = Managers.Game.GetQuestionLogCount();
+        var pcCount = Managers.Game.GetPlayerCount();
+        if (questionCount >= (pcCount - 1))
+        {
+            // 다음 Stage로 이동하기.
+        }
+        
+        // (2025-06-19) 이 곳에서 다른 Screen으로 넘어가게 유도해야 함.
         OnNextScreen<UI_PlayerSelectUI>();
     }
 

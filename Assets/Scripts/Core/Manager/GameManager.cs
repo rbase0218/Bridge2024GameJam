@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
         _gamePlayers.SetContext(type);
     }
 
+    public int GetPlayerCount()
+    {
+        return _gamePlayers.GetPlayerCount();
+    }
+
     public bool ValidateVictory()
     {
         return _gamePlayers.ValidateVictory();
@@ -170,6 +175,16 @@ public class GameManager : MonoBehaviour
     public void ModifyQuestionLog(string answerer = null, string answer = null)
     {
         _questionLogManager.ModifyQuestionLog(answerer, answer);
+    }
+
+    public int GetQuestionLogCount()
+    {
+        return _questionLogManager.GetLogCount();
+    }
+
+    public void ClearQuestionLog()
+    {
+        _questionLogManager.ClearQuestionLog();
     }
     
     #endregion
