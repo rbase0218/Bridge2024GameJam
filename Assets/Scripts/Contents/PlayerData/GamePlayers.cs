@@ -29,6 +29,11 @@ public class GamePlayers
         _context.SetupPlayerStrategy(type);
     }
 
+    public int GetPlayerCount()
+    {
+        return _allPlayers.Count;
+    }
+
     public bool ClearAllPlayers()
     {
         if(_allPlayers == null) return false;

@@ -32,6 +32,11 @@ public class QuestionLogManager
         _questionLogs?.Add(questionLog);
     }
 
+    public void ClearQuestionLog()
+    {
+        _questionLogs?.Clear();
+    }
+
     public void ModifyQuestionLog(string answerer = null, string answer = null)
     {
         int lastIndex = _questionLogs.Count - 1;
