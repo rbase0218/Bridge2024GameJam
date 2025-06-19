@@ -44,8 +44,6 @@ public class UI_KeywordReveal : UIScreen
     private void OnClickButton()
     {
         Managers.Sound.PlaySFX("Click");
-
-        //Managers.Game.ResetData();
         SceneManager.LoadScene("Title");
         Managers.Ads.ShowAd();
     }
