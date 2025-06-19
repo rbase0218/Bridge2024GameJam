@@ -61,6 +61,6 @@ public class UI_InGameSetting : UIWindow
     private void OnClickEmergencyButton()
     {
         Managers.Sound.PlaySFX("Click");
-        //Managers.UI.ShowWindow<UI_Emergency>();
+        Managers.UI.ShowWindow<UI_Switcher01_Last>();
     }
 }

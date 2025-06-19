@@ -1559,7 +1559,7 @@ GameObject:
   - component: {fileID: 256219541}
   - component: {fileID: 256219542}
   m_Layer: 5
-  m_Name: Switcher01V
+  m_Name: Switcher01_Last
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 256219540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02f5930af7e12b943af02043d9452f12, type: 3}
+  m_Script: {fileID: 11500000, guid: c4f8f2341bd0443478566e29ff6fdef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <UseAutoNextScreen>k__BackingField: 1
