@@ -20,6 +20,8 @@ public class CorrectEffect : MonoBehaviour
         coneButton = coneImage.GetComponent<Button>();
         if (coneButton != null)
             coneButton.onClick.AddListener(PlayConfettiEffect);
+        PlayConfettiEffect();
+        Managers.Sound.PlaySFX("Correct");
     }
 
     public void PlayConfettiEffect()

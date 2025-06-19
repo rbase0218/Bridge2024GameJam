@@ -8855,6 +8855,10 @@ PrefabInstance:
       propertyPath: m_Texture
       value: 
       objectReference: {fileID: 8400000, guid: ae1e39d52014a4c49b2d9912256298ac, type: 2}
+    - target: {fileID: 7778360493728928284, guid: ef1f777facc2a024c8bc6aecad8c85c1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8787838387538572279, guid: ef1f777facc2a024c8bc6aecad8c85c1, type: 3}
       propertyPath: TargetGameObject
       value: 
@@ -8875,9 +8879,10 @@ PrefabInstance:
     - {fileID: 7465677150988669712, guid: ef1f777facc2a024c8bc6aecad8c85c1, type: 3}
     - {fileID: 5425834864322915940, guid: ef1f777facc2a024c8bc6aecad8c85c1, type: 3}
     - {fileID: 6559553274475967707, guid: ef1f777facc2a024c8bc6aecad8c85c1, type: 3}
+    - {fileID: 7778360493728928284, guid: ef1f777facc2a024c8bc6aecad8c85c1, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7465677150494984532, guid: ef1f777facc2a024c8bc6aecad8c85c1, type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 270856922}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef1f777facc2a024c8bc6aecad8c85c1, type: 3}
