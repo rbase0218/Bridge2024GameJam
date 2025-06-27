@@ -26,6 +26,9 @@ public struct QuestionLog
 public class QuestionLogManager
 {
     private readonly List<QuestionLog> _questionLogs = new List<QuestionLog>();
+    private List<QuestionLog> _selectQuestion = new List<QuestionLog>();
+    private int count = 0;
+    private int currIndex = 0;
 
     public void AddQuestionLog(QuestionLog questionLog)
     {
@@ -35,6 +38,41 @@ public class QuestionLogManager
     public void ClearQuestionLog()
     {
         _questionLogs?.Clear();
+    }
+
+    public void SelectRandQuestion(int num)
+    {
+        count = num;
+        currIndex = 0;
+
+        HashSet<int> selectIdx = new HashSet<int>();
+
+        while (selectIdx.Count < count && selectIdx.Count < _questionLogs.Count)
+        {
+            int randomNumber = Random.Range(0, _questionLogs.Count);
+            selectIdx.Add(randomNumber);
+        }
+        _selectQuestion.Clear();
+        
+        foreach (int index in selectIdx)
+            _selectQuestion.Add(_questionLogs[index]);
+    }
+
+    public QuestionLog GetRandomQuestionLog()
+    {
+        if (currIndex >= count)
+        {
+            currIndex = 999;
+            return new QuestionLog();
+        }
+
+        int saveIdx = currIndex;
+        currIndex++;
+        
+        Debug.Log("Current : " + currIndex + "    질문 개수 : "  + count);
+        Debug.Log("저장 인덱스 : " + saveIdx);
+        
+        return _selectQuestion[saveIdx];
     }
 
     public void ModifyQuestionLog(string answerer = null, string answer = null)

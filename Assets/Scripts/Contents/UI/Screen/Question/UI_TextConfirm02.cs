@@ -17,8 +17,11 @@ public class UI_TextConfirm02 : UIScreen
 
     private enum Buttons
     {
-        YesButton
+        YesButton,
+        NoButton
     }
+
+    private bool isPass = false;
     
     protected override bool Init()
     {
@@ -30,24 +33,28 @@ public class UI_TextConfirm02 : UIScreen
         BindButton(typeof(Buttons));
         
         GetButton((int)Buttons.YesButton).onClick.AddListener(OnClickYesButton);
+        GetButton((int)Buttons.NoButton).onClick.AddListener(OnClickNoButton);
 
         return true;
     }
     
     protected override bool EnterWindow()
     {
-        var log = Managers.Game.GetLastQuestionLog();
+        isPass = false;
         
+        var log = Managers.Game.GetRandQuestion();
+        Debug.Log(log.question);
+        if (log.question == null)
+        {
+            OnNextScreen<UI_Switcher02>();
+            return false;
+        }
+
         string answererName = log.answerer;
         string questionText = log.question;
         
         GetText((int)Texts.Text).text = answererName;
         Get<TMP_InputField>((int)InputFields.InputField).text = questionText;
-
-        if (UseAutoNextScreen)
-        {
-            BindNextScreen<UI_NextPlayerQ>();
-        }
 
         return true;
     }
@@ -55,6 +62,20 @@ public class UI_TextConfirm02 : UIScreen
     private void OnClickYesButton()
     {
         Managers.Sound.PlaySFX("Click");
-        OnNextScreen<UI_NextPlayerQ>();
+        CheckForNextScreenMove();
+    }
+
+    private void OnClickNoButton()
+    {
+        Managers.Sound.PlaySFX("Click");
+        CheckForNextScreenMove();
+    }
+
+    private void CheckForNextScreenMove()
+    {
+        if (isPass)
+            OnNextScreen<UI_Switcher02>();
+        else
+            OnNextScreen<UI_TextConfirm01>();
     }
 }

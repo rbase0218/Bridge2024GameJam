@@ -37,7 +37,7 @@ namespace UnityToolbarExtender.Examples
 			if(GUILayout.Button(new GUIContent("Start Game", "첫 씬부터 게임을 시작합니다."), ToolbarStyles.commandButtonStyle))
 			{
 				// GUID로 변경해야 함.
-				var startSceneData = AssetDatabase.FindAssets("Init", null);
+				var startSceneData = AssetDatabase.FindAssets("Title t:scene", null);
 				SceneHelper.StartScene(startSceneData[0]);
 			}
 		}

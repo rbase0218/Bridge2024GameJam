@@ -58,6 +58,7 @@ public class QuestionerPicker : IPlayerStrategy
         }
 
         _nextIndex = nextIndex;
+        Debug.Log("다음 넥스트 인덱스 :" + _nextIndex);
     }
 
     private void RefreshCurrentPlayer()

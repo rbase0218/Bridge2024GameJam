@@ -186,6 +186,16 @@ public class GameManager : MonoBehaviour
     {
         _questionLogManager.ClearQuestionLog();
     }
+
+    public void SetRandQuestionCount(int count)
+    {
+        _questionLogManager.SelectRandQuestion(count);
+    }
+
+    public QuestionLog GetRandQuestion()
+    {
+        return _questionLogManager.GetRandomQuestionLog();
+    }
     
     #endregion
 }
