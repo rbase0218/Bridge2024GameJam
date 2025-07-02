@@ -17,8 +17,9 @@ public class UI_Switcher01 : UIScreen
         if(UseAutoNextScreen)
             BindNextScreen<UI_Sequence02>();
         
-        // 플레이어 데이터를 질문자로 변경한다.
+        // 유저 데이터 설정 => Questioner
         Managers.Game.SetContext(PlayersDataContext.DataContextType.Questioner);
+        
         // 퀘스트 목록 클리어.
         Managers.Game.ClearQuestionLog();
         

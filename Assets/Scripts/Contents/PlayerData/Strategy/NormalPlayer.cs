@@ -22,20 +22,13 @@ public class NormalPlayer : IPlayerStrategy
         
         // 플레이어 데이터 등록
         _allPlayers = allPlayers;
-        
-        CheckCurrentPlayer();
     }
 
     // Normal Player 데이터는 직업 확인에서만 사용이 되므로, 약한 검사를 한다.
     // 플레이어 사망 여부, 인질 여부 등 검사 X
     public void CheckCurrentPlayer()
     {
-        UserInfo currentPlayer = _allPlayers[_currentIndex];
-        if (currentPlayer == null)
-        {
-            Debug.Log("현재 유저가 존재하지 않습니다.");
-            Debug.Break();
-        }
+        
     }
     public bool IsLastPlayer()
     {
