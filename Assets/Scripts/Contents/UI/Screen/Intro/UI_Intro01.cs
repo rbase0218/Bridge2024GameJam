@@ -17,8 +17,8 @@ public class UI_Intro01 : UIScreen
         if (UseAutoNextScreen)
             BindNextScreen<UI_Sequence01>();
         
-        // 유저 데이터 타입을 질문으로 설정
-        Managers.Game.SetContext(PlayersDataContext.DataContextType.Questioner);
+        // 유저 데이터 설정 => Normal
+        Managers.Game.SetContext(PlayersDataContext.DataContextType.Normal);
         return true;
     }
 }

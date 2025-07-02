@@ -51,8 +51,12 @@ public class UISetDataBoard : UIBase
         GetButton((int)Buttons.BeforeButton).onClick.AddListener(OnClickBeforeButton);
         GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         
+        // Dropdown 컴포넌트를 가져온다.
         var dropdown = Get<TMP_Dropdown>((int)Dropdowns.CategoryDropdown);
+        // 옵션 추가
         dropdown.AddOptions(Managers.Data.categoryArray.ToList());
+        
+        // 옵션이 변경된다면 사운드 발생
         dropdown.onValueChanged.AddListener((x) =>
         {
             Managers.Sound.PlaySFX("Click");

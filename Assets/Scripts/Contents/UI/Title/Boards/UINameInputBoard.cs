@@ -40,7 +40,6 @@ public class UINameInputBoard : UIBase
     {
         if(Save())
             SceneManager.LoadScene(1);
-        return;
     }
     
     public void ShowInputField(int count = 3)

@@ -74,7 +74,7 @@ public class UI_QuestionInput : UIScreen
             ));
         
         // 다음 유저로 변경하기.
-        Managers.Game.UpdateQuestioner();
+        Managers.Game.UpdateNextPlayer();
         
         return true;
     }
