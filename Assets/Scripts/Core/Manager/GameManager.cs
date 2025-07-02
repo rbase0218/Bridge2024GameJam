@@ -26,6 +26,14 @@ public class GameManager : MonoBehaviour
         }
         Managers.Sound.StopSFX();
         Managers.Sound.PlayBGM("Title");
+
+        var debugData = new List<string>();
+        debugData.Add("1");
+        debugData.Add("2");
+        debugData.Add("3");
+        debugData.Add("4");
+        PickTopic(0);
+        SetUpPlayers(debugData);
     }
 
     private void Initialized()
@@ -99,9 +107,9 @@ public class GameManager : MonoBehaviour
         return _gamePlayers.GetNextPlayerData();
     }
 
-    public void UpdateQuestioner()
+    public void UpdateNextPlayer()
     {
-        _gamePlayers.UpdateQuestioner();
+        _gamePlayers.UpdateNextPlayer();
     }
 
     public void AddHostage(UserInfo userInfo)
