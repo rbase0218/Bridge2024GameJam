@@ -69,22 +69,16 @@ public class GamePlayers
         return _allPlayers;
     }
 
-    /// <summary>
     /// 현재 순서의 유저 데이터를 반환한다.
-    /// </summary>
-    /// <returns></returns>
     public UserInfo GetCurrentPlayerData()
     {
-        return _context.GetStrategy().GetCurrentPlayerData();
+        return _context.GetStrategy().GetCurrentPlayer();
     }
 
-    /// <summary>
     /// 다음 순서의 유저 데이터를 반환한다.
-    /// </summary>
-    /// <returns></returns>
     public UserInfo GetNextPlayerData()
     {
-        return _context.GetStrategy().GetNextPlayerData();
+        return _context.GetStrategy().GetNextPlayer();
     }
 
     public void AddHostage(UserInfo userInfo)
@@ -121,7 +115,7 @@ public class GamePlayers
         return _context.GetStrategy().IsLastPlayer();
     }
 
-    public void UpdateQuestioner()
+    public void UpdateNextPlayer()
     {
         _context.GetStrategy().UpdateNextPlayer();
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VotePicker : IPlayerStrategy
+public class VotePlayer : IPlayerStrategy
 {
     private int _currentIndex;
     private int _nextIndex;
@@ -16,23 +16,25 @@ public class VotePicker : IPlayerStrategy
         
         _allPlayers = allPlayers;
     }
-    
-    public UserInfo GetCurrentPlayerData()
+    public UserInfo GetCurrentPlayer()
     {
-        RefreshCurrentPlayer();
-        return _allPlayers[_currentIndex];
+        throw new System.NotImplementedException();
     }
-    
-    public UserInfo GetNextPlayerData()
+    public UserInfo GetNextPlayer()
     {
-        return _allPlayers[_nextIndex];
+        throw new System.NotImplementedException();
     }
+
     
     public void UpdateNextPlayer()
     {
         UpdateNextVoter();
     }
-    
+    public void CheckCurrentPlayer()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public bool IsLastPlayer()
     {
         return _currentIndex == _allPlayers.Count - 1;

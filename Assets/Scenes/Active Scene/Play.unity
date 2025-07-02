@@ -597,9 +597,9 @@ RectTransform:
   - {fileID: 1733283930}
   m_Father: {fileID: 2057980585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 187, y: -72.5}
   m_SizeDelta: {x: 374, y: 145}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &69231697
@@ -6872,7 +6872,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -73}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 258.14, y: 64.01}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1233436975
 MonoBehaviour:
@@ -7487,7 +7487,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 516.27, y: 128.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1355812472
 MonoBehaviour:
@@ -11697,7 +11697,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1776083022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11901,9 +11901,9 @@ RectTransform:
   - {fileID: 1986073274}
   m_Father: {fileID: 2057980585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 561, y: -72.5}
   m_SizeDelta: {x: 374, y: 145}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1778916114
@@ -13059,7 +13059,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 312}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 748, y: 145}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2057980586
 MonoBehaviour:
@@ -19109,21 +19109,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1832078442177131789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3764068145652732072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4c743575c763647acc75fe353ef5d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xGap: 1500
-  yGap: 100
-  columnsPerRow: 9
 --- !u!224 &1887826429795456790
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25365,7 +25350,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2447508572639117020}
-  - component: {fileID: 1832078442177131789}
   m_Layer: 5
   m_Name: QuestionStage
   m_TagString: Untagged
