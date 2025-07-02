@@ -19,15 +19,13 @@ public static class Global
 
 public class UserInfo
 {
-    // 유저 이름
-    public string userName;
-    // 유저 직업
-    public EJobType jobType;
+    public string userName;     // 유저 이름
+    public EJobType jobType;    // 유저 직업
     
-    // 사망자
-    public bool isDie;
-    // 현재 인질 여부
-    public bool isHostage;
+    public bool isDie;          // 사망 여부
+    public bool isHostage;      // 인질 여부
+
+    public bool isOrder;        // 차례 진행 여부
     
     public UserInfo(string userName)
     {
@@ -35,6 +33,7 @@ public class UserInfo
         jobType = EJobType.VIP;
         isDie = false;
         isHostage = false;
+        isOrder = false;
     }
 }
 
