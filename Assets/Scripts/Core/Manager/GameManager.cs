@@ -112,6 +112,11 @@ public class GameManager : MonoBehaviour
         _gamePlayers.UpdateNextPlayer();
     }
 
+    public void CleanTurn()
+    {
+        _gamePlayers.CleanTurn();
+    }
+
     public void AddHostage(UserInfo userInfo)
     {
         _gamePlayers.AddHostage(userInfo);

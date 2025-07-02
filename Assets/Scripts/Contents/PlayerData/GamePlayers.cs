@@ -120,6 +120,14 @@ public class GamePlayers
         _context.GetStrategy().UpdateNextPlayer();
     }
 
+    public void CleanTurn()
+    {
+        foreach (var player in _allPlayers)
+        {
+            player.isOrder = false;
+        }
+    }
+
     public void AddVote(UserInfo userInfo)
     {
         _voteManager.AddVote(userInfo.userName);

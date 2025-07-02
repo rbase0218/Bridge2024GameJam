@@ -55,9 +55,12 @@ public class UI_NextPlayer : UIScreen
             
             GetText((int)Texts.NameB).SetText("종료");
             GetText((int)Texts.NameB).faceColor = Color.red;
-            
+
             if (UseAutoNextScreen)
+            {
+                Managers.Game.CleanTurn();
                 BindNextScreen<UI_Switcher01>();
+            }
         }
         
         return true;
@@ -73,6 +76,7 @@ public class UI_NextPlayer : UIScreen
         }
         else
         {
+            Managers.Game.CleanTurn();
             OnNextScreen<UI_Switcher01>();
         }
     }
