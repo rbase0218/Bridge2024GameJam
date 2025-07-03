@@ -33,15 +33,11 @@ public class QuestionPlayer : IPlayerStrategy
     // 1. 죽지 않은 상태여야 한다.
     // 2. 인질이 아닌 상태여야 한다.
     // 3. 자신의 차례가 이전에 실행되지 않았어야 한다.
-    public void CheckCurrentPlayer()
+    public bool ValidateCurrentAndNextPlayers()
     {
-        UserInfo currentPlayer = GetCurrentPlayer();
-        
-        // 3가지 조건이 맞지 않는다면, 다음 유저로 넘어간다.
-        if(currentPlayer.isOrder || currentPlayer.isHostage || currentPlayer.isDie)
-            UpdateNextPlayer();
+        return false;
     }
-
+    
     public bool IsLastPlayer()
     {
         return _isLastEmpty;

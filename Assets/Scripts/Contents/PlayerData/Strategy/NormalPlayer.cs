@@ -24,12 +24,12 @@ public class NormalPlayer : IPlayerStrategy
         _allPlayers = allPlayers;
     }
 
-    // Normal Player 데이터는 직업 확인에서만 사용이 되므로, 약한 검사를 한다.
-    // 플레이어 사망 여부, 인질 여부 등 검사 X
-    public void CheckCurrentPlayer()
+    public bool ValidateCurrentAndNextPlayers()
     {
-        
+        // 검증할 필요가 존재하지 않음.
+        return true;
     }
+    
     public bool IsLastPlayer()
     {
         return _isLastEmpty;

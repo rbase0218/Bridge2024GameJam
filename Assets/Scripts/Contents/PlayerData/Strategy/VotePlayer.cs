@@ -25,12 +25,11 @@ public class VotePlayer : IPlayerStrategy
         throw new System.NotImplementedException();
     }
 
-    
     public void UpdateNextPlayer()
     {
         UpdateNextVoter();
     }
-    public void CheckCurrentPlayer()
+    public bool ValidateCurrentAndNextPlayers()
     {
         throw new System.NotImplementedException();
     }

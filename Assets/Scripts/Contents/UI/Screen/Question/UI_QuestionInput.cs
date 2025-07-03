@@ -41,6 +41,7 @@ public class UI_QuestionInput : UIScreen
         {
             Managers.Sound.PlaySFX("Click");
         });
+        
         var currUserName = Managers.Game.GetCurrentPlayer().userName;
         GetText((int)Texts.NameText).SetText(currUserName);
 
@@ -75,6 +76,7 @@ public class UI_QuestionInput : UIScreen
         
         // 다음 유저로 변경하기.
         Managers.Game.UpdateNextPlayer();
+        Debug.Log("다음 유저로 변경되었습니다." + Managers.Game.GetCurrentPlayer().userName + " : " + Managers.Game.GetNextPlayer().userName);
         
         return true;
     }

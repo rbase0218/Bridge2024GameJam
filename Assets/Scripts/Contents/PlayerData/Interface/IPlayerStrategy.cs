@@ -16,8 +16,7 @@ public interface IPlayerStrategy
     // 유저 인덱스를 업데이트한다.
     public void UpdateNextPlayer();
 
-    // 현재 지정된 유저가 유효한 지 검사한다.
-    public void CheckCurrentPlayer();
+    public bool ValidateCurrentAndNextPlayers();
 
     public bool IsLastPlayer();
 }

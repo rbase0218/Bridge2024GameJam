@@ -48,8 +48,8 @@ public class PlayersDataContext
             default:
                 break;
         }
-        
-        // 첫 순서로 지정된 유저가 유효한지 확인한다.
-        _playerStrategy.CheckCurrentPlayer();
+
+        // 지정된 플레이어가 유효한 지 확인한다.
+        _playerStrategy.ValidateCurrentAndNextPlayers();
     }
 }
