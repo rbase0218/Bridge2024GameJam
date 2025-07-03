@@ -61,7 +61,9 @@ public class QuestionPlayer : IPlayerStrategy
             return;
         }
 
-        while (_allPlayers[nextIndex].isOrder)
+        while ( _allPlayers[nextIndex].isOrder   ||
+                _allPlayers[nextIndex].isHostage ||
+                _allPlayers[nextIndex].isDie)
         {
             nextIndex++;
 
@@ -73,5 +75,6 @@ public class QuestionPlayer : IPlayerStrategy
         }
         
         _nextIndex = nextIndex;
+        Debug.Log("NEXT INDEX : " + _allPlayers[_nextIndex].userName);
     }
 }
