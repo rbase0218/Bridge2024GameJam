@@ -61,12 +61,16 @@ public class QuestionPlayer : IPlayerStrategy
             return;
         }
 
+        // 현재 차례가 될 수 없거나
+        // 현재 인질 상태이거나
+        // 현재 죽은 상태라면
+        // 다음 플레이어 중에서 조건에 부합하지 않은 플레이어를 찾는다.
         while ( _allPlayers[nextIndex].isOrder   ||
                 _allPlayers[nextIndex].isHostage ||
                 _allPlayers[nextIndex].isDie)
         {
             nextIndex++;
-
+            
             if (nextIndex >= _allPlayers.Count)
             {
                 _isLastEmpty = true;
