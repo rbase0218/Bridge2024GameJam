@@ -58,7 +58,10 @@ public class UI_QuestionInput : UIScreen
         if (Managers.Game.IsLastPlayer())
             OnNextScreen<UI_SlotMachine>();
         else
+        {
+            Managers.Game.UpdateNextPlayer();
             OnNextScreen<UI_Sequence02>();
+        }
     }
 
     private bool SaveQuestion()
@@ -73,11 +76,6 @@ public class UI_QuestionInput : UIScreen
             inputText,
             null
             ));
-        
-        // 다음 유저로 변경하기.
-        Managers.Game.UpdateNextPlayer();
-        Debug.Log("다음 유저로 변경되었습니다." + Managers.Game.GetCurrentPlayer().userName + " : " + Managers.Game.GetNextPlayer().userName);
-        
         return true;
     }
 }
