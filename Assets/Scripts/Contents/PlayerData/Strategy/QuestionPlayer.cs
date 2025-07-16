@@ -35,9 +35,40 @@ public class QuestionPlayer : IPlayerStrategy
     // 3. 자신의 차례가 이전에 실행되지 않았어야 한다.
     public bool ValidateCurrentAndNextPlayers()
     {
-        return false;
+        int loopCount = 0;
+        
+        while (true)
+        {
+            var currentPlayer = GetCurrentPlayer();
+            if (!(currentPlayer.isHostage || currentPlayer.isDie || currentPlayer.isOrder))
+                break;
+
+            UpdateNextPlayer();
+            loopCount++;
+            if (_isLastEmpty || loopCount > _allPlayers.Count)
+                return false;
+        }
+
+        loopCount = 0;
+        
+        var nextPlayer = GetNextPlayer();
+        while (nextPlayer.isHostage || nextPlayer.isDie || nextPlayer.isOrder)
+        {
+            _nextIndex++;
+            loopCount++;
+
+            if (_nextIndex >= _allPlayers.Count || loopCount > _allPlayers.Count)
+            {
+                _isLastEmpty = true;
+                return false;
+            }
+
+            nextPlayer = GetNextPlayer();
+        }
+
+        return true;
     }
-    
+
     public bool IsLastPlayer()
     {
         return _isLastEmpty;
