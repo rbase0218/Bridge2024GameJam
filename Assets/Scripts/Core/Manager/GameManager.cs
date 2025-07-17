@@ -28,13 +28,14 @@ public class GameManager : MonoBehaviour
         Managers.Sound.StopSFX();
         Managers.Sound.PlayBGM("Title");
 
-        var debugData = new List<string>();
-        debugData.Add("1");
-        debugData.Add("2");
-        debugData.Add("3");
-        debugData.Add("4");
-        PickTopic(0);
-        SetUpPlayers(debugData);
+        // 디버그를 위한 데이터 - 지우지마세욧.
+        // var debugData = new List<string>();
+        // debugData.Add("1");
+        // debugData.Add("2");
+        // debugData.Add("3");
+        // debugData.Add("4");
+        // PickTopic(0);
+        // SetUpPlayers(debugData);
     }
 
     private void Initialized()
