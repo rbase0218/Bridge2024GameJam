@@ -38,7 +38,7 @@ public class VotePlayer : IPlayerStrategy
         while (true)
         {
             var currentPlayer = GetCurrentPlayer();
-            if (!(currentPlayer.isHostage || currentPlayer.isDie || currentPlayer.isOrder))
+            if (!(currentPlayer.isDie || currentPlayer.isOrder))
                 break;
 
             UpdateNextPlayer();
@@ -50,7 +50,7 @@ public class VotePlayer : IPlayerStrategy
         loopCount = 0;
         
         var nextPlayer = GetNextPlayer();
-        while (nextPlayer.isHostage || nextPlayer.isDie || nextPlayer.isOrder)
+        while (nextPlayer.isDie || nextPlayer.isOrder)
         {
             _nextIndex++;
             loopCount++;
@@ -69,7 +69,7 @@ public class VotePlayer : IPlayerStrategy
 
     public bool IsLastPlayer()
     {
-        return _currentIndex == _allPlayers.Count - 1;
+        return _isLastEmpty;
     }
 
     private void UpdateNextVoter()
@@ -102,13 +102,5 @@ public class VotePlayer : IPlayerStrategy
         }
         
         _nextIndex = nextIndex;
-    }
-    
-    private void RefreshCurrentPlayer()
-    {
-        if (_allPlayers[_currentIndex].isDie)
-        {
-            UpdateNextVoter();
-        }
     }
 }
