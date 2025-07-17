@@ -6,6 +6,8 @@ public class VotePlayer : IPlayerStrategy
 {
     private int _currentIndex;
     private int _nextIndex;
+
+    private bool _isLastEmpty;
     
     private List<UserInfo> _allPlayers;
     
@@ -18,11 +20,11 @@ public class VotePlayer : IPlayerStrategy
     }
     public UserInfo GetCurrentPlayer()
     {
-        throw new System.NotImplementedException();
+        return _allPlayers[_currentIndex];
     }
     public UserInfo GetNextPlayer()
     {
-        throw new System.NotImplementedException();
+        return _allPlayers[_nextIndex];
     }
 
     public void UpdateNextPlayer()
@@ -31,7 +33,38 @@ public class VotePlayer : IPlayerStrategy
     }
     public bool ValidateCurrentAndNextPlayers()
     {
-        throw new System.NotImplementedException();
+        int loopCount = 0;
+        
+        while (true)
+        {
+            var currentPlayer = GetCurrentPlayer();
+            if (!(currentPlayer.isHostage || currentPlayer.isDie || currentPlayer.isOrder))
+                break;
+
+            UpdateNextPlayer();
+            loopCount++;
+            if (_isLastEmpty || loopCount > _allPlayers.Count)
+                return false;
+        }
+
+        loopCount = 0;
+        
+        var nextPlayer = GetNextPlayer();
+        while (nextPlayer.isHostage || nextPlayer.isDie || nextPlayer.isOrder)
+        {
+            _nextIndex++;
+            loopCount++;
+
+            if (_nextIndex >= _allPlayers.Count || loopCount > _allPlayers.Count)
+            {
+                _isLastEmpty = true;
+                return false;
+            }
+
+            nextPlayer = GetNextPlayer();
+        }
+
+        return true;
     }
 
     public bool IsLastPlayer()
@@ -41,22 +74,33 @@ public class VotePlayer : IPlayerStrategy
 
     private void UpdateNextVoter()
     {
+        var currentPlayer = GetCurrentPlayer();
+        currentPlayer.isOrder = true;
+        
         _currentIndex = _nextIndex;
         int nextIndex = _currentIndex + 1;
+
+        if (nextIndex >= _allPlayers.Count)
+        {
+            _isLastEmpty = true;
+            return;
+        }
         
-        // 투표 대상이 될 수 있는 유저
-        // 1. 현재 죽은 상태가 아니어야 한다.
-        if(nextIndex >= _allPlayers.Count)
-            nextIndex = 0;
-        
-        while (_allPlayers[nextIndex].isDie)
+        // 투표 권한이 있는 유저.
+        // 1. 인질이 아닌 상태
+        while ( _allPlayers[nextIndex].isHostage ||
+                _allPlayers[nextIndex].isDie ||
+                _allPlayers[nextIndex].isOrder)
         {
             nextIndex++;
-
+            
             if (nextIndex >= _allPlayers.Count)
-                break;
+            {
+                _isLastEmpty = true;
+                return;
+            }
         }
-
+        
         _nextIndex = nextIndex;
     }
     
