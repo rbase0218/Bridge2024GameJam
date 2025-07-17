@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
 {
     private GamePlayers _gamePlayers;
     private TopicPicker _topicPicker;
-    private QuestionLogManager _questionLogManager;
+    
+    public QuestionLogManager QuestionManager { get; private set; }
     public bool isGameEnd;
 
     private EJobType _winType = 0;
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         _gamePlayers = new GamePlayers();
         _topicPicker = new TopicPicker();
-        _questionLogManager = new QuestionLogManager();
+        QuestionManager = new QuestionLogManager();
 
         _winType = 0;
         isGameEnd = false;
@@ -171,44 +172,5 @@ public class GameManager : MonoBehaviour
     {
         return _topicPicker.Topic;
     }
-    #endregion
-    
-    #region QuestionLogManager
-
-    public void CreateQuestionLog(QuestionLog questionLog)
-    {
-        _questionLogManager.AddQuestionLog(questionLog);
-    }
-
-    public QuestionLog GetLastQuestionLog()
-    {
-        return _questionLogManager.GetLastQuestionLog();
-    }
-
-    public void ModifyQuestionLog(string answerer = null, string answer = null)
-    {
-        _questionLogManager.ModifyQuestionLog(answerer, answer);
-    }
-
-    public int GetQuestionLogCount()
-    {
-        return _questionLogManager.GetLogCount();
-    }
-
-    public void ClearQuestionLog()
-    {
-        _questionLogManager.ClearQuestionLog();
-    }
-
-    public void SetRandQuestionCount(int count)
-    {
-        _questionLogManager.SelectRandQuestion(count);
-    }
-
-    public QuestionLog GetRandQuestion()
-    {
-        return _questionLogManager.GetRandomQuestionLog();
-    }
-    
     #endregion
 }
