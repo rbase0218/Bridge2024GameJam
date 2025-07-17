@@ -88,8 +88,7 @@ public class VotePlayer : IPlayerStrategy
         
         // 투표 권한이 있는 유저.
         // 1. 인질이 아닌 상태
-        while ( _allPlayers[nextIndex].isHostage ||
-                _allPlayers[nextIndex].isDie ||
+        while (_allPlayers[nextIndex].isDie ||
                 _allPlayers[nextIndex].isOrder)
         {
             nextIndex++;
