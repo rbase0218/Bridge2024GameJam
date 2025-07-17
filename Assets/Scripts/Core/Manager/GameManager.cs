@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
 
     public void SetContext(PlayersDataContext.DataContextType type)
     {
+        CleanTurn();
         _gamePlayers.SetContext(type);
     }
 
