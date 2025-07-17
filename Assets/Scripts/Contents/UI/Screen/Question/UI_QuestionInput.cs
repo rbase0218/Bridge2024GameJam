@@ -70,7 +70,7 @@ public class UI_QuestionInput : UIScreen
         if (inputText == string.Empty)
             return false;
         
-        Managers.Game.CreateQuestionLog(new QuestionLog(
+        Managers.Game.QuestionManager.AddQuestionLog(new QuestionLog(
             Managers.Game.GetCurrentPlayer().userName,
             null,
             inputText,

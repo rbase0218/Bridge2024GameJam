@@ -21,7 +21,7 @@ public class UI_Switcher01 : UIScreen
         Managers.Game.SetContext(PlayersDataContext.DataContextType.Questioner);
         
         // 퀘스트 목록 클리어.
-        Managers.Game.ClearQuestionLog();
+        Managers.Game.QuestionManager.ClearQuestionLog();
         
         return true;
     }

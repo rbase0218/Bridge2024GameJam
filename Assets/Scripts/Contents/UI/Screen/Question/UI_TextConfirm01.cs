@@ -30,7 +30,8 @@ public class UI_TextConfirm01 : UIScreen
     
     protected override bool EnterWindow()
     {
-        var answerUserName = Managers.Game.GetLastQuestionLog().answerer;
+        // 랜덤 질문 가져오기
+        var answerUserName = Managers.Game.QuestionManager.GetRandomQuestionLog().questioner;
         GetText((int)Texts.Text).SetText(answerUserName);
         
         if (UseAutoNextScreen)
