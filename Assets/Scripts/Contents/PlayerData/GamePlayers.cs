@@ -124,6 +124,7 @@ public class GamePlayers
     {
         foreach (var player in _allPlayers)
         {
+            if (player == null) break;
             player.isOrder = false;
         }
     }

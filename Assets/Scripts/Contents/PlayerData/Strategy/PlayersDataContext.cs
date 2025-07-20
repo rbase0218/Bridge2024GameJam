@@ -49,6 +49,8 @@ public class PlayersDataContext
                 break;
         }
 
+        // 플레이어 인덱스 데이터를 초기화한다.
+        _playerStrategy.Clean();
         // 지정된 플레이어가 유효한 지 확인한다.
         _playerStrategy.ValidateCurrentAndNextPlayers();
     }

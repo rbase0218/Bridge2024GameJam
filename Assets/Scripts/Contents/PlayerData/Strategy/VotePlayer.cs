@@ -13,11 +13,19 @@ public class VotePlayer : IPlayerStrategy
     
     public void Initialized(List<UserInfo> allPlayers)
     {
-        _currentIndex = 0;
-        _nextIndex = 1;
+        Clean();
         
         _allPlayers = allPlayers;
     }
+
+    public void Clean()
+    {
+        _currentIndex = 0;
+        _nextIndex = 1;
+
+        _isLastEmpty = false;
+    }
+    
     public UserInfo GetCurrentPlayer()
     {
         return _allPlayers[_currentIndex];

@@ -24,6 +24,11 @@ public class NormalPlayer : IPlayerStrategy
         _allPlayers = allPlayers;
     }
 
+    public void Clean()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public bool ValidateCurrentAndNextPlayers()
     {
         // 검증할 필요가 존재하지 않음.
