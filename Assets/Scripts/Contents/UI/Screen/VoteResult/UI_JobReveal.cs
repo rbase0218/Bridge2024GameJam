@@ -88,8 +88,10 @@ public class UI_JobReveal : UIScreen
                 }
                 else
                 {
-                    // 다시 투표 수가 초기화가 되어야 한다.
-                    Managers.Game.ClearVoteCount();
+                    var game = Managers.Game;
+                    game.ClearVoteCount();
+                    game.SetContext(PlayersDataContext.DataContextType.Questioner);
+                    game.QuestionManager.ClearQuestionLog();
                     
                     Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume);
                     OnNextScreen<UI_Sequence02>();

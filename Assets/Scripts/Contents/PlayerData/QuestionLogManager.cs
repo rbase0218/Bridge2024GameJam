@@ -28,7 +28,7 @@ public class QuestionLogManager
     private readonly List<QuestionLog> _questionLogs = new List<QuestionLog>();
     private List<QuestionLog> _selectQuestion = new List<QuestionLog>();
     private int count = 0;
-    private int currIndex = 0;
+    private int _currentIndex = 0;
 
     public void AddQuestionLog(QuestionLog questionLog)
     {
@@ -43,7 +43,7 @@ public class QuestionLogManager
     public void SelectRandQuestion(int num)
     {
         count = num;
-        currIndex = 0;
+        _currentIndex = 0;
 
         HashSet<int> selectIdx = new HashSet<int>();
 
@@ -60,38 +60,18 @@ public class QuestionLogManager
 
     public QuestionLog GetRandomQuestionLog()
     {
-        if (currIndex >= count)
-        {
-            currIndex = 999;
-            return new QuestionLog();
-        }
-
-        int saveIdx = currIndex;
-        currIndex++;
-        
-        Debug.Log("Current : " + currIndex + "    질문 개수 : "  + count);
-        Debug.Log("저장 인덱스 : " + saveIdx);
-        
-        return _selectQuestion[saveIdx];
+        if (_currentIndex >= count)
+            return new QuestionLog("NULL");
+        return _selectQuestion[_currentIndex];
     }
 
-    public void ModifyQuestionLog(string answerer = null, string answer = null)
+    public bool NextQuestion()
     {
-        int lastIndex = _questionLogs.Count - 1;
-            
-        QuestionLog lastLog = _questionLogs[lastIndex];
-        
-        if(answerer != null)
-            lastLog.answerer = answerer;
-        if(answer != null)
-            lastLog.answer = answer;
-            
-        _questionLogs[lastIndex] = lastLog;
-    }
+        _currentIndex++;
 
-    public QuestionLog GetLastQuestionLog()
-    {
-        return _questionLogs[^1];
+        if (_currentIndex >= count)
+            return false;
+        return true;
     }
 
     public int GetLogCount()

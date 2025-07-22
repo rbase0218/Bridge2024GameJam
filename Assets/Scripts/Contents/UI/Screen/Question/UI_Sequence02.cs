@@ -32,10 +32,8 @@ public class UI_Sequence02 : UIScreen
     
     protected override bool EnterWindow()
     {
-        // 여기서 오류 생김. 질문 할 얘가 없어서 null 반환 -> _userList[0]을 줌.
         string hostageName = Managers.Game.GetCurrentHostageName().userName;
         string currUserName = Managers.Game.GetCurrentPlayer().userName;
-        Debug.Log("현재 Screen은 Sequence 02");
         
         Get<UIPersonViewer>((int)PersonViewer.PersonViewer).SetFrame(
             new FrameData("인질", hostageName, 1),

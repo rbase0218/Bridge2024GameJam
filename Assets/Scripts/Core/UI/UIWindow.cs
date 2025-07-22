@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class UIWindow : UIBase
 {
@@ -9,6 +10,8 @@ public abstract class UIWindow : UIBase
     public bool IsAlwaysOpen => alwaysOpen;
     protected abstract bool EnterWindow();
     protected virtual void ExitWindow() { }
+    
+    protected UnityEvent onOpen = new UnityEvent();
     
     protected override bool Init()
     {
@@ -35,6 +38,7 @@ public abstract class UIWindow : UIBase
             Debug.Log($"{GetType()} Window Open Failed.");
         
         gameObject.SetActive(isOpen);
+        onOpen?.Invoke();
     }
 
     public void Hide(bool isForced = false)

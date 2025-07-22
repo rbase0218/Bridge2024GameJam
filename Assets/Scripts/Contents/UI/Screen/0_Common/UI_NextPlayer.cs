@@ -32,15 +32,20 @@ public class UI_NextPlayer : UIScreen
     protected override bool EnterWindow()
     {
         isNext = false;
+
+        var currentPlayerName = Managers.Game.GetCurrentPlayer().userName;
+        var nextPlayerName = Managers.Game.GetNextPlayer().userName;
         
-        GetText((int)Texts.NameA).SetText(Managers.Game.GetCurrentPlayer().userName);
-        
-        // 유저 리스트를 가져온다.
-        // 리스트의 끝 인덱스에 도달했는지 확인한다.
+        GetText((int)Texts.NameA).SetText(currentPlayerName);
+
+        // 현재 유저가 마지막 유저인지 검사한다.
         if (!Managers.Game.IsLastPlayer())
         {
             isNext = true;
-            GetText((int)Texts.NameB).SetText(Managers.Game.GetNextPlayer().userName);
+            
+            GetText((int)Texts.NameB).SetText(nextPlayerName);
+            Managers.Game.UpdateNextPlayer();
+            
             if (UseAutoNextScreen)
                 BindNextScreen<UI_JobIntro01>();
         }
@@ -50,11 +55,14 @@ public class UI_NextPlayer : UIScreen
             
             GetText((int)Texts.NameB).SetText("종료");
             GetText((int)Texts.NameB).faceColor = Color.red;
+
             if (UseAutoNextScreen)
+            {
+                Managers.Game.CleanTurn();
                 BindNextScreen<UI_Switcher01>();
+            }
         }
         
-        Managers.Game.UpdateQuestioner();
         return true;
     }
     
@@ -68,6 +76,7 @@ public class UI_NextPlayer : UIScreen
         }
         else
         {
+            Managers.Game.CleanTurn();
             OnNextScreen<UI_Switcher01>();
         }
     }

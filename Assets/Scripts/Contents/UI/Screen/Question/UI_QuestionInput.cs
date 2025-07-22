@@ -41,6 +41,7 @@ public class UI_QuestionInput : UIScreen
         {
             Managers.Sound.PlaySFX("Click");
         });
+        
         var currUserName = Managers.Game.GetCurrentPlayer().userName;
         GetText((int)Texts.NameText).SetText(currUserName);
 
@@ -57,7 +58,10 @@ public class UI_QuestionInput : UIScreen
         if (Managers.Game.IsLastPlayer())
             OnNextScreen<UI_SlotMachine>();
         else
+        {
+            Managers.Game.UpdateNextPlayer();
             OnNextScreen<UI_Sequence02>();
+        }
     }
 
     private bool SaveQuestion()
@@ -66,16 +70,12 @@ public class UI_QuestionInput : UIScreen
         if (inputText == string.Empty)
             return false;
         
-        Managers.Game.CreateQuestionLog(new QuestionLog(
+        Managers.Game.QuestionManager.AddQuestionLog(new QuestionLog(
             Managers.Game.GetCurrentPlayer().userName,
             null,
             inputText,
             null
             ));
-        
-        // 다음 유저로 변경하기.
-        Managers.Game.UpdateQuestioner();
-        
         return true;
     }
 }

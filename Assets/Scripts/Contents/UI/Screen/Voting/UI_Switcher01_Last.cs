@@ -17,8 +17,9 @@ public class UI_Switcher01_Last : UIScreen
         if(UseAutoNextScreen)
             BindNextScreen<UI_Introduce>();
         
-        // 플레이어 데이터를 투표자로 변경한다.
-        Managers.Game.SetContext(PlayersDataContext.DataContextType.Voter);
+        // 유저 턴 데이터 초기화
+        Managers.Game.CleanTurn();
+        
         return true;
     }
 }

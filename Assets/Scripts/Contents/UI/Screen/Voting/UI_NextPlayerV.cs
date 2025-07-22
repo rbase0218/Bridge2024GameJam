@@ -59,7 +59,7 @@ public class UI_NextPlayerV : UIScreen
                 BindNextScreen<UI_Switcher01VR>();
         }
         
-        Managers.Game.UpdateQuestioner();
+        Managers.Game.UpdateNextPlayer();
         return true;
     }
     
