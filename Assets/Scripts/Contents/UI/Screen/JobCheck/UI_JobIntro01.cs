@@ -17,13 +17,7 @@ public class UI_JobIntro01 : UIScreen
 
     private enum Buttons
     {
-        CloseCard
-    }
-
-    private enum Objects
-    {
-        CloseCard,
-        JobFrame
+        CardAnim
     }
     
     protected override bool Init()
@@ -35,18 +29,17 @@ public class UI_JobIntro01 : UIScreen
         BindText(typeof(Texts));
         BindImage(typeof(Images));
         BindButton(typeof(Buttons));
-        BindObject(typeof(Objects));
         
-        GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickCloseCard);
+        GetButton((int)Buttons.CardAnim).onClick.AddListener(OnClickCloseCard);
         
         return true;
     }
     
     protected override bool EnterWindow()
     {
-        // ===== [ Init ] =====
-        GetObject((int)Objects.CloseCard).SetActive(true);
-        GetObject((int)Objects.JobFrame).SetActive(false);
+        // // ===== [ Init ] =====
+        // GetObject((int)Objects.CloseCard).SetActive(true);
+        // GetObject((int)Objects.JobFrame).SetActive(false);
         
         // ===== [ Data Bind ] =====
         var currentUser = Managers.Game.GetCurrentPlayer();
@@ -66,8 +59,8 @@ public class UI_JobIntro01 : UIScreen
     private void OnClickCloseCard()
     {
         Managers.Sound.PlaySFX("Card");
-        GetObject((int)Objects.CloseCard).SetActive(false);
-        GetObject((int)Objects.JobFrame).SetActive(true);
+        // GetObject((int)Objects.CloseCard).SetActive(false);
+        // GetObject((int)Objects.JobFrame).SetActive(true);
         BindNextScreen<UI_JobInteraction>();
     }
 }

@@ -25,7 +25,7 @@ public class UI_JobInteraction : UIScreen
 
     private enum Buttons
     {
-        CloseCard
+        CardAnim
     }
     #region # [ Board B Component ] #
     
@@ -52,7 +52,7 @@ public class UI_JobInteraction : UIScreen
     {
         _gauge.SetGauge(10f);
         isSelect = false;
-        GetButton((int)Buttons.CloseCard).gameObject.SetActive(true);
+        GetButton((int)Buttons.CardAnim).gameObject.SetActive(true);
         
         if (UseAutoNextScreen)  
             BindNextScreen<UI_ClockSwitcher>();
@@ -78,7 +78,7 @@ public class UI_JobInteraction : UIScreen
                          Math.Min(6, originalText.Length - i * 7))));
              
              GetText((int)Texts.WordText).text = wrappedText;
-             GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
+             GetButton((int)Buttons.CardAnim).onClick.AddListener(OnClickOpenCardButton);
          }
          else
          {
@@ -137,8 +137,8 @@ public class UI_JobInteraction : UIScreen
     private void OnClickOpenCardButton()
     {
         Managers.Sound.PlaySFX("Card"); 
-        GetButton((int)Buttons.CloseCard).gameObject.SetActive(false);
-        GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
+        // GetButton((int)Buttons.CloseCard).gameObject.SetActive(false);
+        // GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
         
         BindNextScreen<UI_ClockSwitcher>();
     }
