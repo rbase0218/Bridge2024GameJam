@@ -55,6 +55,13 @@ public class UI_TextConfirm01 : UIScreen
     {
         Managers.Sound.PlaySFX("Card");
         GetButton((int)Buttons.CardAnim).interactable = false;
+        StartCoroutine(CardOpenDelay());
         OnNextScreen<UI_TextConfirm02>();
+    }
+
+    private IEnumerator CardOpenDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GetText((int)Texts.WordText).gameObject.SetActive(true);
     }
 }
