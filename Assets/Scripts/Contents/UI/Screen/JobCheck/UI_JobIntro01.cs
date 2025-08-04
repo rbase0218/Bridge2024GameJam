@@ -19,6 +19,12 @@ public class UI_JobIntro01 : UIScreen
     {
         CardAnim
     }
+
+    private enum Objects
+    {
+        OpenCard,
+        CloseCard
+    }
     
     protected override bool Init()
     {
@@ -29,7 +35,8 @@ public class UI_JobIntro01 : UIScreen
         BindText(typeof(Texts));
         BindImage(typeof(Images));
         BindButton(typeof(Buttons));
-        
+        BindObject(typeof(Objects));
+
         GetButton((int)Buttons.CardAnim).onClick.AddListener(OnClickCloseCard);
         
         return true;
@@ -38,8 +45,9 @@ public class UI_JobIntro01 : UIScreen
     protected override bool EnterWindow()
     {
         // // ===== [ Init ] =====
-        // GetObject((int)Objects.CloseCard).SetActive(true);
-        // GetObject((int)Objects.JobFrame).SetActive(false);
+        GetButton((int)Buttons.CardAnim).interactable = true;
+        GetObject((int)Objects.OpenCard).SetActive(false);
+        GetObject((int)Objects.CloseCard).SetActive(true);
         
         // ===== [ Data Bind ] =====
         var currentUser = Managers.Game.GetCurrentPlayer();
@@ -47,7 +55,6 @@ public class UI_JobIntro01 : UIScreen
         GetText((int)Texts.NameText).SetText(currentUser.userName);
         GetText((int)Texts.JobNameText).SetText(Managers.Data.GetJobText(currentUser.jobType));
         GetImage((int)Images.Frame).sprite = Managers.Data.GetFrameSprite(currentUser.jobType);
-        
         
         // 다음 Screen 연결하기
         if (UseAutoNextScreen)
@@ -59,8 +66,7 @@ public class UI_JobIntro01 : UIScreen
     private void OnClickCloseCard()
     {
         Managers.Sound.PlaySFX("Card");
-        // GetObject((int)Objects.CloseCard).SetActive(false);
-        // GetObject((int)Objects.JobFrame).SetActive(true);
+        GetButton((int)Buttons.CardAnim).interactable = false;
         BindNextScreen<UI_JobInteraction>();
     }
 }

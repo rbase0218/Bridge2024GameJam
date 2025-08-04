@@ -6,14 +6,21 @@ public class UI_TextConfirm01 : UIScreen
 {
     private enum Buttons
     {
-        CloseCard
+        CardAnim
     }
 
     private enum Texts
     {
         Text
     }
-    
+
+    private enum Objects
+    {
+        OpenCard,
+        CloseCard
+    }
+
+
     protected override bool Init()
     {
         if (!base.Init())
@@ -22,18 +29,23 @@ public class UI_TextConfirm01 : UIScreen
         // 질문자 이름 호출
         BindText(typeof(Texts));
         BindButton(typeof(Buttons));
-        
-        GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickCloseCard);
-        
+        BindObject(typeof(Objects));
+
+        GetButton((int)Buttons.CardAnim).onClick.AddListener(OnClickCloseCard);
+
         return true;
     }
-    
+
     protected override bool EnterWindow()
     {
+        GetButton((int)Buttons.CardAnim).interactable = true;
+        GetObject((int)Objects.OpenCard).SetActive(false);
+        GetObject((int)Objects.CloseCard).SetActive(true);
+
         // 랜덤 질문 가져오기
         var answerUserName = Managers.Game.QuestionManager.GetRandomQuestionLog().questioner;
         GetText((int)Texts.Text).SetText(answerUserName);
-        
+
         if (UseAutoNextScreen)
             BindNextScreen<UI_TextConfirm02>();
         return true;
@@ -42,6 +54,7 @@ public class UI_TextConfirm01 : UIScreen
     private void OnClickCloseCard()
     {
         Managers.Sound.PlaySFX("Card");
+        GetButton((int)Buttons.CardAnim).interactable = false;
         OnNextScreen<UI_TextConfirm02>();
     }
 }

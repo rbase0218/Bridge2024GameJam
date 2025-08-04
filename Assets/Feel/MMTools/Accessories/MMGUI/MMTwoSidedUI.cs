@@ -132,5 +132,18 @@ namespace MoreMountains.Tools
 
 			return 0f;
 		}
+
+		/// <summary>
+		/// 현재 상태와 관계없이 카드를 앞면으로 강제 설정
+		/// </summary>
+		public void ForceToFront()
+		{
+			// BackVisible 상태를 false로 강제 설정 (앞면 상태)
+			_initialized = true;
+			BackVisible = false;
+            
+			Front.SetActive(!BackVisible);
+			Back.SetActive(BackVisible);
+		}
 	}
 }
