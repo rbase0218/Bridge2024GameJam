@@ -46,6 +46,6 @@ public class UI_VoteResult : UIScreen
         GetButton((int)Buttons.CloseCard).gameObject.SetActive(false);
         GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
         
-        OnNextScreen<UI_JobReveal>();
+        OnNextScreen<UI_VoteResult1>();
     }
 }

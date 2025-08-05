@@ -6,12 +6,15 @@ public class UI_TextConfirm01 : UIScreen
 {
     private enum Buttons
     {
-        CardAnim
+        CardAnim,
+        YesButton,
+        NoButton
     }
 
     private enum Texts
     {
-        Text
+        Text,
+        WordText
     }
 
     private enum Objects
@@ -20,6 +23,8 @@ public class UI_TextConfirm01 : UIScreen
         CloseCard
     }
 
+    private bool hasNextQuestion = false;
+    private QuestionLog _questionLog;
 
     protected override bool Init()
     {
@@ -39,15 +44,22 @@ public class UI_TextConfirm01 : UIScreen
     protected override bool EnterWindow()
     {
         GetButton((int)Buttons.CardAnim).interactable = true;
+        GetText((int)Texts.WordText).gameObject.SetActive(false);
         GetObject((int)Objects.OpenCard).SetActive(false);
         GetObject((int)Objects.CloseCard).SetActive(true);
 
-        // 랜덤 질문 가져오기
-        var answerUserName = Managers.Game.QuestionManager.GetRandomQuestionLog().questioner;
-        GetText((int)Texts.Text).SetText(answerUserName);
 
-        if (UseAutoNextScreen)
-            BindNextScreen<UI_TextConfirm02>();
+        _questionLog = Managers.Game.QuestionManager.GetRandomQuestionLog();
+
+        string playerName = _questionLog.questioner;
+        string text = _questionLog.question;
+
+        GetText((int)Texts.Text).SetText(playerName);
+        GetText((int)Texts.WordText).SetText(text);
+
+        GetButton((int)Buttons.YesButton).onClick.AddListener(OnClickYesButton);
+        GetButton((int)Buttons.NoButton).onClick.AddListener(OnClickNoButton);
+
         return true;
     }
 
@@ -56,12 +68,38 @@ public class UI_TextConfirm01 : UIScreen
         Managers.Sound.PlaySFX("Card");
         GetButton((int)Buttons.CardAnim).interactable = false;
         StartCoroutine(CardOpenDelay());
-        OnNextScreen<UI_TextConfirm02>();
     }
 
     private IEnumerator CardOpenDelay()
     {
         yield return new WaitForSeconds(0.1f);
         GetText((int)Texts.WordText).gameObject.SetActive(true);
+    }
+
+    private void OnClickYesButton()
+    {
+        Managers.Sound.PlaySFX("Click");
+        // 답변 저장
+        _questionLog.SetAnswer(Managers.Game.GetCurrentPlayer().userName, "예");
+        CheckForNextScreenMove();
+    }
+
+    private void OnClickNoButton()
+    {
+        Managers.Sound.PlaySFX("Click");
+        // 답변 저장
+        _questionLog.SetAnswer(Managers.Game.GetCurrentPlayer().userName, "아니오");
+        CheckForNextScreenMove();
+    }
+
+    private void CheckForNextScreenMove()
+    {
+        hasNextQuestion = Managers.Game.QuestionManager.NextQuestion();
+        Debug.Log("다음 질문 존재 여부 : " + hasNextQuestion);
+
+        if (hasNextQuestion == false)
+            OnNextScreen<UI_Switcher02>();
+        else
+            OnNextScreen<UI_TextConfirm01>();
     }
 }

@@ -21,6 +21,12 @@ public struct QuestionLog
         this.question = question;
         this.answer = answer;
     }
+
+    public void SetAnswer(string answerer, string answer)
+    {
+        this.answerer = answerer;
+        this.answer = answer;
+    }
 }
 
 public class QuestionLogManager
