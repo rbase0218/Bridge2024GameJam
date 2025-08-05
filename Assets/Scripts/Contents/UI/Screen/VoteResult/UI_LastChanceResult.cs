@@ -22,6 +22,12 @@ public class UI_LastChanceResult : UIScreen
     {
         NextButton
     }
+
+    private enum Objects
+    {
+        Defeat,
+        Victory
+    }
     
     protected override bool Init()
     {
@@ -31,6 +37,7 @@ public class UI_LastChanceResult : UIScreen
         BindText(typeof(Texts));
         BindImage(typeof(Images));
         BindButton(typeof(Buttons));
+        BindObject(typeof(Objects));
         
         GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
         
@@ -51,9 +58,13 @@ public class UI_LastChanceResult : UIScreen
 
     public void SetInfo(bool isAnswerCorrect)
     {
+        GetObject((int)Objects.Defeat).SetActive(false);
+        GetObject((int)Objects.Victory).SetActive(false);
+
         if (isAnswerCorrect)    // 정답을 맞춘 경우
         {
-            Managers.Sound.PlaySFX("Correct");
+            GetObject((int)Objects.Defeat).SetActive(true);
+            Managers.Sound.PlaySFX("Assasin");
             // Assassin의 승리
             // 다양한 게임 분기를 위해 정답입니다 문구를 제거함.
             GetText((int)Texts.FirstText).SetText("");
@@ -63,13 +74,15 @@ public class UI_LastChanceResult : UIScreen
         }
         else
         {
+            GetObject((int)Objects.Victory).SetActive(true);
+            
             var voteUser = Managers.Game.GetMaxVotePlayerName()[0];
             var voteUserJob = Managers.Game.FindPlayer(voteUser).jobType;
             
             // 광대 승리
             if (voteUserJob == EJobType.Actor)
             {
-                Managers.Sound.PlaySFX("Correct");
+                Managers.Sound.PlaySFX("Clown");
         
                 GetText((int)Texts.FirstText).SetText("오답입니다!");
                 GetText((int)Texts.SecondText).SetText("뜻밖의 광대가\n귀빈들과의 게임에서\n승리를 가져갑니다.");
@@ -79,8 +92,10 @@ public class UI_LastChanceResult : UIScreen
             } 
             else if (voteUserJob == EJobType.Assassin) 
             {
+                GetObject((int)Objects.Victory).SetActive(true);
+
                 // 귀빈 승리
-                Managers.Sound.PlaySFX("Wrong");
+                Managers.Sound.PlaySFX("Guest");
         
                 GetText((int)Texts.FirstText).SetText("오답입니다!");
                 GetText((int)Texts.JobText).SetText("귀빈");

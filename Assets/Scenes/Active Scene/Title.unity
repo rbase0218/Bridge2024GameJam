@@ -1794,7 +1794,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0d87cabaf92bd5c45ae4b3b689d024a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e8184d5016f0da24ea84d142e3a33b0b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4023,12 +4023,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9b5c854a271665b489382329db4c6cfd, type: 3}
   - name: Clock
     clip: {fileID: 8300000, guid: 0fe3d90339d6aec46bed216f85d87b73, type: 3}
-  - name: Correct
-    clip: {fileID: 8300000, guid: 88a8a9243b3066d4bade8f5d34a84119, type: 3}
-  - name: Wrong
-    clip: {fileID: 8300000, guid: 81109d1a499d94940b5e4336a7ea2b2a, type: 3}
   - name: GameOver
     clip: {fileID: 8300000, guid: c9338a3624791e8479b28391c12c80f3, type: 3}
+  - name: Assasin
+    clip: {fileID: 8300000, guid: 94808bf1fc33e3a4696691c1dfd86639, type: 3}
+  - name: Clown
+    clip: {fileID: 8300000, guid: e251c7884a93ed14fabca92790098c7c, type: 3}
+  - name: Guest
+    clip: {fileID: 8300000, guid: 7e422d5c57346f846aa5e55e38e8221b, type: 3}
   array_bgm:
   - name: Title
     clip: {fileID: 8300000, guid: 57c253ee7d6cdf144a3e052d2791f7d9, type: 3}
@@ -12422,7 +12424,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b048d734e9f510844923070583c1a98f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8bd453ca5c8312646aabe6bf98624f40, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
