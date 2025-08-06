@@ -9,12 +9,12 @@ public class GameManager : MonoBehaviour
 {
     private GamePlayers _gamePlayers;
     private TopicPicker _topicPicker;
-    
+
     public QuestionLogManager QuestionManager { get; private set; }
     public bool isGameEnd;
 
     private EJobType _winType = 0;
-    
+
     private void Start()
     {
         if (Managers.Game.isGameEnd)
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
         // 유저들에게 직업을 분배한다.
         var onRegisterJobs = _gamePlayers.AllocatePlayerJobs();
-        
+
         return onRegisterJobs;
     }
 
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         return _winType;
     }
-    
+
     #region GamePlayers
 
     public UserInfo FindPlayer(string playerName)
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
 
     public void AddHostage(string playerName)
     {
-        var playerData = FindPlayer(playerName); 
+        var playerData = FindPlayer(playerName);
         _gamePlayers.AddHostage(playerData);
     }
 
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
     {
         return _gamePlayers.IsLastPlayer();
     }
-    
+
     public UserInfo GetCurrentHostageName()
     {
         return _gamePlayers.GetCurrentHostage();
@@ -159,14 +159,14 @@ public class GameManager : MonoBehaviour
     {
         _gamePlayers.ClearVoteCount();
     }
-    
+
     #endregion
-    
+
     #region TopicPicker
     public void PickTopic(int index)
     {
         Initialized();
-        
+
         _topicPicker.PickTopic(index);
     }
 
@@ -174,5 +174,48 @@ public class GameManager : MonoBehaviour
     {
         return _topicPicker.Topic;
     }
+    #endregion
+
+    #region Final Vote Target
+
+    public void SetFinalVoteTarget(UserInfo targetPlayer)
+    {
+        _gamePlayers.SetFinalVoteTarget(targetPlayer);
+    }
+
+    public void SetFinalVoteTarget(string playerName)
+    {
+        _gamePlayers.SetFinalVoteTarget(playerName);
+    }
+
+    public UserInfo GetFinalVoteTarget()
+    {
+        return _gamePlayers.GetFinalVoteTarget();
+    }
+
+    #endregion
+
+    #region Yes/No Choices
+    
+    public void AddYesNoChoice(string choice)
+    {
+        _gamePlayers.AddYesNoChoice(choice);
+    }
+
+    public void AddYesNoChoice(bool isYes)
+    {
+        _gamePlayers.AddYesNoChoice(isYes);
+    }
+
+    public string GetMostChosenAnswer()
+    {
+        return _gamePlayers.GetMostChosenAnswer();
+    }
+
+    public void ClearYesNoChoices()
+    {
+        _gamePlayers.ClearYesNoChoices();
+    }
+    
     #endregion
 }

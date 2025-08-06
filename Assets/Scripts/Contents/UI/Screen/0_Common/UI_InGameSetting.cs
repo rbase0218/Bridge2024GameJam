@@ -60,7 +60,24 @@ public class UI_InGameSetting : UIWindow
 
     private void OnClickEmergencyButton()
     {
+        Time.timeScale = 0;
         Managers.Sound.PlaySFX("Click");
-        Managers.UI.ShowWindow<UI_Switcher01_Last>();
+
+        var exit = Managers.UI.ShowWindow<UIEmergency>();
+        exit.OnClickButtons(() =>
+        {
+            Time.timeScale = 1;
+            Managers.Sound.PlaySFX("Click");
+            var gauge = FindObjectOfType<UI_Gauge>();
+            gauge?.Stop();
+            Managers.UI.CloseWindow();
+            Managers.UI.CloseWindow();
+            Managers.UI.ShowWindow<UI_Switcher01_Last>();
+        }, () =>
+        {
+            Time.timeScale = 1;
+            Managers.Sound.PlaySFX("Click");
+            Managers.UI.CloseWindow();
+        });
     }
 }

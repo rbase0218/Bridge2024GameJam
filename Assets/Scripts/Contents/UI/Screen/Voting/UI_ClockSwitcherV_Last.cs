@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_Switcher01_Last : UIScreen
+public class UI_ClockSwitcherV_Last : UIScreen
 {
     protected override bool Init()
     {
@@ -14,11 +14,10 @@ public class UI_Switcher01_Last : UIScreen
     
     protected override bool EnterWindow()
     {
+        Managers.Sound.PlaySFX("Clock");
+        _gauge.SetGauge(10f);
         if(UseAutoNextScreen)
-            BindNextScreen<UI_Introduce_Target>();
-        
-        // 유저 턴 데이터 초기화
-        Managers.Game.CleanTurn();
+            BindNextScreen<UI_NextPlayerV_Last>();
         
         return true;
     }

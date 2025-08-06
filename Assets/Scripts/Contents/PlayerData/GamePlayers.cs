@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GamePlayers
 {
@@ -7,6 +8,8 @@ public class GamePlayers
     private UserInfo _assassinPlayer;
     private UserInfo _jokerPlayer;
     private List<UserInfo> _hostages = new List<UserInfo>();
+    private UserInfo _finalVoteTarget; // 최후 투표 지목자
+    private List<string> _yesNoChoices = new List<string>(); // 예/아니오 선택 리스트
 
     private PlayersDataContext _context = new PlayersDataContext();
     private VoteManager _voteManager = new VoteManager();
@@ -148,4 +151,62 @@ public class GamePlayers
     {
         return _hostages.Count == (_allPlayers.Count - 1);
     }
+
+    public void SetFinalVoteTarget(UserInfo targetPlayer)
+    {
+        _finalVoteTarget = targetPlayer;
+    }
+
+    public void SetFinalVoteTarget(string playerName)
+    {
+        var targetPlayer = FindPlayer(playerName);
+        if (targetPlayer != null)
+        {
+            SetFinalVoteTarget(targetPlayer);
+        }
+    }
+
+    public UserInfo GetFinalVoteTarget()
+    {
+        return _finalVoteTarget;
+    }
+
+    #region Yes/No Choices
+    
+    public void AddYesNoChoice(string choice)
+    {
+        if (choice == "예" || choice == "아니오")
+        {
+            _yesNoChoices.Add(choice);
+        }
+    }
+
+    public void AddYesNoChoice(bool isYes)
+    {
+        string choice = isYes ? "예" : "아니오";
+        _yesNoChoices.Add(choice);
+    }
+
+    public string GetMostChosenAnswer()
+    {
+        if (_yesNoChoices.Count == 0)
+            return "예"; // 기본값
+
+        int yesCount = _yesNoChoices.Count(x => x == "예");
+        int noCount = _yesNoChoices.Count(x => x == "아니오");
+
+        if (yesCount > noCount)
+            return "예";
+        else if (noCount > yesCount)
+            return "아니오";
+        else
+            return "동점";
+    }
+
+    public void ClearYesNoChoices()
+    {
+        _yesNoChoices.Clear();
+    }
+    
+    #endregion
 }

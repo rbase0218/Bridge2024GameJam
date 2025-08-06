@@ -51,10 +51,10 @@ public class UI_TextConfirm01 : UIScreen
 
         _questionLog = Managers.Game.QuestionManager.GetRandomQuestionLog();
 
-        string playerName = _questionLog.questioner;
+        string hostageName = Managers.Game.GetCurrentHostageName().userName;
         string text = _questionLog.question;
 
-        GetText((int)Texts.Text).SetText(playerName);
+        GetText((int)Texts.Text).SetText(hostageName);
         GetText((int)Texts.WordText).SetText(text);
 
         GetButton((int)Buttons.YesButton).onClick.AddListener(OnClickYesButton);
