@@ -45,6 +45,12 @@ public class UI_PlayerSelectUIV_Target : UIScreen
         if (UseAutoNextScreen)
             BindNextScreen<UI_Switcher01_Last>();
 
+        var inGameSetting = Managers.UI.GetWindow<UI_InGameSetting>();
+        if (inGameSetting != null)
+        {
+            inGameSetting.HideEmergencyButton();
+        }
+
         isSelect = false;
 
         var currentUser = Managers.Game.GetCurrentPlayer();

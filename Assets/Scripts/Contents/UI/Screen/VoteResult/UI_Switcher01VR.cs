@@ -71,6 +71,7 @@ public class UI_Switcher01VR : UIScreen
             Managers.Game.CleanTurn();
             Managers.Game.ClearVoteCount();
             Managers.Game.ClearYesNoChoices();
+            Managers.Game.NextRound(); // 라운드 증가
 
             BindNextScreen<UI_Switcher02>();
 

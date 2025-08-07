@@ -23,6 +23,7 @@ public class UI_InGameSetting : UIWindow
         GetButton((int)Buttons.BackButton).onClick.AddListener(OnClickBackButton);
         GetButton((int)Buttons.ManualButton).onClick.AddListener(OnClickManualButton);
         GetButton((int)Buttons.EmergencyButton).onClick.AddListener(OnClickEmergencyButton);
+        HideEmergencyButton();
 
         return true;
     }
@@ -79,5 +80,15 @@ public class UI_InGameSetting : UIWindow
             Managers.Sound.PlaySFX("Click");
             Managers.UI.CloseWindow();
         });
+    }
+
+    public void ShowEmergencyButton()
+    {
+        GetButton((int)Buttons.EmergencyButton).gameObject.SetActive(true);
+    }
+
+    public void HideEmergencyButton()
+    {
+        GetButton((int)Buttons.EmergencyButton).gameObject.SetActive(false);
     }
 }

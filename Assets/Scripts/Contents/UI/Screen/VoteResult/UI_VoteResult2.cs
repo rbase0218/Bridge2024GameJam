@@ -91,6 +91,7 @@ public class UI_VoteResult2 : UIScreen
                     game.ClearYesNoChoices();
                     game.SetContext(PlayersDataContext.DataContextType.Questioner);
                     game.QuestionManager.ClearQuestionLog();
+                    Managers.Game.NextRound(); // 라운드 증가
                     if (voteUser == Managers.Game.GetCurrentHostage().userName)
                     {
                         // 만약에 이전에 암살자가 잡은 인질이 이번 투표에서 죽었다면, 랜덤으로 인질을 잡는다.

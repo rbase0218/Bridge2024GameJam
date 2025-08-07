@@ -11,11 +11,17 @@ public class UI_Switcher01V : UIScreen
 
         return true;
     }
-    
+
     protected override bool EnterWindow()
     {
-        if(UseAutoNextScreen)
+        if (UseAutoNextScreen)
             BindNextScreen<UI_Introduce>();
+
+        var inGameSetting = Managers.UI.GetWindow<UI_InGameSetting>();
+        if (inGameSetting != null)
+        {
+            inGameSetting.HideEmergencyButton();
+        }
 
         // 플레이어 데이터를 투표자로 변경한다.
         Managers.Game.SetContext(PlayersDataContext.DataContextType.Voter);

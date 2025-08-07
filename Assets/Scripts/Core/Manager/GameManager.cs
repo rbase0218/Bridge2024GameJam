@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     public QuestionLogManager QuestionManager { get; private set; }
     public bool isGameEnd;
+    public int CurrentRound { get; private set; } = 1; // 현재 라운드
 
     private EJobType _winType = 0;
 
@@ -235,6 +236,7 @@ public class GameManager : MonoBehaviour
         // 게임 상태 초기화
         isGameEnd = false;
         _winType = 0;
+        CurrentRound = 1; // 라운드 초기화
         
         // 플레이어 데이터 초기화
         _gamePlayers.ClearAllPlayers();
@@ -299,5 +301,21 @@ public class GameManager : MonoBehaviour
 
         // 인질로 지정
         _gamePlayers.AddHostage(selected);
+    }
+
+    public void NextRound()
+    {
+        CurrentRound++;
+        
+        // 라운드가 인원수의 절반을 넘어갔을 때 비상 버튼 표시
+        int halfPlayerCount = GetPlayerCount() / 2;
+        if (CurrentRound > halfPlayerCount)
+        {
+            var inGameSetting = Managers.UI.GetWindow<UI_InGameSetting>();
+            if (inGameSetting != null)
+            {
+                inGameSetting.ShowEmergencyButton();
+            }
+        }
     }
 }
