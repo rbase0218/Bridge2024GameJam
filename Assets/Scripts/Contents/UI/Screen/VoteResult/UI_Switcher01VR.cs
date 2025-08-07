@@ -73,8 +73,7 @@ public class UI_Switcher01VR : UIScreen
             Managers.Game.ClearYesNoChoices();
             Managers.Game.NextRound(); // 라운드 증가
 
-            BindNextScreen<UI_Switcher02>();
-
+            BindNextScreen<UI_Switcher01>();
 
             return true;
         }
