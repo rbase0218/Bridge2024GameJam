@@ -17,9 +17,6 @@ public class UI_Switcher01_Last : UIScreen
         if(UseAutoNextScreen)
             BindNextScreen<UI_Introduce_Target>();
         
-        // 유저 턴 데이터 초기화
-        Managers.Game.CleanTurn();
-        
         return true;
     }
 }

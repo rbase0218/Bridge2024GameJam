@@ -113,6 +113,13 @@ public class GamePlayers
         return _hostages[^1];
     }
 
+    public UserInfo GetLastHostage()
+    {
+        if (_hostages.Count < 2)
+            return null;
+        return _hostages[_hostages.Count - 2];
+    }
+
     public bool IsLastPlayer()
     {
         return _context.GetStrategy().IsLastPlayer();

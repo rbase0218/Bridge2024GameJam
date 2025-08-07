@@ -74,8 +74,8 @@ public class UI_PlayerSelectUIV_Last : UIScreen
             return;
 
         // 해당 유저에 대한 정보를 찾는다.
-        var findUser = Managers.Game.FindPlayer(text);
-        Managers.Game.AddVote(findUser);
+        //var findUser = Managers.Game.FindPlayer(text);
+        Managers.Game.AddYesNoChoice(text);
 
         OnNextScreen<UI_ClockSwitcherV_Last>();
     }

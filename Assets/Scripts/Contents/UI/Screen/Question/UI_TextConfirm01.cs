@@ -44,6 +44,9 @@ public class UI_TextConfirm01 : UIScreen
     protected override bool EnterWindow()
     {
         GetButton((int)Buttons.CardAnim).interactable = true;
+        GetButton((int)Buttons.YesButton).interactable = false;
+        GetButton((int)Buttons.NoButton).interactable = false;
+
         GetText((int)Texts.WordText).gameObject.SetActive(false);
         GetObject((int)Objects.OpenCard).SetActive(false);
         GetObject((int)Objects.CloseCard).SetActive(true);
@@ -74,6 +77,8 @@ public class UI_TextConfirm01 : UIScreen
     {
         yield return new WaitForSeconds(0.1f);
         GetText((int)Texts.WordText).gameObject.SetActive(true);
+        GetButton((int)Buttons.YesButton).interactable = true;
+        GetButton((int)Buttons.NoButton).interactable = true;
     }
 
     private void OnClickYesButton()

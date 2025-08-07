@@ -84,7 +84,7 @@ public class UI_PlayerSelectUIV : UIScreen
             GetObject((int)Objects.Board_A).SetActive(true);
             
             var selectorA = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA);
-            selectorA.ShowButton(alivePlayers);
+            selectorA.ShowButton("예", "아니오");
             
             GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
             GetText((int)Texts.Text).SetText(currentUser.userName);
@@ -103,8 +103,9 @@ public class UI_PlayerSelectUIV : UIScreen
             return;
         
         // 해당 유저에 대한 정보를 찾는다.
-        var findUser = Managers.Game.FindPlayer(text);
-        Managers.Game.AddVote(findUser);
+        // var findUser = Managers.Game.FindPlayer(text);
+        // Managers.Game.AddVote(findUser);
+        Managers.Game.AddYesNoChoice(text);
         
         OnNextScreen<UI_ClockSwitcherV>();
     }
@@ -120,7 +121,6 @@ public class UI_PlayerSelectUIV : UIScreen
         var findUser = Managers.Game.FindPlayer(text);
         
         Managers.Game.AddHostage(findUser);
-        
         OnNextScreen<UI_ClockSwitcherV>();
         isSelect = true;
     }

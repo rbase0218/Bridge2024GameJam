@@ -11,14 +11,14 @@ public class UI_ClockSwitcherV : UIScreen
 
         return true;
     }
-    
+
     protected override bool EnterWindow()
     {
         Managers.Sound.PlaySFX("Clock");
         _gauge.SetGauge(10f);
-        if(UseAutoNextScreen)
+        if (UseAutoNextScreen)
             BindNextScreen<UI_NextPlayerV>();
-        
+
         return true;
     }
 }
