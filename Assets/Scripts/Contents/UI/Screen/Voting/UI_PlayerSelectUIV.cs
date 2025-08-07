@@ -55,7 +55,7 @@ public class UI_PlayerSelectUIV : UIScreen
         
         if (currentUser.jobType == EJobType.Assassin)
         {
-            var notHostagePlayers = Managers.Game.GetAllPlayers().FindAll( x => x.isHostage != true).Select(x => x.userName).ToArray();
+            var notHostagePlayers = Managers.Game.GetAllPlayers().FindAll( x => x.isDie != true).Select(x => x.userName).ToArray();
             
             GetObject((int)Objects.Board_B).SetActive(true);
             GetObject((int)Objects.Board_A).SetActive(false);

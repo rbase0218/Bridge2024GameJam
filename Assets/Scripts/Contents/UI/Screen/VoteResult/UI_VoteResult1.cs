@@ -37,13 +37,13 @@ public class UI_VoteResult1 : UIScreen
 
     protected override bool EnterWindow()
     {
-        var votePlayerName = Managers.Game.GetMaxVotePlayerName()[0];
-        var votePlayerData = Managers.Game.FindPlayer(votePlayerName);
+        var votePlayer = Managers.Game.GetLastHostage();
+        var votePlayerData = Managers.Game.FindPlayer(votePlayer.userName);
 
         var voteUserPicture = Managers.Data.GetFrameSprite(votePlayerData.jobType);
         var voteUserJobFrame = Managers.Data.GetFrameBGSprite(votePlayerData.jobType);
 
-        GetText((int)Texts.FirstText).SetText($"{votePlayerName}은");
+        GetText((int)Texts.FirstText).SetText($"{votePlayer.userName}은");
 
         var infoTexts = Managers.Data.jobInfoTexts[votePlayerData.jobType];
         // Info Text 추가
@@ -69,11 +69,9 @@ public class UI_VoteResult1 : UIScreen
     {
         Managers.Sound.PlaySFX("Click");
 
-        var voteUser = Managers.Game.GetMaxVotePlayerName()[0];
+        string voteUser = Managers.Game.GetLastHostage().userName;
         var votePlayerData = Managers.Game.FindPlayer(voteUser);
 
-        // 인질 수가 자기 자신을 제외한 수와 동일하다면 암살자 승리
-        // Debug.Log($"투표: {voteUser.jobType}, isAssassinWin: {isAssassinWin}");
         switch (votePlayerData.jobType)
         {
             case EJobType.VIP:
@@ -88,9 +86,16 @@ public class UI_VoteResult1 : UIScreen
                 else
                 {
                     var game = Managers.Game;
+                    game.CleanTurn();
                     game.ClearVoteCount();
+                    game.ClearYesNoChoices();
                     game.SetContext(PlayersDataContext.DataContextType.Questioner);
                     game.QuestionManager.ClearQuestionLog();
+                    if (voteUser == Managers.Game.GetCurrentHostage().userName)
+                    {
+                        // 만약에 이전에 암살자가 잡은 인질이 이번 투표에서 죽었다면, 랜덤으로 인질을 잡는다.
+                        Managers.Game.PickRandomHostage();
+                    }
 
                     Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume);
                     OnNextScreen<UI_Sequence02>();

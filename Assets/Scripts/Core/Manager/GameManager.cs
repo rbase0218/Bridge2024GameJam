@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 public class GameManager : MonoBehaviour
 {
     private GamePlayers _gamePlayers;
@@ -131,6 +132,8 @@ public class GameManager : MonoBehaviour
         _gamePlayers.AddHostage(playerData);
     }
 
+    
+
     public void UndoHostage()
     {
         _gamePlayers.UndoHostage();
@@ -140,9 +143,14 @@ public class GameManager : MonoBehaviour
         return _gamePlayers.IsLastPlayer();
     }
 
-    public UserInfo GetCurrentHostageName()
+    public UserInfo GetCurrentHostage()
     {
         return _gamePlayers.GetCurrentHostage();
+    }
+
+    public UserInfo GetLastHostage()
+    {
+        return _gamePlayers.GetLastHostage();
     }
 
     public void AddVote(UserInfo userInfo)
@@ -247,24 +255,18 @@ public class GameManager : MonoBehaviour
     {
         _gamePlayers.ClearAllPlayers();
         _gamePlayers.ClearVoteCount();
-        _gamePlayers.SetFinalVoteTarget((UserInfo)null);
-        
-        Debug.Log("플레이어 데이터가 초기화되었습니다.");
+        _gamePlayers.SetFinalVoteTarget((UserInfo)null);        
     }
 
     public void ResetVoteData()
     {
         _gamePlayers.ClearVoteCount();
-        _gamePlayers.SetFinalVoteTarget((UserInfo)null);
-        
-        Debug.Log("투표 데이터가 초기화되었습니다.");
+        _gamePlayers.SetFinalVoteTarget((UserInfo)null);        
     }
 
     public void ResetYesNoData()
     {
-        _gamePlayers.ClearYesNoChoices();
-        
-        Debug.Log("예/아니오 선택 데이터가 초기화되었습니다.");
+        _gamePlayers.ClearYesNoChoices();        
     }
 
     public void ResetQuestionData()
@@ -272,18 +274,30 @@ public class GameManager : MonoBehaviour
         if (QuestionManager != null)
         {
             QuestionManager.ClearQuestionLog();
-        }
-        
-        Debug.Log("질문 로그 데이터가 초기화되었습니다.");
+        }        
     }
 
     public void ResetGameState()
     {
         isGameEnd = false;
         _winType = 0;
-        
-        Debug.Log("게임 상태가 초기화되었습니다.");
     }
     
     #endregion
+
+    public void PickRandomHostage()
+    {
+        // 살아있는 플레이어 리스트 추출
+        var alivePlayers = GetAllPlayers().FindAll(player => !player.isDie);
+
+        if (alivePlayers.Count == 0)
+            return;
+
+        // 랜덤 인덱스 선택
+        int randomIndex = UnityEngine.Random.Range(0, alivePlayers.Count);
+        var selected = alivePlayers[randomIndex];
+
+        // 인질로 지정
+        _gamePlayers.AddHostage(selected);
+    }
 }

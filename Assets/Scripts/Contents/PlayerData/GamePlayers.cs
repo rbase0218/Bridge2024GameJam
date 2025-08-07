@@ -14,6 +14,9 @@ public class GamePlayers
     private PlayersDataContext _context = new PlayersDataContext();
     private VoteManager _voteManager = new VoteManager();
 
+    private UserInfo _currentHostage;
+    private UserInfo _lastCurrentHostage;
+
     public bool GeneratePlayersData(List<string> userNames)
     {
         if (userNames == null) return false;
@@ -86,6 +89,8 @@ public class GamePlayers
 
     public void AddHostage(UserInfo userInfo)
     {
+        _lastCurrentHostage = _currentHostage;
+        _currentHostage = userInfo;
         // 이미 인질로 붙잡힌 적이 없다면 인질 리스트에 추가한다.
         // 가장 마지막에 존재하는 유저가 인질로 판정하기 위함
         if (!IsPlayerAlreadyHostage(userInfo.userName))
@@ -110,14 +115,12 @@ public class GamePlayers
 
     public UserInfo GetCurrentHostage()
     {
-        return _hostages[^1];
+        return _currentHostage;
     }
 
     public UserInfo GetLastHostage()
     {
-        if (_hostages.Count < 2)
-            return null;
-        return _hostages[_hostages.Count - 2];
+        return _lastCurrentHostage;
     }
 
     public bool IsLastPlayer()
@@ -156,7 +159,10 @@ public class GamePlayers
 
     public bool ValidateVictory()
     {
-        return _hostages.Count == (_allPlayers.Count - 1);
+        // 살아남은 사람 수 = isDie가 false인 플레이어 수
+        int survivors = _allPlayers.Count(player => !player.isDie);
+        // 살아남은 사람이 암살자 포함 2명인 경우 승리
+        return survivors == 2;
     }
 
     public void SetFinalVoteTarget(UserInfo targetPlayer)

@@ -54,7 +54,7 @@ public class UI_TextConfirm01 : UIScreen
 
         _questionLog = Managers.Game.QuestionManager.GetRandomQuestionLog();
 
-        string hostageName = Managers.Game.GetCurrentHostageName().userName;
+        string hostageName = Managers.Game.GetCurrentHostage().userName;
         string text = _questionLog.question;
 
         GetText((int)Texts.Text).SetText(hostageName);
