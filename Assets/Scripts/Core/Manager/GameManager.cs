@@ -218,4 +218,72 @@ public class GameManager : MonoBehaviour
     }
     
     #endregion
+
+    #region Data Reset
+    
+
+    public void ResetAllGameData()
+    {
+        // 게임 상태 초기화
+        isGameEnd = false;
+        _winType = 0;
+        
+        // 플레이어 데이터 초기화
+        _gamePlayers.ClearAllPlayers();
+        _gamePlayers.ClearYesNoChoices();
+        _gamePlayers.ClearVoteCount();
+        
+        // 질문 로그 초기화
+        if (QuestionManager != null)
+        {
+            QuestionManager.ClearQuestionLog();
+        }
+        
+        // 최후 투표 지목자 초기화
+        _gamePlayers.SetFinalVoteTarget((UserInfo)null);        
+    }
+
+    public void ResetPlayerData()
+    {
+        _gamePlayers.ClearAllPlayers();
+        _gamePlayers.ClearVoteCount();
+        _gamePlayers.SetFinalVoteTarget((UserInfo)null);
+        
+        Debug.Log("플레이어 데이터가 초기화되었습니다.");
+    }
+
+    public void ResetVoteData()
+    {
+        _gamePlayers.ClearVoteCount();
+        _gamePlayers.SetFinalVoteTarget((UserInfo)null);
+        
+        Debug.Log("투표 데이터가 초기화되었습니다.");
+    }
+
+    public void ResetYesNoData()
+    {
+        _gamePlayers.ClearYesNoChoices();
+        
+        Debug.Log("예/아니오 선택 데이터가 초기화되었습니다.");
+    }
+
+    public void ResetQuestionData()
+    {
+        if (QuestionManager != null)
+        {
+            QuestionManager.ClearQuestionLog();
+        }
+        
+        Debug.Log("질문 로그 데이터가 초기화되었습니다.");
+    }
+
+    public void ResetGameState()
+    {
+        isGameEnd = false;
+        _winType = 0;
+        
+        Debug.Log("게임 상태가 초기화되었습니다.");
+    }
+    
+    #endregion
 }

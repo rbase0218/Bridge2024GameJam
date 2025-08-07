@@ -72,7 +72,7 @@ public class UI_InGameSetting : UIWindow
             gauge?.Stop();
             Managers.UI.CloseWindow();
             Managers.UI.CloseWindow();
-            Managers.UI.ShowWindow<UI_Switcher01_Last>();
+            Managers.UI.ShowWindow<UI_PlayerSelectUIV_Target>();
         }, () =>
         {
             Time.timeScale = 1;
