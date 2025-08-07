@@ -55,8 +55,8 @@ public class UI_NextPlayerV_Last : UIScreen
             GetText((int)Texts.NameB).SetText("종료");
             GetText((int)Texts.NameB).faceColor = Color.red;
             
-            // if (UseAutoNextScreen)
-            //     BindNextScreen<UI_Switcher01VR>();
+            if (UseAutoNextScreen)
+                BindNextScreen<UI_Switcher01VR_Last>();
         }
         
         Managers.Game.UpdateNextPlayer();
@@ -69,8 +69,7 @@ public class UI_NextPlayerV_Last : UIScreen
 
         if (isNext)
             OnNextScreen<UI_PlayerSelectUIV_Last>();
-        // else
-        //     OnNextScreen<UI_Switcher01VR>();
-        //TODO: 최후 투표 지목자 확인
+        else
+            OnNextScreen<UI_Switcher01VR_Last>();
     }
 }

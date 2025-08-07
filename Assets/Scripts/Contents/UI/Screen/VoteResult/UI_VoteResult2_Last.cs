@@ -69,7 +69,7 @@ public class UI_VoteResult2_Last : UIScreen
     {
         Managers.Sound.PlaySFX("Click");
 
-        string voteUser = Managers.Game.GetLastHostage().userName;
+        string voteUser = Managers.Game.GetFinalVoteTarget().userName;
         var votePlayerData = Managers.Game.FindPlayer(voteUser);
 
         switch (votePlayerData.jobType)
