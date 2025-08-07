@@ -306,16 +306,5 @@ public class GameManager : MonoBehaviour
     public void NextRound()
     {
         CurrentRound++;
-        
-        // 라운드가 인원수의 절반을 넘어갔을 때 비상 버튼 표시
-        int halfPlayerCount = GetPlayerCount() / 2;
-        if (CurrentRound > halfPlayerCount)
-        {
-            var inGameSetting = Managers.UI.GetWindow<UI_InGameSetting>();
-            if (inGameSetting != null)
-            {
-                inGameSetting.ShowEmergencyButton();
-            }
-        }
     }
 }
