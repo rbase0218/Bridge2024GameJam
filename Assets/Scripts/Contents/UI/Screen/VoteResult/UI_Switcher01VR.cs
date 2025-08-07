@@ -71,9 +71,14 @@ public class UI_Switcher01VR : UIScreen
             Managers.Game.CleanTurn();
             Managers.Game.ClearVoteCount();
             Managers.Game.ClearYesNoChoices();
+            // 유저 데이터 설정 => Questioner
+            Managers.Game.SetContext(PlayersDataContext.DataContextType.Questioner);
+
+            // 퀘스트 목록 클리어.
+            Managers.Game.QuestionManager.ClearQuestionLog();
             Managers.Game.NextRound(); // 라운드 증가
 
-            BindNextScreen<UI_Switcher01>();
+            BindNextScreen<UI_Sequence02>();
 
             return true;
         }
