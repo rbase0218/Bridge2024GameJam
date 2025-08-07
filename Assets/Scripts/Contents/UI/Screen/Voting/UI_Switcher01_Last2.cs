@@ -20,6 +20,7 @@ public class UI_Switcher01_Last2 : UIScreen
         // 유저 턴 데이터 초기화
         Managers.Game.CleanTurn();
         Managers.Game.ClearYesNoChoices();
+        Managers.Game.SetContext(PlayersDataContext.DataContextType.Voter);
         
         return true;
     }

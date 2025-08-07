@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_VoteResult : UIScreen
+public class UI_VoteResult_Last : UIScreen
 {
     private enum Texts
     {
@@ -28,8 +28,8 @@ public class UI_VoteResult : UIScreen
     protected override bool EnterWindow()
     {
         Managers.Sound.SetBGMVolumeNoneSave(0);
-        var currentHostage = Managers.Game.GetLastHostage();
-        
+        var currentHostage = Managers.Game.GetFinalVoteTarget();
+    
         if (currentHostage != null)
         {
             var voteUserName = currentHostage.userName;
@@ -45,7 +45,7 @@ public class UI_VoteResult : UIScreen
         GetButton((int)Buttons.CloseCard).onClick.AddListener(OnClickOpenCardButton);
 
         if(UseAutoNextScreen)
-            BindNextScreen<UI_VoteResult2>();
+            BindNextScreen<UI_VoteResult2_Last>();
         return true;
     }
     
@@ -55,6 +55,6 @@ public class UI_VoteResult : UIScreen
         GetButton((int)Buttons.CloseCard).gameObject.SetActive(false);
         GetButton((int)Buttons.CloseCard).onClick.RemoveAllListeners();
         
-        OnNextScreen<UI_VoteResult2>();
+        OnNextScreen<UI_VoteResult2_Last>();
     }
 }

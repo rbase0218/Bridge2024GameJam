@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI_VoteResult1 : UIScreen
+public class UI_VoteResult2 : UIScreen
 {
     private enum Texts
     {

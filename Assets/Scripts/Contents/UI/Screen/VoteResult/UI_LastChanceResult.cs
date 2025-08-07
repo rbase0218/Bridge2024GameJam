@@ -76,8 +76,17 @@ public class UI_LastChanceResult : UIScreen
         {
             GetObject((int)Objects.Victory).SetActive(true);
             
-            var voteUser = Managers.Game.GetMaxVotePlayerName()[0];
-            var voteUserJob = Managers.Game.FindPlayer(voteUser).jobType;
+            UserInfo voteUser = null;
+
+            if(Managers.Game.GetFinalVoteTarget() == null)
+            {
+                voteUser = Managers.Game.GetLastHostage();
+            }
+            else
+            {
+                voteUser = Managers.Game.GetFinalVoteTarget();
+            }
+            var voteUserJob = Managers.Game.FindPlayer(voteUser.userName).jobType;
             
             // 광대 승리
             if (voteUserJob == EJobType.Actor)
