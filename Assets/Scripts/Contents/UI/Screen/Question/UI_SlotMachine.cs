@@ -16,6 +16,8 @@ public class UI_SlotMachine : UIScreen
 
     private GameObject _slotObject;
     private int _maxCount = 0;
+
+    private Coroutine _slotCoroutine;
     
     protected override bool Init()
     {
@@ -44,19 +46,27 @@ public class UI_SlotMachine : UIScreen
         Managers.Game.QuestionManager.SelectRandQuestion(resultNumber);
         Debug.Log("질문 개수 : " + resultNumber);
         
-        onOpen?.AddListener(() => StartCoroutine(StartSlotCoroutine()));
+        onOpen?.AddListener(() =>
+        {
+            _slotCoroutine = StartCoroutine(StartSlotCoroutine());
+        });
         
         return true;
     }
 
     private void OnClickNextButton()
     {
+        if (_slotCoroutine != null)
+        {
+            return;
+        }
+
         OnNextScreen<UI_TextConfirm01>();
     }
 
     private IEnumerator StartSlotCoroutine()
     {
-        Debug.Log("Coroutine 동작");
+        int turnCount = 0; 
         for (int i = 0; i < (20 * 8) + (20 * _maxCount) ; ++i)
         {
             _slotObject.transform.localPosition += Vector3.up * 31.25f;
@@ -65,5 +75,7 @@ public class UI_SlotMachine : UIScreen
             
             yield return new WaitForSeconds(0.01f);
         }
+        
+        _slotCoroutine = null;
     }
 }
