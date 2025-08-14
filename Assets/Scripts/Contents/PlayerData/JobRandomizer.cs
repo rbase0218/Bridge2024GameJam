@@ -66,13 +66,23 @@ public static class JobRandomizer
         }
         
         jobList.Add(EJobType.Assassin);
-        
+
+        // VIP 추가
         for (int i = 0; i < vipCount; i++)
+        {
             jobList.Add(EJobType.VIP);
+        }
+        
+        // Actor 추가
         if (needActor && UnityEngine.Random.value < 0.5f)
         {
             jobList.Add(EJobType.Actor);
         }
+        else if(needActor)
+        {
+            jobList.Add(EJobType.VIP);
+        }
+        
         return jobList;
     }
 

@@ -26,7 +26,6 @@ public class NormalPlayer : IPlayerStrategy
 
     public void Clean()
     {
-        throw new System.NotImplementedException();
     }
 
     public bool ValidateCurrentAndNextPlayers()
