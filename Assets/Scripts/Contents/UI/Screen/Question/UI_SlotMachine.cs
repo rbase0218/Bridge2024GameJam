@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class UI_SlotMachine : UIScreen
 {
+    private enum Texts
+    {
+        NameText
+    }
     private enum Buttons
     {
         NextButton
@@ -31,14 +35,18 @@ public class UI_SlotMachine : UIScreen
 
         BindButton(typeof(Buttons));
         BindObject(typeof(GameObjects));
+        BindText(typeof(Texts));
 
         GetButton((int)Buttons.NextButton).onClick.AddListener(OnClickNextButton);
+        
         return true;
     }
 
     protected override bool EnterWindow()
     {
         onOpen?.RemoveAllListeners();
+        
+        GetText((int)Texts.NameText).text = Managers.Game.GetCurrentPlayer().userName;
 
         _maxCount = Mathf.Clamp(Managers.Game.QuestionManager.GetLogCount(), 1, 5);
 
