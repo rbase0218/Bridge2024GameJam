@@ -11,8 +11,6 @@ public class UI_Gauge : UIBase
     public UnityEvent onStartGauge;
     public UnityEvent onEndGauge;
     
-    public UnityAction<float> onGaugeTimer;
-    
     #endregion
 
     #region # [ Components ] #
@@ -62,6 +60,7 @@ public class UI_Gauge : UIBase
             return false;
         }
         
+        Debug.Log(gameObject.GetInstanceID());
         if (_rectTransform.sizeDelta.x <= 0)
             _rectTransform.sizeDelta = _originSize;
 
@@ -107,9 +106,6 @@ public class UI_Gauge : UIBase
             yield return null;
 
             _gaugeFillImage.fillAmount = 1f - _timer / GaugeTime;
-            
-            // Ratio를 전달한다.
-            onGaugeTimer?.Invoke(_timer / GaugeTime);
         }
         
         SetGauge();

@@ -33,6 +33,7 @@ public abstract class UIScreen : UIWindow
         _gauge.onEndGauge.AddListener(OnSceneChanged<T>);
         
         _gauge.Play();
+        Debug.Log("Gauge Play");
         
         return Managers.UI.GetWindow<T>();
     }

@@ -19,8 +19,8 @@ public class UIManager : MonoBehaviour
 
         SceneManager.activeSceneChanged += (x, y) =>
         {
+            Time.timeScale = 1f;
             _windowContainer.Clear();
-            _activeWindowStack.Clear();
         };
     }
 
