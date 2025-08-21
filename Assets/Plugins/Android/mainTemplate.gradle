@@ -1,7 +1,4 @@
-plugins {
-    id 'com.android.application' version '8.0.2' apply false
-    id 'com.android.library' version '8.0.2' apply false
-}
+// plugins DSL with explicit versions removed to avoid classpath conflicts in Unity's build
 
 // Android Resolver Repos Start
 ([rootProject] + (rootProject.subprojects as List)).each {
