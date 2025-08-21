@@ -27,7 +27,7 @@ public class UI_Switcher01VR_Last : UIScreen
         GetText((int)Texts.SecondText).SetText("최종 투표\n결과를 확인합니다..");
 
         var voteData = Managers.Game.GetMostChosenAnswer();
-        if (voteData == "동점" || voteData == "아니오")
+        if (voteData == "동점")
         {
             GetText((int)Texts.SecondText).SetText("동표가 나왔으므로\n 투표를 다시 시작합니다.");
 
@@ -38,6 +38,12 @@ public class UI_Switcher01VR_Last : UIScreen
             Managers.Game.ClearYesNoChoices();
 
             BindNextScreen<UI_Switcher01_Last2>();
+            return true;
+        }
+        else if (voteData == "아니오")
+        {
+            // 반대표 우세: 발의자 역할 공개 화면으로 이동
+            BindNextScreen<UI_VoteResult2_Last>();
             return true;
         }
 

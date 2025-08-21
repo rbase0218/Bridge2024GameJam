@@ -9,6 +9,7 @@ public class GamePlayers
     private UserInfo _jokerPlayer;
     private List<UserInfo> _hostages = new List<UserInfo>();
     private UserInfo _finalVoteTarget; // 최후 투표 지목자
+    private UserInfo _finalVoteProposer; // 최후 투표 발의자
     private List<string> _yesNoChoices = new List<string>(); // 예/아니오 선택 리스트
 
     private PlayersDataContext _context = new PlayersDataContext();
@@ -89,13 +90,21 @@ public class GamePlayers
 
     public void AddHostage(UserInfo userInfo)
     {
+        // 이전 라운드 인질 해제
+        if (_currentHostage != null)
+        {
+            _currentHostage.isHostage = false;
+        }
+
         _lastCurrentHostage = _currentHostage;
         _currentHostage = userInfo;
-        // 이미 인질로 붙잡힌 적이 없다면 인질 리스트에 추가한다.
-        // 가장 마지막에 존재하는 유저가 인질로 판정하기 위함
+
+        // 현재 라운드 인질 지정
+        userInfo.isHostage = true;
+
+        // 히스토리 추적용 리스트에는 한 번만 추가
         if (!IsPlayerAlreadyHostage(userInfo.userName))
         {
-            userInfo.isHostage = true;
             _hostages?.Add(userInfo);
         }
     }
@@ -182,6 +191,25 @@ public class GamePlayers
     public UserInfo GetFinalVoteTarget()
     {
         return _finalVoteTarget;
+    }
+
+    public void SetFinalVoteProposer(UserInfo proposer)
+    {
+        _finalVoteProposer = proposer;
+    }
+
+    public void SetFinalVoteProposer(string playerName)
+    {
+        var proposer = FindPlayer(playerName);
+        if (proposer != null)
+        {
+            SetFinalVoteProposer(proposer);
+        }
+    }
+
+    public UserInfo GetFinalVoteProposer()
+    {
+        return _finalVoteProposer;
     }
 
     #region Yes/No Choices

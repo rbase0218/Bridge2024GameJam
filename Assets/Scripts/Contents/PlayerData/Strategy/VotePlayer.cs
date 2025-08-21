@@ -42,11 +42,13 @@ public class VotePlayer : IPlayerStrategy
     public bool ValidateCurrentAndNextPlayers()
     {
         int loopCount = 0;
+        var finalVoteTarget = Managers.Game.GetFinalVoteTarget();
         
         while (true)
         {
             var currentPlayer = GetCurrentPlayer();
-            if (!(currentPlayer.isDie || currentPlayer.isOrder))
+            bool isFinalCandidate = (finalVoteTarget != null && currentPlayer == finalVoteTarget);
+            if (!(currentPlayer.isDie || currentPlayer.isOrder || isFinalCandidate))
                 break;
 
             UpdateNextPlayer();
@@ -58,7 +60,7 @@ public class VotePlayer : IPlayerStrategy
         loopCount = 0;
         
         var nextPlayer = GetNextPlayer();
-        while (nextPlayer.isDie || nextPlayer.isOrder)
+        while (nextPlayer.isDie || nextPlayer.isOrder || (finalVoteTarget != null && nextPlayer == finalVoteTarget))
         {
             _nextIndex++;
             loopCount++;
@@ -96,8 +98,10 @@ public class VotePlayer : IPlayerStrategy
         
         // 투표 권한이 있는 유저.
         // 1. 인질이 아닌 상태
+        var finalVoteTarget = Managers.Game.GetFinalVoteTarget();
         while (_allPlayers[nextIndex].isDie ||
-                _allPlayers[nextIndex].isOrder)
+                _allPlayers[nextIndex].isOrder ||
+                (finalVoteTarget != null && _allPlayers[nextIndex] == finalVoteTarget))
         {
             nextIndex++;
             

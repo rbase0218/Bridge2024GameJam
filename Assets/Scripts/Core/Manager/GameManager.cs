@@ -202,6 +202,21 @@ public class GameManager : MonoBehaviour
         return _gamePlayers.GetFinalVoteTarget();
     }
 
+    public void SetFinalVoteProposer(UserInfo proposer)
+    {
+        _gamePlayers.SetFinalVoteProposer(proposer);
+    }
+
+    public void SetFinalVoteProposer(string playerName)
+    {
+        _gamePlayers.SetFinalVoteProposer(playerName);
+    }
+
+    public UserInfo GetFinalVoteProposer()
+    {
+        return _gamePlayers.GetFinalVoteProposer();
+    }
+
     #endregion
 
     #region Yes/No Choices

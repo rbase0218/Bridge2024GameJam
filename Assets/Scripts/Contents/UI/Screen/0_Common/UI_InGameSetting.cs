@@ -29,6 +29,8 @@ public class UI_InGameSetting : UIWindow
     }
     protected override bool EnterWindow()
     {
+        HideEmergencyButton();
+
         return true;
     }
 

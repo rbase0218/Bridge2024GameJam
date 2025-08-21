@@ -5,19 +5,12 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_PlayerSelectUIV_Target : UIScreen
+public class UI_PlayerSelectUIV_Proposer : UIScreen
 {
     private bool isSelect;
     private enum Objects
     {
         Board_A,
-    }
-
-    private enum Texts
-    {
-        FrontText,
-        Text,
-        BackText
     }
 
     private enum PlayerSelector
@@ -30,7 +23,6 @@ public class UI_PlayerSelectUIV_Target : UIScreen
         if (!base.Init())
             return false;
 
-        BindText(typeof(Texts));
         BindObject(typeof(Objects));
         Bind<UIPlayerSelector>(typeof(PlayerSelector));
         Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA).Binding();
@@ -55,20 +47,15 @@ public class UI_PlayerSelectUIV_Target : UIScreen
 
         var currentUser = Managers.Game.GetCurrentPlayer();
 
-        // 남아 있는 플레이어 중, 살아 있는 플레이어 목록 (발의자 제외)
-        var proposer = Managers.Game.GetFinalVoteProposer();
+        // 남아 있는 플레이어 중, 살아 있는 플레이어 목록 (암살자 제외)
         var alivePlayers = Managers.Game.GetAllPlayers()
-            .FindAll(x => !x.isDie && x != currentUser && (proposer == null || x != proposer))
+            .FindAll(x => !x.isDie && x != currentUser && x.jobType != EJobType.Assassin)
             .Select(x => x.userName).ToArray();
 
         GetObject((int)Objects.Board_A).SetActive(true);
 
         var selectorA = Get<UIPlayerSelector>((int)PlayerSelector.SelectContainerA);
         selectorA.ShowButton(alivePlayers);
-
-        GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
-        GetText((int)Texts.Text).SetText(currentUser.userName);
-        GetText((int)Texts.BackText).SetText("입니다.");
 
         return true;
     }
@@ -81,9 +68,9 @@ public class UI_PlayerSelectUIV_Target : UIScreen
         if (text == null)
             return;
 
-        // 최후 투표 지목 대상 설정
-        var findUser = Managers.Game.FindPlayer(text);
-        Managers.Game.SetFinalVoteTarget(findUser);
+        // 해당 유저를 최후 투표 발의자로 설정
+        var proposer = Managers.Game.FindPlayer(text);
+        Managers.Game.SetFinalVoteProposer(proposer);
 
         OnNextScreen<UI_Switcher01_Last>();
     }

@@ -55,7 +55,15 @@ public class UI_PlayerSelectUIV : UIScreen
         
         if (currentUser.jobType == EJobType.Assassin)
         {
-            var notHostagePlayers = Managers.Game.GetAllPlayers().FindAll( x => x.isDie != true).Select(x => x.userName).ToArray();
+            // 지난 라운드 인질은 후보에서 제외한다.
+            var lastHostage = Managers.Game.GetCurrentHostage();
+            var candidateList = Managers.Game.GetAllPlayers()
+                .FindAll(x => x.isDie != true)
+                .Select(x => x.userName)
+                .ToList();
+            if (lastHostage != null)
+                candidateList = candidateList.Where(name => name != lastHostage.userName).ToList();
+            var notHostagePlayers = candidateList.ToArray();
             
             GetObject((int)Objects.Board_B).SetActive(true);
             GetObject((int)Objects.Board_A).SetActive(false);
