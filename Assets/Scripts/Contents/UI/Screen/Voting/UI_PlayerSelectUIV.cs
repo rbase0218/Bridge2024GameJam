@@ -17,7 +17,7 @@ public class UI_PlayerSelectUIV : UIScreen
     private enum Texts
     {
         FrontText,
-        Text,
+        NameText,   // NameText로 수정하기
         BackText
     }
 
@@ -80,7 +80,7 @@ public class UI_PlayerSelectUIV : UIScreen
             });
             
             GetText((int)Texts.FrontText).SetText("당신은");
-            GetText((int)Texts.Text).SetText("암살자");
+            GetText((int)Texts.NameText).SetText("암살자");
             GetText((int)Texts.BackText).SetText("입니다.");
         }
         else
@@ -95,7 +95,7 @@ public class UI_PlayerSelectUIV : UIScreen
             selectorA.ShowButton("예", "아니오");
             
             GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
-            GetText((int)Texts.Text).SetText(currentUser.userName);
+            GetText((int)Texts.NameText).SetText(currentUser.userName);
             GetText((int)Texts.BackText).SetText("입니다.");
         }
         

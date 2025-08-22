@@ -19,9 +19,6 @@ public class UI_SlotMachine : UIScreen
         SlotObject,
     }
 
-    private const float ITEM = 250f;  // 슬롯 셀 높이 (250x250 사양)
-    private const int SPINS = 4;      // 정확히 4바퀴
-
     private GameObject _slotObject;
     private int _maxCount = 0;        // 1~5
 
@@ -46,9 +43,11 @@ public class UI_SlotMachine : UIScreen
     {
         onOpen?.RemoveAllListeners();
         
+        // 이름을 변경한다.
         GetText((int)Texts.NameText).text = Managers.Game.GetCurrentPlayer().userName;
 
-        _maxCount = Mathf.Clamp(Managers.Game.QuestionManager.GetLogCount(), 1, 5);
+        // 질문의 최대 개수를 정한다.
+        _maxCount = Managers.Game.QuestionManager.GetLogCount();
 
         // Random.Range(int,int) 의 상한은 "제외"이므로 +1 필요
         int resultNumber = Random.Range(1, _maxCount + 1); // 1.._maxCount
@@ -79,55 +78,55 @@ public class UI_SlotMachine : UIScreen
         OnNextScreen<UI_TextConfirm01>();
     }
 
+    // 설정값(원하면 인스펙터로 빼도 됩니다)
+    const float ITEM   = 250f;   // 슬롯 하나의 높이
+    const int   COUNT  = 5;      // 슬롯 개수
+    const float SPINS  = 3f;     // 멈추기 전에 도는 "완전 회전" 수
+    const float DURATION = 2.2f; // 전체 회전 시간(가감속 포함)
+
+// targetIndex는 0~COUNT-1 기준입니다.
+// 만약 1~COUNT 로 전달된다면, 아래 첫 줄을 해제하세요.
+// targetIndex = ((targetIndex - 1) % COUNT + COUNT) % COUNT;
+
     private IEnumerator SpinToIndexCoroutine(int targetIndex)
     {
         var rt = _slotObject.GetComponent<RectTransform>();
-
-        // 현재 시작 위치를 0~H로 정규화
-        float H = ITEM * _maxCount;
-        float startYRaw = rt.anchoredPosition.y;
-        float startY = Mathf.Repeat(startYRaw, H);
-
-        // 목표 절대 이동량: 4바퀴 + 타겟칸 오프셋
-        float targetYAbs = startY + (SPINS * H) + (targetIndex * ITEM);
-
-        // 총 소요 시간(가감속 포함). 필요 시 취향대로 조절 가능.
-        float duration = 2.5f + 0.2f * _maxCount; // 개수 많을수록 약간 더 길게
-        float t = 0f;
-
-        // 회전 중 입력/버튼 방지
         var nextBtn = GetButton((int)Buttons.NextButton);
         if (nextBtn) nextBtn.interactable = false;
 
-        while (t < duration)
+        // ---- 준비: 현재 위치 정규화/목표 위치 계산 ----
+        float H = ITEM * COUNT;                                // 한 바퀴(전체 높이)
+        float startY = Mathf.Repeat(rt.anchoredPosition.y, H); // 0~H 범위로 정규화
+        targetIndex = ((targetIndex % COUNT) + COUNT) % COUNT; // 안전 클램프
+
+        // 여러 바퀴 돈 뒤 목표 인덱스 위치까지의 "절대" 타겟
+        float targetYAbs = startY + (SPINS * H) + (targetIndex * ITEM);
+
+        // ---- 애니메이션(가속-감속: easeOutCubic) ----
+        float t = 0f;
+        Vector2 basePos = rt.anchoredPosition;
+
+        while (t < DURATION)
         {
             t += Time.deltaTime;
-            float u = Mathf.Clamp01(t / duration);
+            float u = Mathf.Clamp01(t / DURATION);
 
-            // Cubic ease-out (부드럽게 감속)
-            float eased = EaseOutCubic(u);
+            // easeOutCubic: 1 - (1 - u)^3
+            float eased = 1f - Mathf.Pow(1f - u, 3f);
 
-            float currentYAbs = Mathf.LerpUnclamped(startY, targetYAbs, eased);
+            float y = Mathf.Lerp(startY, targetYAbs, eased);
+            // 화면상 래핑
+            float yWrapped = Mathf.Repeat(y, H);
 
-            // 보여줄 위치는 래핑하여 자연스러운 무한 스크롤
-            float wrappedY = Mathf.Repeat(currentYAbs, H);
-            rt.anchoredPosition = new Vector2(rt.anchoredPosition.x, wrappedY);
-
+            rt.anchoredPosition = new Vector2(basePos.x, yWrapped);
             yield return null;
         }
 
-        // 도착 시 정확히 타겟 칸에 스냅
+        // ---- 스냅 정렬(미세 오차 제거) ----
         rt.anchoredPosition = new Vector2(rt.anchoredPosition.x, targetIndex * ITEM);
 
         if (nextBtn) nextBtn.interactable = true;
-
         _slotCoroutine = null;
     }
 
-    private static float EaseOutCubic(float x)
-    {
-        // 1 - (1 - x)^3
-        float a = 1f - x;
-        return 1f - (a * a * a);
-    }
 }
