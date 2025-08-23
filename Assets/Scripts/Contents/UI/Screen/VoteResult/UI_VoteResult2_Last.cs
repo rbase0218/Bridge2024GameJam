@@ -76,7 +76,7 @@ public class UI_VoteResult2_Last : UIScreen
         switch (votePlayerData.jobType)
         {
             case EJobType.VIP:
-                OnNextScreen<UI_LastChanceResult>().SetInfo(true);
+                OnNextScreen<UI_LastChanceResult>().SetInfo(true, true); // 최후 투표로 시민이 죽은 경우
                 break;
             case EJobType.Actor:
             case EJobType.Assassin:
