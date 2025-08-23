@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // 먼저 초기화
+        Initialized();
+        
+        // 임시 질문 답변 데이터 추가 (가장 먼저)
+        AddTemporaryQuestionData();
+        
         if (Managers.Game.isGameEnd)
         {
             Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume / 0.25f);
@@ -31,13 +37,18 @@ public class GameManager : MonoBehaviour
         Managers.Sound.PlayBGM("Title");
 
         // 디버그를 위한 데이터 - 지우지마세욧.
-        // var debugData = new List<string>();
-        // debugData.Add("1");
-        // debugData.Add("2");
-        // debugData.Add("3");
-        // debugData.Add("4");
-        // PickTopic(0);
-        // SetUpPlayers(debugData);
+        var debugData = new List<string>();
+        debugData.Add("1");
+        debugData.Add("2");
+        debugData.Add("3");
+        debugData.Add("4");
+        debugData.Add("5");
+        debugData.Add("6");
+        PickTopic(0);
+        SetUpPlayers(debugData);
+        
+        // 플레이어 설정 후 임시 플레이어 데이터 추가
+        AddTemporaryPlayerData();
     }
 
     private void Initialized()
@@ -322,4 +333,40 @@ public class GameManager : MonoBehaviour
     {
         CurrentRound++;
     }
+    
+    #region Debug Data
+    
+    private void AddTemporaryQuestionData()
+    {
+        // 임시 질문 로그 데이터 추가
+        if (QuestionManager != null)
+        {
+            QuestionManager.AddQuestionLog(new QuestionLog("플레이어1", "플레이어1", "당신은 스파이입니까?", "아니오"));
+            QuestionManager.AddQuestionLog(new QuestionLog("플레이어2", "플레이어2", "어제 뭐 먹었어?", "피자"));
+            QuestionManager.AddQuestionLog(new QuestionLog("플레이어3", "플레이어3", "좋아하는 색깔이 뭐야?", "파란색"));
+            QuestionManager.AddQuestionLog(new QuestionLog("플레이어4", "플레이어4", "취미가 뭐야?", "게임"));
+            QuestionManager.AddQuestionLog(new QuestionLog("플레이어5", "플레이어5", "가장 좋아하는 음식은?", "치킨"));
+            QuestionManager.AddQuestionLog(new QuestionLog("플레이어6", "플레이어6", "여행 가고 싶은 곳은?", "일본"));
+        }
+    }
+    
+    private void AddTemporaryPlayerData()
+    {
+        // 플레이어 리스트 가져오기
+        var players = GetAllPlayers();
+        
+        // 임시 인질 데이터 추가
+        if (players.Count > 0)
+        {
+            AddHostage(players[0]); // 플레이어1을 인질로
+        }
+
+        // 임시 죽은 플레이어 데이터 추가
+        if (players.Count > 1)
+        {
+            players[1].isDie = true;
+        }
+    }
+    
+    #endregion
 }

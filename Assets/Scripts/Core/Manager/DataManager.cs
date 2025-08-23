@@ -47,6 +47,7 @@ public class DataManager
     
     // BG
     public Sprite ActorBG, VipBG, AssBG;
+    public GameObject QuestionObject;
     
     public void Init()
     {
@@ -61,6 +62,8 @@ public class DataManager
         ActorBG = Load<Sprite>(@"Sprite/Full BG/Verify/Play_Verify_ActorBG");
         VipBG = Load<Sprite>(@"Sprite/Full BG/Verify/Play_Verify_VipBG");
         AssBG = Load<Sprite>(@"Sprite/Full BG/Verify/Play_Verify_AccBG");
+
+        QuestionObject = Load<GameObject>(@"Prefabs/UI/QuestionObject");
     }
 
     public Sprite GetFrameSprite(EJobType jobType)

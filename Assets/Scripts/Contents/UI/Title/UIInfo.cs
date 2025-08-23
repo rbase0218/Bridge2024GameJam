@@ -58,7 +58,7 @@ public class UIInfo : UIWindow
     {
         Managers.Sound.PlaySFX("Click");
 
-        if (index == 6)
+        if (index == 1)
             return;
         
         GetObject((int)Objects.First + index).SetActive(false);

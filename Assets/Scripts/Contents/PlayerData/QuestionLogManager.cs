@@ -84,4 +84,9 @@ public class QuestionLogManager
     {
         return _questionLogs.Count;
     }
+
+    public List<QuestionLog> GetAllQuestionLogs()
+    {
+        return new List<QuestionLog>(_questionLogs);
+    }
 }
