@@ -48,8 +48,9 @@ public class UI_VoteResult2_Last : UIScreen
         var infoTexts = Managers.Data.jobInfoTexts[votePlayerData.jobType];
         // Info Text 추가
         GetText((int)Texts.SecondText).SetText(infoTexts.Item2);
+
         // Button Text 변경
-        GetText((int)Texts.ButtonText).SetText(infoTexts.Item1);
+        //GetText((int)Texts.ButtonText).SetText(infoTexts.Item1);
 
         // 초상화 세팅
         GetImage((int)Images.Picture).sprite = voteUserPicture;
