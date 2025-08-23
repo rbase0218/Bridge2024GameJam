@@ -14,12 +14,7 @@ public class UIInfo : UIWindow
     private enum Objects
     {
         First,
-        Second,
-        Third,
-        Fourth,
-        Fifth,
-        Sixth,
-        Seventh
+        Second
     }
 
     private int index;

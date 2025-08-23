@@ -8,7 +8,8 @@ public class UI_InGameSetting : UIWindow
     {
         BackButton,
         ManualButton,
-        EmergencyButton
+        EmergencyButton,
+        InfoButton
     }
 
     protected override bool Init()
@@ -23,6 +24,7 @@ public class UI_InGameSetting : UIWindow
         GetButton((int)Buttons.BackButton).onClick.AddListener(OnClickBackButton);
         GetButton((int)Buttons.ManualButton).onClick.AddListener(OnClickManualButton);
         GetButton((int)Buttons.EmergencyButton).onClick.AddListener(OnClickEmergencyButton);
+        GetButton((int)Buttons.InfoButton).onClick.AddListener(OnClickInfoButton);
         HideEmergencyButton();
 
         return true;
@@ -84,6 +86,13 @@ public class UI_InGameSetting : UIWindow
         });
     }
 
+    private void OnClickInfoButton()
+    {
+        Time.timeScale = 0;
+        Managers.Sound.PlaySFX("Click");
+        Managers.UI.ShowWindow<UIInfo>();
+    }
+
     public void ShowEmergencyButton()
     {
         GetButton((int)Buttons.EmergencyButton).gameObject.SetActive(true);
@@ -92,5 +101,15 @@ public class UI_InGameSetting : UIWindow
     public void HideEmergencyButton()
     {
         GetButton((int)Buttons.EmergencyButton).gameObject.SetActive(false);
+    }
+
+    public void ShowInfoButton()
+    {
+        GetButton((int)Buttons.InfoButton).gameObject.SetActive(true);
+    }
+
+    public void HideInfoButton()
+    {
+        GetButton((int)Buttons.InfoButton).gameObject.SetActive(false);
     }
 }
