@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIInfo_Players : UIWindow
+public class UIInfo_Players : UIScreen
 {
     private enum Texts
     {
@@ -31,16 +31,26 @@ public class UIInfo_Players : UIWindow
 
     protected override bool EnterWindow()
     {
-        GetText((int)Texts.HostageText).text = Managers.Data.Hostage.name;
+        var currentHostage = Managers.Game.GetCurrentHostage();
+        GetText((int)Texts.HostageText).text = currentHostage != null ? currentHostage.userName : "-";
         
         // 플레이어 목록 갱신을 지연시켜 실행
         Invoke(nameof(RefreshPlayerList), 0.1f);
-        
         return true;
     }
 
     private void RefreshPlayerList()
     {
         Get<PlayersScrollView>((int)PlayersScrollViews.ScrollView).RefreshPlayerList();
+    }
+
+    public void RefreshData()
+    {
+        if (_init == false)
+            Init();
+        
+        var currentHostage = Managers.Game.GetCurrentHostage();
+        GetText((int)Texts.HostageText).text = currentHostage != null ? currentHostage.userName : "-";
+        RefreshPlayerList();
     }
 }

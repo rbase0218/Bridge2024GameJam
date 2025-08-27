@@ -17,6 +17,7 @@ public class GamePlayers
 
     private UserInfo _currentHostage;
     private UserInfo _lastCurrentHostage;
+    private UserInfo _temporaryHostage; // 임시 인질 저장용
 
     public bool GeneratePlayersData(List<string> userNames)
     {
@@ -109,6 +110,49 @@ public class GamePlayers
         }
     }
 
+    // 임시 인질 설정 (투표 과정용)
+    public void SetTemporaryHostage(UserInfo userInfo)
+    {
+        _temporaryHostage = userInfo;
+    }
+
+    // 임시 인질 설정 (이름으로)
+    public void SetTemporaryHostage(string playerName)
+    {
+        var player = FindPlayer(playerName);
+        if (player != null)
+        {
+            SetTemporaryHostage(player);
+        }
+    }
+
+    // 임시 인질을 실제 인질로 확정
+    public void ConfirmTemporaryHostage()
+    {
+        if (_temporaryHostage != null)
+        {
+            AddHostage(_temporaryHostage);
+            _temporaryHostage = null; // 임시 인질 초기화
+        }
+    }
+
+    // 임시 인질 취소
+    public void CancelTemporaryHostage()
+    {
+        _temporaryHostage = null;
+    }
+
+    // 현재 인질 가져오기 (임시 인질이 있으면 임시 인질, 없으면 실제 인질)
+    public UserInfo GetCurrentHostage()
+    {
+        return _temporaryHostage != null ? _temporaryHostage : _currentHostage;
+    }
+
+    public UserInfo GetLastHostage()
+    {
+        return _lastCurrentHostage;
+    }
+
     public void UndoHostage()
     {
         var hostage = _hostages[^1];
@@ -120,16 +164,6 @@ public class GamePlayers
     public bool IsPlayerAlreadyHostage(string playerName)
     {
         return _hostages.Find((x) => x.userName == playerName) != null;
-    }
-
-    public UserInfo GetCurrentHostage()
-    {
-        return _currentHostage;
-    }
-
-    public UserInfo GetLastHostage()
-    {
-        return _lastCurrentHostage;
     }
 
     public bool IsLastPlayer()

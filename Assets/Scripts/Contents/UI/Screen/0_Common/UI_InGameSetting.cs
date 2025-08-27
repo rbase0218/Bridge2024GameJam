@@ -26,13 +26,13 @@ public class UI_InGameSetting : UIWindow
         GetButton((int)Buttons.EmergencyButton).onClick.AddListener(OnClickEmergencyButton);
         GetButton((int)Buttons.InfoButton).onClick.AddListener(OnClickInfoButton);
         HideEmergencyButton();
-
+        HideInfoButton();
         return true;
     }
     protected override bool EnterWindow()
     {
         HideEmergencyButton();
-
+        HideInfoButton();
         return true;
     }
 
@@ -90,7 +90,7 @@ public class UI_InGameSetting : UIWindow
     {
         Time.timeScale = 0;
         Managers.Sound.PlaySFX("Click");
-        Managers.UI.ShowWindow<UIInfo>();
+        Managers.UI.ShowWindow<UIInfo>().RefreshData();
     }
 
     public void ShowEmergencyButton()

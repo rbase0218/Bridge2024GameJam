@@ -84,16 +84,16 @@ public class UI_TextConfirm01 : UIScreen
     private void OnClickYesButton()
     {
         Managers.Sound.PlaySFX("Click");
-        // 답변 저장
-        _questionLog.SetAnswer(Managers.Game.GetCurrentPlayer().userName, "예");
+        // 답변 저장 - QuestionLogManager에 직접 업데이트
+        Managers.Game.QuestionManager.SetCurrentQuestionAnswer("예");
         CheckForNextScreenMove();
     }
 
     private void OnClickNoButton()
     {
         Managers.Sound.PlaySFX("Click");
-        // 답변 저장
-        _questionLog.SetAnswer(Managers.Game.GetCurrentPlayer().userName, "아니오");
+        // 답변 저장 - QuestionLogManager에 직접 업데이트
+        Managers.Game.QuestionManager.SetCurrentQuestionAnswer("아니오");
         CheckForNextScreenMove();
     }
 

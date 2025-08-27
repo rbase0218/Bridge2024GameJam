@@ -21,10 +21,7 @@ public class GameManager : MonoBehaviour
     {
         // 먼저 초기화
         Initialized();
-        
-        // 임시 질문 답변 데이터 추가 (가장 먼저)
-        AddTemporaryQuestionData();
-        
+
         if (Managers.Game.isGameEnd)
         {
             Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume / 0.25f);
@@ -46,9 +43,9 @@ public class GameManager : MonoBehaviour
         debugData.Add("6");
         PickTopic(0);
         SetUpPlayers(debugData);
-        
+
         // 플레이어 설정 후 임시 플레이어 데이터 추가
-        AddTemporaryPlayerData();
+        //AddTemporaryPlayerData();
     }
 
     private void Initialized()
@@ -144,7 +141,28 @@ public class GameManager : MonoBehaviour
         _gamePlayers.AddHostage(playerData);
     }
 
-    
+    // 임시 인질 설정 (투표 과정용)
+    public void SetTemporaryHostage(UserInfo userInfo)
+    {
+        _gamePlayers.SetTemporaryHostage(userInfo);
+    }
+
+    public void SetTemporaryHostage(string playerName)
+    {
+        _gamePlayers.SetTemporaryHostage(playerName);
+    }
+
+    // 임시 인질을 실제 인질로 확정
+    public void ConfirmTemporaryHostage()
+    {
+        _gamePlayers.ConfirmTemporaryHostage();
+    }
+
+    // 임시 인질 취소
+    public void CancelTemporaryHostage()
+    {
+        _gamePlayers.CancelTemporaryHostage();
+    }
 
     public void UndoHostage()
     {
@@ -231,7 +249,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Yes/No Choices
-    
+
     public void AddYesNoChoice(string choice)
     {
         _gamePlayers.AddYesNoChoice(choice);
@@ -251,11 +269,11 @@ public class GameManager : MonoBehaviour
     {
         _gamePlayers.ClearYesNoChoices();
     }
-    
+
     #endregion
 
     #region Data Reset
-    
+
 
     public void ResetAllGameData()
     {
@@ -263,38 +281,38 @@ public class GameManager : MonoBehaviour
         isGameEnd = false;
         _winType = 0;
         CurrentRound = 1; // 라운드 초기화
-        
+
         // 플레이어 데이터 초기화
         _gamePlayers.ClearAllPlayers();
         _gamePlayers.ClearYesNoChoices();
         _gamePlayers.ClearVoteCount();
-        
+
         // 질문 로그 초기화
         if (QuestionManager != null)
         {
             QuestionManager.ClearQuestionLog();
         }
-        
+
         // 최후 투표 지목자 초기화
-        _gamePlayers.SetFinalVoteTarget((UserInfo)null);        
+        _gamePlayers.SetFinalVoteTarget((UserInfo)null);
     }
 
     public void ResetPlayerData()
     {
         _gamePlayers.ClearAllPlayers();
         _gamePlayers.ClearVoteCount();
-        _gamePlayers.SetFinalVoteTarget((UserInfo)null);        
+        _gamePlayers.SetFinalVoteTarget((UserInfo)null);
     }
 
     public void ResetVoteData()
     {
         _gamePlayers.ClearVoteCount();
-        _gamePlayers.SetFinalVoteTarget((UserInfo)null);        
+        _gamePlayers.SetFinalVoteTarget((UserInfo)null);
     }
 
     public void ResetYesNoData()
     {
-        _gamePlayers.ClearYesNoChoices();        
+        _gamePlayers.ClearYesNoChoices();
     }
 
     public void ResetQuestionData()
@@ -302,7 +320,7 @@ public class GameManager : MonoBehaviour
         if (QuestionManager != null)
         {
             QuestionManager.ClearQuestionLog();
-        }        
+        }
     }
 
     public void ResetGameState()
@@ -310,7 +328,7 @@ public class GameManager : MonoBehaviour
         isGameEnd = false;
         _winType = 0;
     }
-    
+
     #endregion
 
     public void PickRandomHostage()
@@ -333,32 +351,18 @@ public class GameManager : MonoBehaviour
     {
         CurrentRound++;
     }
-    
+
     #region Debug Data
-    
-    private void AddTemporaryQuestionData()
-    {
-        // 임시 질문 로그 데이터 추가
-        if (QuestionManager != null)
-        {
-            QuestionManager.AddQuestionLog(new QuestionLog("플레이어1", "플레이어1", "당신은 스파이입니까?", "아니오"));
-            QuestionManager.AddQuestionLog(new QuestionLog("플레이어2", "플레이어2", "어제 뭐 먹었어?", "피자"));
-            QuestionManager.AddQuestionLog(new QuestionLog("플레이어3", "플레이어3", "좋아하는 색깔이 뭐야?", "파란색"));
-            QuestionManager.AddQuestionLog(new QuestionLog("플레이어4", "플레이어4", "취미가 뭐야?", "게임"));
-            QuestionManager.AddQuestionLog(new QuestionLog("플레이어5", "플레이어5", "가장 좋아하는 음식은?", "치킨"));
-            QuestionManager.AddQuestionLog(new QuestionLog("플레이어6", "플레이어6", "여행 가고 싶은 곳은?", "일본"));
-        }
-    }
-    
+
     private void AddTemporaryPlayerData()
     {
         // 플레이어 리스트 가져오기
         var players = GetAllPlayers();
-        
+
         // 임시 인질 데이터 추가
         if (players.Count > 0)
         {
-            AddHostage(players[0]); // 플레이어1을 인질로
+            AddHostage(players[1]); // 플레이어1을 인질로
         }
 
         // 임시 죽은 플레이어 데이터 추가
@@ -366,7 +370,28 @@ public class GameManager : MonoBehaviour
         {
             players[1].isDie = true;
         }
+
+        QuestionManager.AddQuestionLog(new QuestionLog(
+            players[0].userName,
+            null,
+            "당신은 스파이입니까?",
+            "아니오"
+            ));
+
+        QuestionManager.AddQuestionLog(new QuestionLog(
+            players[0].userName,
+            null,
+            "어제 뭐 먹었어?",
+            "피자"
+            ));
+
+        QuestionManager.AddQuestionLog(new QuestionLog(
+            players[0].userName,
+            null,
+            "당신은 스파이입니까?",
+            "아니오"
+        ));
     }
-    
+
     #endregion
 }

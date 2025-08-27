@@ -119,9 +119,30 @@ public class PlayersScrollView : UIBase
         {
             var contentRect = content.GetComponent<RectTransform>();
             
-            // 고정된 Player 높이와 간격으로 계산
-            float playerHeight = 100f; // 고정된 Player 높이
-            float spacing = 120f; // 6명일 때 1200이 되도록 계산: (100×6) + (120×5) = 600 + 600 = 1200
+            // 실제 플레이어 오브젝트의 높이 측정
+            float playerHeight = 0f;
+            float spacing = content.spacing; // VerticalLayoutGroup의 spacing 사용
+            
+            // 첫 번째 활성화된 플레이어 오브젝트로 높이 측정
+            for (int i = 0; i < _playerObjects.Length; i++)
+            {
+                if (_playerObjects[i] != null && _playerObjects[i].activeInHierarchy)
+                {
+                    var playerRect = _playerObjects[i].GetComponent<RectTransform>();
+                    if (playerRect != null)
+                    {
+                        playerHeight = playerRect.rect.height;
+                        break;
+                    }
+                }
+            }
+            
+            // 측정된 높이가 0이면 기본값 사용
+            if (playerHeight <= 0f)
+            {
+                playerHeight = 100f; // 기본 높이
+                spacing = 20f; // 기본 간격
+            }
             
             // Content 높이 = (플레이어 높이 × 플레이어 수) + (간격 × (플레이어 수 - 1))
             float totalHeight = (playerHeight * playerCount) + (spacing * (playerCount - 1));
@@ -130,7 +151,11 @@ public class PlayersScrollView : UIBase
             var viewportRect = viewport.GetComponent<RectTransform>();
             float minHeight = viewportRect.rect.height;
             
-            contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, Mathf.Max(totalHeight, minHeight));
+            // 패딩 추가 (상하 여백)
+            float padding = 5f;
+            totalHeight += padding * 2;
+            
+            contentRect.sizeDelta = new Vector2(contentRect.sizeDelta.x, Mathf.Max(totalHeight, minHeight));            
         }
     }
 }

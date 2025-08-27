@@ -32,18 +32,24 @@ public class UI_Sequence02 : UIScreen
 
     protected override bool EnterWindow()
     {
+        var inGameSetting = Managers.UI.GetWindow<UI_InGameSetting>();
+
         var currentPlayer = Managers.Game.GetCurrentPlayer();
-        
+
         int halfPlayerCount = Managers.Game.GetPlayerCount() / 2;
         if (Managers.Game.CurrentRound > halfPlayerCount)
         {
-            var inGameSetting = Managers.UI.GetWindow<UI_InGameSetting>();
             if (inGameSetting != null)
             {
                 inGameSetting.ShowEmergencyButton();
             }
         }
-        
+
+        if (inGameSetting != null)
+        {
+            inGameSetting.ShowInfoButton();
+        }
+
         if (currentPlayer.isDie)
         {
             // 살아있는 첫 번째 플레이어를 찾을 때까지 UpdateNextPlayer() 호출
@@ -70,6 +76,8 @@ public class UI_Sequence02 : UIScreen
 
         if (UseAutoNextScreen)
             BindNextScreen<UI_QuestionInput>();
+
+
 
         return true;
     }

@@ -71,8 +71,8 @@ public class UI_QuestionInput : UIScreen
             return false;
         
         Managers.Game.QuestionManager.AddQuestionLog(new QuestionLog(
-            Managers.Game.GetCurrentPlayer().userName,
             null,
+            Managers.Game.GetCurrentHostage().userName,
             inputText,
             null
             ));

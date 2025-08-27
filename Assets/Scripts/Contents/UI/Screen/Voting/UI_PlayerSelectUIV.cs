@@ -128,7 +128,8 @@ public class UI_PlayerSelectUIV : UIScreen
 
         var findUser = Managers.Game.FindPlayer(text);
         
-        Managers.Game.AddHostage(findUser);
+        // 임시 인질로 설정 (실제 인질은 아님)
+        Managers.Game.SetTemporaryHostage(findUser);
         OnNextScreen<UI_ClockSwitcherV>();
         isSelect = true;
     }
@@ -139,7 +140,8 @@ public class UI_PlayerSelectUIV : UIScreen
         var selectUser = playerNames[random];
         
         Debug.Log("랜덤 선택 : " + selectUser);
-        Managers.Game.AddHostage(selectUser);
+        // 임시 인질로 설정 (실제 인질은 아님)
+        Managers.Game.SetTemporaryHostage(selectUser);
         isSelect = true;
     }
 }

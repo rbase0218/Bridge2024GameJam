@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
         return _windowContainer.TryAdd(window.GetType(), window);
     }
 
-    public T ShowWindow<T>() where T : UIWindow
+    public T ShowWindow<T>(bool isForce = false) where T : UIWindow
     {
         var window = _windowContainer?.GetWindow<T>();
         if (window == null)
@@ -39,9 +39,9 @@ public class UIManager : MonoBehaviour
         }
 
         // 항상 열려있는 Window가 아닐 경우, Stack에 추가한다.
-        if (window.IsAlwaysOpen == false)
+        if (window.IsAlwaysOpen == false && isForce == false)
             _activeWindowStack?.Push(window);
-        
+
         window.Open();
         return window;
     }
@@ -65,6 +65,36 @@ public class UIManager : MonoBehaviour
             var window = _activeWindowStack?.Pop();
             window.Hide();
         }
+    }
+    
+    // 특정 Window를 닫고 스택에서도 제거한다.
+    public void CloseWindow<T>() where T : UIWindow
+    {
+        var target = _windowContainer?.GetWindow<T>();
+        if (target == null)
+            return;
+        
+        // 스택에서 해당 Window 제거
+        if (_activeWindowStack.Count > 0)
+        {
+            var temp = new Stack<UIWindow>();
+            bool removed = false;
+            while (_activeWindowStack.Count > 0)
+            {
+                var top = _activeWindowStack.Pop();
+                if (!removed && top == target)
+                {
+                    removed = true;
+                    continue;
+                }
+                temp.Push(top);
+            }
+            while (temp.Count > 0)
+                _activeWindowStack.Push(temp.Pop());
+        }
+        
+        // 강제 숨김 처리 (항상 숨기기)
+        target.Hide(true);
     }
     
     public bool isEmptyWindow()

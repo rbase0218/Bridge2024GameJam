@@ -50,8 +50,9 @@ public class UIInfo : UIWindow
         if (index == 0)
             return;
         
-        GetObject((int)Objects.First + index).SetActive(false);
-        GetObject((int)Objects.First + --index).SetActive(true);
+        index--;
+        Managers.UI.ShowWindow<UIInfo_Players>(true).RefreshData();
+        Managers.UI.CloseWindow<UIInfo_Questions>();
     }
     
     private void OnClickAfterButton()
@@ -61,7 +62,17 @@ public class UIInfo : UIWindow
         if (index == 1)
             return;
         
-        GetObject((int)Objects.First + index).SetActive(false);
-        GetObject((int)Objects.First + ++index).SetActive(true);
+        index++;
+        Managers.UI.ShowWindow<UIInfo_Questions>(true).RefreshData();
+        Managers.UI.CloseWindow<UIInfo_Players>();
+    }
+
+    public void RefreshData()
+    {
+        GetObject((int)Objects.First).SetActive(true);
+        GetObject((int)Objects.Second).SetActive(false);
+        GetObject((int)Objects.First).GetComponent<UIInfo_Players>().RefreshData();
+        GetObject((int)Objects.Second).GetComponent<UIInfo_Questions>().RefreshData();
+        index = 0;
     }
 }

@@ -60,7 +60,7 @@ public class UI_Gauge : UIBase
             return false;
         }
         
-        Debug.Log(gameObject.GetInstanceID());
+        // Debug.Log(gameObject.GetInstanceID());
         if (_rectTransform.sizeDelta.x <= 0)
             _rectTransform.sizeDelta = _originSize;
 

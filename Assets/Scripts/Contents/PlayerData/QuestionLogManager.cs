@@ -22,9 +22,8 @@ public struct QuestionLog
         this.answer = answer;
     }
 
-    public void SetAnswer(string answerer, string answer)
+    public void SetAnswer(string answer)
     {
-        this.answerer = answerer;
         this.answer = answer;
     }
 }
@@ -69,6 +68,28 @@ public class QuestionLogManager
         if (_currentIndex >= count)
             return new QuestionLog("NULL");
         return _selectQuestion[_currentIndex];
+    }
+
+    public void SetCurrentQuestionAnswer(string answer)
+    {
+        if (_currentIndex >= count || _currentIndex < 0) return;
+        
+        // _selectQuestion에서 현재 질문의 답변 업데이트
+        var currentQuestion = _selectQuestion[_currentIndex];
+        currentQuestion.SetAnswer(answer);
+        _selectQuestion[_currentIndex] = currentQuestion;
+        
+        // _questionLogs에서도 해당 질문을 찾아서 답변 업데이트
+        for (int i = 0; i < _questionLogs.Count; i++)
+        {
+            if (_questionLogs[i].question == currentQuestion.question)
+            {
+                var questionLog = _questionLogs[i];
+                questionLog.SetAnswer(answer);
+                _questionLogs[i] = questionLog;
+                break;
+            }
+        }
     }
 
     public bool NextQuestion()
