@@ -33,19 +33,19 @@ public class GameManager : MonoBehaviour
         Managers.Sound.StopSFX();
         Managers.Sound.PlayBGM("Title");
 
-        // 디버그를 위한 데이터 - 지우지마세욧.
-        var debugData = new List<string>();
-        debugData.Add("1");
-        debugData.Add("2");
-        debugData.Add("3");
-        debugData.Add("4");
-        // debugData.Add("5");
-        // debugData.Add("6");
-        PickTopic(0);
-        SetUpPlayers(debugData);
+        // // 디버그를 위한 데이터 - 지우지마세욧.
+        // var debugData = new List<string>();
+        // debugData.Add("1");
+        // debugData.Add("2");
+        // debugData.Add("3");
+        // debugData.Add("4");
+        // // debugData.Add("5");
+        // // debugData.Add("6");
+        // PickTopic(0);
+        // SetUpPlayers(debugData);
 
-        // 플레이어 설정 후 임시 플레이어 데이터 추가
-        //AddTemporaryPlayerData();
+        // // 플레이어 설정 후 임시 플레이어 데이터 추가
+        // //AddTemporaryPlayerData();
     }
 
     private void Initialized()
