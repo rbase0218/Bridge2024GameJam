@@ -39,8 +39,8 @@ public class GameManager : MonoBehaviour
         debugData.Add("2");
         debugData.Add("3");
         debugData.Add("4");
-        debugData.Add("5");
-        debugData.Add("6");
+        // debugData.Add("5");
+        // debugData.Add("6");
         PickTopic(0);
         SetUpPlayers(debugData);
 

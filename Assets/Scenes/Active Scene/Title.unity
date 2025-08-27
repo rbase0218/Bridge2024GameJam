@@ -4016,24 +4016,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   array_sfx:
   - name: Card
-    clip: {fileID: 8300000, guid: fc3c310d8e83a36418f54e99562772a0, type: 3}
+    clip: {fileID: 8300000, guid: 0fbb126ca096234479c376204704e712, type: 3}
   - name: Chance
-    clip: {fileID: 8300000, guid: c934be7ab4071a049bbc7de06bc4f266, type: 3}
+    clip: {fileID: 8300000, guid: b0aed413804fb2246a5a2c9a29a1252b, type: 3}
   - name: Click
-    clip: {fileID: 8300000, guid: 9b5c854a271665b489382329db4c6cfd, type: 3}
+    clip: {fileID: 8300000, guid: e660e9b8ad99b9848b267c21e400eb04, type: 3}
   - name: Clock
-    clip: {fileID: 8300000, guid: 0fe3d90339d6aec46bed216f85d87b73, type: 3}
+    clip: {fileID: 8300000, guid: f31f8b73debe4344994d233ab5a470e1, type: 3}
   - name: GameOver
-    clip: {fileID: 8300000, guid: c9338a3624791e8479b28391c12c80f3, type: 3}
+    clip: {fileID: 8300000, guid: c657e504821d4fa409f476cc87b12a24, type: 3}
   - name: Assasin
-    clip: {fileID: 8300000, guid: 94808bf1fc33e3a4696691c1dfd86639, type: 3}
+    clip: {fileID: 8300000, guid: e99d9777d64a9e34ebcac7a9cd3d8345, type: 3}
   - name: Clown
-    clip: {fileID: 8300000, guid: e251c7884a93ed14fabca92790098c7c, type: 3}
+    clip: {fileID: 8300000, guid: 839dd1a8f9d19434b845e2c5f2c87d72, type: 3}
   - name: Guest
-    clip: {fileID: 8300000, guid: 7e422d5c57346f846aa5e55e38e8221b, type: 3}
+    clip: {fileID: 8300000, guid: d4bd7ffab3e001545a9fbed9cabf6e16, type: 3}
+  - name: Win
+    clip: {fileID: 8300000, guid: 2f0a72dbd014cc040a7dfaf489e080ed, type: 3}
+  - name: Lose
+    clip: {fileID: 8300000, guid: 56085db02a624024b90cd4aa213f1e77, type: 3}
   array_bgm:
   - name: Title
-    clip: {fileID: 8300000, guid: 57c253ee7d6cdf144a3e052d2791f7d9, type: 3}
+    clip: {fileID: 8300000, guid: b86e89c9756e3ba4485b7ad59c0ad048, type: 3}
   audioSourcePrefab: {fileID: 8096834215764501516, guid: f5c40946dad3ae147a0b522185687b2e, type: 3}
   bgmVolume: 21.65
   sfxVolume: 1

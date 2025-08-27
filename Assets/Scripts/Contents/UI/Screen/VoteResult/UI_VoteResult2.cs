@@ -43,6 +43,11 @@ public class UI_VoteResult2 : UIScreen
         var voteUserPicture = Managers.Data.GetFrameSprite(votePlayerData.jobType);
         var voteUserJobFrame = Managers.Data.GetFrameBGSprite(votePlayerData.jobType);
 
+        if (votePlayerData.jobType == EJobType.Assassin)
+        {
+            Managers.Sound.PlaySFX("Chance");
+        }
+
         GetText((int)Texts.FirstText).SetText($"{votePlayer.userName}은");
 
         var infoTexts = Managers.Data.jobInfoTexts[votePlayerData.jobType];

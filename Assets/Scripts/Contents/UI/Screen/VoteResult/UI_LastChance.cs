@@ -39,7 +39,7 @@ public class UI_LastChance : UIScreen
     
     protected override bool EnterWindow()
     {
-        Managers.Sound.PlaySFX("Chance");
+        Managers.Sound.PlaySFX("Win");
         
         var input = Get<TMP_InputField>((int)InputFields.InputField);
         input.text = string.Empty;
