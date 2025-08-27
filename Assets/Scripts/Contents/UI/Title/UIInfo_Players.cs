@@ -31,7 +31,7 @@ public class UIInfo_Players : UIScreen
 
     protected override bool EnterWindow()
     {
-        var currentHostage = Managers.Game.GetCurrentHostage();
+        var currentHostage = Managers.Game.GetConfirmedHostage();
         GetText((int)Texts.HostageText).text = currentHostage != null ? currentHostage.userName : "-";
         
         // 플레이어 목록 갱신을 지연시켜 실행
@@ -49,7 +49,7 @@ public class UIInfo_Players : UIScreen
         if (_init == false)
             Init();
         
-        var currentHostage = Managers.Game.GetCurrentHostage();
+        var currentHostage = Managers.Game.GetConfirmedHostage();
         GetText((int)Texts.HostageText).text = currentHostage != null ? currentHostage.userName : "-";
         RefreshPlayerList();
     }

@@ -178,6 +178,11 @@ public class GameManager : MonoBehaviour
         return _gamePlayers.GetCurrentHostage();
     }
 
+    public UserInfo GetConfirmedHostage()
+    {
+        return _gamePlayers.GetConfirmedHostage();
+    }
+
     public UserInfo GetLastHostage()
     {
         return _gamePlayers.GetLastHostage();

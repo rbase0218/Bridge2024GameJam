@@ -148,6 +148,12 @@ public class GamePlayers
         return _temporaryHostage != null ? _temporaryHostage : _currentHostage;
     }
 
+    // 확정된 인질만 가져오기 (임시 인질 제외)
+    public UserInfo GetConfirmedHostage()
+    {
+        return _currentHostage;
+    }
+
     public UserInfo GetLastHostage()
     {
         return _lastCurrentHostage;
