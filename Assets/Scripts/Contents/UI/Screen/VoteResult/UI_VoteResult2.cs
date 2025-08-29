@@ -6,7 +6,6 @@ public class UI_VoteResult2 : UIScreen
 {
     private enum Texts
     {
-        FirstText,
         SecondText,
         JobText,
         ButtonText
@@ -47,8 +46,6 @@ public class UI_VoteResult2 : UIScreen
         {
             Managers.Sound.PlaySFX("Chance");
         }
-
-        GetText((int)Texts.FirstText).SetText($"{votePlayer.userName}은");
 
         var infoTexts = Managers.Data.jobInfoTexts[votePlayerData.jobType];
         // Info Text 추가
