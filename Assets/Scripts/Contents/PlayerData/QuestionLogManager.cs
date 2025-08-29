@@ -32,6 +32,7 @@ public class QuestionLogManager
 {
     private readonly List<QuestionLog> _questionLogs = new List<QuestionLog>();
     private List<QuestionLog> _selectQuestion = new List<QuestionLog>();
+    
     private int count = 0;
     private int _currentIndex = 0;
 
@@ -48,25 +49,26 @@ public class QuestionLogManager
     public void SaveSelectedNumber(int count)
     {
         this.count = count;
+        
         PickRandomQuestion();
     }
     private void PickRandomQuestion()
     {
+        // 랜덤으로 Pick한 Index를 대신하는 변수
         _currentIndex = 0;
-
-        HashSet<int> selectIdx = new HashSet<int>();
-
-        while (selectIdx.Count < count && selectIdx.Count < _questionLogs.Count)
+        
+        // 선택된 Index를 모아두는 Int형 HashSet.
+        HashSet<int> selectedIndexGroup = new HashSet<int>();
+        while (selectedIndexGroup.Count < count)
         {
             int randomNumber = Random.Range(0, _questionLogs.Count);
-            selectIdx.Add(randomNumber);
+            selectedIndexGroup.Add(randomNumber);
         }
         
         // 선택된 퀘스트 목록을 지운다.
         _selectQuestion.Clear();
-        
-        foreach (int index in selectIdx)
-            _selectQuestion.Add(_questionLogs[index]);
+        foreach (int selectIndex in selectedIndexGroup)
+            _selectQuestion.Add(_questionLogs[selectIndex]);
     }
 
     public QuestionLog GetRandomQuestionLog()
@@ -78,7 +80,10 @@ public class QuestionLogManager
 
     public void SetCurrentQuestionAnswer(string answer)
     {
-        if (_currentIndex >= count || _currentIndex < 0) return;
+        if (_currentIndex >= count)
+        {
+            return;
+        }
         
         // _selectQuestion에서 현재 질문의 답변 업데이트
         var currentQuestion = _selectQuestion[_currentIndex];
@@ -100,11 +105,14 @@ public class QuestionLogManager
 
     public bool NextQuestion()
     {
-        _currentIndex++;
-
-        if (_currentIndex >= count)
-            return false;
-        return true;
+        int nextIndex = _currentIndex + 1;
+        
+        if (nextIndex < count)
+        {
+            _currentIndex++;
+            return true;
+        }
+        return false;
     }
 
     public int GetLogCount()

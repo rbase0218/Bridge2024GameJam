@@ -51,7 +51,7 @@ public class UI_TextConfirm01 : UIScreen
         GetObject((int)Objects.OpenCard).SetActive(false);
         GetObject((int)Objects.CloseCard).SetActive(true);
 
-
+        // 퀘스트 정보를 가져온다.
         _questionLog = Managers.Game.QuestionManager.GetRandomQuestionLog();
 
         string hostageName = Managers.Game.GetCurrentHostage().userName;
@@ -59,6 +59,9 @@ public class UI_TextConfirm01 : UIScreen
 
         GetText((int)Texts.Text).SetText(hostageName);
         GetText((int)Texts.WordText).SetText(text);
+        
+        GetButton((int)Buttons.YesButton).onClick.RemoveAllListeners();
+        GetButton((int)Buttons.NoButton).onClick.RemoveAllListeners();
 
         GetButton((int)Buttons.YesButton).onClick.AddListener(OnClickYesButton);
         GetButton((int)Buttons.NoButton).onClick.AddListener(OnClickNoButton);
@@ -84,6 +87,7 @@ public class UI_TextConfirm01 : UIScreen
     private void OnClickYesButton()
     {
         Managers.Sound.PlaySFX("Click");
+        
         // 답변 저장 - QuestionLogManager에 직접 업데이트
         Managers.Game.QuestionManager.SetCurrentQuestionAnswer("예");
         CheckForNextScreenMove();
@@ -92,6 +96,7 @@ public class UI_TextConfirm01 : UIScreen
     private void OnClickNoButton()
     {
         Managers.Sound.PlaySFX("Click");
+        
         // 답변 저장 - QuestionLogManager에 직접 업데이트
         Managers.Game.QuestionManager.SetCurrentQuestionAnswer("아니오");
         CheckForNextScreenMove();
@@ -100,7 +105,6 @@ public class UI_TextConfirm01 : UIScreen
     private void CheckForNextScreenMove()
     {
         hasNextQuestion = Managers.Game.QuestionManager.NextQuestion();
-        Debug.Log("다음 질문 존재 여부 : " + hasNextQuestion);
 
         if (hasNextQuestion == false)
             OnNextScreen<UI_Switcher02>();
