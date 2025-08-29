@@ -50,17 +50,16 @@ public class UI_SlotMachine : UIScreen
         _maxCount = Managers.Game.QuestionManager.GetLogCount();
 
         // Random.Range(int,int) 의 상한은 "제외"이므로 +1 필요
-        int resultNumber = Random.Range(1, _maxCount + 1); // 1.._maxCount
-        _resultIndex = resultNumber - 1;                   // 0.._maxCount-1
+        int resultCount = Random.Range(1, _maxCount + 1); // 1.._maxCount
+        _resultIndex = resultCount - 1;                   // 0.._maxCount-1
 
         // 위치 초기화 (UI는 RectTransform.anchoredPosition 권장)
         _slotObject = GetObject((int)GameObjects.SlotObject);
         var rt = _slotObject.GetComponent<RectTransform>();
         rt.anchoredPosition = new Vector2(rt.anchoredPosition.x, 0f);
 
-        // 결과 인덱스를 미리 고정 (게임 로직)
-        Managers.Game.QuestionManager.SelectRandQuestion(resultNumber);
-        Debug.Log($"질문 개수(선택 인덱스 1-based) : {resultNumber}");
+        // 뽑은 랜덤 숫자를 Question의 질문 수로 지정한다.
+        Managers.Game.QuestionManager.SaveSelectedNumber(resultCount);
 
         onOpen?.AddListener(() =>
         {

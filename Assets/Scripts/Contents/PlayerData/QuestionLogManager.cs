@@ -45,9 +45,13 @@ public class QuestionLogManager
         _questionLogs?.Clear();
     }
 
-    public void SelectRandQuestion(int num)
+    public void SaveSelectedNumber(int count)
     {
-        count = num;
+        this.count = count;
+        PickRandomQuestion();
+    }
+    private void PickRandomQuestion()
+    {
         _currentIndex = 0;
 
         HashSet<int> selectIdx = new HashSet<int>();
@@ -57,6 +61,8 @@ public class QuestionLogManager
             int randomNumber = Random.Range(0, _questionLogs.Count);
             selectIdx.Add(randomNumber);
         }
+        
+        // 선택된 퀘스트 목록을 지운다.
         _selectQuestion.Clear();
         
         foreach (int index in selectIdx)
