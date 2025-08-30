@@ -16,7 +16,7 @@ public class UI_PlayerSelectUIV_Last : UIScreen
     private enum Texts
     {
         FrontText,
-        Text,
+        NameText,
         BackText
     }
 
@@ -59,7 +59,7 @@ public class UI_PlayerSelectUIV_Last : UIScreen
         selectorA.ShowButton("예", "아니오");
 
         GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
-        GetText((int)Texts.Text).SetText(currentUser.userName);
+        GetText((int)Texts.NameText).SetText(currentUser.userName);
         GetText((int)Texts.BackText).SetText("입니다.");
 
         return true;

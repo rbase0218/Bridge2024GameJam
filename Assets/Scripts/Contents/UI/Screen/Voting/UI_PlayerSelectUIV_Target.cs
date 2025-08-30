@@ -16,7 +16,7 @@ public class UI_PlayerSelectUIV_Target : UIScreen
     private enum Texts
     {
         FrontText,
-        Text,
+        NameText,
         BackText
     }
 
@@ -67,7 +67,7 @@ public class UI_PlayerSelectUIV_Target : UIScreen
         selectorA.ShowButton(alivePlayers);
 
         GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
-        GetText((int)Texts.Text).SetText(currentUser.userName);
+        GetText((int)Texts.NameText).SetText(currentUser.userName);
         GetText((int)Texts.BackText).SetText("입니다.");
 
         return true;
@@ -77,7 +77,7 @@ public class UI_PlayerSelectUIV_Target : UIScreen
     private void OnClickSubmitButtonA(string text)
     {
         Managers.Sound.PlaySFX("Click");
-
+        
         if (text == null)
             return;
 
