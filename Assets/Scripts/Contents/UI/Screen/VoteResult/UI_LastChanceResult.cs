@@ -73,7 +73,7 @@ public class UI_LastChanceResult : UIScreen
 
             if (isLastChanceVote)
             {
-                GetText((int)Texts.SecondText).SetText("최후 투표의 규칙에 따라,\n 모든 귀빈은 무도회에서 패배했습니다.");
+                GetText((int)Texts.SecondText).SetText("최후 투표의 규칙에 따라,\n 모든 귀빈은 무도회에서 \n패배했습니다.");
                 GetText((int)Texts.ButtonText).SetText("넘어가기");
             }
             else
