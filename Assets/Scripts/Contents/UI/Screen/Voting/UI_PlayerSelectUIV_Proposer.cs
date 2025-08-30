@@ -72,6 +72,6 @@ public class UI_PlayerSelectUIV_Proposer : UIScreen
         var proposer = Managers.Game.FindPlayer(text);
         Managers.Game.SetFinalVoteProposer(proposer);
 
-        OnNextScreen<UI_Switcher01_Last>();
+        OnNextScreen<UI_PlayerSelectUIV_Target>();
     }
 }
