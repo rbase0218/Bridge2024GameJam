@@ -58,7 +58,7 @@ public class UI_PlayerSelectUIV_Target : UIScreen
         // 남아 있는 플레이어 중, 살아 있는 플레이어 목록 (발의자 제외)
         var proposer = Managers.Game.GetFinalVoteProposer();
         var alivePlayers = Managers.Game.GetAllPlayers()
-            .FindAll(x => !x.isDie && x != currentUser && (proposer == null || x != proposer))
+            .FindAll(x => !x.isDie && x != proposer)
             .Select(x => x.userName).ToArray();
 
         GetObject((int)Objects.Board_A).SetActive(true);
@@ -67,7 +67,7 @@ public class UI_PlayerSelectUIV_Target : UIScreen
         selectorA.ShowButton(alivePlayers);
 
         GetText((int)Texts.FrontText).SetText("이번 투표 순서는");
-        GetText((int)Texts.NameText).SetText(currentUser.userName);
+        GetText((int)Texts.NameText).SetText(proposer.userName);
         GetText((int)Texts.BackText).SetText("입니다.");
 
         return true;

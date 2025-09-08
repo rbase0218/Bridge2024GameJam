@@ -47,9 +47,9 @@ public class UI_PlayerSelectUIV_Proposer : UIScreen
 
         var currentUser = Managers.Game.GetCurrentPlayer();
 
-        // 남아 있는 플레이어 중, 살아 있는 플레이어 목록 (암살자 제외)
+        // 남아 있는 플레이어 중, 살아 있는 플레이어 목록
         var alivePlayers = Managers.Game.GetAllPlayers()
-            .FindAll(x => !x.isDie && x != currentUser && x.jobType != EJobType.Assassin)
+            .FindAll(x => !x.isDie)
             .Select(x => x.userName).ToArray();
 
         GetObject((int)Objects.Board_A).SetActive(true);
