@@ -112,6 +112,6 @@ public class QuestionPlayer : IPlayerStrategy
         }
         
         _nextIndex = nextIndex;
-        Debug.Log("NEXT INDEX : " + _allPlayers[_nextIndex].userName);
+        //Debug.Log("NEXT INDEX : " + _allPlayers[_nextIndex].userName);
     }
 }
