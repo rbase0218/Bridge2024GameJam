@@ -19,7 +19,8 @@ public class UIManual : UIWindow
         Fourth,
         Fifth,
         Sixth,
-        Seventh
+        Seventh,
+        Eighth
     }
 
     private int index;
@@ -63,7 +64,7 @@ public class UIManual : UIWindow
     {
         Managers.Sound.PlaySFX("Click");
 
-        if (index == 6)
+        if (index == 7)
             return;
         
         GetObject((int)Objects.First + index).SetActive(false);
