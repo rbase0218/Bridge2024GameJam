@@ -57,7 +57,7 @@ public class UI_LastChanceResult : UIScreen
         OnNextScreen<UI_Switcher01F>();
     }
 
-    public void SetInfo(bool isAnswerCorrect, bool isLastChanceVote = false)
+    public void SetInfo(bool isAnswerCorrect)
     {
         GetObject((int)Objects.Defeat).SetActive(false);
         GetObject((int)Objects.Victory).SetActive(false);
@@ -71,15 +71,9 @@ public class UI_LastChanceResult : UIScreen
             // 다양한 게임 분기를 위해 정답입니다 문구를 제거함.
             GetText((int)Texts.FirstText).SetText("");
 
-            if (isLastChanceVote)
-            {
-                GetText((int)Texts.SecondText).SetText("최후 투표의 규칙에 따라,\n 모든 귀빈은 무도회에서 \n패배했습니다.");
-                GetText((int)Texts.ButtonText).SetText("넘어가기");
-            }
-            else
-            {
-                GetText((int)Texts.SecondText).SetText("암살자가\n귀빈들과의 대결에서\n승리했습니다.");
-            }
+
+            GetText((int)Texts.SecondText).SetText("암살자가\n귀빈들과의 대결에서\n승리했습니다.");
+
 
             Managers.Game.SetWinner(EJobType.Assassin);
         }

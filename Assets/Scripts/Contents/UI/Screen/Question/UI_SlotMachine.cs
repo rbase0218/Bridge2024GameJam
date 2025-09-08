@@ -44,7 +44,7 @@ public class UI_SlotMachine : UIScreen
         onOpen?.RemoveAllListeners();
         
         // 이름을 변경한다.
-        GetText((int)Texts.NameText).text = Managers.Game.GetCurrentPlayer().userName;
+        GetText((int)Texts.NameText).text = Managers.Game.GetCurrentHostage().userName;
 
         // 질문의 최대 개수를 정한다.
         _maxCount = Managers.Game.QuestionManager.GetLogCount();

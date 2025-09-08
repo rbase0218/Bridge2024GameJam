@@ -6,7 +6,6 @@ public class UI_VoteResult2_Last : UIScreen
 {
     private enum Texts
     {
-        FirstText,
         SecondText,
         JobText,
         ButtonText
@@ -43,14 +42,11 @@ public class UI_VoteResult2_Last : UIScreen
         var voteUserPicture = Managers.Data.GetFrameSprite(votePlayerData.jobType);
         var voteUserJobFrame = Managers.Data.GetFrameBGSprite(votePlayerData.jobType);
 
-        GetText((int)Texts.FirstText).SetText($"{votePlayer.userName}은");
-
         var infoTexts = Managers.Data.jobInfoTexts[votePlayerData.jobType];
         // Info Text 추가
-        GetText((int)Texts.SecondText).SetText(infoTexts.Item2);
-
+        GetText((int)Texts.SecondText).SetText("최후 투표의 규칙에 따라,\n 모든 귀빈은 무도회에서 패배했습니다.");
         // Button Text 변경
-        //GetText((int)Texts.ButtonText).SetText(infoTexts.Item1);
+        GetText((int)Texts.ButtonText).SetText("넘어가기");
 
         // 초상화 세팅
         GetImage((int)Images.Picture).sprite = voteUserPicture;
@@ -76,7 +72,7 @@ public class UI_VoteResult2_Last : UIScreen
         switch (votePlayerData.jobType)
         {
             case EJobType.VIP:
-                OnNextScreen<UI_LastChanceResult>().SetInfo(true, true); // 최후 투표로 시민이 죽은 경우
+                OnNextScreen<UI_LastChanceResult>().SetInfo(true);
                 break;
             case EJobType.Actor:
             case EJobType.Assassin:
