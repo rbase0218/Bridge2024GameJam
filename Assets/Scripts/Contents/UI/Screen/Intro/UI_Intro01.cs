@@ -14,6 +14,8 @@ public class UI_Intro01 : UIScreen
     
     protected override bool EnterWindow()
     {
+        _gauge.SetGauge(3f);
+
         if (UseAutoNextScreen)
             BindNextScreen<UI_Sequence01>();
         

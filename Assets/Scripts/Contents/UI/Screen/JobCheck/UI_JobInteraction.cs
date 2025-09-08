@@ -54,7 +54,7 @@ public class UI_JobInteraction : UIScreen
 
     protected override bool EnterWindow()
     {
-        _gauge.SetGauge(10f);
+        _gauge.SetGauge(7f);
         isSelect = false;
         GetText((int)Texts.WordText).gameObject.SetActive(false);
         var cardAnim = GetButton((int)Buttons.CardAnim);
