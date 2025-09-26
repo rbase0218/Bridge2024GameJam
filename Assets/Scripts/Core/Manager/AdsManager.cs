@@ -8,17 +8,18 @@ using UnityEngine.SceneManagement;
 public class AdsManager : MonoBehaviour
 {
     // Editor용 샘플 광고 ID와 실제 광고 ID를 구분합니다.
+    private readonly string _adUnitId =
 #if UNITY_EDITOR
-    readonly string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
+    "ca-app-pub-3940256099942544/1033173712"
 #else
-readonly string _adUnitId = "ca-app-pub-6504355093417066/5452284685";
+    "ca-app-pub-6504355093417066/5452284685"
 #endif
-
+;
     private InterstitialAd _interAd;
 
     private void Awake()
     {
-        MobileAds.Initialize(status => {});
+        MobileAds.Initialize(status => { });
     }
 
     public void Init()
@@ -35,7 +36,7 @@ readonly string _adUnitId = "ca-app-pub-6504355093417066/5452284685";
         }
 
         var adRequest = new AdRequest();
-        
+
         InterstitialAd.Load(_adUnitId, adRequest, (InterstitialAd ad, LoadAdError error) =>
         {
             if (error != null || ad == null)
@@ -43,11 +44,11 @@ readonly string _adUnitId = "ca-app-pub-6504355093417066/5452284685";
                 Debug.LogError("광고 로드 실패 error명 : " + error);
                 return;
             }
-            
+
             // Debug.Log("로드 성공 " + ad.GetResponseInfo());
 
             _interAd = ad;
-            
+
             RegisterEventHandlers(_interAd);
         });
     }
@@ -91,7 +92,7 @@ readonly string _adUnitId = "ca-app-pub-6504355093417066/5452284685";
             Debug.LogError("Interstitial ad failed to open full screen content with error: " + error);
         };
     }
-    
+
     public void ShowAd()
     {
         if (_interAd != null && _interAd.CanShowAd())
