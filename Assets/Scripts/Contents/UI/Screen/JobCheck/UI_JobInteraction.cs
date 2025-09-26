@@ -78,7 +78,7 @@ public class UI_JobInteraction : UIScreen
 
             // 주제를 이 곳에서 전달한다.
             string originalText = Managers.Game.GetCurrentTopic();
-            Debug.Log(originalText);
+            // Debug.Log(originalText);
 
             string wrappedText = string.Join("\n",
                 Enumerable.Range(0, (originalText.Length + 6) / 7)

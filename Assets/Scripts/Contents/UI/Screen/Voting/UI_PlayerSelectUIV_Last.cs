@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class UI_PlayerSelectUIV_Last : UIScreen
 {
-    private bool isSelect;
     private enum Objects
     {
         Board_A,
@@ -44,8 +43,6 @@ public class UI_PlayerSelectUIV_Last : UIScreen
     {
         if (UseAutoNextScreen)
             BindNextScreen<UI_ClockSwitcherV_Last>();
-
-        isSelect = false;
 
         var currentUser = Managers.Game.GetCurrentPlayer();
 

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class UI_PlayerSelectUIV_Target : UIScreen
 {
-    private bool isSelect;
     private enum Objects
     {
         Board_A,
@@ -50,8 +49,6 @@ public class UI_PlayerSelectUIV_Target : UIScreen
         {
             inGameSetting.HideEmergencyButton();
         }
-
-        isSelect = false;
 
         var currentUser = Managers.Game.GetCurrentPlayer();
 

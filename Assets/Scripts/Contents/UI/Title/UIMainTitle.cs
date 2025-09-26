@@ -85,7 +85,7 @@ public class UIMainTitle : UIWindow
         returnMain.OnClickButtons(() =>
         {
             Managers.Sound.PlaySFX("Click");
-            Debug.Log("메인으로 돌아감");
+            // Debug.Log("메인으로 돌아감");
         });
     }
     

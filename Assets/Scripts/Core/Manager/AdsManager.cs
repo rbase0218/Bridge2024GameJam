@@ -44,7 +44,7 @@ readonly string _adUnitId = "ca-app-pub-6504355093417066/5452284685";
                 return;
             }
             
-            Debug.Log("로드 성공 " + ad.GetResponseInfo());
+            // Debug.Log("로드 성공 " + ad.GetResponseInfo());
 
             _interAd = ad;
             
@@ -75,14 +75,14 @@ readonly string _adUnitId = "ca-app-pub-6504355093417066/5452284685";
         // 전면 광고가 열렸을 때 호출
         interstitialAd.OnAdFullScreenContentOpened += () =>
         {
-            Debug.Log("Interstitial ad full screen content opened.");
+            // Debug.Log("Interstitial ad full screen content opened.");
         };
 
         // 전면 광고가 닫혔을 때 호출
         interstitialAd.OnAdFullScreenContentClosed += () =>
         {
             SceneManager.LoadScene("Title");
-            Debug.Log("close Scene");
+            // Debug.Log("close Scene");
         };
 
         // 전면 광고가 열리지 못했을 때 호출
@@ -96,7 +96,7 @@ readonly string _adUnitId = "ca-app-pub-6504355093417066/5452284685";
     {
         if (_interAd != null && _interAd.CanShowAd())
         {
-            Debug.Log("전면 광고 띄우기");
+            // Debug.Log("전면 광고 띄우기");
             _interAd.Show();
         }
         else

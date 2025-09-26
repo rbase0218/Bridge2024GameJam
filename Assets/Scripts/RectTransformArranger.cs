@@ -62,7 +62,7 @@ public class RectTransformArranger : MonoBehaviour
             child.anchoredPosition = newPosition;
         }
         
-        Debug.Log($"Arranged {childCount} child RectTransforms in grid. X Gap: {xGap}, Y Gap: {yGap}");
+        // Debug.Log($"Arranged {childCount} child RectTransforms in grid. X Gap: {xGap}, Y Gap: {yGap}");
     }
 
     [ContextMenu("Reset Children Positions")]
@@ -95,7 +95,7 @@ public class RectTransformArranger : MonoBehaviour
             child.anchoredPosition = Vector2.zero;
         }
         
-        Debug.Log($"Reset {childCount} child RectTransforms positions to zero.");
+        // Debug.Log($"Reset {childCount} child RectTransforms positions to zero.");
     }
 
     // 런타임에서 호출할 수 있는 public 메서드들

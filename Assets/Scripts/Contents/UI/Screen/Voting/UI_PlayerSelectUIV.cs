@@ -139,7 +139,7 @@ public class UI_PlayerSelectUIV : UIScreen
         var random = Random.Range(0, playerNames.Length);
         var selectUser = playerNames[random];
         
-        Debug.Log("랜덤 선택 : " + selectUser);
+        // Debug.Log("랜덤 선택 : " + selectUser);
         // 임시 인질로 설정 (실제 인질은 아님)
         Managers.Game.SetTemporaryHostage(selectUser);
         isSelect = true;
