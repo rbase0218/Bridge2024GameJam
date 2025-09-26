@@ -66,7 +66,7 @@ public class UI_LastChanceResult : UIScreen
         if (isAnswerCorrect)    // 정답을 맞춘 경우
         {
             GetObject((int)Objects.Defeat).SetActive(true);
-            Managers.Sound.PlaySFX("Assassin");
+            Managers.Sound.PlaySFX("Assasin");
             // Assassin의 승리
             // 다양한 게임 분기를 위해 정답입니다 문구를 제거함.
             GetText((int)Texts.FirstText).SetText("");
