@@ -45,9 +45,9 @@ public class UI_KeywordReveal : UIScreen
     {
         Managers.Sound.PlaySFX("Click");
         Managers.Game.ResetAllGameData();
-        // 테스트용 광고 비활성화
-        //Managers.Ads.ShowAd();
-        SceneManager.LoadScene("Title");
+        // 광고 보여주기
+        Managers.Ads.ShowAd();
+        //SceneManager.LoadScene("Title");
 
     }
 }

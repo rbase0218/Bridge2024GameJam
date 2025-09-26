@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
             Managers.Sound.SetBGMVolume(Managers.Data.BGMVolume);
         }
         Managers.Sound.StopSFX();
+        Managers.Sound.StopBGM();
         Managers.Sound.PlayBGM("Title");
 
         // // 디버그를 위한 데이터 - 지우지마세욧.
