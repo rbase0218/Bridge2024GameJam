@@ -53,6 +53,7 @@ public class UI_InGameSetting : UIWindow
         exit.OnClickButtons(() =>
         {
             Managers.Sound.PlaySFX("Click");
+            Managers.Game.ResetAllGameData();
             Managers.Ads.ShowAd();
         }, () =>
         {
