@@ -53,7 +53,6 @@ public class UI_InGameSetting : UIWindow
         exit.OnClickButtons(() =>
         {
             Managers.Sound.PlaySFX("Click");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Title");
             Managers.Ads.ShowAd();
         }, () =>
         {
